@@ -1,8 +1,10 @@
 # Third-party material
 
 megawob's own code and its image assets are MIT-licensed (see [`LICENSE`](LICENSE)). The material below is not
-covered by that licence: each item keeps its own, and its licence text ships next to it. Nothing here is loaded over
-the network; the libraries are vendored, pinned releases that run inside the browser page only.
+covered by that licence: each item keeps its own, and its licence text ships next to it.
+
+Nothing here is loaded over the network. The libraries are vendored, pinned releases that run inside the browser page
+only.
 
 ## Vendored libraries
 
@@ -30,14 +32,14 @@ the source URL of every file, which widget uses it and how the two pre-built bun
 
 Notes:
 
-- Items 13 and 14 ship no browser build upstream. `dndkit.min.js` and `rcslider.min.js` are bundles made with
-  esbuild 0.24.0 from the exact npm versions listed; the recipe is in the vendor README. The licences of the
-  dependencies compiled into the bundles (dnd kit, rc-slider) and into the other pre-built files (MUI, @hello-pangea/dnd,
-  dragula, vanilla-picker, react-dom) are in a `NOTICE.txt` next to each; GridStack's `gridstack-all.js.LICENSE.txt` ships
-  next to its bundle.
-- vanilla-picker stands in for iro.js, which is MPL-2.0 and is not used.
-- Only the base site loads vendored libraries (through a widget's `uses` list); the `design-*` sites use the
-  kit's own primitives.
+- **Items 13 and 14** ship no browser build upstream. `dndkit.min.js` and `rcslider.min.js` are bundles made with
+  esbuild 0.24.0 from the exact npm versions listed. The recipe is in the vendor README.
+- **Licences of compiled-in dependencies.** The dependencies compiled into the bundles (dnd kit, rc-slider) and into the
+  other pre-built files (MUI, @hello-pangea/dnd, dragula, vanilla-picker, react-dom) have their licences in a
+  `NOTICE.txt` next to each. GridStack's `gridstack-all.js.LICENSE.txt` ships next to its bundle.
+- **vanilla-picker** stands in for iro.js, which is MPL-2.0 and is not used.
+- **Where they load.** Only the base site loads vendored libraries, through a widget's `uses` list. The `design-*`
+  sites use the kit's own primitives.
 
 ## Fonts
 
@@ -52,14 +54,16 @@ Both fonts are unmodified. Find the copies with `git ls-files | grep -E 'Oswald|
 
 ## Image assets
 
-The images in `html/sites/*/assets/` (illustrations, photographs, logos, avatars, backgrounds) were generated with image models for this project. They depict imagined
-applications and people. They are released under the same MIT licence as the
-code. Where a site keeps the prompt that produced an asset, it sits next to it in `assets/`.
+The images in `html/sites/*/assets/` (illustrations, photographs, logos, avatars, backgrounds) were generated with
+image models for this project. They depict imagined applications and people. They are released under the same MIT
+licence as the code. Where a site keeps the prompt that produced an asset, it sits next to it in `assets/`.
 
 ## Runtime dependencies
 
-Python dependencies (BrowserGym, Playwright, Pillow, NumPy, OpenEnv, ...) are not redistributed; they are installed
-by `pip` under their own licences. The Docker image in [`server/Dockerfile`](server/Dockerfile) installs system
-fonts from Debian packages (Liberation, DejaVu, URW base35, Comic Neue, Noto Color Emoji, Unifont, WenQuanYi
-Micro Hei) under their own licences. The original MiniWoB++ tasks, served only by the Docker image, are downloaded from the
-upstream MiniWoB++ project at build time and keep its licence.
+- **Python dependencies** (BrowserGym, Playwright, Pillow, NumPy, OpenEnv, ...) are not redistributed. `pip` installs
+  them under their own licences.
+- **System fonts.** The Docker image in [`server/Dockerfile`](server/Dockerfile) installs them from Debian packages
+  under their own licences: Liberation, DejaVu, URW base35, Comic Neue, Noto Color Emoji, Unifont and WenQuanYi
+  Micro Hei.
+- **MiniWoB++ tasks.** Only the Docker image serves the original tasks. It downloads them from the upstream MiniWoB++
+  project at build time, and they keep its licence.

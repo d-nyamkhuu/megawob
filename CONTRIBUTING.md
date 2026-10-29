@@ -5,7 +5,7 @@ next. The terms are defined in the [glossary](docs/glossary.md). Every command i
 
 ## Before you open a pull request
 
-Run what CI runs (`.github/workflows/ci.yml`); all of it must pass:
+Run what CI runs (`.github/workflows/ci.yml`). All of it must pass:
 
 ```bash
 pip install -e '.[browsergym]' && pip install -e '.[check,dev]' && playwright install chromium
@@ -40,14 +40,19 @@ A change is done when:
 2. Add a base widget `html/sites/base/widgets/<task>.js` that supports every scenario, and list it in
    `html/sites/base/manifest.json`. The [worked example](html/kit/README.md#worked-example-a-task-and-a-widget) is the
    smallest complete pair. Python finds both by glob: there is no registry to edit.
-3. Run `python -m megawob.scenarios --site base`. It refreshes `html/scenarios.json`, which also records the
-   task's start modes, judgment modes, hooks and whether its plan drags; these decide which task names it gets.
-4. Add the task name to `server/smoke_client.py`, a row to the error table in
-   [docs/architecture.md](docs/architecture.md#tasks), and the task to its category in the README "Tasks" list and in
-   `CATEGORIES` in `megawob/gallery.py` (the gallery's tabs; `tests/test_gallery.py` checks it). Then run
-   `python -m megawob.describe --markdown docs/tasks.md`.
-5. Check it: `python -m megawob.check --task <task> --seeds 20`, `python server/smoke_gym.py <task>` (binary and with
-   `MEGAWOB_REWARD=shaped`), and `python -m megawob.lint`.
+3. Run `python -m megawob.scenarios --site base`. It refreshes `html/scenarios.json`.
+   - The file also records the task's start modes, judgment modes, hooks and whether its plan drags.
+   - These decide which task names it gets.
+4. Register the task:
+   - Add the task name to `server/smoke_client.py`.
+   - Add a row to the error table in [docs/architecture.md](docs/architecture.md#tasks).
+   - Add the task to its category in the README "Tasks" list and in `CATEGORIES` in `megawob/gallery.py` (the gallery's
+     tabs; `tests/test_gallery.py` checks it).
+   - Run `python -m megawob.describe --markdown docs/tasks.md`.
+5. Check it:
+   - `python -m megawob.check --task <task> --seeds 20`
+   - `python server/smoke_gym.py <task>`, in binary reward and with `MEGAWOB_REWARD=shaped`
+   - `python -m megawob.lint`
 
 ## Add a scenario
 
@@ -81,16 +86,22 @@ A full site has its own frame and a widget for every task. Follow [docs/site-che
 
    `overlay(ctx)` draws all five popup kinds.
 3. A design's own always-on obstruction (a welcome tour, a chat bubble) is declared as
-   `initialOverlay: {kind, p?, at?}` in `site.js` and drawn by `overlay(ctx)` when `ctx.initial` is true. The kit
-   schedules it, the oracle dismisses it, and `popups=off` suppresses it. Never draw it in `frame()`. If the task
-   should wait while it is up, add `pauseOnOverlay: true`.
+   `initialOverlay: {kind, p?, at?}` in `site.js` and drawn by `overlay(ctx)` when `ctx.initial` is true.
+   - The kit schedules it, the oracle dismisses it, and `popups=off` suppresses it.
+   - Never draw it in `frame()`.
+   - If the task should wait while it is up, add `pauseOnOverlay: true`.
 4. Done when `python -m megawob.check --site <site>` passes and its row of `--matrix` is full.
 
 ## Add a design (a `design-*` site)
 
-`tools/sitegen` does this with Codex agents: `python tools/sitegen/sitegen.py new <task> <scenario>` draws a
-reviewed design image, then builds the site until the checker passes ([its README](tools/sitegen/README.md)). Look
-at the result and run the checks of step 4 below before you open a pull request.
+`tools/sitegen` does this with Codex agents ([its README](tools/sitegen/README.md)):
+
+```bash
+python tools/sitegen/sitegen.py new <task> <scenario>
+```
+
+This draws a reviewed design image, then builds the site until the checker passes. Look at the result and run the
+checks of step 4 below before you open a pull request.
 
 By hand: a design is one site `html/sites/design-<task>-<scenario>-<NN>/` with one widget named `design`, built
 from one design image. Take the next free `NN`.

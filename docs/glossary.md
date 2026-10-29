@@ -10,11 +10,11 @@ MegaWoB uses it in that sense. Names in `code` are the ones in the API, file nam
 | **task** | One kind of job, such as setting a slider or replying to an email (`html/tasks/<task>/logic.js`). It samples the episode, grades the result and plans the oracle. Its id (verb-object, as in MiniWoB++) is the same everywhere: folder, `--task`, `browsergym/miniwob.set-slider`. |
 | **model** | The task's own record of the page state (a slider's value, the emails' flags). The widget updates it; the task grades it. Not to be confused with the AI model being trained. |
 | **scenario** | A sub-case of a task, such as `use-email/attachment` or `set-slider/range`. Each one has its own sampling and instruction. MiniWoB++ would make each scenario a separate task name; MegaWoB samples one per episode. |
-| **site** | A page design: the frame around the task on that site, with its theme, header, where the instruction appears, the end control, decoy controls and popups (`html/sites/<site>/site.js`). |
+| **site** | A page design (`html/sites/<site>/site.js`). It sets the frame around the task: theme, header, where the instruction appears, end control, decoy controls and popups. |
 | **widget** | How one site draws one task's interactive part, plus `locate()`, which tells the oracle where each target is on screen (`html/sites/<site>/widgets/<task>.js`). A site can have several widgets for one task; the base site has seven slider widgets. |
 | **frame** | The UI a site draws around the stage: header, navigation, instruction panel, end control (`site.frame(ctx)`). |
 | **stage** | The part of the page the widget draws into. |
-| **end control** | The button that ends an episode (Submit, Save, Done, ...). In finish-by-message episodes there is none: the agent ends the episode with a message. |
+| **end control** | The button that ends an episode (Submit, Save, Done, ...). Finish-by-message episodes have none: the agent ends them with a message. |
 | **UI primitives** | Headless helpers in the kit (`env.ui`: draggable, slider, sortable, calendar, ...). They own the input mechanics; the widget owns every pixel. Called primitives, never widgets. |
 | **kit** | The shared runtime every page loads (`html/kit/`): seeded RNG, scoring, the oracle runner, randomization parameters, content banks and the UI primitives. |
 | **template** | Shared widget or site code with named parts (`html/templates/`). A design-* site usually overrides a few parts of a template rather than writing a widget from scratch. |
@@ -68,7 +68,14 @@ MegaWoB uses it in that sense. Names in `code` are the ones in the API, file nam
 | `set-slider.<site>` | one site, any split (`set-slider.base`, `use-email.mock-inbox`) |
 | `set-slider.eval-<name>` | training widgets with one [eval perturbation](randomization.md#eval-perturbations) |
 
-How a name picks its episode (`catalog.pick`): the seed draws a scenario uniformly from the task's scenarios, then a
-site whose widgets support it, then one of that site's widgets. With thousands of `design-*` sites, a plain task name
-almost never draws `base`; use `<task>.base` for it. `.heldout` is registered only when held-out widgets exist, and
-some eval perturbations only for tasks with the matching feature ([tasks.md](tasks.md#eval-perturbations)).
+How a name picks its episode (`catalog.pick`):
+
+1. The seed draws a scenario uniformly from the task's scenarios.
+2. It then draws a site whose widgets support that scenario.
+3. It then draws one of that site's widgets.
+
+Two consequences:
+
+- With thousands of `design-*` sites, a plain task name almost never draws `base`. Use `<task>.base` for it.
+- `.heldout` is registered only when held-out widgets exist, and some eval perturbations only for tasks with the
+  matching feature ([tasks.md](tasks.md#eval-perturbations)).

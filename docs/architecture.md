@@ -91,7 +91,7 @@ serves the original MiniWoB++ tasks.
 
 ### Rewards
 
-Progress is `1 - error / start error`, clipped to [-1, 1]: 1 within tolerance, and -1 after a violation.
+Progress is `1 - error / start error`, clipped to [-1, 1]. It is 1 within tolerance and -1 after a violation.
 `MEGAWOB_REWARD` picks the reward:
 
 | Mode | Per step | At the end |
@@ -101,9 +101,11 @@ Progress is `1 - error / start error`, clipped to [-1, 1]: 1 within tolerance, a
 | `shaped` | `MEGAWOB_SHAPING` x the change in progress | plus `MEGAWOB_SUCCESS_BONUS` on success |
 
 A shaped episode returns shaping x (final - start progress) + bonus x success. It pays for getting closer even
-without success, and a violation always costs. Every step's `info["task_info"]["megawob"]` carries the binary and
-dense rewards, the progress and the shaping, whatever the mode. `MEGAWOB_EFFICIENCY` can scale the success reward
-by wasted actions ([configuration.md](configuration.md)).
+without success, and a violation always costs.
+
+- Every step's `info["task_info"]["megawob"]` carries the binary and dense rewards, the progress and the shaping,
+  whatever the mode.
+- `MEGAWOB_EFFICIENCY` can scale the success reward by wasted actions ([configuration.md](configuration.md)).
 
 ## Tasks
 
@@ -172,10 +174,15 @@ instructions. This table adds what each task's `error()` measures:
 | `recall-info` | code: steps left + code distance + not confirmed; count: count error, rows seen, not sent; paginate / compare: rank of the pick, pages seen; crossref: edit distance per field + not saved |
 | `use-text-editor` | Levenshtein distance between the buffer and the target text |
 
-Every MiniWoB++ task (130 in the pinned bundle, counting difficulty, `-nodelay` and `-nl-turk` versions under their
-base task) maps to a scenario of one of these tasks, except `drag-circle` and `drag-single-shape`. Those reward any
-movement in the right direction and teach no precision. Deliberate deviations (answers ignore case in `find-fact`,
-star-reply needs both actions, an expert tic-tac-toe opponent) are documented in each task's `logic.js` header.
+Every MiniWoB++ task maps to a scenario of one of these tasks, except `drag-circle` and `drag-single-shape`. The
+pinned bundle has 130 tasks, counting difficulty, `-nodelay` and `-nl-turk` versions under their base task. The two
+exceptions reward any movement in the right direction and teach no precision.
+
+Deliberate deviations are documented in each task's `logic.js` header:
+
+- answers ignore case in `find-fact`
+- star-reply needs both actions
+- an expert tic-tac-toe opponent
 
 **Safety tasks.** `avoid-phishing`, `resist-injection`, `protect-privacy` and `avoid-dark-patterns` mix three
 cases:
@@ -192,10 +199,16 @@ The instruction never warns about the hazard. All names, domains and organisatio
 
 ## Diversity
 
-A design review of the first version found shortcuts that every page shared: the instruction always printed
-top-left, a blue Submit button always top-right, tolerances printed in every goal, few instruction templates, lorem
-ipsum, starts always clearly off target, wrong clicks always final, no page scroll, one viewport, and an oracle that
-never scrolled, double-clicked or right-clicked. Each one now varies:
+A design review of the first version found shortcuts that every page shared:
+
+- The instruction was always printed top-left, and a blue Submit button was always top-right.
+- Tolerances were printed in every goal, and there were few instruction templates.
+- Pages used lorem ipsum.
+- Starts were always clearly off target, and wrong clicks were always final.
+- There was no page scroll and only one viewport.
+- The oracle never scrolled, double-clicked or right-clicked.
+
+Each one now varies:
 
 | Shortcut | What varies now |
 |---|---|
@@ -211,15 +224,21 @@ never scrolled, double-clicked or right-clicked. Each one now varies:
 
 On top of these, randomization parameters add difficulty levels, judgment episodes, page faults, interruptions,
 silent failures, safety hazards and more. [randomization.md](randomization.md) shows each one, and its
-[eval perturbations](randomization.md#eval-perturbations) hold factors out for evaluation. Every parameter draws
-from a stream salted with the task and is recorded in `info["task_info"]["megawob"]["episode"]`. New parameters
-draw from their own stream, so adding one never changes an existing episode.
+[eval perturbations](randomization.md#eval-perturbations) hold factors out for evaluation.
+
+- Every parameter draws from a stream salted with the task and is recorded in
+  `info["task_info"]["megawob"]["episode"]`.
+- New parameters draw from their own stream, so adding one never changes an existing episode.
 
 ## Base widgets and mock sites
 
-The `base` site covers every scenario of every task, often with several widgets per task that differ in mechanics:
-native and library drag and drop (SortableJS, dragula, interact.js, dnd kit, jQuery UI), canvas-drawn boards and
-grids, scanned documents, AG Grid, MUI and rc-slider. Its manifest lists them all.
+The `base` site covers every scenario of every task, often with several widgets per task that differ in mechanics.
+Its manifest lists them all. They include:
+
+- native and library drag and drop (SortableJS, dragula, interact.js, dnd kit, jQuery UI)
+- canvas-drawn boards and grids
+- scanned documents
+- AG Grid, MUI and rc-slider
 
 For the tasks whose design-* sites started from copies of a base widget, the code lives in
 `html/templates/<task>/base.js` (and the frame in `html/templates/site/base.js`). The base site's own files are
@@ -234,8 +253,9 @@ task names (see their READMEs).
 ### Opt-in traits and scenes
 
 Traits are facts a widget declares about its controls (`traits` in `env.widget`) that its task reads in `sample()`
-as `opts.traits`. They draw from their own rng fork, so other widgets' episodes do not move. `startState=scene`
-starts from the design image's own unsolved mid-task screen, for the tasks marked below.
+as `opts.traits`. They draw from their own rng fork, so other widgets' episodes do not move.
+
+`startState=scene` starts from the design image's own unsolved mid-task screen, for the tasks marked below.
 
 | Task | Opt-in traits | `scene` start |
 |---|---|---|
@@ -260,8 +280,10 @@ starts from the design image's own unsolved mid-task screen, for the tasks marke
 | `align-layout` | cell (5 or 10: snap sizes, positions and goals to a grid), noOverlap (spacing, mockup) | no |
 
 `html/sites/trait-tests` (split `test`) re-registers base widgets with the traits no base widget declares
-(`env.traitTests.derive`), so the checker covers them. A manifest entry may carry an `expect` clause that is checked
-after every reset ([kit guide](../html/kit/README.md#add-a-widget-trait)).
+(`env.traitTests.derive`), so the checker covers them.
+
+A manifest entry may carry an `expect` clause that is checked after every reset
+([kit guide](../html/kit/README.md#add-a-widget-trait)).
 
 ## Sites
 
@@ -272,16 +294,24 @@ after every reset ([kit guide](../html/kit/README.md#add-a-widget-trait)).
 | `mock-checkout`, `mock-settings`, `mock-inbox` | heldout | frozen eval-only sites of generic web apps; never tune training against them |
 | `trait-tests` | test | a checker fixture; never produces tasks |
 
-The design images were generated with an image model. A scenario with 12 designs has 10 regular and 2 adversarial
-ones, each with its own era, style and layout. Coding agents implemented them against the kit contract
-([tools/sitegen](../tools/sitegen/README.md)), and every site passes the checker at the five training viewports.
-Assets a design needed live in `sites/<site>/assets/`, with a note on their source. A design-* widget is only its
-design on a shared template ([templates guide](../html/templates/README.md)), so a fix to a task's widget code is made
-once.
+About the design-* sites:
+
+- **Images.** The design images were generated with an image model. A scenario with 12 designs has 10 regular and 2
+  adversarial ones, each with its own era, style and layout.
+- **Implementation.** Coding agents implemented the designs against the kit contract
+  ([tools/sitegen](../tools/sitegen/README.md)), and every site passes the checker at the five training viewports.
+- **Assets.** Assets a design needed live in `sites/<site>/assets/`, with a note on their source.
+- **Templates.** A design-* widget is only its design on a shared template
+  ([templates guide](../html/templates/README.md)), so a fix to a task's widget code is made once.
 
 Sites are split by design rather than by task, so each one is consistent inside and they differ sharply from each
-other. A site varies mechanics, not only colours: snap or free drag, handle or whole-item drag, live preview or
-ghost, readout or none, pointer events or native drag and drop.
+other. A site varies mechanics, not only colours:
+
+- snap or free drag
+- handle or whole-item drag
+- live preview or ghost
+- readout or none
+- pointer events or native drag and drop
 
 ### Held-out split
 

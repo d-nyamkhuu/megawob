@@ -24,9 +24,12 @@ reset control and menu labels. `shades` draws a panel of shade tiles and has lit
 | `shades` | Tiles in shades of one hue. The agent selects every tile of the named hue. |
 
 With `design: {}`, each scenario draws the page of its first design: `design-read-figure-<scenario>-01`. The
-exceptions are `number-checkboxes`, which draws `design-read-figure-number-checkboxes-03`, and `shades`, which draws
-`design-read-figure-shades-03`. The header of each `.js` file lists every token and part. This file is a shorter
-guide.
+exceptions are:
+
+- `number-checkboxes` draws `design-read-figure-number-checkboxes-03`.
+- `shades` draws `design-read-figure-shades-03`.
+
+The header of each `.js` file lists every token and part. This file is a shorter guide.
 
 ## Rules
 

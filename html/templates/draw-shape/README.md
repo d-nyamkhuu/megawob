@@ -161,3 +161,6 @@ Stroke and build:
 - A miniature preview of the ink: `penCreated` and `ink`.
 
 If the site's CSS has to be in place before the frame is measured, check the first page load in a screenshot.
+
+Verify a change to the template as `templates/README.md` ("Changing a template") describes: golden snapshots of the
+sites built on it before and after, the checker and the lint.

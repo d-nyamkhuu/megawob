@@ -7,10 +7,12 @@ Two templates. The agent drags slider thumbs to target values.
 | `set-slider/classic` | `horizontal`, `vertical`, `log`, `range`, `multi`, `stops`, `media`, `mixer`, `match` | Straight custom or native sliders. |
 | `set-slider/settings` | `horizontal` | Rows of settings sliders, with decorative rows around the live ones. |
 
-With `design: {}`, `classic` draws `design-set-slider-range-12`, `design-set-slider-log-01`,
-`design-set-slider-multi-10` and `design-set-slider-vertical-03` for `range`, `log`, `multi` and `vertical`. The
-other `classic` scenarios keep the reference behavior. `settings` draws `design-set-slider-horizontal-09`; with
-the raw defaults it draws `design-set-slider-horizontal-10`.
+With `design: {}`:
+
+- `classic` draws `design-set-slider-range-12`, `design-set-slider-log-01`, `design-set-slider-multi-10` and
+  `design-set-slider-vertical-03` for `range`, `log`, `multi` and `vertical`. The other `classic` scenarios keep the
+  reference behavior.
+- `settings` draws `design-set-slider-horizontal-09`. With the raw defaults it draws `design-set-slider-horizontal-10`.
 
 The header of each `.js` file lists every token and part. This file is a shorter guide.
 

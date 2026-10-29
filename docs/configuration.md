@@ -11,17 +11,42 @@ Every environment variable MegaWoB reads. Set them before the env starts, for ex
 
 | Variable | Values (default first) | Effect |
 |---|---|---|
-| `MEGAWOB_REWARD` | `binary` \| `dense` \| `shaped` | reward the task returns (MiniWoB's 0/1, graded score at the end, per-step progress plus a success bonus) |
+| `MEGAWOB_REWARD` | `binary` \| `dense` \| `shaped` | the reward the task returns ([modes](#reward-modes)) |
 | `MEGAWOB_SHAPING`, `MEGAWOB_SUCCESS_BONUS` | `1.0` each | weights of the shaped reward |
 | `MEGAWOB_EFFICIENCY` | `0` (off) to `1` | scales the success reward down for wasted actions ([below](#efficiency)) |
-| `MEGAWOB_PRESET` | `default` \| `small` | `small`: a curriculum for small models: shaped reward, mostly easy and medium difficulty, more partial starts, lighter popups, no judgment episodes, instruction noise or split drags |
-| `MEGAWOB_INTERFACE` | `both` \| `pixel` \| `dom` | `pixel`: coordinate actions and the screenshot only; `dom`: element actions, DOM and accessibility tree, no screenshot, drags in one action |
-| `MEGAWOB_REUSE` | `1` \| `0` | reset reuses the open page and browser (about half the reset time; `tests/test_reuse_parity.py` checks the episodes match); `0` relaunches per reset |
+| `MEGAWOB_PRESET` | `default` \| `small` | `small` is a curriculum for small models ([below](#preset-small)) |
+| `MEGAWOB_INTERFACE` | `both` \| `pixel` \| `dom` | what the agent sees and does ([below](#interface-modes)) |
+| `MEGAWOB_REUSE` | `1` \| `0` | `1`: reset reuses the open page and browser. `0`: relaunch per reset ([below](#page-reuse)) |
 | `MEGAWOB_STEP_MS` | `1000` | task time per action in `clock=step` (page param `stepms`); weights allowed (`500:.5,1000:.5`) |
 | `MEGAWOB_CLOCK` | `step` \| `action` \| `real` | how task time moves ([below](#clock-modes)) |
 | `MEGAWOB_TIMESCALE` | `1` | wall-clock slowdown in `clock=real` (0.25 = four times slower) |
 | `MEGAWOB_VIEWPORTS` | five training sizes | comma list of `WxH` sampled per episode (ignored when the env is created with a viewport, as OpenEnv does) |
 | `MEGAWOB_DEVICE_SCALE` | `1` | device scale factor of the screenshot, sampled per episode (`check.py --dsf`; page param `deviceScale`) |
+
+### Reward modes
+
+- `binary`: MiniWoB's 0/1.
+- `dense`: a graded score at the end.
+- `shaped`: per-step progress plus a success bonus.
+
+### Preset small
+
+`MEGAWOB_PRESET=small` is a curriculum for small models:
+
+- shaped reward;
+- mostly easy and medium difficulty;
+- more partial starts;
+- lighter popups;
+- no judgment episodes, instruction noise or split drags.
+
+### Interface modes
+
+- `pixel`: coordinate actions and the screenshot only.
+- `dom`: element actions, DOM and accessibility tree, no screenshot, drags in one action.
+
+### Page reuse
+
+With `MEGAWOB_REUSE=1`, reset takes about half the time. `tests/test_reuse_parity.py` checks that the episodes match.
 
 ## Randomization parameters
 

@@ -26,8 +26,8 @@ There are three layers, and each owns one kind of code:
   instruction and the oracle plan. It is pure JS and never touches the DOM.
 - **Sites and widgets** (`html/sites/<site>/`) own all DOM, CSS and visuals. A site draws the page frame and the
   overlays. A widget renders one task on that site and turns plan targets into viewport pixels.
-- **The kit** (`html/kit/`) owns what every page shares: the episode lifecycle, randomization parameters, the clock, scoring, the
-  oracle and the input gate. It also offers optional primitives and banks.
+- **The kit** (`html/kit/`) owns what every page shares: the episode lifecycle, randomization parameters, the clock,
+  scoring, the oracle and the input gate. It also offers optional primitives and banks.
 
 Kit code follows four rules:
 
@@ -215,20 +215,27 @@ Some globals are easy to mix up:
 
 1. `kit/ui/*.js`, in the order of `UI_PRIMITIVES` in `env.js` (`_base` first), then
 2. `kit/content/*.js`, in the order of `CONTENT_FILES` in `env.js` (`core` first), then
-3. `kit/instruct.js`: steps 1-3 download at once and run in this order (as do a task's `files` in step 5). An error
-   at a file's top level fails the boot with its cause; registering a task, site, widget or template twice throws.
-4. `sites/<site>/site.js` (and `templates/site/<name>.js` when its `env.site` names `template: 'site/<name>'`; the site is
-   rebuilt as `{ ...make(design, def), ...the site file's own keys }`), then the site's `styles` and `scripts`. A path in them is relative to the site directory,
-   unless it starts with `kit/`, `vendor/`, `tasks/` or `sites/`.
+3. `kit/instruct.js`.
+4. `sites/<site>/site.js`, then the site's `styles` and `scripts`.
+   - A path in `styles` or `scripts` is relative to the site directory, unless it starts with `kit/`, `vendor/`,
+     `tasks/` or `sites/`.
+   - When the site's `env.site` names `template: 'site/<name>'`, boot also loads `templates/site/<name>.js`. The site
+     is rebuilt as `{ ...make(design, def), ...the site file's own keys }`.
 5. `tasks/<task>/logic.js` and the files it lists in `files` (in order), then the same for every task listed in
    its `uses`.
-6. `sites/<site>/widgets/<task>.js`; for each widget it registers with `template: '<task>/<name>'`, `templates/<task>/<name>.js` (once,
-   with the shared template files its `uses` lists),
-   and the widget is rebuilt as `{ ...make(design, def), ...the widget file's own keys }` (a make that returns an array,
-   for a widget file with no name, registers each widget under its own name); then the widget files of the tasks its
-   `uses` names.
-7. `reset(seed)`. When reset returns, boot sets `env.ready = true`. If any step fails, boot sets `env.bootError` and
-   the page shows the error.
+6. `sites/<site>/widgets/<task>.js`, then the widget files of the tasks its `uses` names.
+   - For each widget registered with `template: '<task>/<name>'`, boot loads `templates/<task>/<name>.js` once, with
+     the shared template files its `uses` lists.
+   - The widget is rebuilt as `{ ...make(design, def), ...the widget file's own keys }`. A make that returns an
+     array, for a widget file with no name, registers each widget under its own name.
+7. `reset(seed)`. When reset returns, boot sets `env.ready = true`.
+
+Notes on boot:
+
+- Steps 1-3 download at once and run in this order. So do a task's `files` in step 5.
+- An error at a file's top level fails the boot with its cause.
+- Registering a task, site, widget or template twice throws.
+- If any step fails, boot sets `env.bootError` and the page shows the error.
 
 **Registration checks.** `env.task`, `env.scenario`, `env.site` and `env.widget` check their definition when called
 (`runtime/validate.js`). They throw one error that names the file and every problem, and the boot fails with it:
@@ -248,9 +255,11 @@ They reject:
 A widget or site built on a template is checked again once the template has filled it in. When you add a contract
 key, add it to the tables in `validate.js` and to `tests/kit/validate.test.mjs`.
 
-There is no registry to edit. Python globs `tasks/*/logic.js` and `sites/*/manifest.json`, and a widget only has to
-be listed in its site's `manifest.json` (`python -m megawob.manifests --fix` writes the list from the widget files; the
-lint fails a manifest that differs from them).
+There is no registry to edit. Python globs `tasks/*/logic.js` and `sites/*/manifest.json`. A widget only has to be
+listed in its site's `manifest.json`:
+
+- `python -m megawob.manifests --fix` writes the list from the widget files.
+- The lint fails a manifest that differs from them.
 
 ### One episode: `reset(seed, scenario?, opts?)`
 
@@ -282,24 +291,27 @@ and so on. `env.instruct.say` forks `misorder` itself.
   checks `task.ended()` and refreshes the debug view. It does **not** call `sync()` after an update; a widget that
   draws from the model redraws itself.
 - **The harness steps the clock.** After every agent action it calls `__env.stepClock()`, which advances task time
-  by `stepMs` and shows or expires overlays (`__env.tick()` is `stepClock()` plus `status()` and `inputFeedback()` in one
-  call, what the BrowserGym task uses; `__env.bootInfo()` is the one-call setup read). For a timed task (one with `tick()`) it also runs `tick()` in
-  `tickMs` sub-steps and then calls `view.sync(model)`, unless the pointer is held and the model did not change.
-  A widget without `sync` is re-rendered from scratch instead.
+  by `stepMs` and shows or expires overlays.
+  - For a timed task (one with `tick()`), it also runs `tick()` in `tickMs` sub-steps. It then calls
+    `view.sync(model)`, unless the pointer is held and the model did not change.
+  - A widget without `sync` is re-rendered from scratch instead.
+  - `__env.tick()` is `stepClock()` plus `status()` and `inputFeedback()` in one call. The BrowserGym task uses it.
+  - `__env.bootInfo()` is the one-call setup read.
 - **Scoring** (`kit.score`): error, tolerance, progress and reward come from the task, and the kit adds the
   violations. Anchors (the elements `render` returned) must not move unless the widget calls `ctx.reanchor()`.
-  `compute()` is pure; `check()` records the `layout` violation (a moved anchor, or a page that should not scroll
-  did) and runs before each counted `compute()`: in `score()` (so `status()`, `stepClock()`, `reset()`), in `end()`
-  and in the oracle's within-tolerance test.
+  - `compute()` is pure.
+  - `check()` records the `layout` violation: a moved anchor, or a page that should not scroll did.
+  - `check()` runs before each counted `compute()`: in `score()` (so in `status()`, `stepClock()` and `reset()`), in
+    `end()` and in the oracle's within-tolerance test.
 - **The oracle** (`__env.oracle()`, `runtime/oracle.js`) picks the next action in this order:
   1. the rest of a held split drag;
   2. the dismiss control of an open overlay (popups, faults, hazards, notices);
   3. a `wait` while a pageFaults=hang overlay is busy, and the cancel reply after an interruptions=cancel notice;
   4. the judgment ending;
   5. the end control (or finish; report episodes finish with `kit.report.message`) once the error is within tau;
-  6. otherwise `task.plan()`, located through `widget.locate()`. On scrollable pages a wheel step comes first when the
-     point is off screen, or (a page scrolling in a pane that holds the stage) clipped by that pane or under the site's
-     frame outside it.
+  6. otherwise `task.plan()`, located through `widget.locate()`. On scrollable pages a wheel step comes first when
+     the point is off screen. For a page that scrolls in a pane holding the stage, it also comes first when the point
+     is clipped by that pane or under the site's frame outside it.
 - **Ending.** An episode ends on the site's end control (`ctx.submit()`), on `__env.finish(message?)`, on
   `ended()`, or on a violation.
 
@@ -460,16 +472,17 @@ native HTML5 drag and drop all work, as long as the widget keeps the contract.
 - DOM helpers: `el(tag, cls, parent, text)`, `svg(tag, attrs, parent)`, `center(el)`, `css(id, text)`.
 - `clickCount(e)`, which counts clicks correctly for the three separate clicks BrowserGym sends.
 - The older `drag()`, now a thin wrapper over `env.ui.track`.
-- Pure helpers for task logic (`runtime/data.js`; list in its header): `clamp`, `cap`, `quote`, `pad` / `pad2`,
-  `nonEmpty`, `sameJson`, `lev`, `clone`, `keepIdx`, `hash32`, `pickWeighted`, `reportFactsOf`, `civilToDays` /
-  `daysToCivil`, `srgbToLab` / `deltaE00`, `dist` / `lerp` (points), `listText` ("a, b and c"), `isConfirm`,
-  `monthKey` / `mIndex`. A task destructures what it needs (`const { clamp, quote } = env.util;`);
-  `megawob.lint` (rule `util-copy`) fails a task or kit file that defines a function with one of these names.
+- Pure helpers for task logic (`runtime/data.js`; the list is in its header):
+  - Numbers and strings: `clamp`, `cap`, `quote`, `pad` / `pad2`, `lev`, `listText` ("a, b and c").
+  - Data: `nonEmpty`, `sameJson`, `clone`, `keepIdx`, `hash32`, `pickWeighted`, `reportFactsOf`, `isConfirm`.
+  - Dates and colors: `civilToDays` / `daysToCivil`, `monthKey` / `mIndex`, `srgbToLab` / `deltaE00`.
+  - Points: `dist` / `lerp`.
 
-There are no text-matching helpers: the kit grades ending messages itself from the data a task declares (see
-"Ending messages" below).
+A task destructures what it needs (`const { clamp, quote } = env.util;`). Use these instead of a local copy:
+`megawob.lint` (rule `util-copy`) fails a task or kit file that defines a function with one of these names.
 
-Use these instead of a local copy.
+There are no text-matching helpers. The kit grades ending messages itself from the data a task declares (see
+[Ending messages](#ending-messages-replyformat)).
 
 ### `env.content` and `env.instruct`
 
@@ -482,9 +495,10 @@ Use these instead of a local copy.
 - **`env.instruct`** builds the instruction from one core sentence. `say()` picks the register, `alias()` varies
   labels, `tol()` hides tolerances, and `pick()` / `phrase()` choose from template lists split by `isplit`.
   - Tasks copy `opts.isplit` into the spec, so `instruction()` can pass it on.
-  - Lists with at least two distinct template keys have disjoint, nonempty train/heldout partitions. Templates
-    hash to heldout about 20% of the time; when none do, the lowest-hash key is held out, and when all do, the
-    highest-hash key is reserved for training. A list with one distinct key is shared between splits.
+  - Lists with at least two distinct template keys have disjoint, nonempty train/heldout partitions.
+    - Templates hash to heldout about 20% of the time.
+    - When none do, the lowest-hash key is held out. When all do, the highest-hash key is reserved for training.
+    - A list with one distinct key is shared between splits.
   - The kit applies `messy()` (`instructionNoise`) itself; tasks never call it.
 
 ## Extending the kit
@@ -635,14 +649,15 @@ How it fits together:
   - A hook that replaces the model or spec makes the kit call `env._repaint()`: a full `_render()` with fresh
     anchors, keeping the page scroll.
   - A widget may move parts of the site frame into the stage (the end control into its form). `reset()` records
-    where every frame node sits (`frameHomes()` in `env.js`), and `_render()` first puts those nodes back, so the
+    where every frame node sits (`frameHomes()` in `env.js`). `_render()` first puts those nodes back, so the
     fresh render finds them again.
 - **Overlay records.** Faults, hazards and notices are added with `kit.overlay.add(env, source, kind, at, draw)`, so
-  they share the popup schedule: the oracle dismisses them, they log `<source>` and `<source>-dismiss`, and
-  `dismissOverlay()` closes them. `draw(ov)` returns `{ el, dismiss?, ttlSteps?, after? }`; without `el` nothing is
-  drawn.
-- **Task hooks** are optional. `python -m megawob.scenarios` records them in `html/scenarios.json`, and
-  `catalog.hooks()` uses them to decide which eval perturbations a task gets, so rerun it after adding one.
+  they share the popup schedule.
+  - The oracle dismisses them, and `dismissOverlay()` closes them.
+  - They log `<source>` and `<source>-dismiss`.
+  - `draw(ov)` returns `{ el, dismiss?, ttlSteps?, after? }`. Without `el` nothing is drawn.
+- **Task hooks** are optional. `python -m megawob.scenarios` records them in `html/scenarios.json`. `catalog.hooks()`
+  uses that file to decide which eval perturbations a task gets, so rerun it after adding a hook.
   - `facts(model, spec) -> [{ label, value, aliases?, labels? }]`: `aliases` are other spellings of the value,
     `labels` other names of the fact.
   - `parts(model, spec) -> [{ name, value, aliases? }]`: the page's named items and their graded state.
@@ -660,30 +675,43 @@ How it fits together:
 An episode can end with a message (BrowserGym `send_msg_to_user` / `report_infeasible`, `__env.finish`). The kit
 grades it in `runtime/reply.js`, never with word lists:
 
-- **`replyFormat`** (internal name `reply`; own stream): `auto` (default: structured in tasks that declare `reply: true`, the workflow
-  apps and the safety tasks; free text elsewhere), `structured` (every task) or `free` (no task).
-- **Structured.** A reply format is drawn per episode (own fork `reply`): one of four layouts (json, lines, tags,
-  markdown), synonyms for the field names, the words for each status and reason code, the field order and the
-  wording. `env.goal()` appends its description to the instruction in every episode of a task with judgment modes or
-  facts, so its presence never gives a judgment episode away. Statuses: done (a normal ending), ask (ambiguous),
-  impossible, confirm, declined (a safety stop case), stopped (interruptions=cancel; the format comes with the notice
-  when the goal does not carry it). Fields: facts, options, what, reason, changes, note (never graded).
-- **Free text.** At most 300 characters. ask and confirm need a question mark; ask names the candidates and none of
-  the others; impossible and declined need `report_infeasible` or no question mark and name `what`; a report fact
-  counts when its value starts within 3 words after its label in one clause (commas split clauses unless the value
-  has one); a stop names every changed part and no unchanged one.
+- **`replyFormat`** (internal name `reply`; own stream) takes one of three values:
+  - `auto` (default): structured in tasks that declare `reply: true`, the workflow apps and the safety tasks; free
+    text elsewhere.
+  - `structured`: every task.
+  - `free`: no task.
+- **Structured.** A reply format is drawn per episode (own fork `reply`). It sets:
+  - one of four layouts (json, lines, tags, markdown);
+  - synonyms for the field names;
+  - the words for each status and reason code;
+  - the field order and the wording.
+
+  `env.goal()` appends the format description to the instruction in every episode of a task with judgment modes or
+  facts, so its presence never gives a judgment episode away.
+  - Statuses: done (a normal ending), ask (ambiguous), impossible, confirm, declined (a safety stop case), stopped
+    (interruptions=cancel; the format comes with the notice when the goal does not carry it).
+  - Fields: facts, options, what, reason, changes, note (never graded).
+- **Free text.** At most 300 characters.
+  - ask and confirm need a question mark.
+  - ask names the candidates and none of the others.
+  - impossible and declined need `report_infeasible`, or no question mark, and name `what`.
+  - A report fact counts when its value starts within 3 words after its label in one clause. Commas split clauses
+    unless the value has one.
+  - A stop names every changed part and no unchanged one.
 - **What the task declares** (all data, in `sample()`):
-  - ambiguous: `spec.judge.cands: [[name, ...alternates], ...]` (what tells the candidates apart on the page;
-    `cands[k][0]` is what the oracle offers; same-named things are twins `[[n], [n]]`), optional `need` and
-    `others: [[name], ...]` (the page's other names of that kind, never to be offered). Options must each name
-    exactly one candidate, no two alike.
+  - ambiguous: `spec.judge.cands: [[name, ...alternates], ...]`, plus optional `need` and `others: [[name], ...]`.
+    - `cands` is what tells the candidates apart on the page. `cands[k][0]` is what the oracle offers. Same-named
+      things are twins: `[[n], [n]]`.
+    - `others` are the page's other names of that kind, never to be offered.
+    - Options must each name exactly one candidate, no two alike.
   - impossible: `spec.judge.what: [name, ...]` (the missing thing or impossible value; required by the checker).
   - safety stop cases: `spec.judge.reasons: [code, ...]` (phishing, injection, deceptive, privacy, other) and `what`.
   - reportFacts: `facts()`; interruptions: `parts()`; answerIn=reply: `answers()` / `answered()`.
   - `judged(model, spec, info)` stays optional, for model checks only (`info.reply` is the parsed reply).
-- **The oracle** writes its endings with `kit.reply.format(env, o)`; `megawob/check.py` runs every judgment mode in both
-  reply formats, and `python -m megawob.hackcheck` runs scripted cheats (hedges, page dumps, sprays, echoes, empty
-  stops) against every task: each must stay at or below 5%.
+- **The oracle** writes its endings with `kit.reply.format(env, o)`.
+- **Checks.** `megawob/check.py` runs every judgment mode in both reply formats. `python -m megawob.hackcheck` runs
+  scripted cheats (hedges, page dumps, sprays, echoes, empty stops) against every task. Each cheat must stay at or
+  below 5%.
 
 ### Add a randomization parameter
 
@@ -734,16 +762,19 @@ new options that tasks opt into, or treat the change as a revalidated content ch
 ### Add a runtime module or a `util` helper
 
 - **A runtime module.** Write `runtime/<name>.js` as an IIFE that sets `kit.<name> = {...}` on
-  `window.__megawobKit`. Add a `<script>` tag to `play.html` before `env.js` (stubdom reads the tags from
-  `play.html`) and the name to `MODULES` in `env.js` if `env.js` calls it. List it in the `env.js` header. State
-  the module keeps between calls goes in its own slot `env._rt.<name>`, made by its reset hook (`reset(env)`, or
-  `schedule(env)` for the parameters) that `env.reset()` calls; other modules read it through the module's functions
-  (`kit.clock.steps(env)`, `kit.preempt.pending(env)`, `kit.fault.on(env)`), never the slot, and the header says
-  what the slot holds.
-- **A pure helper for tasks.** Put it in `runtime/data.js` (header, `kit.data = {...}` and a test in
-  `tests/kit/data.test.mjs`); `env.util` spreads `kit.data`, and the `util-copy` lint rule then flags any task that
-  defines a function of that name. First check that tasks do not already carry copies; migrate those copies in
-  the same change.
+  `window.__megawobKit`.
+  - Add a `<script>` tag to `play.html` before `env.js` (stubdom reads the tags from `play.html`).
+  - Add the name to `MODULES` in `env.js` if `env.js` calls it.
+  - List it in the `env.js` header.
+  - State the module keeps between calls goes in its own slot `env._rt.<name>`. The module's reset hook makes the
+    slot: `reset(env)`, or `schedule(env)` for the parameters. `env.reset()` calls that hook.
+  - Other modules read the slot through the module's functions (`kit.clock.steps(env)`,
+    `kit.preempt.pending(env)`, `kit.fault.on(env)`), never directly. The header says what the slot holds.
+- **A pure helper for tasks.** Put it in `runtime/data.js`: the header entry, `kit.data = {...}` and a test in
+  `tests/kit/data.test.mjs`.
+  - `env.util` spreads `kit.data`, and the `util-copy` lint rule then flags any task that defines a function of
+    that name.
+  - First check that tasks do not already carry copies. Migrate those copies in the same change.
 
 ## Testing a kit change
 
@@ -776,23 +807,29 @@ python -m megawob.check --site trait-tests --seeds 20
   oracle trajectory, the score after every action, the end status and lossless start and end screenshots
   (about 80 MB). Keep snapshots outside the repository.
 - **Runs per widget.** They follow `check.py`: seeds with the parameter mix, one run per scenario, and the sweep of
-  parameter values. There are also `full` runs where every parameter draws (`golden.FULL_MIX`). Only these catch a
-  reordered shared stream, because the checker's mix leaves `inputRoute`, `composition` and `undeclaredInput`
-  undrawn.
+  parameter values.
+  - There are also `full` runs where every parameter draws (`golden.FULL_MIX`).
+  - Only the `full` runs catch a reordered shared stream, because the checker's mix leaves `inputRoute`,
+    `composition` and `undeclaredInput` undrawn.
 
 How to read and extend the results:
 
 - **Golden differences.** Two captures of one kit are identical, screenshots included (`--noise 0 0`), so any
-  difference is real: either intended (list it with `--ignore 'pattern'`, matched against the printed paths) or a
-  bug. Typical bugs are a widget whose model lags the page, or state that leaks across episodes on the reused page.
-  `--noise PX DELTA` accepts small screenshot differences, if you need to.
+  difference is real. It is either intended or a bug.
+  - List an intended difference with `--ignore 'pattern'`, matched against the printed paths.
+  - Typical bugs are a widget whose model lags the page, or state that leaks across episodes on the reused page.
+  - `--noise PX DELTA` accepts small screenshot differences, if you need to.
 - **Known gaps.** Node's V8 and Chromium's can differ in the last digit of a `Math` result, and Playwright returns
   `-0` as `0`. Neither matters for a before/after comparison.
 - **What golden cannot see.** The node layer stubs frame, overlays and every widget's `render` / `locate`. A change to
   widget-facing code (`env.ui`, `_render`, overlays) therefore also needs the checker on the affected sites. Run the
   full design-* check once at the end.
 - **Checker flags.** `--seed` and `--viewport` prefix-match `--seeds` and `--viewports`. Pass a viewport list
-  explicitly: `--viewports 1024x640 1280x720 1366x768 1440x900 1536x864`.
+  explicitly:
+
+  ```bash
+  python -m megawob.check --site X --viewports 1024x640 1280x720 1366x768 1440x900 1536x864
+  ```
 - **Testing new work outside the repo.** Point `MEGAWOB_HTML` at a scratch copy of `html/` (with `kit/`,
   `play.html`, `tasks/`, `scenarios.json` and the sites you need). The worked example above was checked this way.
 
@@ -848,13 +885,21 @@ never exercised by a training site, and one used by no group is dead.
 
 **Count from the registered definitions, not with grep.** Tasks, sites and widgets are object literals passed to
 `env.task()`, `env.site()` and `env.widget()`. Text search misses spreads and defaults, and over-counts generic
-names (`lines` also matches `b.lines`). Instead, load each `logic.js`, `site.js` and `widgets/*.js` in a Node `vm`
-context whose `env` records what those calls receive, with permissive Proxy stubs for the other globals
-(`megawob/widgetdefs.mjs` does this). Every widget loads in seconds.
+names (`lines` also matches `b.lines`).
+
+Instead:
+
+1. Load each `logic.js`, `site.js` and `widgets/*.js` in a Node `vm` context.
+2. Make its `env` record what those calls receive.
+3. Give the other globals permissive Proxy stubs.
+
+`megawob/widgetdefs.mjs` does this. Every widget loads in seconds.
 
 Grep is still right for calls inside function bodies (`ui.slider({...})` options, `traits.x` reads). Mind the
-aliases: tasks reach content as `C.X`, `arr('KEY')`, `bank('KEY')` or `C[key]`, and instruct as `I`, `In`, `ins`
-or `I()`.
+aliases:
+
+- Tasks reach content as `C.X`, `arr('KEY')`, `bank('KEY')` or `C[key]`.
+- Tasks reach instruct as `I`, `In`, `ins` or `I()`.
 
 A full audit splits into three read-only passes that can run in parallel:
 
@@ -864,17 +909,28 @@ A full audit splits into three read-only passes that can run in parallel:
 
 **RNG streams.** A kit change must not move any draw an existing episode depends on.
 
-- **Shared stream.** These parameters draw in this order from one stream, `knobs/<task>`: `startState`, `popups`,
-  `instructionDisplay`, `finishByMessage`, `popupAt`, `inputRoute`, `composition`, `undeclaredInput` and
-  `pageLanguage`. These are the `'shared'` rows of `TABLE`; `kit.knobs.PARAMS` maps their internal names to the
-  public ones. Removing or reordering one shifts every later draw. A parameter draws only when it has weights.
-- **Own streams.** Every other parameter (`difficulty`, `judgment`, `instructionNoise`, `dragSteps`, `stepms`,
-  `timescale` and the [behaviour parameters](#behaviour-parameters-pagefaults-reportfacts-interruptions-silentfailures-safetyhazards-answerin))
-  draws from its own `knob/<name>` fork. A new parameter gets an `'own'` row.
+- **Shared stream.** These parameters draw in this order from one stream, `knobs/<task>`:
+  1. `startState`
+  2. `popups`
+  3. `instructionDisplay`
+  4. `finishByMessage`
+  5. `popupAt`
+  6. `inputRoute`
+  7. `composition`
+  8. `undeclaredInput`
+  9. `pageLanguage`
+
+  These are the `'shared'` rows of `TABLE`; `kit.knobs.PARAMS` maps their internal names to the public ones.
+  Removing or reordering one shifts every later draw. A parameter draws only when it has weights.
+- **Own streams.** Every other parameter draws from its own `knob/<name>` fork. That covers `difficulty`,
+  `judgment`, `instructionNoise`, `dragSteps`, `stepms`, `timescale` and the
+  [behaviour parameters](#behaviour-parameters-pagefaults-reportfacts-interruptions-silentfailures-safetyhazards-answerin).
+  A new parameter gets an `'own'` row.
 - **Salting.** Parameters and the frame draw from streams salted with the task, so one seed does not give every task
   the same parameters. The stream names keep their old spelling (`chrome/<task>`) so episodes stay identical.
-- Deleting code that never runs, or never draws, is safe. Changing `env.instruct` or `env.content` (wording, banks,
-  splits) changes instructions and content for a seed: give it its own commit and revalidate.
+- **Safe changes.** Deleting code that never runs, or never draws, is safe.
+- **Revalidated changes.** Changing `env.instruct` or `env.content` (wording, banks, splits) changes instructions
+  and content for a seed. Give it its own commit and revalidate.
 
 ## Debugging a page
 
@@ -892,9 +948,13 @@ html/play.html?task=set-slider&site=base&widget=classic&seed=3&debug=1&shortcut=
 | `clock=real` | task time runs from wall time, so timed tasks move on their own |
 | randomization parameters | force one: `&startState=wrong&popups=cookie&popupAt=0&instructionDisplay=panel` |
 
-`python -m megawob.gallery --serve` gives the same view with parameter pickers and an oracle overlay. It also shows a
-per-action reward log of your own play, a finish-message box, and oracle Step / Play from the current state. Over
-`file://` the gallery cannot reach its iframe.
+`python -m megawob.gallery --serve` gives the same view with parameter pickers and an oracle overlay. It also has:
+
+- a per-action reward log of your own play;
+- a finish-message box;
+- oracle Step / Play from the current state.
+
+Over `file://` the gallery cannot reach its iframe.
 
 In the console:
 
@@ -910,7 +970,7 @@ Common failures and where to look:
 |---|---|
 | `megawob boot error: ... did not register` | the task or site name differs from its directory, or the file threw while loading |
 | `scenario 'x' not supported by widget` | the widget's `scenarios` lacks it; rerun `python -m megawob.scenarios` after changing scenarios |
-| `env.ui: <what> is not rendered` from the oracle | `locate()` targets an element that is hidden, closed or scrolled away; the plan asks for something the page does not show (the choose-option select2 fix, commit 2cbc391, is an example) |
+| `env.ui: <what> is not rendered` from the oracle | `locate()` targets an element that is hidden, closed or scrolled away; the plan asks for something the page does not show |
 | layout violation | an anchor moved after render; call `ctx.reanchor()` after a legitimate change, or keep the anchor still |
 | "anchor outside the stage" | the widget sized itself from the window or a fixed height; size it from `ctx.size` |
 | "reset(7) is not deterministic" | the widget reads wall time, keeps state across resets, or its model lags the page |
@@ -924,8 +984,8 @@ Common failures and where to look:
 - **`ended()` runs after every update and tick.** Do not add a no-op `tick` just to get it evaluated.
 - **`ctx.model` is a getter.** It reads the current model even from an old ctx. `update`, `patch`, `flag` and `log`
   from an old episode are dropped and logged as `ignored`.
-- **`render` may run more than once per episode.** Without `sync`, every clock step of a timed task re-renders the widget. The `widget` fork
-  restarts on every render, so the draws repeat.
+- **`render` may run more than once per episode.** Without `sync`, every clock step of a timed task re-renders the
+  widget. The `widget` fork restarts on every render, so the draws repeat.
 - **Trainer API names are reserved.** Never name an instance field like a method (an `events` array once shadowed
   `events()`).
 - **`env.ui.buttons` keys read from `data-key` are strings.** Pass `opts.keys` for numeric keys. For targets that are
@@ -933,6 +993,10 @@ Common failures and where to look:
 - **CSS `zoom` breaks hit testing in this Chromium.** Vary scale with the viewport or the device scale factor.
 - **The checker runs Chromium with `catalog.RASTER_ARGS`** (`--disable-partial-raster --disable-smooth-scrolling`).
   Without them, screenshots differ from run to run at shape edges and a wheel action can leave a pane half-scrolled.
-- **There is no hidden registry.** Lists that must agree are `UI_PRIMITIVES` and `CONTENT_FILES` in `env.js`, the
-  `<script>` tags in `play.html` and `MODULES` in `env.js`. The unit-test loader reads the first three from the
-  source, so only `env.js` and `play.html` need editing.
+- **There is no hidden registry.** Four lists must agree:
+  - `UI_PRIMITIVES` in `env.js`;
+  - `CONTENT_FILES` in `env.js`;
+  - the `<script>` tags in `play.html`;
+  - `MODULES` in `env.js`.
+
+  The unit-test loader reads the first three from the source, so only `env.js` and `play.html` need editing.

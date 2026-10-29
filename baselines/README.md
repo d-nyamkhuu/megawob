@@ -8,14 +8,24 @@
 
 The checker, audit, hackcheck and lint ([docs/checks.md](../docs/checks.md)) show that a task can be solved and is
 scored honestly. They cannot show whether a pixel policy can learn it, because the oracle reads hidden state and
-clicks exact pixels. The two probes measure that without training. Run them after a task, widget or tolerance
-change, or before an RL run to pick tasks.
+clicks exact pixels.
 
-`benchmark.py` and `step_probe.py` drive the pages directly through Playwright (no BrowserGym) and talk to any
-OpenAI-compatible vision model: the Responses API by default, or Chat Completions with `--api chat` (vLLM, SGLang,
-Ollama, LM Studio, OpenRouter). They need the `baselines` extra: `pip install -e '.[baselines]'` from the repo root,
-then `playwright install chromium`. To train or run other agents, use the BrowserGym or OpenEnv interface from the
-main README.
+The two probes measure that without training. Run them after a task, widget or tolerance change, or before an RL run
+to pick tasks.
+
+`benchmark.py` and `step_probe.py`:
+
+- Drive the pages directly through Playwright (no BrowserGym).
+- Talk to any OpenAI-compatible vision model. They use the Responses API by default, or Chat Completions with
+  `--api chat` (vLLM, SGLang, Ollama, LM Studio, OpenRouter).
+- Need the `baselines` extra. From the repo root, run:
+
+  ```bash
+  pip install -e '.[baselines]'
+  playwright install chromium
+  ```
+
+To train or run other agents, use the BrowserGym or OpenEnv interface from the main README.
 
 ## Benchmark
 
@@ -40,16 +50,18 @@ python baselines/benchmark.py --model <model> --tasks set-slider fill-form --epi
 A full run is 177 episodes and about 1,500 model calls for `gpt-6-luna`. Each call resends the conversation so far,
 so long episodes cost more. At 3-6 s a call with `--workers 2`, that is one to two hours.
 
-Results go to `data/benchmark/<model>-<timestamp>/` (or `--out`), and the run prints the README's results table:
+Results go to `data/benchmark/<model>-<timestamp>/` (or `--out`), and the run prints the README's results table.
+The output folder holds:
 
-- `config.json`: the options of the run;
-- `records-*.jsonl`: every reply, action and score of every episode (the step probe's format);
-- `shots/`: screenshots;
-- `results.json`: per task, the site, episodes, model and oracle successes and action counts; totals; anything that
-  did not run.
+- `config.json`: the options of the run.
+- `records-*.jsonl`: every reply, action and score of every episode (the step probe's format).
+- `shots/`: screenshots.
+- `results.json`: per task, the site, episodes, model and oracle successes and action counts. It also has the totals
+  and anything that did not run.
 
-Rerunning with the same `--out` resumes: tasks already recorded are skipped, so keep the other options the same. To
-redraw the README chart from a new `results.json`, copy it to `docs/results/baseline-heldout.json`.
+Rerunning with the same `--out` resumes. Tasks already recorded are skipped, so keep the other options the same.
+
+To redraw the README chart from a new `results.json`, copy it to `docs/results/baseline-heldout.json`.
 
 | Option | Effect |
 |---|---|
@@ -85,9 +97,12 @@ in progress. The oracle's own next actions from the same state are the control.
 - The probe's actions mirror BrowserGym's: `type` fills a field (click, select all, type) and `text` types at the
   caret.
 
-It needs the `baselines` extra and an OpenAI-compatible endpoint: the key in `OPENAI_API_KEY`, and `--base-url` (or
-`OPENAI_BASE_URL`) for an endpoint other than OpenAI's. The module docstring lists every logged field. Run it from
-the repo root:
+It needs the `baselines` extra and an OpenAI-compatible endpoint:
+
+- Put the key in `OPENAI_API_KEY`.
+- For an endpoint other than OpenAI's, set `--base-url` (or `OPENAI_BASE_URL`).
+
+The module docstring lists every logged field. Run it from the repo root:
 
 ```bash
 python baselines/step_probe.py --task set-slider --widget classic --states 3 --workers 1  # live check, a few calls
@@ -105,8 +120,9 @@ python baselines/step_probe.py --task fill-form --states 6 --set instructionDisp
 | `--widget`, `--max-cells`, `--no-history`, `--workers`, `--out` | narrow the run, drop the history, parallel processes, output directory |
 
 A call takes about 3-6 s. The conversation is resent each turn, with the repeated part served from the prompt cache.
-A run on the base site with `--states 4 --horizon 5 --workers 5` takes roughly 1-2 h. Keep the model, effort and
-randomization parameters fixed between runs you compare; `config.json` records them.
+A run on the base site with `--states 4 --horizon 5 --workers 5` takes roughly 1-2 h.
+
+Keep the model, effort and randomization parameters fixed between runs you compare. `config.json` records them.
 
 ## Precision probe
 
@@ -126,12 +142,15 @@ click error).
 
 Both probes write to `data/<probe>/<timestamp>/` under the current directory (`--out` to choose):
 
-- `config.json`;
-- one JSONL line per widget (precision) or per state (step probe), written as it finishes, so a crashed run keeps
-  what it did;
+- `config.json`.
+- One JSONL line per widget (precision) or per state (step probe), written as it finishes, so a crashed run keeps
+  what it did.
 - `shots/`: screenshots.
 
-Precision keeps, for each failed noisy run, the per-action trace and an end screenshot. The step probe keeps every
-reply, the score after each model and oracle action, and the screenshots. Both are seeded, so a rerun with the same
-arguments replays the same runs. To compare before and after a change, run the same arguments into two `--out`
-directories.
+What each probe keeps:
+
+- **Precision:** for each failed noisy run, the per-action trace and an end screenshot.
+- **Step probe:** every reply, the score after each model and oracle action, and the screenshots.
+
+Both are seeded, so a rerun with the same arguments replays the same runs. To compare before and after a change, run
+the same arguments into two `--out` directories.

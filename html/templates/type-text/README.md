@@ -13,13 +13,15 @@ labeled fields.
 
 The widget also keeps the `textarea`, `copy` and validation-fix paths, which use the same card.
 
-Fields are bound with `env.ui.textField`, which handles masks and a character counter inside the field. A form with an
-in-app save has a submit button inside the `<form>`. A click, or Enter in a one-line field, runs the task's
-`validate()`. Errors show in a fixed-height slot under each field and in a status line next to the button. The focused
-field is mirrored into `model.focus`. Long forms scroll the page.
+- Fields are bound with `env.ui.textField`, which handles masks and a character counter inside the field.
+- A form with an in-app save has a submit button inside the `<form>`. A click, or Enter in a one-line field, runs the
+  task's `validate()`.
+- Errors show in a fixed-height slot under each field and in a status line next to the button.
+- The focused field is mirrored into `model.focus`.
+- Long forms scroll the page.
 
-The card uses `ft-*` classes and the site's colors (`--panel`, `--line`, `--accent`, `--muted`, `--fg`, `--bg`). A site
-restyles it in `site.css`.
+The card uses `ft-*` classes and the site's colors: `--panel`, `--line`, `--accent`, `--muted`, `--fg` and `--bg`.
+A site restyles it in `site.css`.
 
 The header of `fields.js` lists every token and part. This file is a shorter guide.
 

@@ -179,3 +179,6 @@ Kanban dragging and dropping:
 - Counts or progress in empty columns: `counts`, `columnBegin`, `columnReady`.
 - Remeasuring the board after a count change: `kanbanSize`, `columnsChanged`.
 - Cards with detail lines: `kanbanTitle`, `kanbanCard`. Keep the `cardMeta` and `wheelPane` traits of the widget.
+
+Verify a change to the template as `templates/README.md` ("Changing a template") describes: golden snapshots of the
+sites built on it before and after, the checker and the lint.

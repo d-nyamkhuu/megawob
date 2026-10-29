@@ -13,14 +13,17 @@ and sized from `ctx.size`. Month and weekday names, the first day of the week an
 
 The template also keeps the `duration` path (spinners, two number inputs, or preset chips).
 
-The mechanics come from `env.ui` (`kit/ui/form.js`): the picker is an `env.ui.dropdown`, the month grid an
-`env.ui.calendar`, and the spinners `env.ui.spinner`. Every callback goes through `env.taskDef.helpers.apply()`, so the
-task's plan and the page agree. A press outside an open picker closes it. The card has a fixed size, which is the
-anchor, and pickers overlay its lower part.
+The mechanics come from `env.ui` (`kit/ui/form.js`):
+
+- The picker is an `env.ui.dropdown`, the month grid an `env.ui.calendar`, and the spinners `env.ui.spinner`.
+- Every callback goes through `env.taskDef.helpers.apply()`, so the task's plan and the page agree.
+- A press outside an open picker closes it.
+- The card has a fixed size, which is the anchor. Pickers overlay its lower part.
 
 With `design: {}`, the scenarios draw `design-set-date-calendar-02`, `design-set-date-range-03`,
-`design-set-date-time-01` and `design-set-date-typed-01`. The raw token defaults draw `design-set-date-typed-11`. The
-header of `calendar.js` lists every token and part. This file is a shorter guide.
+`design-set-date-time-01` and `design-set-date-typed-01`. The raw token defaults draw `design-set-date-typed-11`.
+
+The header of `calendar.js` lists every token and part. This file is a shorter guide.
 
 ## Rules
 

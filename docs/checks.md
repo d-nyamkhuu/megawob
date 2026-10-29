@@ -68,7 +68,7 @@ With no arguments it checks every widget of every site, which takes many hours.
 ### Lint
 
 `python -m megawob.lint [--site 'design-use-*'] [--verbose]` loads every `site.js` and widget file in a Node
-recorder (`megawob/widgetdefs.mjs`) and checks what the checker cannot see, because the checker reads `__env` and
+recorder (`megawob/widgetdefs.mjs`). It checks what the checker cannot see, because the checker reads `__env` and
 not the page:
 
 - a widget that shows the task's `error()` or `tolerance()` verdict on the page;
@@ -86,7 +86,7 @@ It also enforces the template pattern:
 - each manifest matches its widget files. `python -m megawob.manifests [--fix]` checks, or rewrites, the manifests.
 
 The rules and the allow comment (`// megawob-lint: allow <rule> reason`) are listed in the `megawob/lint.py`
-docstring. A full run ends with `ruff check`; `--no-ruff` skips it.
+docstring. A full run ends with `ruff check`. `--no-ruff` skips it.
 
 ### smoke_gym.py
 
@@ -101,9 +101,10 @@ MEGAWOB_REWARD=shaped python server/smoke_gym.py      # shaped returns must be 2
 ```
 
 It needs BrowserGym and gymnasium. If your Python lacks them, run it in the Docker image with your working tree
-mounted over the image's copy (`/opt/megawob`). The mount brings in your current code, so rebuild only when the
-Dockerfile or its dependencies change. `$U` runs the container as you, so files it writes (such as
-`__pycache__`) stay yours:
+mounted over the image's copy (`/opt/megawob`).
+
+- The mount brings in your current code, so rebuild only when the Dockerfile or its dependencies change.
+- `$U` runs the container as you, so files it writes (such as `__pycache__`) stay yours.
 
 ```bash
 docker build -f server/Dockerfile -t megawob .        # once, a few minutes
@@ -156,7 +157,9 @@ python -m megawob.gallery --player-check --site base  # where the viewer's oracl
 ## Long runs
 
 A full check is every widget at five viewports. The base site alone (128 widgets, 640 cells) takes minutes with
-`--jobs 8`. Each job is a process with its own Chromium (~400 MB), so lower `--jobs` when memory is short.
+`--jobs 8`.
+
+Each job is a process with its own Chromium (~400 MB), so lower `--jobs` when memory is short.
 
 - Wrap long runs in `timeout`, set `PYTHONUNBUFFERED=1` when writing to a log, and keep one log per task, so a hang
   points at its task.
@@ -169,7 +172,8 @@ A full check is every widget at five viewports. The base site alone (128 widgets
 - `py-spy dump --pid <pid>` shows where a hung Python run is blocked.
 
 `smoke_gym.py` has no `--jobs`. To run every task in parallel, run one process per task in the Docker image (see
-above), with the logs in a mounted directory:
+above), with the logs in a mounted directory. Failures are the lines with `return=` that are not ` OK `, and
+`exit=124` means that task timed out:
 
 ```bash
 S=/tmp/megawob-smoke; mkdir -p $S
@@ -178,5 +182,5 @@ docker run --rm --shm-size=2g $U -v "$PWD":/opt/megawob -v $S:/logs -w /opt/mega
 export PYTHONUNBUFFERED=1 S=/logs
 python -c "from megawob import catalog; print(\" \".join(sorted(k + \".base\" for k in catalog.task_names() if \".\" not in k)))" \
   | tr " " "\n" | xargs -P 5 -I{} sh -c "timeout 600 python server/smoke_gym.py {} --seeds 2 3 > $S/{}.log 2>&1; echo \"{} exit=\$?\""'
-grep -h "return=" $S/*.log | grep -v " OK "     # failures; exit=124 means that task timed out
+grep -h "return=" $S/*.log | grep -v " OK "     # failures
 ```

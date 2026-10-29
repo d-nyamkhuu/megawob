@@ -8,75 +8,108 @@ command:
 python tools/sitegen/sitegen.py new use-email archive            # one new design image, then its site
 ```
 
-It needs the `sitegen` extra (`pip install -e '.[sitegen]'`, after the install steps in the main README: it uses
-the checker's Playwright and Chromium), Node 22+ (the gate runs `node --check`) and a Codex sign-in:
-`codex login` with a ChatGPT plan or an API key. The `openai-codex` package brings its own Codex runtime. Run it
-from the repository root.
+It needs:
+
+- **The `sitegen` extra:** `pip install -e '.[sitegen]'`, after the install steps in the main README. It uses the
+  checker's Playwright and Chromium.
+- **Node 22+.** The gate runs `node --check`.
+- **A Codex sign-in:** `codex login` with a ChatGPT plan or an API key. The `openai-codex` package brings its own
+  Codex runtime.
+
+Run it from the repository root.
 
 ## Stages
 
 Each stage writes its result to disk, so a stage can be rerun or inspected alone.
 
-| Stage | Command | What it does | Output |
-|---|---|---|---|
-| card | `card <task>...` | Reads the task's `logic.js` header, start modes and sample goals and writes what the task's code renders at the start of each scenario, what it never renders, and 2-4 ways the task area can be laid out. Every current task has one. | `cards/<task>.json` |
-| design | `design <task> <scenario> [--count N]` | Plans the next design (below), has Codex's image tool draw it, checks it (16:9, not blank) and has a separate turn review it against a checklist: accept, revise (an edit with one correction) or redraw, up to `--attempts` images. | `<out>/designs/<task>/<scenario>/<NN>/`: `design.json`, `prompt.txt`, `attempt-*.png`, `design.png` |
-| build | `build <design.json or site>...` | Scaffolds the site from the base site (designs on its templates, so it passes the checker from the start), lets a Codex agent restyle it to the image, gates it and sends failures back; then a review scores it and a stronger model polishes it, kept only if the review does not drop. | `html/sites/design-<task>-<scenario>-<NN>/`, `<out>/runs/<site>.json` |
-| | `new <task> <scenario>` | design, then build every accepted design | both |
-| | `status` | designs and builds in `<out>` | |
+| Stage | Command | Output |
+|---|---|---|
+| card | `card <task>...` | `cards/<task>.json` |
+| design | `design <task> <scenario> [--count N]` | `<out>/designs/<task>/<scenario>/<NN>/`: `design.json`, `prompt.txt`, `attempt-*.png`, `design.png` |
+| build | `build <design.json or site>...` | `html/sites/design-<task>-<scenario>-<NN>/`, `<out>/runs/<site>.json` |
+| | `new <task> <scenario>` | design, then build every accepted design: both outputs |
+| | `status` | designs and builds in `<out>` |
+
+What each stage does:
+
+- **card.** Reads the task's `logic.js` header, start modes and sample goals. It writes:
+  - what the task's code renders at the start of each scenario;
+  - what it never renders;
+  - 2-4 ways the task area can be laid out.
+
+  Every current task has one.
+- **design.** Plans the next design ([Design images](#design-images)) and has Codex's image tool draw it. It checks the
+  image (16:9, not blank), then a separate turn reviews it against a checklist: accept, revise (an edit with one
+  correction) or redraw. It draws up to `--attempts` images.
+- **build.** Scaffolds the site from the base site, with designs on its templates so it passes the checker from the
+  start. A Codex agent restyles it to the image, a gate checks it and failures go back to the agent. A review then
+  scores it and a stronger model polishes it, kept only if the review does not drop.
 
 `<out>` is `data/sitegen/` unless `--out` says otherwise. `--jobs N` runs designs or builds in parallel (each
 build runs its own browsers and checker runs, so keep it to a few).
 
 ### Design images
 
-A design image is one base screen at 1536x864, the largest training viewport, with no task note and no end
-control: the hidden-instruction, finish-by-message episode, so it fits every episode setting; the build agent adds
-the episode frame. Designs of one task differ in structure, not only in colour:
+A design image is one base screen at 1536x864, the largest training viewport. It has no task note and no end
+control: that is the hidden-instruction, finish-by-message episode, so it fits every episode setting. The build agent
+adds the episode frame.
 
-- **Style**: an era and visual language from `styles.json` (74 desktop and web profiles, 1984 to
-  2026), the one the task's designs have used least and never one its scenario has; `--style <slug>` picks one.
-- **Window arrangement**: one option per axis of `arrangements.json` (navigation, where the task area sits,
-  what the secondary content is), a combination the task has not used yet.
-- **Task-area arrangement**: from the card, taken in turn.
-- **Goal**: a real goal of the scenario, sampled from the pages, so the depicted state matches what the env samples.
+Designs of one task differ in structure, not only in colour:
+
+- **Style:** an era and visual language from `styles.json` (74 desktop and web profiles, 1984 to 2026). It is the one
+  the task's designs have used least, and never one its scenario has. `--style <slug>` picks one.
+- **Window arrangement:** one option per axis of `arrangements.json` (navigation, where the task area sits, what the
+  secondary content is). The combination is one the task has not used yet.
+- **Task-area arrangement:** from the card, taken in turn.
+- **Goal:** a real goal of the scenario, sampled from the pages, so the depicted state matches what the env samples.
 
 Existing designs count: the style and arrangement of every `design-<task>-*` site are read from its manifest's
 `description`. The site number `NN` is the next free one of the scenario.
 
 ### Building
 
-The agent works in the site folder (Codex's workspace-write sandbox; it cannot write anywhere else and its
-approval requests are denied) with two tools from an MCP server (`render_server.py`) that runs outside the
-sandbox:
+The agent works in the site folder, in Codex's workspace-write sandbox. It cannot write anywhere else, and its
+approval requests are denied. It has two tools from an MCP server (`render_server.py`) that runs outside the sandbox:
 
-- `render`: the design image beside the render, a crop of both at full size, the small viewports, or the four
-  instruction modes, with page, console and layout errors; any seed, randomization parameter or popup, and the page
-  after the oracle's first N actions.
-- `check`: the static lint, then the oracle checker at three viewports.
+- **`render`** shows:
+  - the design image beside the render, a crop of both at full size, the small viewports, or the four instruction
+    modes, with page, console and layout errors;
+  - any seed, randomization parameter or popup;
+  - the page after the oracle's first N actions.
+- **`check`** runs the static lint, then the oracle checker at three viewports.
 
-The agent's brief is `prompts/build.md`: the site and widget contract, the episode settings the frame must handle
-(instruction display, finish mode, end-control variation, decoys), what never to change, and how to report. It ends
-with a JSON report (`prompts/result.schema.json`: fidelity 1-5, remaining differences and their cause, deviations).
+The agent's brief is `prompts/build.md`. It covers:
 
-A build runs in this order; no agent's own verdict accepts anything:
+- the site and widget contract;
+- the episode settings the frame must handle (instruction display, finish mode, end-control variation, decoys);
+- what never to change;
+- how to report.
+
+The agent ends with a JSON report (`prompts/result.schema.json`: fidelity 1-5, remaining differences and their cause,
+deviations).
+
+A build runs in this order. No agent's own verdict accepts anything.
 
 1. **Build** (`--model`, gpt-6-luna): the first turn, up to `--minutes`.
-2. **Gate and fix** (`--fix-model`, gpt-6.1-terra): missing files, `node --check`, `megawob.lint`, then
-   `megawob.check` at all five training viewports with `--seeds` plain seeds plus the parameter sweep. Failures, and
-   a report that is not `done`, go back to the same thread (its context kept, the model switched) as a fix round, at
-   most `--fix-rounds` times (default 2). A site that still fails stays in `html/sites/` for you to fix or remove
-   (then run `python -m megawob.scenarios`); the run record says what failed.
-3. **Review** (`--review-model`, gpt-6.1-sol): a separate read-only turn that did not build the page scores its
-   fidelity 1-5 (`prompts/site_review.txt`) from the design image, the page beside it and the four instruction
-   modes, and lists what still differs.
-4. **Polish** (`--polish-model`, gpt-6.1-sol; `--no-polish` skips it): a fresh thread gets the brief and the
-   review's list, then the gate (one fix round, on the fix model) and the review run again. The polish is kept only if the gate
-   passes and the fidelity did not drop; otherwise the built files are restored. A page reviewed at 5 skips it.
+2. **Gate and fix** (`--fix-model`, gpt-6.1-terra).
+   - The gate checks for missing files, then runs `node --check`, `megawob.lint`, and `megawob.check` at all five
+     training viewports with `--seeds` plain seeds plus the parameter sweep.
+   - Failures, and a report that is not `done`, go back to the same thread as a fix round. The thread keeps its
+     context and the model is switched. There are at most `--fix-rounds` rounds (default 2).
+   - A site that still fails stays in `html/sites/` for you to fix or remove (then run
+     `python -m megawob.scenarios`). The run record says what failed.
+3. **Review** (`--review-model`, gpt-6.1-sol): a separate read-only turn that did not build the page. It scores
+   fidelity 1-5 (`prompts/site_review.txt`) from the design image, the page beside it and the four instruction modes,
+   and lists what still differs.
+4. **Polish** (`--polish-model`, gpt-6.1-sol; `--no-polish` skips it).
+   - A fresh thread gets the brief and the review's list. Then the gate (one fix round, on the fix model) and the
+     review run again.
+   - The polish is kept only if the gate passes and the fidelity did not drop. Otherwise the built files are restored.
+   - A page reviewed at 5 skips it.
 
 The run record has every turn (model, report, gate result, time, tokens), both reviews and whether the polish was
-kept; `status` shows each site's final review fidelity. A `KIT_REQUESTS.md` the agent writes (a kit or task change
-it needed) is moved next to the run record.
+kept. `status` shows each site's final review fidelity. A `KIT_REQUESTS.md` the agent writes (a kit or task change it
+needed) is moved next to the run record.
 
 Before you commit a site, look at it (`python -m megawob.gallery --serve`) and run the full check:
 `python -m megawob.check --site <site> --seeds 20`.
@@ -91,11 +124,18 @@ Before you commit a site, look at it (`python -m megawob.gallery --serve`) and r
 | `--review-model` | gpt-6.1-sol | design-image and site reviews, capability cards |
 | `--image-model` | gpt-6-luna | relaying the prompt to Codex's image tool (it only passes it on) |
 
-The cheap model does the long build, a mid-size one fixes what the checker finds, and the strong model spends one
-pass on what the review says still differs, and reviews. The reviewer is a separate thread with no tools, so it never grades its own work. `--effort`
-sets the reasoning effort. A build is one long turn (`--minutes`, default 60, then interrupted), up to two shorter
-fix turns, and the polish turn; most of the time is renders and checker runs. Token usage of every turn is in the
-run record. Codex runs every thread as ephemeral, so nothing lands in your Codex history.
+Who does what:
+
+- The cheap model does the long build.
+- A mid-size model fixes what the checker finds.
+- The strong model spends one pass on what the review says still differs, and reviews.
+- The reviewer is a separate thread with no tools, so it never grades its own work.
+
+`--effort` sets the reasoning effort.
+
+A build is one long turn (`--minutes`, default 60, then interrupted), up to two shorter fix turns, and the polish
+turn. Most of the time is renders and checker runs. Token usage of every turn is in the run record. Codex runs every
+thread as ephemeral, so nothing lands in your Codex history.
 
 ## Changing the workflow
 

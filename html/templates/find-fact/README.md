@@ -167,3 +167,6 @@ the order of the links. The search is bound at a fixed point, so moving the inpu
 - The search somewhere else: `searchParent`, `searchInput`, `searchBound`.
 - A clear-selection action in `similar`: `ready` or `rendered`.
 - Reply mode that moves the instruction: set `preserveNote` in `table` or `find-word`, and use `dropAnswer`.
+
+Verify a change to these templates as `templates/README.md` ("Changing a template") describes: golden snapshots of
+the sites built on them before and after, the checker and the lint.
