@@ -1,0 +1,67 @@
+// Design on templates/site/base.js (the base site.js): only what this site changed.
+(function () {
+  'use strict';
+
+  const parts = {
+    'frame.header': (base, S) => function (_c) {
+      const { content, rng, util } = _c;
+      const { TITLES } = S;
+      const header = util.el('header', 'ref-task', document.body);
+      rng.pick(TITLES);
+      const brand = util.el('div', 'ref-brand', header, 'Zephyr Streaming');
+      brand.dataset.role = 'brand';
+      {
+        const n = util.el('nav', 'ref-nav', header);
+        rng.sample(content.NAV_ITEMS, rng.int(3, 5));
+        for (const item of ['Files', 'Photos', 'Shared', 'Activity', 'Account']) {
+          const a = util.el('a', 'ref-navlink', n, item);
+          a.dataset.role = 'nav';
+          a.addEventListener('click', (e) => { e.preventDefault(); env.log('decoy', { what: 'nav', label: item }); });
+        }
+      }
+      Object.assign(_c, { brand, header });
+    },
+    'frame.body': (base, S) => function (_c) {
+      const { content, label, rng, sidebar, util } = _c;
+      const body = util.el('div', 'ref-body', document.body);
+      const inspector = util.el('aside', 'zephyr-inspector', body);
+      util.el('div', 'zephyr-logo', inspector, '≈  Zephyr');
+      util.el('div', 'zephyr-tagline', inspector, 'S T R E A M I N G');
+      const account = util.el('section', 'zephyr-info', inspector);
+      util.el('h2', '', account, 'Account Details');
+      for (const [label, value] of [['Name:', 'Alex Rivera'], ['Email:', 'alex.rivera@example.com'],
+        ['Member since:', 'Mar 14, 2001'], ['Plan:', 'Premium']]) {
+        const row = util.el('div', 'zephyr-property', account);
+        util.el('span', '', row, label); util.el('strong', '', row, value);
+      }
+      const privacy = util.el('section', 'zephyr-info zephyr-privacy', inspector);
+      util.el('h2', '', privacy, 'Privacy Settings');
+      for (const [label, value] of [['Personalized Recommendations:', 'On'], ['Ad Personalization:', 'On'],
+        ['Share Listening Activity:', 'Friends Only'], ['Sync Contacts:', 'On'], ['Location Data:', 'Off']]) {
+        const row = util.el('div', 'zephyr-property', privacy);
+        util.el('span', '', row, label); util.el('strong', '', row, value);
+      }
+      const reassurance = util.el('div', 'zephyr-reassurance', inspector);
+      util.el('span', 'zephyr-lock', reassurance, '▣');
+      util.el('p', '', reassurance, 'We give you control over your personal information. You can download a copy of your data or delete specific categories.');
+      if (sidebar) {
+        const side = util.el('aside', 'ref-side', body);
+        rng.sample(content.NAV_ITEMS, rng.int(4, 7));
+        for (const item of []) {
+          const a = util.el('a', 'ref-sidelink', side, item);
+          a.dataset.role = 'nav';
+          a.addEventListener('click', (e) => { e.preventDefault(); env.log('decoy', { what: 'sidebar', label: item }); });
+        }
+      }
+      Object.assign(_c, { account, body, inspector, privacy, reassurance });
+    },
+    'frame.nav': (base, S) => function (_c) {
+    },
+  };
+
+  env.site({
+    name: 'design-protect-privacy-retention-04',
+    template: 'site/base',
+    design: { parts },
+  });
+})();

@@ -1,0 +1,71 @@
+@import url("../../templates/site/css/solve-puzzle-odd-even-02d7d2.css");
+
+
+/* 2014 Material paper reference: wide exercise with a survey drawer on the right. */
+body.material-paper{--bg:#fff;--panel:#fff;--fg:#1c2430;--line:#dfe3e8;--accent:#4564cf;background:#fff;color:#1d2530;font-family:Roboto,"Segoe UI",Arial,sans-serif}
+.material-paper .app{height:100vh;width:100%;padding:0;gap:0;display:grid;grid-template-rows:84px minmax(0,1fr) 82px;background:#fff}
+.material-paper .top{height:84px;min-height:0;padding:0 32px;display:flex;align-items:center;gap:20px;background:#394da8;color:white;font-size:18px;font-weight:400;position:relative}
+.material-paper .brand{font-size:32px;font-weight:500;letter-spacing:-.4px}
+.material-paper .section-label{margin-left:auto;font-size:21px;color:#d9def3;padding-right:3px}
+.material-paper .center{min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:0;padding:16px 0 0;position:relative}
+.material-paper .brief{font-size:clamp(28px,2.75vw,46px);font-weight:650;line-height:1.2;padding:18px 3vw 22px;max-height:none;color:#1b2430}
+.material-paper .brief:after{content:"Choose one option for each number.";display:block;margin-top:10px;font-size:clamp(18px,1.65vw,27px);font-weight:400;color:#727987;line-height:1.3}
+.material-paper .stage{min-width:0;min-height:0;overflow:hidden;padding:0 2.9vw}
+.material-paper .content{inset:0;gap:0;position:absolute}
+.material-paper .scene{min-height:0;justify-content:flex-start;align-items:stretch;display:block;overflow:hidden}
+.material-paper .parity{display:flex;flex-direction:column;width:100%;height:100%;max-height:none;gap:0;align-items:stretch;overflow:hidden}
+.material-paper .parity-row{flex:1 1 0;min-height:0;max-height:100px;border:0;border-bottom:1px solid #dfe2e6;border-radius:0;padding:0 2vw;display:grid;grid-template-columns:205px 190px 190px;grid-template-rows:minmax(0,1fr);align-items:center;justify-content:start;gap:0;background:#fff}
+.material-paper .parity-row strong{text-align:left;font:600 clamp(25px,2.2vw,36px)/1 Roboto,"Segoe UI",Arial,sans-serif;margin:0;color:#1d2530}
+.material-paper .parity-row button{font:400 clamp(17px,1.55vw,25px)/1.2 Roboto,"Segoe UI",Arial,sans-serif;text-align:left;white-space:nowrap;padding:9px 0;background:transparent;border:0;border-radius:0;color:#1e2632}
+.material-paper .parity-row button:before{width:26px;height:26px;border:2px solid #858b94;margin-right:18px;background:white}
+.material-paper .parity-row button.selected:before{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 6px white}
+/* OOD lists may contain ten rows: keep every answer inside its allocated row. */
+.material-paper .parity:has(>.parity-row:nth-child(7)) .parity-row button{display:flex;align-items:center;max-height:100%;padding-top:0;padding-bottom:0}
+.material-paper .parity:has(>.parity-row:nth-child(7)) .parity-row button:before{flex:none}
+.material-paper .bottom{min-height:0;height:82px;display:flex;justify-content:flex-end;align-items:center;padding:0 3vw;border-top:1px solid #eceef1;background:white}
+.material-paper .submit{height:56px;min-width:195px;padding:0 38px;border:0;border-radius:3px;background:#4564cf;color:white;font:500 21px Roboto,"Segoe UI",Arial,sans-serif;box-shadow:0 2px 5px #0003}
+.material-paper .reference-reset{display:none}
+.material-paper .survey-drawer{position:fixed;z-index:30;right:0;top:0;bottom:0;width:23.3%;min-width:285px;max-width:390px;background:#fafbfe;border-left:1px solid #cbd1dc;box-shadow:-8px 0 22px #18243a26;color:#283344;padding:0 30px 26px;overflow:auto;font-family:Roboto,"Segoe UI",Arial,sans-serif}
+.material-paper .survey-head{height:84px;margin:0 -30px 36px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;background:#4564cf;color:#fff;font-size:27px}
+.material-paper .survey-x{border:0;background:transparent;color:white;font-size:37px;line-height:1;padding:0 2px;cursor:pointer}
+.material-paper .survey-lead{display:block;font-size:24px;line-height:1.3;margin:0 0 13px;color:#1e2734}
+.material-paper .survey-intro{font-size:22px;line-height:1.35;color:#687183;margin:0 0 35px}
+.material-paper .survey-question{font-size:23px;line-height:1.35;margin:0 0 18px}
+.material-paper .survey-choices{display:flex;flex-direction:column;gap:14px;margin-bottom:48px}
+.material-paper .survey-choice{display:flex;align-items:center;gap:17px;font-size:21px;color:#465163;white-space:nowrap}
+.material-paper .survey-choice i{width:30px;height:30px;border:3px solid #a1a7b1;border-radius:50%;background:#fff;flex:none}
+.material-paper .survey-comment-label{display:block;font-size:22px;color:#465163;margin-bottom:14px}
+.material-paper .survey-comment{height:92px;border:1px solid #d5d9e0;border-radius:4px;background:#fff;padding:16px 18px;color:#818896;font-size:21px;box-shadow:0 1px 2px #0000000d}
+.material-paper .survey-close{height:72px;width:100%;margin-top:31px;border:0;border-radius:4px;background:#4564cf;color:white;font:500 23px Roboto,"Segoe UI",Arial,sans-serif;box-shadow:0 2px 5px #0003;cursor:pointer}
+/* Reserve the drawer lane even when dismissed: overlays must not move task anchors. */
+body.material-paper{--workspace:calc(100% - clamp(260px,23.3vw,390px))}
+.material-paper .center,.material-paper .bottom{width:var(--workspace)}
+.material-paper .top{padding-right:calc(100% - var(--workspace) + 32px)}
+.material-paper .brand{white-space:nowrap;flex:none}
+.material-paper .section-label{white-space:nowrap}
+.material-paper .chrome-tools{display:flex;align-items:center;gap:12px;flex:none}
+.material-paper .chrome-tools:empty{display:none}
+.material-paper .chrome-tools .submit{height:44px;min-width:0;padding:0 22px;font-size:18px;background:#fff;color:#394da8}
+.material-paper .chrome-xtra{background:transparent;border:0;color:#fff;border-radius:3px;padding:10px 12px;font-size:18px}
+.material-paper .end-link{margin-right:auto;min-width:0;background:transparent;color:#4564cf;box-shadow:none;padding:0 10px}
+.material-paper.instruction-hidden .brief{display:none}
+.material-paper.instruction-hidden .center{grid-template-rows:minmax(0,1fr)}
+.material-paper.instruction-toast .brief{justify-self:end;width:calc(100% - 6vw);margin:0 3vw 16px;padding:14px 18px;border-left:4px solid #4564cf;border-radius:3px;background:#f6f7fb;box-shadow:0 2px 6px #0002;font-size:22px;line-height:1.35}
+.material-paper.instruction-toast .brief:after{font-size:18px}
+@media(min-width:1260px) and (min-height:701px){
+  .material-paper.instruction-panel .center{grid-template-columns:minmax(220px,28%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:20px;padding:24px}
+  .material-paper.instruction-panel .brief{align-self:start;margin:0;padding:20px;border:1px solid #dfe3e8;border-top:4px solid #4564cf;border-radius:3px;box-shadow:0 2px 5px #0001;font-size:24px;line-height:1.35}
+  .material-paper.instruction-panel .brief:after{font-size:18px;margin-top:18px}
+}
+@media(max-width:1259px){
+  .material-paper .top{gap:12px;padding-left:24px;padding-right:calc(100% - var(--workspace) + 24px)}
+  .material-paper .section-label{font-size:17px}
+  .material-paper .top:has(.chrome-tools:not(:empty)) .section-label{display:none}
+  .material-paper .chrome-tools{margin-left:auto;gap:6px}
+  .material-paper .chrome-tools .submit{padding:0 14px;font-size:17px}
+  .material-paper .chrome-xtra{padding:10px 8px;font-size:17px}
+  .material-paper.instruction-panel .brief{border:0;background:none;padding:18px 3vw 22px;font-size:clamp(28px,2.75vw,46px)}
+}
+@media(max-width:1150px){.material-paper .parity-row{grid-template-columns:150px 150px 150px;padding:0 12px}.material-paper .survey-drawer{min-width:260px;padding-left:21px;padding-right:21px}.material-paper .survey-head{margin-left:-21px;margin-right:-21px;padding:0 17px}.material-paper .survey-choice{font-size:17px;gap:10px}.material-paper .survey-question,.material-paper .survey-intro{font-size:18px}.material-paper .survey-lead{font-size:20px}.material-paper .survey-comment-label,.material-paper .survey-comment{font-size:17px}}
+@media(max-height:700px){.material-paper .app{grid-template-rows:64px minmax(0,1fr) 62px}.material-paper .top{height:64px}.material-paper .brand{font-size:26px}.material-paper .survey-head{height:64px;margin-bottom:22px;font-size:22px}.material-paper .survey-lead{font-size:20px}.material-paper .survey-intro{margin-bottom:21px;font-size:18px}.material-paper .survey-question{font-size:19px;margin-bottom:11px}.material-paper .survey-choices{gap:9px;margin-bottom:24px}.material-paper .survey-choice{font-size:17px}.material-paper .survey-choice i{width:25px;height:25px}.material-paper .survey-close{height:56px;margin-top:20px;font-size:19px}.material-paper .survey-comment{height:68px}.material-paper .bottom{height:62px}.material-paper .submit{height:46px}}
+@media(max-height:800px){.material-paper .survey-drawer{padding-bottom:12px}.material-paper .survey-head{margin-bottom:15px}.material-paper .survey-intro{line-height:1.22;margin-bottom:14px;font-size:18px}.material-paper .survey-question{line-height:1.22;margin-bottom:8px;font-size:19px}.material-paper .survey-choices{gap:6px;margin-bottom:17px}.material-paper .survey-choice{line-height:1.15;font-size:17px}.material-paper .survey-choice i{width:22px;height:22px;border-width:2px}.material-paper .survey-comment-label{margin-bottom:8px;font-size:16px}.material-paper .survey-comment{height:54px;padding:10px 12px;font-size:16px}.material-paper .survey-close{height:48px;margin-top:13px;font-size:17px}}

@@ -1,0 +1,60 @@
+// Design on templates/site/app-email-unread-04.js: only what this site changed.
+(function () {
+  'use strict';
+  env.site({
+    name: 'design-use-email-bulk-02',
+    styles: ['site.css'],
+    scripts: [],
+    template: 'site/use-email-unread-04',
+    design: {
+      C: {
+        'style': 'industrial',
+        'brand': 'Mercury Mail',
+        'nav': 'Mail   Compose   Addresses   Calendar   Tasks   Preferences',
+        'bg': '#d6d5d0',
+        'surface': '#f5f5f3',
+        'fg': '#18191b',
+        'line': '#93938f',
+        'title': 'linear-gradient(#7b2638,#641b2b)',
+        'control': 'linear-gradient(#fafafa,#d9d9d6)',
+        'accent': '#702033',
+        'accentfg': '#fff',
+        'sel': '#cbd8f1',
+        'selfg': '#182438',
+        'font': 'Arial,sans-serif',
+        'note': 'right:2%;top:14%;width:26%',
+        'end': 'right:2%;top:4%',
+        'geo': {
+          'folders': 'left:0;top:0;width:15%;height:100%',
+          'ledger': 'left:15%;top:0;width:56%;height:100%',
+          'document': 'right:0;top:0;width:29%;height:100%',
+          'editor': 'right:0;top:0;width:35%;height:100%',
+          'contacts': 'display:none',
+        },
+        'site': 'design-use-email-bulk-02',
+        'scenario': 'bulk',
+        'platform': 'desktop',
+        'account': '',
+        'noteTitle': 'Task',
+        'folderLabels': {
+          'sent': 'Sent',
+          'drafts': 'Drafts',
+          'junk': 'Junk',
+          'spam': 'Spam',
+          'templates': 'Templates',
+          'compose': 'Compose',
+        },
+        'folderList': ['inbox', 'sent', 'drafts', 'archive', 'trash'],
+        'rowHeight': 40,
+        'stack': false,
+        'dock': [],
+      },
+      parts: {
+        'frame.7': () => () => {},
+        'frame.8': () => () => {},
+        'frame.9': () => () => {},
+        'frame.10': () => () => {},
+      },
+    },
+  });
+})();

@@ -1,0 +1,584 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Lisa-era nursing workstation widget */
+:root {
+  --bg: #f1eedf !important;
+  --panel: #f5f2e5 !important;
+  --fg: #171613 !important;
+  --muted: #4a473e !important;
+  --line: #24221d !important;
+  --accent: #25231f !important;
+  background: #deddd4;
+}
+html, body { background: #deddd4 !important; color: #171613 !important; }
+body {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 17px !important;
+  line-height: 1.22 !important;
+  border: 3px ridge #77756b;
+  outline: 1px solid #111;
+  outline-offset: -4px;
+}
+.ref-task {
+  min-height: 44px !important;
+  padding: 5px 12px !important;
+  gap: 8px !important;
+  background: linear-gradient(#e8e6dc,#d8d6cc) !important;
+  border-bottom: 2px solid #1b1a17 !important;
+  box-shadow: inset 0 1px #fff;
+}
+.ref-task::before {
+  content: "▤  Nursing Observations";
+  flex: none;
+  font: bold 19px Georgia, "Times New Roman", serif;
+  white-space: nowrap;
+  margin-right: 14px;
+}
+.ref-instruction { font: bold 16px/1.18 Georgia, "Times New Roman", serif !important; }
+.ref-task button:not([data-role="submit"]):not([data-role="xtra"]) { display: none !important; }
+.ref-brand, .ref-nav, .ref-side { display: none !important; }
+.ref-body { background: #f3f0e2 !important; padding: 0 !important; }
+.ref-stage {
+  display: block !important;
+  padding: 8px !important;
+  overflow: hidden !important;
+  background: #f3f0e2 !important;
+  font: 17px/1.2 Georgia, "Times New Roman", serif !important;
+}
+.ref-stage > * { max-width: 100% !important; }
+.ref-stage header, .ref-stage nav, .ref-stage aside,
+.ref-stage [role="navigation"], .ref-stage [class*="sidebar"],
+.ref-stage [class*="Sidebar"], .ref-stage [class*="side-nav"],
+.ref-stage [class*="sidenav"], .ref-stage [class*="patient-chart"] {
+  display: none !important;
+}
+.ref-stage [role="tablist"], .ref-stage [role="menu"], .ref-stage [role="toolbar"],
+.ref-stage [role="complementary"], .ref-stage [class*="left-rail"],
+.ref-stage [class*="LeftRail"], .ref-stage [class*="workspace-nav"],
+.ref-stage [class*="global-nav"], .ref-stage [class*="utility-nav"] {
+  display: none !important;
+}
+.ref-stage [class*="topbar"], .ref-stage [class*="Topbar"],
+.ref-stage [class*="menubar"], .ref-stage [class*="menu-bar"] {
+  background: #e5e2d7 !important;
+  border-color: #222 !important;
+  box-shadow: none !important;
+}
+.ref-stage button, .ref-stage input, .ref-stage [role="button"] {
+  border: 2px solid #181714 !important;
+  border-radius: 0 !important;
+  background: #f7f4e8 !important;
+  box-shadow: inset 1px 1px #fff, 1px 1px #777 !important;
+  color: #171613 !important;
+  font: bold 16px Georgia, "Times New Roman", serif !important;
+}
+.ref-stage input { background: #fbf9f1 !important; }
+.ref-stage, .ref-stage * {
+  font-family: Georgia, "Times New Roman", serif !important;
+  line-height: 1.16 !important;
+}
+.ref-stage h1, .ref-stage h2, .ref-stage h3, .ref-stage strong, .ref-stage b {
+  font-weight: 700 !important;
+}
+.ref-stage table { width: 100% !important; }
+.ref-stage td, .ref-stage th { padding: 3px 5px !important; }
+.ref-stage table { border-collapse: collapse !important; }
+.ref-stage th, .ref-stage td { border: 1px solid #24221d !important; }
+.ref-submit, .ref-xtra, .ref-endlink {
+  border: 2px solid #171613 !important;
+  border-radius: 0 !important;
+  background: #ece9dd !important;
+  color: #171613 !important;
+  box-shadow: inset 1px 1px white, 1px 1px #555 !important;
+  font: bold 15px Georgia, "Times New Roman", serif !important;
+}
+.ref-foot { background: #e5e2d7 !important; border-top: 1px solid #171613 !important; }
+.ref-panel, .ref-note, .ref-ov, .ref-hz { border-radius: 0 !important; font-family: Georgia, "Times New Roman", serif !important; }
+@media (max-height: 740px) {
+  .ref-stage { padding: 3px !important; }
+  .ref-stage * { line-height: 1 !important; }
+  .ref-stage button, .ref-stage input, .ref-stage [role="button"] {
+    padding: 2px 4px !important;
+    font-size: 10px !important;
+  }
+  .ref-stage td, .ref-stage th { padding: 1px 3px !important; }
+  .ref-stage h1, .ref-stage h2, .ref-stage h3 { margin-block: 2px !important; }
+}
+
+/* 1996 Riverside hospital homepage treatment */
+:root {
+  --bg: #e8e6db !important;
+  --panel: #f7f5ec !important;
+  --fg: #10234f !important;
+  --muted: #39435b !important;
+  --line: #8da0b3 !important;
+  --accent: #1765a8 !important;
+}
+html, body { background: #e7e5da !important; }
+body {
+  border: 2px ridge #7e8790;
+  outline: 1px solid #172c4d;
+  outline-offset: -3px;
+  background-color: #f1efe5 !important;
+  background-image: repeating-linear-gradient(0deg, rgba(95,86,67,.022) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(95,86,67,.018) 0 1px, transparent 1px 5px) !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+.ref-task {
+  min-height: 120px !important;
+  padding: 0 4px 3px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) auto;
+  grid-template-rows: 77px auto 35px;
+  gap: 0 8px !important;
+  align-items: center !important;
+  background: transparent !important;
+  border-bottom: 3px ridge #8ea0ae !important;
+  box-shadow: none !important;
+  position: relative;
+}
+.ref-task::before {
+  content: "Riverside Community Hospital";
+  grid-column: 1 / -1;
+  grid-row: 1;
+  align-self: start;
+  text-align: center;
+  padding-top: 2px;
+  color: #10285a;
+  font: bold 38px/1.15 Georgia, "Times New Roman", serif;
+  text-shadow: 1px 1px #fff;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.55), transparent 70%);
+}
+.ref-task::after {
+  content: "People  •  Care  •  Our Community";
+  position: absolute;
+  top: 46px;
+  left: 0; right: 0;
+  text-align: center;
+  color: #1c2e50;
+  font: 17px Georgia, "Times New Roman", serif;
+}
+.ref-task > .ref-instruction, .ref-task > .ref-spacer { grid-row: 2; }
+.ref-instruction { font: bold 15px/1.15 Georgia, "Times New Roman", serif !important; }
+.ref-task > .ref-tools { grid-column: 2; grid-row: 2; }
+.ref-task > .ref-nav {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  align-self: stretch;
+  display: flex !important;
+  gap: 2px !important;
+  border-bottom: 2px ridge #8197a7;
+  background: linear-gradient(#e6e5df,#c9cbd0);
+  overflow: hidden;
+}
+.ref-navlink {
+  flex: 1;
+  text-align: center;
+  padding: 5px 3px 2px;
+  color: #111e3b !important;
+  font: 16px/1.1 Georgia, "Times New Roman", serif !important;
+  border: 1px solid #71859a;
+  border-bottom: 0;
+  background: linear-gradient(#f3f2ef,#d6d7d8);
+  text-decoration: none !important;
+}
+.ref-navlink:nth-child(2), .ref-navlink:nth-child(5) { color: white !important; background: linear-gradient(#2980bd,#075496); font-weight: bold; }
+.ref-brand, .ref-side { display: none !important; }
+.ref-body { background: transparent !important; padding: 0 !important; }
+.ref-stage {
+  display: block !important;
+  overflow: hidden !important;
+  padding: 5px !important;
+  background: transparent !important;
+  color: #111d3b !important;
+  font: 16px/1.18 Georgia, "Times New Roman", serif !important;
+}
+.ref-stage, .ref-stage * { font-family: Georgia, "Times New Roman", serif !important; }
+.ref-stage * { line-height: 1.18 !important; }
+.ref-stage button, .ref-stage input, .ref-stage [role="button"] {
+  border: 1px solid #607b99 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(#fff,#f2f1eb) !important;
+  box-shadow: inset 1px 1px #fff !important;
+  color: #132346 !important;
+  font: 15px Georgia, "Times New Roman", serif !important;
+}
+.ref-stage input { background: #fff !important; }
+.ref-stage table { border-collapse: collapse !important; }
+.ref-stage th, .ref-stage td { border: 1px solid #a9adb1 !important; padding: 4px 6px !important; }
+.ref-stage th { background: #e1e2e3 !important; }
+.ref-submit, .ref-xtra, .ref-endlink {
+  border: 1px solid #597594 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(#f7f7f4,#d7d9dc) !important;
+  color: #11234a !important;
+  box-shadow: inset 1px 1px white, 1px 1px #8b9297 !important;
+}
+.ref-foot { background: #e3e2dc !important; border-top: 2px ridge #8797a3 !important; }
+.ref-panel, .ref-note, .ref-ov, .ref-hz { border-radius: 2px !important; font-family: Georgia, "Times New Roman", serif !important; }
+@media (max-width: 1100px) {
+  .ref-task { min-height: 92px !important; grid-template-rows: 55px auto 31px; }
+  .ref-task::before { font-size: 27px; }
+  .ref-task::after { top: 31px; font-size: 13px; }
+  .ref-navlink { font-size: 12px !important; padding: 5px 1px 2px; }
+}
+@media (max-height: 740px) {
+  .ref-task { min-height: 92px !important; grid-template-rows: 55px auto 31px; }
+  .ref-task::before { font-size: 27px; }
+  .ref-task::after { top: 31px; font-size: 13px; }
+}
+
+/* Compact Riverside chart layout: keep the patient work area and inspector in view. */
+:root {
+  --bg: #f1efe8 !important;
+  --panel: #f7f5ee !important;
+  --fg: #000b39 !important;
+  --muted: #344362 !important;
+  --line: #8da2b8 !important;
+  --accent: #155f9e !important;
+}
+html, body { background-color: #e7e5da !important; }
+body {
+  font-family: Georgia, "Times New Roman", serif !important;
+  color: #000b39 !important;
+}
+.ref-task {
+  min-height: 120px !important;
+  grid-template-rows: 76px auto 36px !important;
+  border-bottom: 2px ridge #8da2b8 !important;
+}
+.ref-task::before { font-size: 37px !important; }
+.ref-task::after { top: 48px !important; font-size: 17px !important; }
+.ref-nav { gap: 2px !important; }
+.ref-navlink { font-size: 16px !important; }
+.ref-body { min-height: 0 !important; padding: 0 4px !important; }
+.ref-stage {
+  display: block !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 4px !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  color: #000b39 !important;
+  font: 16px/1.18 Georgia, "Times New Roman", serif !important;
+}
+.ref-stage, .ref-stage * {
+  font-family: Georgia, "Times New Roman", serif !important;
+  line-height: 1.18 !important;
+}
+.ref-stage * { max-width: 100%; }
+/* Avoid suppressing clinical section headers and inspector content; only remove the
+   redundant chart-wide utility strips above the patient record. */
+.ref-stage header, .ref-stage nav, .ref-stage aside,
+.ref-stage [role="navigation"], .ref-stage [role="complementary"],
+.ref-stage [class*="left-rail"], .ref-stage [class*="LeftRail"],
+.ref-stage [class*="workspace-nav"], .ref-stage [class*="global-nav"],
+.ref-stage [class*="utility-nav"], .ref-stage [class*="topbar"],
+.ref-stage [class*="Topbar"], .ref-stage [class*="menubar"],
+.ref-stage [class*="menu-bar"] { display: none !important; }
+/* The clinical details inspector is an actual aside in the shared chart widget. */
+.ref-stage aside, .ref-stage [role="complementary"] { display: block !important; }
+.ref-stage aside:has(nav),
+.ref-stage aside:has([class*="chart-nav"]),
+.ref-stage aside:has([class*="patient-nav"]),
+.ref-stage aside:has([class*="PatientNav"]) { display: none !important; }
+.ref-stage div[class*="patient-nav"], .ref-stage div[class*="PatientNav"],
+.ref-stage div[class*="chart-sidebar"], .ref-stage div[class*="ChartSidebar"],
+.ref-stage div[class*="left-rail"], .ref-stage div[class*="LeftRail"] { display: none !important; }
+.ref-stage [class*="toolbar"], .ref-stage [class*="Toolbar"],
+.ref-stage [class*="utility-bar"], .ref-stage [class*="utilityBar"] { display: none !important; }
+/* The EHR widget contributes its own eight-item application navigation. The site
+   already renders the intended chart tabs in the page masthead. */
+.ref-stage div:has(> button:nth-of-type(8)),
+.ref-stage div:has(> a:nth-of-type(8)),
+.ref-stage [class*="patient-navigation"], .ref-stage [class*="PatientNavigation"],
+.ref-stage [class*="chart-navigation"], .ref-stage [class*="ChartNavigation"] {
+  display: none !important;
+}
+.ref-stage [class*="nav"] { display: none !important; }
+/* Patient-chart navigation is a link list inside the EHR workbench. Removing its
+   link-list wrapper returns that width to the chart task and leaves the inspector. */
+/* The task workspace groups the handoff table and new-entry form in one panel.
+   Let the available chart width place those two sections side by side. */
+.ref-stage button, .ref-stage input, .ref-stage textarea,
+.ref-stage [role="button"] {
+  border: 1px solid #6d88a3 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(#fff, #f4f3ed) !important;
+  box-shadow: inset 1px 1px #fff !important;
+  color: #000b39 !important;
+  font: 15px Georgia, "Times New Roman", serif !important;
+}
+.ref-stage input, .ref-stage textarea { background: #fff !important; }
+.ref-stage table { border-collapse: collapse !important; }
+.ref-stage th, .ref-stage td {
+  border: 1px solid #bbb !important;
+  padding: 3px 5px !important;
+}
+.ref-stage th { background: #e4e6e7 !important; }
+.ref-submit, .ref-xtra, .ref-endlink {
+  border: 1px solid #597594 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(#f8f8f5,#d7dce1) !important;
+  color: #11234a !important;
+  box-shadow: inset 1px 1px white, 1px 1px #8b9297 !important;
+}
+.ref-foot { background: #e3e2dc !important; border-top: 2px ridge #8797a3 !important; }
+.ref-panel, .ref-note, .ref-ov, .ref-hz { border-radius: 2px !important; }
+@media (max-height: 760px) {
+  .ref-task { min-height: 92px !important; grid-template-rows: 55px auto 31px !important; }
+  .ref-task::before { font-size: 27px !important; }
+  .ref-task::after { top: 31px !important; font-size: 13px !important; }
+  .ref-stage { padding: 2px !important; }
+  .ref-stage * { line-height: 1.08 !important; }
+  .ref-stage td, .ref-stage th { padding: 2px 4px !important; }
+  .ref-stage { overflow: hidden !important; }
+}
+
+/* Riverside: the clinical task shares the two-column paper chart itself. */
+body {font-family:"Times New Roman",serif !important;background-color:#f1efe8 !important;background-image:url('assets/paper.svg') !important;}
+.ref-task {min-height:116px !important;grid-template-rows:77px auto 35px !important;}
+.ref-task[data-instruction="hidden"] {grid-template-rows:77px 0 35px !important;}
+.ref-task[data-instruction="panel"],.ref-task[data-instruction="toast"] {grid-template-rows:77px 0 35px !important;}
+.ref-task[data-instruction="header"] {grid-template-rows:45px auto 35px !important;}
+.ref-task[data-instruction="header"]::after {display:none;}
+.ref-task[data-instruction="header"] .ref-instruction {padding-left:165px;text-align:center;}
+.ref-task::before {font-family:"Times New Roman",serif !important; font-size:38px !important;}
+.ref-task::after {font-family:"Times New Roman",serif !important;top:48px !important;font-size:18px !important;}
+.ref-nav {width:76.5%;background:transparent !important;border:0 !important;}
+.ref-navlink {font-family:"Times New Roman",serif !important;font-size:18px !important;flex:auto;padding:6px 8px 2px !important;border-radius:3px 3px 0 0;}
+.ref-navlink:nth-child(5) {background:linear-gradient(#f3f2ef,#d6d7d8) !important;color:#000b39 !important;font-weight:normal !important;}
+.ref-navlink {display:flex;align-items:center;justify-content:center;gap:7px;}
+.r-nursing-badge {display:inline-flex;width:26px;height:22px;}.r-nursing-badge svg {width:100%;height:100%;}
+.ref-task > .ref-tools {padding:2px 0;}
+.r-scenery {position:absolute;left:18px;top:0;width:145px;height:77px;pointer-events:none;}
+.r-hospital {position:absolute;right:17%;top:0;width:154px;height:80px;pointer-events:none;}
+.r-motto {position:absolute;right:24px;top:4px;white-space:pre-line;text-align:center;font-size:15px;line-height:1.08;pointer-events:none;}
+.ref-body {padding:0 3px !important;}
+.ref-stage {padding:3px !important;overflow:hidden !important;}
+.ref-stage,.ref-stage * {font-family:"Times New Roman",serif !important;}
+.ref-stage > .ehr-root {position:relative !important;inset:auto !important;width:100% !important;height:100% !important;max-width:100% !important;zoom:1 !important;display:grid !important;grid-template-columns:minmax(0,76.5fr) minmax(0,23.5fr);grid-template-rows:104px minmax(0,1fr);gap:5px;border:0;border-radius:0;box-shadow:none;background:transparent;}
+.ref-stage .ehr-body {display:contents !important;}
+.ref-stage .ehr-main {grid-column:1;grid-row:2;min-width:0;min-height:0;border:1px solid #829ba9;box-shadow:inset 1px 1px white;}
+.ref-stage .riverside-banner {grid-column:1;grid-row:1;display:flex;gap:15px;align-items:stretch;padding:5px 10px 5px 30px;border:2px ridge #a3b2b9;min-height:0;background:#f5f2ed;}
+.r-identity {flex:1;min-width:0;align-self:center;font-size:17px;line-height:1.35 !important;white-space:pre-wrap;}
+.r-name {font-size:30px;font-weight:bold;margin-bottom:3px;}
+.r-summary {width:40%;flex:none;border:1px solid #b7b6b4;padding:5px 9px;display:flex;gap:26px;font-size:17px;align-items:center;}
+.r-summary-icon {font-size:40px;align-self:flex-start;}
+.ref-stage .ehr-root > aside.ehr-context {grid-column:2;grid-row:1 / 3;display:flex !important;flex-direction:column;gap:5px;min-width:0 !important;width:100% !important;max-height:none;padding:4px;background:#f3f0eb;border:2px ridge #8f9ca6;overflow:hidden;}
+.ref-stage .ehr-context .ehr-section {margin:0;flex:none;}
+.ref-stage .ehr-context .ehr-section:last-child {flex:1;min-height:0;}
+.ref-stage .ehr-section {border:1px solid #94a4ad;border-radius:0;background:#f3f0eb;box-shadow:inset 1px 1px #fff;margin:0;min-width:0;}
+.ref-stage .ehr-sectionhead {display:flex;justify-content:flex-start;align-items:center;gap:10px;padding:3px 8px;height:32px;min-height:0;background:linear-gradient(110deg,#dce5eb,#cbd9e5);border:1px solid #91aac0;margin:3px 3px 0;font-size:20px;font-weight:bold;color:#000b39;}
+.r-section-icon {order:-1;font-size:23px;line-height:1 !important;}
+.ref-stage .ehr-sectionbody {padding:5px;min-height:0;}
+.ref-stage .ehr-pane {display:grid;grid-template-rows:minmax(0,1fr) 72px 58px;gap:5px;padding:3px;overflow:hidden;font-size:16px;}
+.r-workspace {min-height:0;display:grid;grid-template-columns:53.5fr 46.5fr;gap:6px;}
+.r-handoff {min-height:0;}
+.r-handoff .ehr-handoff-meta {display:none;}
+.ref-stage .r-handoff table {font-size:16px;}
+.ref-stage .r-handoff th,.ref-stage .r-handoff td {font-size:16px;padding:8px 5px !important;text-align:center;}
+.ref-stage .r-handoff tr:nth-child(2) {background:#c8e9fa;}
+.r-entry {display:flex;flex-direction:column;gap:5px;min-height:0;}
+.ref-stage .r-form {flex:1;min-height:0;}
+.ref-stage .r-form .ehr-sectionbody {padding:6px 12px;}
+.ref-stage .ehr-formgrid {display:flex;flex-direction:column;gap:4px;}
+.ref-stage .ehr-field,.r-notes {display:grid;grid-template-columns:140px minmax(100px,157px) minmax(0,1fr);gap:7px;align-items:center;min-height:28px;}
+.ref-stage .ehr-field label,.r-notes label {font-size:17px;font-weight:normal;margin:0;}
+.ref-stage .ehr-field input {height:28px;padding:3px 5px;font-size:16px !important;min-width:0;}
+.ref-stage .ehr-field small {font-size:14px;color:#838383;margin:0;line-height:1.1 !important;}
+.ref-stage .ehr-field .ehr-choices {display:flex;flex-wrap:nowrap;gap:7px;}
+.ref-stage .ehr-choices button {font:15px "Times New Roman",serif !important;min-height:27px;min-width:32px;padding:2px 5px;}
+.ref-stage .ehr-choices button[aria-pressed="true"] {background:#b9daf0 !important;outline:1px solid #155f9e;}
+.ref-stage .r-time {grid-template-columns:140px minmax(80px,157px) minmax(0,1fr);}
+.r-time-readout {grid-column:2;grid-row:1;border:1px solid #6d88a3;border-radius:2px;background:white;height:28px;padding:4px;}
+.ref-stage .r-time .ehr-choices {grid-column:3;grid-row:1;}
+.ref-stage .r-time small {grid-column:2 / -1;display:none;}
+.r-temperature .ehr-choices {grid-column:3;grid-row:1;}
+.r-temperature small {display:none !important;}
+.r-notes {grid-template-columns:140px 1fr;min-height:41px;}
+.ref-stage .r-notes textarea {height:41px;resize:none;width:100%;}
+.ref-stage .ehr-orderpreview {flex:none;margin:0;border:1px solid #bcae76;background:#fff7df;padding:0;line-height:1.2;border-radius:3px;min-height:126px;}
+.r-preview-title {background:#fbefc8;font-size:19px;font-weight:bold;padding:4px 10px;}
+.r-preview-values {display:grid;grid-template-columns:1.45fr 1fr .8fr;gap:3px 18px;padding:6px 22px;font-size:17px;}
+.r-preview-values > div {display:flex;gap:14px;justify-content:space-between;}
+.r-preview-values > div:nth-child(1) {grid-area:1/1;}.r-preview-values > div:nth-child(2) {grid-area:2/1;}.r-preview-values > div:nth-child(3) {grid-area:2/2;}.r-preview-values > div:nth-child(4) {grid-area:3/1;}.r-preview-values > div:nth-child(5) {grid-area:3/2;}.r-preview-values > div:nth-child(6) {grid-area:3/3;}.r-preview-values > div:nth-child(7) {grid-area:4/1;}
+.ref-stage .r-history .ehr-sectionbody {padding:0;max-height:72px;overflow:auto;}
+.ref-stage .r-history table {font-size:14px;}
+.ref-stage .r-history th,.ref-stage .r-history td {padding:3px 8px !important;text-align:center;}
+.ref-stage .r-guidance {background:#e3efdd;border:1px solid #8eaa8f;}
+.ref-stage .r-guidance .ehr-sectionhead {background:transparent;border:0;height:26px;margin:0;font-size:16px;}
+.ref-stage .r-guidance .ehr-sectionbody {padding:0 18px;}
+.ref-stage .r-guidance .ehr-sectionbody {display:grid;grid-template-rows:repeat(3,1fr);grid-auto-flow:column;grid-template-columns:1fr 1.15fr;gap:2px 20px;font-size:14px;}
+.ref-stage .ehr-section .ehr-tablewrap {margin:0;}
+.ref-stage .r-history th,.ref-stage .r-history td {font-size:14px;}
+.ref-stage .r-guidance .ehr-data {font-size:13px;}
+.ref-stage .r-guidance th,.ref-stage .r-guidance td {border:0 !important;background:transparent !important;padding:1px 4px !important;}
+.ref-stage .r-guidance thead {display:none;}
+.ref-stage .ehr-actions {min-height:31px;padding:3px 8px;gap:5px;border-top:1px solid #a9b2b6;}
+.ref-stage .ehr-actiontext {font-size:12px;line-height:1 !important;}
+.ref-stage .ehr-actiontext b {display:inline;margin-right:10px;}
+.ref-stage .ehr-savebutton {font:14px "Times New Roman",serif !important;padding:3px 7px;min-height:25px;}
+.ref-stage .ehr-foot {display:none;}
+.r-detail-row {display:grid;grid-template-columns:90px 1fr;gap:0;font-size:17px;padding:3px 2px;line-height:1.15 !important;}
+.ref-stage .ehr-context th,.ref-stage .ehr-context td {font-size:16px;}
+.ref-stage .ehr-context .ehr-sectionhead {font-size:19px;}
+.ref-stage .ehr-context table {font-size:16px;}
+.ref-stage .ehr-context td,.ref-stage .ehr-context th {padding:8px 7px !important;white-space:normal;text-align:left;}
+.ref-stage .ehr-context th {background:#e9e7e3 !important;}
+.ref-stage .ehr-context .ehr-section:last-child td {font-size:15px;padding:5px 7px !important;}
+.ref-stage .ehr-popup[hidden] {display:none !important;}
+.ref-stage .r-temperature .ehr-choices button {border:0 !important;background:none !important;box-shadow:none !important;display:flex;align-items:center;gap:5px;}
+.ref-stage .r-temperature .ehr-choices button::before {content:'';width:14px;height:14px;border:1px solid #314779;border-radius:50%;background:white;}
+.ref-stage .r-temperature .ehr-choices button[aria-pressed="true"]::before {background:#155f9e;box-shadow:inset 0 0 0 3px white;}
+.r-section-icon svg {width:23px;height:25px;vertical-align:middle;display:block;}
+.r-summary-icon svg {width:45px;height:49px;}
+.r-preview-title {display:flex;gap:10px;align-items:center;}
+.ref-stage .ehr-root,.ref-stage .riverside-banner,.ref-stage .ehr-section,.ref-stage .ehr-root > aside.ehr-context {background-image:url('assets/paper.svg');}
+.ref-stage .r-guidance {background-color:#e3efdd;}
+.ref-stage .r-details .ehr-sectionbody {padding:8px 5px;}
+.ref-panel {position:static;width:auto;margin:0;}
+.ref-stage .ehr-context > .ref-panel {position:static;width:auto;padding:8px;margin:0;border:1px solid #b5a464;background:#fff6d9;flex:none;}
+.ref-panel-title {font-family:"Times New Roman",serif;font-size:16px;font-weight:bold;text-transform:none;letter-spacing:0;color:#000b39;}
+.ref-panel-text {font-family:"Times New Roman",serif;font-size:15px;line-height:1.3;}
+.ref-note {position:relative;left:6px;bottom:auto;align-self:flex-start;margin:3px 0;min-height:38px;padding:7px 10px;background:#fff6d9;box-shadow:1px 1px #a7a09a;font:14px "Times New Roman",serif;}
+.ref-note-text {max-width:700px;}.ref-note-x {align-self:center;}
+.ref-foot {min-height:30px;padding:2px 10px;}
+.ref-stage .ehr-actions > .ref-foot {display:contents;}
+.ref-stage .ehr-actions .ref-foot-text {display:none;}
+.ref-stage .ehr-actions .ref-tools {gap:5px;}
+.ref-stage .ref-endlink {background:none !important;border:0 !important;box-shadow:none !important;padding:3px 6px;text-decoration:underline;white-space:nowrap;}
+.ref-stage .ehr-popup > header {display:flex !important;}
+.ref-stage .ehr-actions .ref-submit,.ref-stage .ehr-actions .ref-xtra {padding:3px 7px;font-size:13px !important;}
+.ref-foot-text {visibility:hidden;}
+.ref-submit,.ref-xtra {padding:4px 10px;font-family:"Times New Roman",serif;}
+.ref-float-dock {height:34px;}.ref-float {right:12px;bottom:4px;}
+.ref-ov {font-family:"Times New Roman",serif;border:1px solid #6d88a3;box-shadow:inset 1px 1px white,1px 1px #a9a59b;}
+.ref-ov-btn {border:1px solid #6d88a3;border-radius:2px;padding:4px 10px;background:linear-gradient(white,#e8e7e1);box-shadow:inset 1px 1px white;font-family:"Times New Roman",serif;}
+.ref-ov-primary {background:#155f9e;color:white;}
+.ref-ov-cookie {left:6px;right:6px;bottom:3px;padding:5px 9px;gap:12px;background:#fff8df;font-size:13px;}
+.ref-ov-chat,.ref-ov-toast {background:#fff8df;border-radius:2px;box-shadow:2px 2px #92918c;}
+.ref-ov-promo {inset:auto;left:28%;top:31%;width:min(420px,55vw);background:transparent;border:0;box-shadow:none;}
+.ref-ov-box {border:2px ridge #8da2b8;border-radius:2px;background:#f1efe8;padding:18px;box-shadow:4px 4px #0004;}
+.ref-ov-banner {position:fixed;z-index:1100;left:0;right:0;top:116px;flex:none;min-height:34px;padding:5px 12px;background:#fff6d9;}
+@media(max-height:800px), (max-width:1200px) {
+  .ref-task {min-height:88px !important;grid-template-rows:54px auto 29px !important;}
+  .ref-task[data-instruction="hidden"] {grid-template-rows:54px 0 29px !important;}
+  .ref-task[data-instruction="panel"],.ref-task[data-instruction="toast"] {grid-template-rows:54px 0 29px !important;}
+  .ref-task[data-instruction="header"] {grid-template-rows:35px auto 29px !important;}
+  .ref-task[data-instruction="header"] .ref-instruction {font-size:13px !important;}
+  .ref-task[data-instruction="header"] .ref-instruction {padding-left:105px;}
+  .r-nursing-badge {width:18px;height:17px;}
+  .ref-task .ref-icon {height:26px;width:29px;}
+  .ref-task::before {font-size:28px !important;}.ref-task::after {font-size:13px !important;top:33px !important;}
+  .r-scenery {height:53px;width:100px;}.r-hospital {height:43px;width:86px;}.r-motto {font-size:10px;right:10px;top:2px;line-height:1;}
+  .ref-navlink {font-size:13px !important;padding:4px !important;}
+  .ref-stage > .ehr-root {grid-template-rows:72px minmax(0,1fr);gap:3px;}
+  .ref-stage * {line-height:1.12 !important;}
+  .ref-stage .ehr-pane {font-size:12px;}
+  .ref-stage .riverside-banner {padding:4px 8px;gap:5px;}
+  .r-name {font-size:23px !important;}.r-identity {font-size:12px;}.r-summary {font-size:12px;width:35%;gap:8px;padding:3px;}.r-summary-icon {font-size:26px;}
+  .ref-stage .ehr-pane {grid-template-rows:minmax(0,1fr) 44px 34px;gap:3px;padding:2px;}
+  .ref-stage .ehr-sectionhead {font-size:14px;height:24px;margin:2px 2px 0;padding:2px 5px;gap:5px;}
+  .r-section-icon {font-size:17px;}
+  .ref-stage .r-handoff table {font-size:11px;}.ref-stage .r-handoff td,.ref-stage .r-handoff th {padding:5px 3px !important;}
+  .ref-stage .r-handoff td,.ref-stage .r-handoff th {font-size:11px;}
+  .r-workspace {gap:3px;}.r-entry {gap:3px;}
+  .ref-stage .r-form .ehr-sectionbody {padding:3px 5px;}
+  .ref-stage .ehr-formgrid {gap:2px;}
+  .ref-stage .ehr-field {grid-template-columns:90px minmax(65px,104px) minmax(0,1fr);gap:4px;min-height:20px;}
+  .ref-stage .ehr-field label,.r-notes label {font-size:11px !important;}
+  .ref-stage .ehr-field input {height:20px;font-size:12px !important;}
+  .ref-stage .ehr-field small {font-size:10px;}
+  .ref-stage .ehr-choices button {font-size:11px !important;padding:1px 3px;min-height:20px;min-width:22px;}
+  .ref-stage .ehr-field .ehr-choices {gap:3px;}
+  .r-time-readout {height:20px;}.r-notes {grid-template-columns:90px 1fr;gap:4px;min-height:24px;}
+  .ref-stage .r-notes textarea {height:24px;}
+  .ref-stage .ehr-orderpreview {min-height:68px;}.r-preview-title {font-size:13px;padding:2px 6px;height:23px;}
+  .r-preview-values {font-size:10px;padding:3px 10px;gap:1px 9px;}
+  .ref-stage .r-history .ehr-sectionbody {max-height:44px;}.ref-stage .r-history table {font-size:10px;}
+  .ref-stage .r-history th,.ref-stage .r-history td {padding:2px 4px !important;}
+  .ref-stage .r-history th,.ref-stage .r-history td {font-size:10px;}
+  .ref-stage .r-guidance .ehr-sectionhead {height:19px;font-size:12px;}.ref-stage .r-guidance .ehr-data {font-size:10px;}
+  .ref-stage .r-guidance .ehr-sectionbody {padding:0 5px;}
+  .ref-stage .r-guidance .ehr-sectionbody {font-size:9px;gap:1px 5px;line-height:1.05 !important;grid-template-columns:1fr 1fr;}
+  .ref-stage .r-guidance .r-guide-line {line-height:1.05 !important;}
+  .ref-stage .r-guidance .r-guide-line {font-size:9px;}
+  .ref-stage .r-history th,.ref-stage .r-history td {padding:1px 4px !important;}
+  .ref-stage .ehr-actions .ref-submit,.ref-stage .ehr-actions .ref-xtra {font-size:11px !important;padding:2px 5px;}
+  .r-section-icon svg {width:17px;height:19px;}.r-summary-icon svg {width:28px;height:32px;}
+  .ref-stage .ehr-actions {min-height:27px;}.ref-stage .ehr-actiontext {font-size:10px;}.ref-stage .ehr-savebutton {font-size:11px !important;min-height:21px;}
+  .r-detail-row {grid-template-columns:63px 1fr;font-size:12px;padding:2px 0;}
+  .ref-stage .ehr-context table {font-size:11px;}.ref-stage .ehr-context td,.ref-stage .ehr-context th {padding:5px 3px !important;}
+  .ref-stage .ehr-context th,.ref-stage .ehr-context td {font-size:11px;}
+  .ref-stage .ehr-context .ehr-sectionhead {font-size:14px;}
+  .ref-stage .ehr-context .ehr-section:last-child td {font-size:11px;padding:3px !important;}
+}
+@media (min-height:801px) and (max-height:900px) {
+  .ref-stage > .ehr-root {grid-template-rows:80px minmax(0,1fr);}
+  .ref-stage .ehr-pane {grid-template-rows:minmax(0,1fr) 42px 32px;}
+}

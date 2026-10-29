@@ -1,0 +1,171 @@
+:root{--bg:#fff;--panel:#f6f7f9;--fg:#222;--accent:#1f66c2;--muted:#667;--line:#b9c0c8;--font:"Helvetica Neue",Helvetica,Arial,sans-serif}
+*{box-sizing:border-box;transition:none!important;animation:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);background:#fff;color:var(--fg);display:flex;flex-direction:column;font-size:16px}
+button,input,textarea{font-family:inherit}button{cursor:pointer}
+input,textarea{caret-color:transparent!important}
+.ds-top{flex:none;height:3.35vw;min-height:36px;display:flex;align-items:center;padding:0 2vw;background:linear-gradient(#f4f7fa,#d9e0e8);border-bottom:1px solid #b5bcc5;font-size:max(13px,1.2vw)}
+.ds-brand{color:#1f5fae;font-size:1.5em;font-weight:500;padding-right:1.4vw;margin-right:1.4vw;border-right:1px solid #c3cad2;line-height:1.5}
+.ds-brand b{font-weight:700}
+.ds-menu{display:flex;gap:2.2vw;color:#333}
+.ds-util{margin-left:auto;display:flex;color:#444;font-size:.85em}
+.ds-util span+span{margin-left:1vw;padding-left:1vw;border-left:1px solid #b5bcc5}
+.ds-body{flex:1;min-height:0;display:flex}
+.ds-content{position:relative;flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+.ds-main{position:relative;flex:1;min-height:0}
+.ds-stage{position:absolute;left:1.4vw;right:0;top:1.1vw;bottom:1.1vw;overflow:visible}
+.ds-brief{position:absolute;z-index:3;right:1.4vw;top:1.4vw;width:27%;color:#1a63b8}
+.ds-instruction{font-size:max(15px,1.6vw);line-height:1.28;font-weight:700;overflow-wrap:anywhere}
+.ds-footer{position:absolute;z-index:3;right:1.2vw;bottom:1.2vw;width:27.5%}
+.ds-btns{display:flex;gap:1.4vw;margin-bottom:1.2vw}
+.ds-submit,.ds-cancel{font-size:max(13px,1.15vw);height:max(32px,2.7vw);padding:0 2.2vw;border-radius:2px;cursor:pointer}
+.ds-submit{background:linear-gradient(#3b86e0,#1c5fb8);color:#fff;border:1px solid #174f98;font-weight:700}
+.ds-cancel{background:linear-gradient(#fdfdfd,#e4e8ec);color:#333;border:1px solid #a9b1ba}
+.ds-notes{font-size:max(11px,.95vw);color:#333;line-height:1.4}
+.ds-notes ul{margin:.3em 0 0;padding-left:1.4em}
+@media(max-height:760px){.ds-btns{margin-bottom:0}}
+.ds-toast{position:relative;flex:none;margin:8px 18px;padding:10px 16px;background:#eef4fb;border:1px solid #b5c6dc;color:#1a63b8}
+.ds-toast .ds-instruction{font-size:17px}
+.ds-overlay{z-index:1000;position:fixed;padding:22px;max-width:420px;background:var(--panel);border:1px solid var(--line);box-shadow:0 8px 24px #0004;right:24px;bottom:85px}
+.ds-overlay button{padding:8px 16px;margin:16px 8px 0 0;font:inherit;background:var(--accent);color:#fff;border:1px solid #174f98}
+.ds-overlay-cookie{left:0;right:0;bottom:0;max-width:none;display:flex;align-items:center;justify-content:space-between}
+.ds-overlay-banner{top:42px;bottom:auto;left:15%;right:15%;max-width:none}
+.ds-overlay-promo{top:27%;bottom:auto;left:35%;right:auto}
+.ds-overlay-chat{width:330px}
+.ds-overlay-toast{top:60px;bottom:auto}
+.ds-stage input{min-width:0}
+
+/* document + form: doc left 72%, form in the right margin */
+.ds-stage .ff-root{width:100%!important;margin:0!important;height:100%;flex-direction:row!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important;padding:0!important}
+.ds-stage .ff-root.tabs{flex-direction:column!important}
+.ds-stage .ff-docpane{width:72%!important;height:100%;align-self:stretch;background:#fff;border:1px solid #8a96a4;box-shadow:inset 0 0 0 1px #fff;align-items:center}
+.ds-stage .ff-root.tabs .ff-docpane{width:100%!important}
+.ds-stage .ff-paper{box-shadow:none!important;border-radius:0!important;font-family:Helvetica,Arial,sans-serif}
+.ds-stage .ff-formpane{flex:1 1 auto;max-width:none;padding-left:1.3vw;margin-top:17vh;margin-right:1.4vw}
+.ds-stage .ff-root.tabs .ff-formpane{margin-top:0;padding-left:0}
+.ds-stage .ff-form{background:#f7f8fa!important;border:1px solid #c5cbd2!important;border-radius:0!important;box-shadow:none!important;padding:0 0 1em!important}
+.ds-stage .ff-form h2{margin:0 0 .9em!important;padding:.6em .85em;font-size:1.1em!important;font-weight:700;color:#2a2f36!important;background:linear-gradient(#f3f5f7,#dde1e6);border-bottom:1px solid #c5cbd2}
+.ds-stage .ff-form .ff-sub{display:none}
+.ds-stage .ff-grid{padding:0 .85em;gap:.7em!important}
+.ds-stage .ff-field:not(.ff-wide){display:grid;grid-template-columns:36% minmax(0,1fr);align-items:center;gap:.4em}
+.ds-stage .ff-label{margin:0;font-size:.95em!important;font-weight:400!important;color:#333}
+.ds-stage .ff-input,.ds-stage .ff-ddbtn{height:2.2em!important;background:#fff!important;border:1px solid #aab2bb!important;border-radius:2px!important;color:#222!important}
+.ds-stage .ff-list{border-radius:2px;background:#fff}
+.ds-stage .ff-grid.two{grid-template-columns:1fr!important}
+.ds-stage .ff-docpane{width:70%!important}
+.ds-stage .ff-root.tabs .ff-docpane{width:100%!important}
+.ds-brief{width:26%}
+.ds-footer{width:26%}
+.ds-stage .ff-docpane .ff-paper{font-size:1.3em}
+.ds-stage .ff-root{height:calc(100% - 36px)!important}
+.ds-stage .ff-docpane{height:100%!important}
+.ds-stage .ff-docpane .ff-paper{font-size:1.45em}
+.ds-stage .ff-docpane{overflow:hidden}
+.ds-stage .ff-docpane .ff-paper{font-size:1.12em}
+@media(min-height:900px){.ds-stage .ff-docpane .ff-paper{font-size:1.4em}}
+
+/* Reference proportions, applied to every seeded document and field set. */
+.ds-top{height:3.35vw;min-height:34px;padding:0 1.9vw;font-size:1.2vw}
+.ds-brand{font-size:1.65vw;font-weight:700;color:#29313f;height:100%;display:flex;align-items:center;gap:.35em;padding-right:1.9vw;margin-right:1.6vw;line-height:1}
+.ds-brand b{color:#0061ad}
+.ds-menu{gap:2vw}.ds-util{font-size:1.05vw}
+.ds-stage{left:1.4vw;right:1.4vw;top:1.05vw;bottom:1.4vw}
+.ds-brief{right:1.4vw;top:1.6vw;width:30.2%}
+.ds-instruction{font-size:1.65vw;line-height:1.27;color:#005eb5}
+.ds-footer{right:1.4vw;bottom:2.1vw;width:30.2%;pointer-events:none}
+.ds-notes{font-size:1.2vw;line-height:1.3;color:#29313f}
+.ds-notes ul{padding-left:1.15em;margin:.3em 0 0}
+.ds-stage .ff-root{height:100%!important;font-size:1.2vw!important;gap:1.9vw!important}
+.ds-stage .ff-docpane{width:67%!important;height:100%!important;align-items:stretch;box-shadow:0 1px 5px #0002}
+.ds-stage .ff-formpane{padding-left:0;margin-right:0;margin-top:10.4vw;max-width:none}
+.ds-stage .ff-form{position:relative;display:flex;flex-direction:column;min-height:29.6vw;border-radius:4px!important;padding:0 0 1.5vw!important;background:#f8f9fa!important}
+.ds-stage .ff-form h2{font-size:1.3vw!important;padding:.7vw 1.25vw;margin:0 0 1.25vw!important;background:linear-gradient(#e7ebef,#d8dfe6)}
+.ds-stage .ff-grid{padding:0 1.25vw;gap:.7vw!important}
+.ds-stage .ff-field:not(.ff-wide){grid-template-columns:37% minmax(0,1fr);gap:.5vw}
+.ds-stage .ff-label{font-size:1.1vw!important;line-height:1.2;color:#29313f}
+.ds-stage .ff-input,.ds-stage .ff-ddbtn{height:2.25vw!important;font-size:1.05vw;border-radius:3px!important;box-shadow:inset 0 1px 2px #0001}
+.ff-required{color:#c00}.ff-hint{grid-column:2;font-size:1vw;line-height:1.25;color:#647082}
+.ff-dateicon{position:absolute;right:0;top:0;bottom:0;width:2.1vw;display:flex;align-items:center;justify-content:center;border-left:1px solid #bbc3cd;color:#506172;background:linear-gradient(#fff,#e8ecf0);pointer-events:none}
+.ff-dateicon svg{width:1.35vw;height:1.35vw}.ff-datewrap .ff-clear{right:2.25vw}
+.ds-stage .ds-btns{margin:1.7vw 1.25vw 0;gap:1.3vw;pointer-events:auto}
+.ds-stage .ff-form .ds-btns{margin-top:auto;padding-top:1.3vw}
+.ds-submit,.ds-cancel{height:2.7vw;min-height:28px;font-size:1.15vw;border-radius:3px;padding:0}
+.ds-submit{width:9.9vw}.ds-cancel{width:8.2vw}
+.ds-stage .ff-docpane .ff-paper{font-family:Arial,Helvetica,sans-serif!important;font-size:1.3vw!important;background:#fff!important;width:100%;height:100%;padding:3.2vw 3.3vw!important;filter:none!important;line-height:1.2}
+.ds-stage .ff-invhead{position:relative;height:23.9vw;display:flex;justify-content:space-between;margin:0;gap:1vw}
+.ds-stage .ff-vendor{position:relative;flex:1;padding-top:.5vw;min-width:0}
+.ds-stage .ff-logo{position:absolute;left:.5vw;top:0;width:7vw;height:4.1vw}
+.ds-stage .ff-logo svg{width:100%;height:100%}
+.ds-stage .ff-vname{margin-left:8.4vw;color:#080808;font-size:2.15vw;font-weight:700;line-height:1.1;max-width:30vw}
+.ds-stage .ff-tagline{margin-left:8.4vw;color:#526171;font-size:1.1vw;letter-spacing:.025em}
+.ds-stage .ff-vaddr{margin:1.5vw 0 0 .8vw;white-space:pre-line;font-size:1.3vw;color:#161b23;line-height:1.18}
+.ds-stage .ff-invright{padding-top:1.2vw;flex:none;max-width:44%}
+.ds-stage .ff-invtitle{font-size:2.8vw;font-weight:700;letter-spacing:0;color:#090909;margin:0 1vw 1.6vw 0}
+.ds-stage .ff-meta{font-size:1.25vw;line-height:1.3;width:100%}
+.ds-stage .ff-meta td{padding:.08vw .6vw;text-align:left;color:#151922!important;white-space:nowrap}
+.ds-stage .ff-billto{position:absolute;top:17.5vw;left:4.1vw;font-size:1.3vw;line-height:1.18;margin:0}
+.ds-stage .ff-billto .ff-doclabel{font-size:1.3vw;color:#151922;font-weight:700;letter-spacing:0;text-transform:none}
+.ds-stage .ff-billto b{font-weight:400}
+.ds-stage .ff-items{font-size:1.25vw;table-layout:fixed;border-collapse:collapse;width:100%}
+.ds-stage .ff-items th,.ds-stage .ff-items td{border:1px solid #d0d6dd;padding:.48vw 1.15vw;line-height:1.15;font-size:1.25vw;color:#151922}
+.ds-stage .ff-items th{background:linear-gradient(#e2e5e9,#d7dade);font-weight:700;border-color:#b7bfca}
+.ds-stage .ff-items th:first-child{width:49%}.ds-stage .ff-items th:nth-child(2){width:15%}.ds-stage .ff-items th:nth-child(3){width:17%}
+.ds-stage .ff-items th:nth-child(2),.ds-stage .ff-items td:nth-child(2){text-align:center}
+.ds-stage .ff-totals{font-size:1.25vw;width:36%;margin:0 0 0 auto;line-height:1.15}
+.ds-stage .ff-totals td{border:1px solid #d0d6dd;padding:.48vw 1.15vw;color:#151922!important}
+.ds-stage .ff-totals td:first-child{text-align:left;padding-left:2vw}
+.ds-stage .ff-totals tr.strong td{font-size:1.25vw;border-top:1px solid #bcc4cd;background:linear-gradient(#e5e8eb,#dce0e4);padding:.5vw 1.15vw}
+.ds-stage .ff-totals tr.strong td:first-child{padding-left:2vw}
+.ds-stage .ff-notes{font-size:1.25vw;color:#151922;margin:.5vw 0 0}
+.ds-stage .ff-totals + .ff-notes{margin-top:1.7vw}
+@media(max-width:1100px){.ds-stage .ff-label{font-size:1.15vw}.ds-stage .ff-grid{gap:.65vw!important}.ds-stage .ff-formpane{margin-top:10.4vw}}
+.ds-stage .ff-dense .ff-grid{gap:.32vw!important}
+.ds-stage .ff-dense .ff-input,.ds-stage .ff-dense .ff-ddbtn{height:1.85vw!important}
+.ds-stage .ff-dense .ds-btns{margin-top:auto}
+.ds-stage .ff-dense .ff-hint{font-size:.95vw}
+.ds-stage .ds-notes{margin-top:1.6vw}
+.ds-stage .ff-invhead{height:calc(23.9vw - var(--extra-rows,0)*2.4vw)}
+.ds-stage .ff-invoice>.ff-notes:last-of-type{position:absolute;bottom:3.1vw;left:3.5vw;right:3.3vw}
+.ff-currency{position:absolute;right:0;top:0;bottom:0;border-left:1px solid #aab2bb;background:linear-gradient(#f9fafb,#e0e5eb);padding:0 .6vw;display:flex;align-items:center;justify-content:center;font-size:1.1vw;border-radius:0 3px 3px 0}
+.ff-moneywrap .ff-clear{right:3.1vw}.ff-datewrap .ff-input{padding-right:3.7vw}.ff-moneywrap .ff-input{padding-right:4.5vw}
+.ff-input::placeholder{font-size:.85vw}
+.ds-stage .ff-root.tabs{display:block!important}
+.ds-stage .ff-root.tabs .ff-tabs{position:absolute;top:.5vw;left:1vw;z-index:4;font-size:.85vw}
+.ds-stage .ff-root.tabs .ff-panels{height:100%;padding:0;display:grid;grid-template-columns:67% minmax(0,1fr);column-gap:1.9vw;align-items:start}
+.ds-stage .ff-root.tabs .ff-docpane{grid-area:1 / 1;width:100%!important;height:100%!important}
+.ds-stage .ff-root.tabs .ff-formpane{grid-area:1 / 2;display:block;width:100%!important;margin:10.4vw 0 0;padding:0}
+.ds-stage .ff-root.tabs .ff-forminner{width:100%!important;max-width:none}
+.ds-stage .ff-root.tabs>.ds-btns{position:absolute;top:35.8vw;right:0;width:31.05%;margin:0;padding-left:1.25vw}
+.ds-stage .ff-root.tabs>.ds-notes{position:absolute;top:41.6vw;right:0;width:31.05%;margin:0}
+.ds-stage .ff-root.tabs .ff-form{padding-bottom:6vw!important}
+.ds-stage .ds-btns{margin-bottom:0}
+.ds-stage .ff-docimg{align-self:stretch;max-height:100%;box-shadow:none;border-radius:0!important;object-fit:contain}
+.ds-brand,.ds-menu{letter-spacing:-.02em}
+.ff-dateicon,.ff-currency{border:1px solid #aab2bb;border-radius:0 3px 3px 0}
+.ds-stage .ff-form:not(.ff-dense) .ff-label{font-size:1.2vw!important}
+
+/* Episode frame keeps the invoice and its input grid in their original positions. */
+.ds-tools{display:flex;align-items:center;gap:.65vw;margin-left:1vw;flex:none}
+.ds-tools .ds-submit,.ds-tools .ds-cancel{height:2.25vw;min-height:24px;width:auto;padding:0 1vw;font-size:1vw}
+.ds-margin-end{pointer-events:auto;display:flex;justify-content:flex-end}
+.ds-endlink{width:auto;min-height:24px;height:auto;background:none;border:0;color:#005eb5;text-decoration:underline;font-weight:400;padding:.4em 0;font-size:1.15vw}
+.ds-brief-panel{border:1px solid #c5cbd2;border-radius:3px;background:#f8f9fa;padding:.6vw .8vw;top:1.2vw}
+.ds-brief-title{display:block;font-size:1.05vw;color:#29313f;margin-bottom:.35vw}
+.ds-brief-panel .ds-instruction{font-size:1.2vw;line-height:1.25}
+.ds-toast{margin:6px 1.4vw;padding:7px 12px;border-radius:3px}
+.ds-toast .ds-instruction{font-size:14px;line-height:1.25}
+.ds-stage .ff-formpane{height:calc(100% - 10.4vw);min-height:0;display:flex;flex-direction:column}
+.ds-stage .ff-formpane .ff-form{flex:none}
+.ds-stage .ff-formpane>.ds-notes{flex:none}
+.ds-stage .ff-root.tabs .ff-formpane{height:calc(100% - 10.4vw)}
+.ds-stage .ff-root.tabs .ff-panels{min-height:0;grid-template-rows:minmax(0,1fr)}
+.ds-stage .ff-root.tabs .ff-forminner{flex:none}
+.ds-stage .ff-root.long{min-height:0;overflow:visible}
+.ds-stage .ff-clear{display:flex;visibility:hidden}
+.ds-stage .ff-inwrap.filled .ff-clear{visibility:visible}
+.ds-stage .ff-compact-margin .ff-form{padding-bottom:.7vw!important}
+.ds-stage .ff-compact-margin .ff-form h2{margin-bottom:.7vw!important}
+.ds-stage .ff-compact-margin .ff-grid{gap:.35vw!important}
+.ds-stage .ff-compact-margin .ff-input,.ds-stage .ff-compact-margin .ff-ddbtn{height:1.85vw!important}
+.ds-stage .ff-compact-margin .ff-form .ds-btns{padding-top:.6vw}
+.ds-stage .ff-compact-margin .ds-notes{margin-top:.7vw}

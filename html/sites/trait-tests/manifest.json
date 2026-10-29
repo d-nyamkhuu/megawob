@@ -1,0 +1,414 @@
+{
+ "site": "trait-tests",
+ "split": "test",
+ "description": "Test-only fixture: the base site's frame and widgets re-registered with opt-in traits (traits no base widget declares). Never trained, never evaluated; checked with `python -m megawob.check --site trait-tests`.",
+ "widgets": {
+  "use-email": [
+   {
+    "name": "full-date",
+    "split": "test",
+    "expect": {
+     "*": "spec.emails.every((e) => e.date && e.date.line)"
+    }
+   }
+  ],
+  "use-shop": [
+   {
+    "name": "sort-any",
+    "split": "test",
+    "expect": {
+     "flight": "spec.sortable === true",
+     "search": "!!spec.corpus"
+    }
+   },
+   {
+    "name": "infinite-products",
+    "split": "test",
+    "expect": {
+     "*": "!!spec.infinite && spec.corpus === 'products'"
+    }
+   }
+  ],
+  "use-social-feed": [
+   {
+    "name": "simple-feed",
+    "split": "test",
+    "expect": {
+     "*": "spec.page === null && Object.keys(spec.lists).join() === 'home'"
+    }
+   }
+  ],
+  "use-desktop-tools": [
+   {
+    "name": "meta",
+    "split": "test",
+    "expect": {
+     "*": "!!spec.meta"
+    }
+   },
+   {
+    "name": "selectors",
+    "split": "test",
+    "expect": {
+     "*": "spec.selectors === true && !!spec.range"
+    }
+   },
+   {
+    "name": "tools",
+    "split": "test",
+    "expect": {
+     "*": "Array.isArray(spec.tools)"
+    }
+   }
+  ],
+  "sort-into-bins": [
+   {
+    "name": "central-12",
+    "split": "test",
+    "expect": {
+     "*": "spec.layout === 'central'",
+     "collect": "spec.layout === 'central' && spec.items.length === 12"
+    }
+   },
+   {
+    "name": "rows-above",
+    "split": "test",
+    "expect": {
+     "*": "spec.layout === 'rows'",
+     "collect": "spec.layout === 'rows' && Object.values(spec.startPos).every((p) => p[1] < 0.5)"
+    }
+   },
+   {
+    "name": "palette",
+    "split": "test",
+    "expect": {
+     "collect": "!!spec.palette && spec.rule.kind === 'color' && spec.rule.value === 'blue' && spec.items.every((i) => i.color === 'blue' ? i.fill === 'solid' : i.color === 'black') && spec.items.some((i) => i.fill === 'outline') && spec.items.some((i) => i.color === 'black' && i.fill === 'solid') && spec.items.some((i) => i.color === 'blue')"
+    }
+   },
+   {
+    "name": "palette-central",
+    "split": "test",
+    "expect": {
+     "collect": "!!spec.palette && spec.layout === 'central' && spec.items.length === 12 && spec.rule.value === 'blue' && spec.items.every((i) => i.color === 'blue' || i.color === 'black') && spec.items.some((i) => i.fill === 'outline')"
+    }
+   },
+   {
+    "name": "items-left",
+    "split": "test",
+    "expect": {
+     "*": "spec.itemsAt === 'left' && spec.orient === 'column' && Object.values(spec.startPos).every((p) => p[0] < Math.min(...spec.containers.map((c) => c.x)))"
+    }
+   },
+   {
+    "name": "items-right-grid",
+    "split": "test",
+    "expect": {
+     "*": "spec.orient === 'grid' && Object.values(spec.startPos).every((p) => p[0] > Math.max(...spec.containers.map((c) => c.x + c.w)))",
+     "sort": "spec.containers.length < 3 || spec.containers[2].y >= spec.containers[0].y + spec.containers[0].h"
+    }
+   },
+   {
+    "name": "column-below",
+    "split": "test",
+    "expect": {
+     "*": "spec.orient === 'column' && spec.containers.every((c, i) => i === 0 || c.y >= spec.containers[i - 1].y + spec.containers[i - 1].h - 1e-9) && Object.values(spec.startPos).every((p) => p[1] > Math.max(...spec.containers.map((c) => c.y + c.h)))"
+    }
+   },
+   {
+    "name": "declared-rows",
+    "split": "test",
+    "expect": {
+     "single": "spec.containers.length === 1 && spec.containers[0].x === 0.58 && spec.containers[0].w === 0.34 && !!spec.startPos",
+     "collect": "spec.containers.map((c) => c.x + ':' + c.side).join() === '0.04:left,0.62:right' && !!spec.startPos",
+     "sort": "spec.containers.map((c) => c.y).join() === '0.04,0.355,0.67' && spec.rule.mode === 'each' && !!spec.startPos"
+    }
+   },
+   {
+    "name": "declared-scatter",
+    "split": "test",
+    "expect": {
+     "collect": "spec.containers.length === 1 && spec.containers[0].x === 0.3 && !spec.startPos",
+     "sort": "spec.containers.length === 2 && spec.containers[1].y === 0.05 && !spec.startPos"
+    }
+   }
+  ],
+  "click-point": [
+   {
+    "name": "arc",
+    "split": "test",
+    "expect": {
+     "*": "spec.shape === 'arc'"
+    }
+   },
+   {
+    "name": "horizontal",
+    "split": "test",
+    "expect": {
+     "midpoint": "spec.a[1] === spec.b[1] && spec.b[0] > spec.a[0]",
+     "right-angle": "spec.a[1] === spec.b[1] && Math.abs(Math.hypot(spec.b[0] - spec.a[0], spec.b[1] - spec.a[1]) / spec.minLen - 7) < 0.2",
+     "bisect": "Math.abs((spec.rays[0].len + spec.rays[1].len) / 2 / spec.minLen - 7) < 0.3"
+    }
+   },
+   {
+    "name": "wide",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w >= 1.9 && spec.board.w <= 2.2 && spec.board.h === 1 && !spec.area"
+    }
+   },
+   {
+    "name": "square-left",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 1 && spec.area.x === 0 && spec.area.y === 0 && spec.area.w === 0.6 && spec.area.h === 1 && (r => (b => b.x0 >= r.x - 1e-9 && b.y0 >= r.y - 1e-9 && b.x1 <= r.x + r.w + 1e-9 && b.y1 <= r.y + r.h + 1e-9)(env.taskDef.helpers.figureBounds(spec)))(spec.area)"
+    }
+   },
+   {
+    "name": "placement-right",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 1.5 && (['axis', 'map'].includes(spec.scenario) ? !spec.area : spec.area.x === 0.6 && spec.area.w === 0.9 && spec.area.h === 1 && (r => (b => b.x0 >= r.x - 1e-9 && b.y0 >= r.y - 1e-9 && b.x1 <= r.x + r.w + 1e-9 && b.y1 <= r.y + r.h + 1e-9)(env.taskDef.helpers.figureBounds(spec)))(spec.area))"
+    }
+   },
+   {
+    "name": "center-narrow",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w >= 1 && spec.board.w <= 1.3 && spec.area.y === 0.2 && spec.area.h === 0.6 && Math.abs(spec.area.x - 0.2 * spec.board.w) < 1e-3 && Math.abs(spec.area.w - 0.6 * spec.board.w) < 1e-3 && (r => (b => b.x0 >= r.x - 1e-9 && b.y0 >= r.y - 1e-9 && b.x1 <= r.x + r.w + 1e-9 && b.y1 <= r.y + r.h + 1e-9)(env.taskDef.helpers.figureBounds(spec)))(spec.area)"
+    }
+   },
+   {
+    "name": "panel-rect",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 2 && spec.area.x === 0.9 && spec.area.y === 0.05 && spec.area.w === 1 && spec.area.h === 0.6 && (r => (b => b.x0 >= r.x - 1e-9 && b.y0 >= r.y - 1e-9 && b.x1 <= r.x + r.w + 1e-9 && b.y1 <= r.y + r.h + 1e-9)(env.taskDef.helpers.figureBounds(spec)))(spec.area)"
+    }
+   }
+  ],
+  "crop-image": [
+   {
+    "name": "portrait-left",
+    "split": "test",
+    "expect": {
+     "*": "(a => a >= 0.59 && a <= 0.91)(spec.scenario === 'pan' ? spec.aspect * spec.zoom.y / spec.zoom.x : spec.aspect) && spec.area.l === 0 && spec.area.t === 0 && spec.area.r === 0.55 && spec.area.b === 1 && spec.target.l >= spec.area.l - 1e-4 && spec.target.t >= spec.area.t - 1e-4 && spec.target.r <= spec.area.r + 1e-4 && spec.target.b <= spec.area.b + 1e-4"
+    }
+   },
+   {
+    "name": "wide-top",
+    "split": "test",
+    "expect": {
+     "*": "Math.abs(spec.aspect - 2.4) <= 0.01 && spec.area.l === 0 && spec.area.t === 0 && spec.area.r === 1 && spec.area.b === 0.6 && spec.target.l >= spec.area.l - 1e-4 && spec.target.t >= spec.area.t - 1e-4 && spec.target.r <= spec.area.r + 1e-4 && spec.target.b <= spec.area.b + 1e-4"
+    }
+   },
+   {
+    "name": "full-start",
+    "split": "test",
+    "expect": {
+     "*": "spec.area.l === 0.5 && spec.area.t === 0.45 && spec.area.r === 1 && spec.area.b === 1 && spec.target.l >= spec.area.l - 1e-4 && spec.target.t >= spec.area.t - 1e-4 && spec.target.r <= spec.area.r + 1e-4 && spec.target.b <= spec.area.b + 1e-4 && (spec.scenario === 'marquee' ? !spec.startBox : spec.startBox.l === 0 && spec.startBox.t === 0 && spec.startBox.r === 1 && spec.startBox.b === 1 && (spec.startMode !== 'off' || spec.judge || spec.keyRoute || spec.level === 'easy' || 1 - env.taskDef.helpers.iou(spec.startBox, spec.target) <= 3 * (1 - spec.threshold) || (Math.abs(model.l) < 5e-3 && Math.abs(model.t) < 5e-3 && Math.abs(model.r - 1) < 5e-3 && Math.abs(model.b - 1) < 5e-3)))"
+    }
+   },
+   {
+    "name": "center-start",
+    "split": "test",
+    "expect": {
+     "*": "spec.aspect >= 0.99 && spec.aspect <= 1.41 && spec.area.l === 0.2 && spec.area.t === 0.2 && spec.area.r === 0.8 && spec.area.b === 0.8 && spec.target.l >= spec.area.l - 1e-4 && spec.target.t >= spec.area.t - 1e-4 && spec.target.r <= spec.area.r + 1e-4 && spec.target.b <= spec.area.b + 1e-4 && spec.startBox.l === 0.15 && spec.startBox.t === 0.15 && spec.startBox.r === 0.85 && spec.startBox.b === 0.85 && (spec.startMode !== 'off' || spec.judge || spec.keyRoute || spec.level === 'easy' || 1 - env.taskDef.helpers.iou(spec.startBox, spec.target) <= 3 * (1 - spec.threshold) || (Math.abs(model.l - 0.15) < 5e-3 && Math.abs(model.t - 0.15) < 5e-3 && Math.abs(model.r - 0.85) < 5e-3 && Math.abs(model.b - 0.85) < 5e-3))"
+    }
+   }
+  ],
+  "draw-shape": [
+   {
+    "name": "guides",
+    "split": "test",
+    "expect": {
+     "trace": "spec.guide === 'wave'",
+     "circle": "spec.rimDot === true"
+    }
+   },
+   {
+    "name": "narrow-left",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.h === 1 && spec.board.w >= 0.8 && spec.board.w <= 1.1 && (['connect', 'erase'].includes(spec.scenario) ? !spec.area : spec.area.x === 0 && spec.area.y === 0 && spec.area.w === 0.64 && spec.area.h === 1 && (A => env.taskDef.helpers.figurePts(spec).every(p => p[0] >= A.x - 1e-3 && p[0] <= A.x + A.w + 1e-3 && p[1] >= A.y - 1e-3 && p[1] <= A.y + A.h + 1e-3))(spec.area))"
+    }
+   },
+   {
+    "name": "wide-bottom",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 2.4 && spec.board.h === 1 && spec.area.x === 0 && spec.area.y === 0.4 && spec.area.w === 2.4 && spec.area.h === 0.6 && (A => env.taskDef.helpers.figurePts(spec).every(p => p[0] >= A.x - 1e-3 && p[0] <= A.x + A.w + 1e-3 && p[1] >= A.y - 1e-3 && p[1] <= A.y + A.h + 1e-3))(spec.area)"
+    }
+   },
+   {
+    "name": "square-center",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 1 && spec.area.x === 0.18 && spec.area.y === 0.2 && spec.area.w === 0.64 && spec.area.h === 0.6 && (A => env.taskDef.helpers.figurePts(spec).every(p => p[0] >= A.x - 1e-3 && p[0] <= A.x + A.w + 1e-3 && p[1] >= A.y - 1e-3 && p[1] <= A.y + A.h + 1e-3))(spec.area)",
+     "line": "spec.mode !== 'through' || spec.reach === 0.2"
+    }
+   },
+   {
+    "name": "panel-rect",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w === 2 && (['connect', 'erase'].includes(spec.scenario) ? !spec.area : spec.area.x === 1 && spec.area.y === 0.05 && spec.area.w === 0.9 && spec.area.h === 0.7 && (A => env.taskDef.helpers.figurePts(spec).every(p => p[0] >= A.x - 1e-3 && p[0] <= A.x + A.w + 1e-3 && p[1] >= A.y - 1e-3 && p[1] <= A.y + A.h + 1e-3))(spec.area))"
+    }
+   },
+   {
+    "name": "atlas-right",
+    "split": "test",
+    "expect": {
+     "*": "spec.board.w >= 1.2 && spec.board.w <= 1.6 && Math.abs(spec.area.x - 0.45 * spec.board.w) < 1e-3 && Math.abs(spec.area.x + spec.area.w - spec.board.w) < 1e-3 && spec.area.y === 0 && spec.area.h === 1 && (A => env.taskDef.helpers.figurePts(spec).every(p => p[0] >= A.x - 1e-3 && p[0] <= A.x + A.w + 1e-3 && p[1] >= A.y - 1e-3 && p[1] <= A.y + A.h + 1e-3))(spec.area)"
+    }
+   }
+  ],
+  "set-date": [
+   {
+    "name": "split-cals",
+    "split": "test",
+    "expect": {
+     "*": "spec.splitCals === true"
+    }
+   },
+   {
+    "name": "range-inline",
+    "split": "test",
+    "expect": {
+     "*": "spec.inline === true"
+    }
+   },
+   {
+    "name": "time-dropdowns",
+    "split": "test",
+    "expect": {
+     "*": "spec.control === 'dropdowns'"
+    }
+   },
+   {
+    "name": "typed-either",
+    "split": "test",
+    "expect": {
+     "*": "!!spec.longForm"
+    }
+   },
+   {
+    "name": "scene-rows",
+    "split": "test",
+    "expect": {
+     "*": "spec.scene.extra.length >= 8 && new Set(spec.scene.extra.map((x) => x[0])).size === spec.scene.extra.length"
+    }
+   }
+  ],
+  "fill-form": [
+   {
+    "name": "no-tabs",
+    "split": "test",
+    "expect": {
+     "*": "spec.layout.tabs === false"
+    }
+   }
+  ],
+  "choose-option": [
+   {
+    "name": "grid-topics",
+    "split": "test",
+    "expect": {
+     "*": "spec.category === 'topic' && (spec.level ? spec.options.length <= 15 : spec.options.length === 15)"
+    }
+   }
+  ],
+  "select-text": [
+   {
+    "name": "empty-start",
+    "split": "test",
+    "expect": {
+     "*": "spec.emptyStart === true"
+    }
+   }
+  ],
+  "reorder-items": [
+   {
+    "name": "staging",
+    "split": "test",
+    "expect": {
+     "*": "spec.staging === 'staging'"
+    }
+   },
+   {
+    "name": "board-size",
+    "split": "test",
+    "expect": {
+     "*": "spec.columns.length === 2"
+    }
+   }
+  ],
+  "resize-element": [
+   {
+    "name": "geometry",
+    "split": "test",
+    "expect": {
+     "*": "!!spec.startSize && spec.startSize.h > spec.startSize.w"
+    }
+   }
+  ],
+  "rotate-object": [
+   {
+    "name": "ell-match",
+    "split": "test",
+    "expect": {
+     "*": "spec.shape === 'ell' && spec.mode === 'match'"
+    }
+   },
+   {
+    "name": "hub-grip",
+    "split": "test",
+    "expect": {
+     "*": "spec.grip === 'hub'"
+    }
+   }
+  ],
+  "solve-puzzle": [
+   {
+    "name": "generate-initial",
+    "split": "test",
+    "expect": {
+     "*": "spec.initial !== undefined"
+    }
+   }
+  ],
+  "act-in-time": [
+   {
+    "name": "moving-triangles",
+    "split": "test",
+    "expect": {
+     "*": "(episode.level && episode.level !== 'normal' ? spec.items.length <= 9 : spec.items.length === 9) && spec.items.every((i) => ['circle', 'square', 'triangle'].includes(i.shape))"
+    }
+   },
+   {
+    "name": "vertical",
+    "split": "test",
+    "expect": {
+     "chase": "spec.orient === 'vertical' && spec.cx === 0.5 && spec.cy === spec.A / 2",
+     "moving": "spec.orient === 'vertical' && spec.lanes.every((l) => l.y === undefined && l.x > 0 && l.x < 1)"
+    }
+   },
+   {
+    "name": "countdown-hold",
+    "split": "test",
+    "expect": {
+     "*": "spec.hold >= 18000"
+    }
+   }
+  ],
+  "align-layout": [
+   {
+    "name": "grid10",
+    "split": "test",
+    "expect": {
+     "*": "spec.cell === 10",
+     "spacing": "spec.cell === 10 && spec.noOverlap === true",
+     "mockup": "spec.cell === 10 && spec.noOverlap === true"
+    }
+   }
+  ]
+ }
+}

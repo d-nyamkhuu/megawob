@@ -1,0 +1,60 @@
+// Design on templates/site/app-email-unread-04.js: only what this site changed.
+(function () {
+  'use strict';
+  env.site({
+    name: 'design-use-email-attachment-05',
+    styles: ['site.css'],
+    scripts: [],
+    template: 'site/use-email-unread-04',
+    design: {
+      C: {
+        'style': 'platinum',
+        'brand': 'File   Edit   View   Go   Message   Window   Help',
+        'nav': '',
+        'bg': '#fff',
+        'surface': '#f4f4f4',
+        'fg': '#111',
+        'line': '#aeb1b5',
+        'title': 'repeating-linear-gradient(0deg,#f5f5f5 0 2px,#c7c9cc 2px 3px,#f7f7f7 3px 5px)',
+        'control': 'linear-gradient(#fff,#d7d7d7)',
+        'accent': '#7ca9ed',
+        'accentfg': '#111',
+        'sel': '#7fa9e8',
+        'selfg': '#111',
+        'font': 'Arial, Helvetica, sans-serif',
+        'note': 'left:2%;top:11%;width:26%',
+        'end': 'right:2%;bottom:2%',
+        'geo': {
+          'folders': 'left:2%;top:6%;width:24%;height:35%',
+          'ledger': 'left:14%;top:14%;width:56%;height:58%',
+          'document': 'right:2%;top:58%;width:32%;height:39%',
+          'editor': 'right:2%;top:50%;width:36%;height:47%',
+          'contacts': 'display:none',
+        },
+        'site': 'design-use-email-attachment-05',
+        'scenario': 'attachment',
+        'platform': 'desktop',
+        'account': 'Mon Apr 14  10:24 AM',
+        'noteTitle': 'Task',
+        'folderLabels': {
+          'sent': 'Sent',
+          'drafts': 'Drafts',
+          'junk': 'Junk',
+          'spam': 'Spam',
+          'templates': 'Templates',
+          'compose': 'Compose',
+        },
+        'folderList': ['inbox', 'sent', 'drafts', 'archive', 'trash'],
+        'rowHeight': 40,
+        'stack': false,
+        'dock': [],
+      },
+      parts: {
+        'frame.7': () => () => {},
+        'frame.8': () => () => {},
+        'frame.9': () => () => {},
+        'frame.10': () => () => {},
+      },
+    },
+  });
+})();

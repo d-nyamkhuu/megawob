@@ -1,0 +1,42 @@
+@import url("../../templates/site/css/solve-puzzle-tictactoe-886ad6.css");
+
+
+/* Soft neumorphic, full-bleed tic-tac-toe reference. */
+html,body{background:#eaf0f7;color:#303744}
+body.soft-board{--bg:#eaf0f7;--panel:#edf2f8;--fg:#303744;--line:#d8e0ea;--accent:#3785f7;font-family:Arial,"Segoe UI",sans-serif}
+.soft-board .app{height:100dvh;padding:15px 17px 17px;gap:12px;grid-template-rows:minmax(0,1fr) 47px;background:radial-gradient(ellipse at 50% 46%,#f3f7fb 0%,#eaf0f7 74%)}
+.soft-board .center{grid-row:1;display:grid;grid-template-rows:49px minmax(0,1fr);gap:30px;min-height:0}
+.soft-board .brief{max-height:none;min-height:49px;overflow:hidden;padding:7px 28px;border-radius:17px;background:#eef3f9;box-shadow:7px 7px 16px #cbd3dd8c,-7px -7px 16px #fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(18px,1.65vw,29px);line-height:1.18;font-weight:700;color:#303744}
+.soft-board.instruction-hidden .brief{visibility:visible}
+.soft-board .stage{min-height:0;overflow:visible;display:flex;align-items:center;justify-content:center}
+.soft-board .content{position:relative;inset:auto;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:0}
+.soft-board .scene{position:relative;flex:none;width:100%;height:100%;min-height:0;display:flex;justify-content:center;align-items:center}
+.soft-board .ttt{width:min(48vw,84vh);height:min(48vw,84vh);max-height:none;aspect-ratio:1;border:0;gap:22px;background:transparent}
+.soft-board .ttt-cell{min-width:0;min-height:0;aspect-ratio:1;border:0;border-radius:25px;background:#eaf0f7;box-shadow:inset 8px 8px 15px #cbd2dcaa,inset -8px -8px 15px #fff;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:clamp(70px,8.7vw,150px);font-weight:700;line-height:1;color:#3785f7}
+.soft-board .ttt-cell:not(.o){color:#3785f7}
+.soft-board .ttt-cell.o{color:#34383d}
+.soft-board .ttt-cell:hover:empty{box-shadow:inset 5px 5px 10px #cbd2dcaa,inset -5px -5px 10px #fff,0 0 0 2px #d9e2ee}
+.soft-board .content>.scene+div{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);font-size:0;line-height:1}
+.soft-board .bottom{grid-row:2;min-height:47px;justify-content:space-between;gap:12px;padding:0}
+.soft-board .submit,.soft-board .reference-reset{min-width:117px;height:47px;padding:0 26px;border:0;border-radius:15px;background:#edf2f8;color:#596476;box-shadow:5px 5px 11px #ccd4df,-5px -5px 11px #fff;font-size:17px;font-weight:700}
+.soft-board .submit{min-width:149px;background:#3785f7;color:#fff;box-shadow:4px 5px 10px #b8c6d9, -3px -3px 9px #fff}
+.soft-board .submit:hover,.soft-board .reference-reset:hover{filter:brightness(1.025)}
+.soft-board .reference-reset{order:-1;margin:0 auto 0 0;border-radius:15px}
+.soft-board .ttt-cell:focus-visible,.soft-board .submit:focus-visible,.soft-board .reference-reset:focus-visible{outline:3px solid #3785f7;outline-offset:4px}
+.soft-board .overlay{background:#edf2f8;border:0;border-radius:18px;box-shadow:12px 12px 24px #bec7d3,-8px -8px 20px #fff}
+@media(max-width:700px){.soft-board .center{grid-template-rows:auto minmax(0,1fr);gap:16px}.soft-board .brief{min-height:49px;padding:6px 12px}.soft-board .ttt{width:min(78vw,67vh);height:min(78vw,67vh);gap:12px}.soft-board .ttt-cell{border-radius:18px;font-size:clamp(58px,14vw,110px)}}
+@media(max-height:700px){.soft-board .center{grid-template-rows:43px minmax(0,1fr);gap:14px}.soft-board .brief{min-height:43px}.soft-board .app{grid-template-rows:minmax(0,1fr) 42px;padding-top:12px;padding-bottom:12px}.soft-board .bottom{min-height:42px}.soft-board .submit,.soft-board .reference-reset{height:42px}.soft-board .ttt{width:min(48vw,80vh);height:min(48vw,80vh);gap:15px}}
+.soft-board .center{grid-template-rows:auto minmax(0,1fr)}
+.soft-board .brief{height:auto;min-height:49px;max-height:112px;overflow:visible}
+.soft-board.instruction-hidden .center{grid-template-rows:minmax(0,1fr);gap:0}
+.soft-board.instruction-hidden .brief{display:none}
+.soft-board .instruction-panel,.soft-board .instruction-toast{position:relative;z-index:1;min-height:49px;max-height:112px;overflow:auto;padding:10px 22px;border-radius:15px;background:#edf2f8;color:#303744;box-shadow:inset 5px 5px 10px #cbd3dd88,inset -5px -5px 10px #fff;font-size:clamp(16px,1.45vw,24px);font-weight:600;line-height:1.25;text-align:center}
+.soft-board .instruction-toast{justify-self:center;width:min(760px,94%);min-height:42px;max-height:90px;padding:9px 20px;border-radius:14px;box-shadow:5px 5px 12px #cbd3ddaa,-5px -5px 12px #fff}
+.soft-board .header-submit{position:absolute;z-index:2;right:0;top:1px;min-width:130px;height:47px;padding:0 20px}
+.soft-board.instruction-header .brief{padding-left:155px;padding-right:155px}
+.soft-board .end-link{align-self:center;margin-left:auto;padding:8px 16px;color:#347ce5;font-size:17px;font-weight:700;text-decoration:none;white-space:nowrap}
+.soft-board .chrome-xtra{height:38px;padding:0 14px;border:0;border-radius:13px;background:#edf2f8;color:#687486;box-shadow:inset 3px 3px 7px #cbd3dd88,inset -3px -3px 7px #fff;font-size:14px;font-weight:700;white-space:nowrap}
+.soft-board .bottom{justify-content:flex-end}
+.soft-board .bottom>.chrome-xtra{margin-right:2px}
+@media(max-width:700px){.soft-board.instruction-header .brief{padding-left:12px;padding-right:12px}.soft-board .header-submit{min-width:90px;padding:0 10px;font-size:14px}.soft-board .instruction-panel,.soft-board .instruction-toast{font-size:15px;padding:8px 12px}}
+@media(max-height:700px){.soft-board .instruction-panel,.soft-board .instruction-toast{min-height:43px;padding-top:7px;padding-bottom:7px}.soft-board .header-submit{height:42px}.soft-board .chrome-xtra{height:36px}}

@@ -1,0 +1,320 @@
+@import url("design-179c67.css");
+
+.ref-ov-banner {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: ref-spin .8s linear infinite;
+}
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+/* World History Encyclopedia: 1997 CD-ROM companion site */
+body {
+  background: #102747;
+  color: #211b14;
+  font: 16px/1.42 Georgia, "Times New Roman", serif;
+  user-select: text;
+  -webkit-user-select: text;
+  touch-action: auto;
+}
+.ref-task {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 68px 49px;
+  gap: 0;
+  min-height: 117px;
+  padding: 0;
+  border: 0;
+  border-bottom: 3px ridge #c6a65c;
+  background: linear-gradient(100deg, #071b37, #173b68 46%, #071b37);
+  box-shadow: 0 3px 8px #06162c99;
+  color: #f5e7bd;
+}
+.ref-brand {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  padding: 0 20px 0 137px;
+  color: #f1d38a;
+  font: small-caps 36px/1 Georgia, "Times New Roman", serif;
+  letter-spacing: .025em;
+  text-shadow: 1px 2px 2px #000, 0 0 8px #d4af5a66;
+  white-space: nowrap;
+}
+.ref-brand::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 3px;
+  width: 96px;
+  height: 112px;
+  border: 4px double #d0ae62;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 35%, #a5c6b0 0 8%, #235f77 18%, #102b50 55%, #07172c 72%);
+  box-shadow: inset 0 0 10px #d5c080, 0 2px 8px #000;
+}
+.ref-brand::after {
+  content: "✦";
+  position: absolute;
+  left: 55px;
+  top: 0;
+  color: #f4d77f;
+  font: 24px Georgia, serif;
+  text-shadow: 0 0 6px #ffd86b;
+}
+.ref-task::after {
+  content: "Search the Encyclopedia     Search";
+  position: absolute;
+  top: 16px;
+  right: 244px;
+  width: 264px;
+  height: 32px;
+  padding: 5px 10px;
+  border: 2px inset #b6aa82;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #e9e3d1 0 78%, #1d3859 78%);
+  color: #372d1e;
+  font: 14px Georgia, serif;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #071a32;
+}
+.ref-nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+  border-top: 1px solid #d0b06c;
+  background: linear-gradient(#650d17, #39070e 55%, #25060a);
+}
+.ref-navlink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 118px;
+  padding: 0 17px;
+  border-right: 1px solid #9d744a;
+  color: #f2e1b5;
+  font: 16px Georgia, "Times New Roman", serif;
+  text-decoration: none;
+  white-space: nowrap;
+  text-shadow: 1px 1px #180407;
+}
+.ref-navlink:first-child { border-left: 1px solid #9d744a; }
+.ref-navlink:nth-child(1)::before { content: "⌂"; }
+.ref-navlink:nth-child(2)::before { content: "▤"; }
+.ref-navlink:nth-child(3)::before { content: "▧"; }
+.ref-navlink:nth-child(4)::before { content: "⌛"; }
+.ref-navlink:nth-child(5)::before { content: "♟"; }
+.ref-navlink:nth-child(6)::before { content: "▰"; }
+.ref-navlink:nth-child(7)::before { content: "▣"; }
+.ref-navlink:nth-child(8)::before { content: "◉"; }
+.ref-navlink::before { margin-right: 11px; color: #e9c66f; font-size: 23px; }
+.ref-navlink:hover { background: linear-gradient(#183d70, #0a2449); color: #fff0bd; }
+.ref-tools {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  margin-right: 24px;
+  gap: 8px;
+}
+.ref-task > .ref-spacer { display: none; }
+.ref-instruction {
+  position: absolute;
+  z-index: 2;
+  left: 140px;
+  right: 245px;
+  bottom: 49px;
+  max-height: 42px;
+  overflow: hidden;
+  color: #f8e8b9;
+  font: bold 13px/1.25 Georgia, serif;
+  text-shadow: 1px 1px #000;
+}
+.ref-task:has(.ref-instruction) { grid-template-rows: 68px 42px 49px; min-height: 159px; }
+.ref-task:has(.ref-instruction) .ref-nav { grid-row: 3; }
+.ref-submit, .ref-xtra {
+  padding: 7px 13px;
+  border: 2px outset #d9bd7b;
+  border-radius: 3px;
+  background: linear-gradient(#25466d, #102748);
+  color: #fff0c4;
+  font: bold 14px Georgia, serif;
+  box-shadow: inset 0 0 0 1px #091a31;
+}
+.ref-icon { width: 38px; height: 34px; border-radius: 3px; }
+.ref-endlink { color: #f5d984; font: bold 15px Georgia, serif; }
+.ref-body {
+  position: relative;
+  display: block;
+  min-height: 0;
+  padding: 12px 12px 24px;
+  background: radial-gradient(ellipse at center, #1b426f, #0b2345 75%);
+}
+.ref-stage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: calc(100vh - 130px);
+  padding: 0 0 20px 194px;
+  background: transparent;
+}
+.ref-stage > * {
+  width: min(1430px, calc(100% - 20px)) !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 28px 36px !important;
+  border: 7px ridge #b49a61 !important;
+  border-radius: 9px !important;
+  background-color: #f4eedc !important;
+  background-image: linear-gradient(110deg, #fff9e9, #eee5cd 48%, #faf4e4) !important;
+  box-shadow: 0 4px 16px #030d1caa, inset 0 0 0 2px #d6c9a5 !important;
+  color: #201a13 !important;
+  font: 21px/1.45 Georgia, "Times New Roman", serif !important;
+}
+.ref-body::before {
+  content: "Discover\A the People,\A Places and\A Events that\A Shaped\A Our World";
+  white-space: pre-line;
+  position: absolute;
+  z-index: 1;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 170px;
+  padding: 245px 22px 24px;
+  border-right: 5px ridge #b69a5b;
+  background:
+    radial-gradient(circle 84px at 50% 170px, #c2bd91 0 5%, #6b9aa0 6% 10%, #23516c 11% 20%, #0b2444 21% 27%, #5d492e 28% 30%, transparent 31%),
+    linear-gradient(180deg, #152e50 0%, #092044 48%, #263d56 100%);
+  color: #f1d36f;
+  font: 25px/1.2 Georgia, "Times New Roman", serif;
+  text-shadow: 1px 2px #000;
+  box-shadow: inset -4px 0 12px #020d1f;
+}
+.ref-stage p, .ref-stage li {
+  font: 21px/1.42 Georgia, "Times New Roman", serif !important;
+}
+.ref-stage aside {
+  border: 2px ridge #c2ac72 !important;
+  background: linear-gradient(#f9f2dd, #ede3c9) !important;
+  color: #302516 !important;
+  box-shadow: 0 2px 7px #5c492322;
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+.ref-stage h1, .ref-stage h2, .ref-stage h3 {
+  color: #654516 !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+.ref-stage h1 { font-size: clamp(28px, 3vw, 42px) !important; }
+.ref-stage h2 { font-size: 27px !important; }
+.ref-stage a { color: #0645ad !important; }
+.ref-side, .ref-panel {
+  border: 2px ridge #bda76d;
+  border-radius: 3px;
+  background: #f4ecd6;
+  color: #241d13;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.ref-panel-title { color: #674a1c; font: bold 19px Georgia, serif; }
+.ref-panel-text { font: 16px/1.4 Georgia, serif; }
+.ref-foot {
+  position: fixed;
+  z-index: 40;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 48px;
+  padding: 7px 24px;
+  border-top: 2px ridge #b9a16a;
+  background: linear-gradient(#e9dfc4, #d8c99f);
+  color: #4b3b1f;
+  font: 14px Georgia, serif;
+}
+.ref-note {
+  left: 24px; bottom: 16px;
+  border: 2px ridge #c2a768;
+  border-radius: 3px;
+  background: #f5ecd2;
+  color: #2e2414;
+  font: 15px/1.35 Georgia, serif;
+  box-shadow: 0 5px 15px #0007;
+}
+.ref-float-dock {
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  pointer-events: none;
+}
+.ref-float { bottom: 60px; pointer-events: auto; }
+.ref-ov { font-family: Georgia, "Times New Roman", serif; }
+.ref-ov-cookie, .ref-ov-toast, .ref-ov-chat, .ref-ov-box, .ref-ov-banner {
+  border: 2px ridge #bda66c;
+  border-radius: 3px;
+  background-color: #f3ecd8;
+  color: #241d13;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.ref-ov-btn { border-radius: 2px; font-family: Georgia, serif; }
+.ref-ov-cookie { bottom: 52px; }
+.ref-ov-chat { bottom: 64px; }
+.ref-ov-promo { inset: 159px 0 56px; }
+.ref-ov-banner { top: 117px; }
+body:has(.ref-instruction) .ref-ov-banner { top: 159px; }

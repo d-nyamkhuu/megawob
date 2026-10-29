@@ -1,0 +1,128 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);font-size:15px;color:#000;background:repeating-linear-gradient(135deg,#5e5e5f 0 1px,#747475 1px 2px,#878788 2px 6px)}
+body.gem{font-family:monospace}
+body.gem .as-app,body.gem .gem-prev{font-family:monospace}
+button,input{font-family:inherit}button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px dotted #000;outline-offset:2px}
+[hidden]{display:none!important}
+.gem-menubar{position:absolute;left:0;right:0;top:0;height:3.2%;min-height:22px;background:#e3e3e3;border-bottom:2px solid #000;display:flex;align-items:center;gap:26px;padding:0 26px;font-size:clamp(12px,1.2vw,20px);font-weight:700;letter-spacing:-.05em;z-index:5}
+.gem-clock{margin-left:auto;font-weight:400;font-size:clamp(11px,1.08vw,18px);white-space:nowrap;letter-spacing:-.04em}
+.gem-win{position:absolute;left:1%;top:4.7%;width:76.4%;height:66.6%;background:#d7d7d7;border:3px solid #000;box-shadow:inset 0 0 0 2px #fff,1px 1px 0 #000;display:grid;grid-template-columns:minmax(0,1fr) 10.6%;grid-template-rows:clamp(24px,2.15vw,36px) auto minmax(0,1fr);z-index:2}
+.gem-win::before{content:'';position:absolute;left:5px;right:10.6%;top:42px;bottom:5px;border:1px solid #555;box-shadow:0 0 0 2px #fff;background:#fcfcfc;pointer-events:none}
+.gem-title{grid-column:1/-1;grid-row:1;display:flex;align-items:center;gap:12px;padding:0 6px;background:radial-gradient(#808080 .55px,transparent .7px) 0 0/3px 3px,#c0c0c0;border-bottom:3px double #000;font-weight:700;font-size:clamp(14px,1.4vw,24px);letter-spacing:-.035em;min-height:0}
+.gem-title .gem-ttext{padding:0 10px;margin-right:auto;border:0}
+.gem-ticon{background:#fff;border:1px solid #000;width:26px;height:26px;display:flex;flex:none}.gem-ticon svg{width:100%;height:100%}
+.gem-tctl{display:flex;gap:6px}.gem-tctl i{position:relative;width:30px;height:28px;border:3px double #000;background:#eee;display:block}
+.gem-tctl i::before,.gem-tctl i::after{content:'';position:absolute;display:block}
+.gem-min::before{height:2px;left:5px;right:5px;bottom:4px;background:#000}
+.gem-max::before{inset:3px;border:2px solid #000}
+.gem-close::before,.gem-close::after{width:19px;height:2px;background:#000;left:2px;top:10px;transform:rotate(45deg)}
+.gem-close::after{transform:rotate(-45deg)}
+.task-note{grid-column:1;grid-row:2;margin:16px 10px 0 16px;padding:8px 22px;background:#fcfcfc;border:2px solid #000;display:flex;align-items:center;gap:40px;min-height:clamp(60px,9.2vh,86px);position:relative}
+.gem-nicon svg{width:clamp(30px,3.2vw,52px);height:clamp(30px,3.2vw,52px);display:block}
+.gem-task{margin:0;font-weight:700;font-size:clamp(17px,1.95vw,32px);line-height:1.25;letter-spacing:-.035em}
+.instruction-hidden .task-note{display:none}
+.instruction-panel .task-note{position:absolute;left:78.5%;top:4.7%;width:20.5%;max-height:50%;margin:0;padding:16px;display:block;overflow:hidden;box-shadow:inset 0 0 0 2px #fff,2px 2px #000}
+.instruction-panel .gem-nicon{display:block;margin-bottom:12px}
+.instruction-panel .gem-task{font-size:clamp(15px,1.25vw,21px);overflow-wrap:anywhere}
+.instruction-toast .task-note{position:absolute;left:1%;top:74%;width:65%;max-height:19%;margin:0;padding:10px 16px;gap:20px;overflow:hidden;box-shadow:2px 2px #000}
+.instruction-toast .gem-task{font-size:clamp(15px,1.35vw,23px);overflow-wrap:anywhere}
+.gem-task{overflow-wrap:anywhere}
+.stage{grid-column:1;grid-row:3;position:relative;margin:10px 10px 12px 16px;min-height:0;min-width:0;overflow:hidden}
+.gem-strip{grid-column:2;grid-row:2/4;display:flex;flex-direction:column;gap:9px;padding:10px 7px;min-width:0;overflow:hidden;letter-spacing:-.1em;border-left:1px solid #777}
+.gem-tool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 0;border:2px solid transparent;font-size:clamp(11px,1.2vw,20px);height:clamp(51px,8.1vh,76px);min-height:0;flex:none}
+.gem-tool svg{width:clamp(24px,2.4vw,40px);height:clamp(24px,2.4vw,40px);flex:none}
+.gem-tool span{letter-spacing:-.065em}
+.gem-tool.on{border-color:#000;background:radial-gradient(#555 .55px,transparent .7px) 0 0/3px 3px,#c5c5c5}
+.gem-prev{position:absolute;left:69.5%;top:58.9%;width:29.6%;height:35.2%;background:#d7d7d7;border:3px solid #000;box-shadow:inset 0 0 0 2px #fff,1px 1px 0 #000;z-index:20;display:flex;flex-direction:column}
+.gem-title.small{grid-column:auto;height:clamp(24px,3vw,32px);flex:none;font-size:clamp(12px,1.2vw,20px);gap:4px}
+.gem-title.small .gem-tctl{gap:20px}
+.gem-title.small .gem-ttext{margin-right:auto}
+.gem-pbody{flex:1;min-height:0;margin:6px;background:#fbfcfb;border:2px solid #000;padding:22px 20px 6px;display:flex;flex-direction:column;font-size:clamp(11px,1.05vw,18px);letter-spacing:-.06em}
+.gem-phead{display:flex;gap:30px;border-bottom:1px solid #000;padding-bottom:15px;flex:none;align-items:flex-start}
+.gem-bigicon{width:clamp(48px,5.65vw,95px);height:clamp(48px,5.65vw,95px);background:#111;border-radius:12px;position:relative;flex:none}
+.gem-bigicon i{position:absolute;width:20%;height:20%;background:#fff}
+.gem-bigicon i:nth-child(1){left:38%;top:20%}.gem-bigicon i:nth-child(2){left:22%;top:56%}.gem-bigicon i:nth-child(3){left:56%;top:56%}
+.gem-pinfo{display:flex;flex-direction:column;gap:2px;min-width:0}.gem-pinfo b{font-size:clamp(13px,1.3vw,22px);margin-bottom:4px}.gem-preview-name,.gem-preview-host,.gem-preview-path{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gem-preview-date{margin-top:4px}
+.gem-preview-path{min-height:1.2em}
+.gem-pdesc{margin:8px 0 0;line-height:1.35;flex:1;min-height:0;overflow:hidden}
+.gem-pbtns{display:flex;gap:12px;flex:none;margin-top:4px;margin-left:-10px;margin-right:-10px}.gem-pbtns button{white-space:nowrap}.gem-pbtns .gem-add-library{flex:1.25}.gem-pbtns .end-control{margin-left:12px}
+.gem-pbtns button,.end-control{flex:1;height:clamp(24px,2.7vw,42px);border:2px solid #000;border-radius:0;background:#d7d7d7;color:#000;font-size:clamp(11px,1.08vw,18px);letter-spacing:-.06em;box-shadow:inset -2px -2px 0 #999,inset 2px 2px 0 #fff;padding:0 4px}
+.end-control{font-weight:700;border-width:3px;background:#f2f2f2;min-width:0}
+.gem-title>.end-control,.gem-xtra{flex:none;height:calc(100% - 4px);min-width:70px;max-width:160px;padding:0 12px;font-family:inherit;font-size:clamp(11px,1.05vw,17px);letter-spacing:-.06em;white-space:nowrap;border:2px solid #000;background:#dedede;box-shadow:inset -2px -2px #999,inset 2px 2px #fff}
+.gem-tray>.end-control{flex:none;margin-left:auto;min-width:100px;height:calc(100% - 2px);padding:0 14px}
+.gem-tray{position:absolute;left:0;right:0;bottom:0;height:4.4%;min-height:26px;box-sizing:border-box;overflow:hidden;background:radial-gradient(#939393 .5px,transparent .7px) 0 0/3px 3px,#c9c9c9;border-top:2px solid #000;display:flex;align-items:center;gap:10px;padding:0 6px;z-index:5}
+.gem-tbtn{border:3px double #000;background:#d7d7d7;padding:0 24px;font-size:clamp(12px,1.2vw,20px);font-weight:700;min-width:8.6vw;height:100%;min-height:0;display:flex;align-items:center;justify-content:center}.gem-tico{width:26px;height:min(26px,100%);flex:none;display:flex;align-items:center}.gem-tico svg{width:100%;height:100%;display:block}
+/* ledger */
+body.gem .as-app{border:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;left:0!important;top:0!important;bottom:0!important;width:100%!important}
+body.gem .as-top{display:none!important}
+body.gem .se-main{padding:0!important;gap:0;display:block;position:absolute;inset:0}
+body.gem .se-col{max-width:none;height:100%;display:flex;flex-direction:column}
+body.gem .se-side{display:none}
+body.gem .se-bar{gap:10px;padding:8px 18px 14px 14px}
+body.gem .se-bar::before{content:'Search:';font-weight:700;font-size:clamp(13px,1.32vw,22px);padding:0 6px;letter-spacing:-.05em}
+body.gem .se-box{height:clamp(30px,2.5vw,42px);border-radius:0;border:2px solid #000;background:#fcfcfc;box-shadow:none;padding:0 10px}
+body.gem .se-box svg{display:none}
+body.gem .se-input{font-size:clamp(13px,1.35vw,21px);color:#000;font-family:inherit}
+body.gem .se-go{height:clamp(30px,2.5vw,42px);border-radius:0;border:2px solid #000;background:#d7d7d7;color:#000;font-weight:700;font-size:clamp(13px,1.3vw,20px);box-shadow:inset -2px -2px 0 #999,inset 2px 2px #fff;padding:0;width:14.8%;min-width:96px;flex:none}
+body.gem .se-meta{display:none}
+body.gem .se-head{flex:none;display:grid;grid-template-columns:5.3% 33.9% 22.5% 21% 17.3%;height:clamp(28px,2.65vw,44px);align-items:center;background:radial-gradient(#999 .5px,transparent .7px) 0 0/3px 3px,#e4e4e4;border:2px solid #000;border-bottom:0;font-size:clamp(12px,1.2vw,20px);padding-right:26px;position:relative}
+body.gem .se-head::after{content:'';position:absolute;right:0;top:0;bottom:0;width:26px;border-left:3px double #000}
+body.gem .se-head b{padding:0 16px;border-right:2px solid #000;height:60%;display:flex;align-items:center}
+body.gem .se-head b{font-weight:400}body.gem .se-head b:nth-child(2){font-weight:700}
+body.gem .se-head b:last-child{border-right:0}
+body.gem .gem-ledger-pane{flex:1;min-height:0;position:relative;border:2px solid #000;background:#fbfcfb;overflow:hidden}
+body.gem .se-list{height:100%;min-height:0;overflow-y:auto;background:#fbfcfb;border:0;display:block;margin-right:26px;scrollbar-width:none}
+body.gem .se-list::-webkit-scrollbar{display:none}
+.gem-scrollrail{position:absolute;right:0;top:0;bottom:0;width:26px;display:flex;flex-direction:column;border-left:2px solid #000;background:#ccc}
+.gem-scroll-arrow{position:relative;height:26px;flex:none;padding:0;border:0;background:#eee;box-shadow:inset 1px 1px #fff,inset -1px -1px #888}
+.gem-scroll-arrow:first-child{border-bottom:2px solid #000}.gem-scroll-arrow:last-child{border-top:2px solid #000}
+.gem-scroll-arrow::after{content:'';position:absolute;left:6px;top:6px;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid #000}
+.gem-scroll-arrow:last-child::after{border-bottom:0;border-top:9px solid #000}
+.gem-scroll-track{position:relative;flex:1;min-height:0;background:repeating-linear-gradient(135deg,#8b8b8b 0 1px,#b6b6b6 1px 3px)}
+.gem-scroll-thumb{position:absolute;left:0;right:0;background:#dedede;border-top:2px solid #000;border-bottom:2px solid #000;box-shadow:inset 2px 0 #fff,inset -2px 0 #888;touch-action:none;cursor:ns-resize}
+body.gem .se-list::-webkit-scrollbar{width:26px;background:repeating-linear-gradient(135deg,#999 0 1px,#ddd 1px 3px)}
+body.gem .se-list::-webkit-scrollbar-track{border-left:2px solid #000}
+body.gem .se-list::-webkit-scrollbar-button:single-button{height:26px;background:#ddd;border:2px solid #000}
+body.gem .se-list::-webkit-scrollbar-thumb{background:#fff;border:2px solid #000}
+body.gem .se-card{height:auto!important;min-height:clamp(30px,2.55vw,43px);display:grid;grid-template-columns:5.3% 33.9% 22.5% 21% 17.3%;align-items:center;padding:0!important;font-size:clamp(12px,1.2vw,20px);border-bottom:0;letter-spacing:-.06em}
+body.gem .se-card::before{content:attr(data-n);grid-column:1;grid-row:1;padding-left:18px}
+body.gem .se-card.gem-selected{background:repeating-conic-gradient(#aaa 0 25%,#eee 0 50%) 0 0/2px 2px;outline:1px dotted #000;outline-offset:-3px}
+body.gem .gem-result-date{grid-column:5;grid-row:1;padding-left:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.gem .se-url{display:contents!important;font-size:inherit}
+body.gem .se-fav{display:none}
+body.gem .se-host{grid-column:4;grid-row:1;padding:0 16px;color:#000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.gem .se-path{grid-column:3;grid-row:1;padding:0 16px;color:#000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.gem .se-title{grid-column:2;grid-row:1;margin:0;padding:0 16px;font-size:inherit!important;line-height:1.2;color:#000;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.gem .se-title{display:flex;align-items:center;gap:30px;min-width:0}.gem-result-name{min-width:0;overflow:hidden;text-overflow:ellipsis}
+body.gem .gem-row-icon{width:30px;height:30px;flex:none;display:inline-flex}.gem-row-icon svg{width:100%;height:100%}
+body.gem .se-title:hover{text-decoration:underline}
+body.gem .se-desc{display:none}
+body.gem .se-empty{color:#333;margin:0;padding:15px 18px;text-align:left;font-size:clamp(12px,1.2vw,20px);letter-spacing:-.06em}
+body.gem .se-empty svg{display:none}
+body.gem .se-pager{margin-top:4px;min-height:0!important;gap:4px}
+body.gem .se-pager:empty{display:none}
+body.gem .se-pg{min-width:26px;height:clamp(22px,2.3vw,30px);border-radius:0;border:2px solid #000;background:#fff;color:#000;font-size:12px}
+body.gem .se-pg.on{background:#000;color:#fff}
+body.gem .se-visit{border:2px solid #000;border-radius:0;background:#fff;flex:1;min-height:0;overflow:auto}
+body.gem .se-visit.gem-preview-visit{border:0;background:transparent;flex:1;min-width:0;overflow:visible}
+body.gem .gem-preview-visit .se-vbar{border:0;background:transparent;padding:0;gap:0;overflow:visible}
+body.gem .gem-preview-visit .se-vbar>span,body.gem .gem-preview-visit .se-vpage{display:none}
+body.gem .gem-preview-visit .as-btn{width:100%;height:clamp(24px,2.7vw,42px);padding:0 4px;font-size:clamp(11px,1.08vw,18px);font-weight:400;background:#d7d7d7;border:2px solid #000;box-shadow:inset -2px -2px 0 #999,inset 2px 2px #fff}
+body.gem .as-btn{border-radius:0;border:2px solid #000;background:#e8e8e8;color:#000}
+.reference-overlay{position:fixed;z-index:1000;border:3px solid #000;background:#fff;color:#000;box-shadow:4px 4px 0 #000;max-width:calc(100vw - 40px);font-family:var(--font);font-size:15px}
+.reference-overlay h2{margin:0;padding:8px 14px;background:repeating-linear-gradient(0deg,#fff 0 1px,#000 1px 2px);border-bottom:3px solid #000;font-size:17px}
+.reference-overlay .overlay-copy{padding:14px 18px;line-height:1.4}
+.reference-overlay .overlay-actions{display:flex;justify-content:flex-end;gap:10px;padding:0 14px 12px}
+.reference-overlay button{height:32px;border:2px solid #000;background:#e8e8e8;color:#000;padding:0 14px;font-weight:700}
+.reference-overlay.cookie{left:50%;top:48%;transform:translate(-50%,-50%);width:440px}
+.reference-overlay.toast{right:25px;top:60px;width:330px}
+.reference-overlay.chat{right:24px;bottom:50px;width:300px}
+.reference-overlay.promo{left:40%;top:40%;transform:translate(-50%,-50%);width:420px}
+.reference-overlay.banner{left:20px;right:20px;top:40px}
+.reference-overlay.banner .overlay-actions{position:absolute;right:6px;top:4px}
+@media(max-width:1300px){.task-note{margin:10px 8px 0 10px;padding:8px 14px;gap:20px}.stage{margin:6px 8px 8px 10px}.gem-pbody{padding:12px 12px 6px}.gem-phead{gap:16px;padding-bottom:10px}.gem-pbtns{gap:6px;margin-left:-6px;margin-right:-6px}.gem-pbtns .end-control{margin-left:4px}.gem-pbtns button{font-size:11px;padding:0 2px}.gem-strip{gap:3px;padding:8px 4px}.gem-tctl i{width:22px;height:20px;font-size:18px;line-height:14px}.gem-ticon{width:20px;height:20px}body.gem .se-title{gap:12px}body.gem .gem-row-icon{width:23px;height:23px}}
+@media(max-width:1300px){.gem-win::before{top:calc(clamp(24px,2.15vw,36px) + 5px)}}
+@media(max-width:1300px){.gem-title.small .gem-tctl{gap:10px}.gem-close::before,.gem-close::after{width:13px;left:1px;top:6px}.gem-min::before{left:3px;right:3px;bottom:3px}.gem-max::before{inset:2px;border-width:1px}}
+@media(max-width:1300px){body.gem .gem-preview-visit .as-btn{font-size:11px}body.gem .se-head b{padding:0 8px}body.gem .se-title,body.gem .se-host,body.gem .se-path{padding-left:8px;padding-right:8px}body.gem .se-card::before{padding-left:10px}}

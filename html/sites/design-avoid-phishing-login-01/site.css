@@ -1,0 +1,443 @@
+@import url("../../templates/site/css/design-67677e.css");
+
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+
+/* Pinecrest editorial login composition */
+:root {
+  --bg: #f1eee7;
+  --panel: #fbfaf7;
+  --fg: #101b16;
+  --muted: #637068;
+  --line: #c9b995;
+  --accent: #293a2d;
+}
+body { font-family: Georgia, 'Times New Roman', serif; background:#f2efe9; color:#101b16; }
+.ref-task {
+  position:relative; z-index:5; height:14.1vh; min-height:92px; max-height:154px;
+  padding:18px 3.2%; gap:25px; background:#f7f5f0; border:0;
+  box-shadow:0 1px 0 #d9d6cf;
+}
+.ref-brand { position:relative; z-index:1; flex:none; width:360px; padding-left:102px; color:#111c16;
+  font: bold clamp(23px,2.8vw,46px)/.9 Georgia,'Times New Roman',serif; letter-spacing:.055em; }
+.ref-brand::before { content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); width:80px; height:92px;
+  background:#9b7b3e; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpath d='M49 2 43 18 31 12 38 25 24 23 36 34 16 35 33 43 8 49 31 53 4 63 34 62 15 75 39 70 29 83 45 76 42 93 50 82 59 95 56 77 73 85 62 70 86 76 68 62 96 64 70 53 92 50 67 43 84 36 64 35 76 24 60 26 68 12 56 18Z M8 103 51 94 94 104 51 113Z'/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpath d='M49 2 43 18 31 12 38 25 24 23 36 34 16 35 33 43 8 49 31 53 4 63 34 62 15 75 39 70 29 83 45 76 42 93 50 82 59 95 56 77 73 85 62 70 86 76 68 62 96 64 70 53 92 50 67 43 84 36 64 35 76 24 60 26 68 12 56 18Z M8 103 51 94 94 104 51 113Z'/%3E%3C/svg%3E") center/contain no-repeat; }
+.ref-brand-sub { display:block; margin-top:8px; color:#715c34; text-align:center; font:700 clamp(10px,1.2vw,18px)/1 Arial,sans-serif; letter-spacing:.3em; }
+.ref-task::after { content:'♢  Secure Sign In　 │　 ⓘ  Help　 │　 ☎  Contact Us'; position:absolute; right:3.2%; top:50%; transform:translateY(-50%); color:#202831; font:16px Georgia,serif; white-space:nowrap; }
+.ref-brand:not(:has(.ref-brand-sub)) { display:none; }
+.ref-task:has(.ref-instruction) .ref-instruction { position:absolute; left:29%; right:31%; top:12px; max-height:calc(100% - 20px); overflow:auto; font:15px/1.35 Georgia,serif; font-weight:400; }
+.ref-task:has(.ref-instruction) .ref-brand { align-self:flex-start; margin-top:7px; }
+.ref-nav { display:none; }
+.ref-task .ref-tools { position:absolute; right:3%; top:calc(100% + 7px); z-index:16; display:flex; }
+.ref-task .ref-xtra { padding:7px 12px; border-color:#c7b681; background:#fbfaf7; color:#293a2d; font:15px Georgia,serif; }
+.ref-body { min-height:0; position:relative; }
+.ref-side { display:none; }
+.ref-stage {
+  align-items:stretch!important; justify-content:stretch!important; overflow:hidden;
+  background-color:#d8e0e5;
+  background-image:linear-gradient(180deg,rgba(244,241,235,.48) 0%,rgba(244,241,235,.24) 38%,rgba(244,241,235,0) 70%),url('assets/pinecrest-lake.jpg');
+  background-size:cover; background-position:center 53%;
+}
+.pine-hero-copy { position:absolute; z-index:5; left:4.8%; top:8.5%; width:49%; max-width:760px; color:#101814; }
+.pine-hero-copy h1 { margin:0 0 24px; white-space:pre-line; font:clamp(38px,5.1vw,86px)/.99 Georgia,'Times New Roman',serif; letter-spacing:-.035em; }
+.pine-rule { width:96px; height:2px; margin:0 0 24px; background:#a28442; }
+.pine-hero-copy p { max-width:625px; margin:0 0 8px 3px; font:clamp(17px,1.6vw,26px)/1.3 Georgia,serif; }
+.pine-domain { margin:0 0 23px 5px; color:#40564a; font:clamp(16px,1.45vw,23px)/1.3 Georgia,serif; }
+.pine-tagline { margin-left:5px; font:700 clamp(11px,1vw,17px)/1.4 Arial,sans-serif; letter-spacing:.25em; }
+.sp-app {
+  position:absolute!important; z-index:2; right:1.7%; top:2%; width:40.6%!important; height:calc(100% - 2.8%)!important;
+  overflow:visible!important; border:0!important; border-radius:14px!important; background:transparent!important; box-shadow:none!important;
+}
+.sp-browser,.sp-top,.sp-nav,.sp-toolbar,.sp-status { display:none!important; }
+.sp-shell,.sp-work,.sp-content { display:flex; width:100%; height:100%; min-height:0; overflow:visible; background:transparent; }
+.sp-content { flex:1; }
+.sp-login:not(.pine-login-card) { display:none!important; }
+.sp-app .pine-login-card {
+  align-self:stretch; display:flex; flex-direction:column; align-items:stretch; gap:0;
+  width:100%; height:100%; margin:0; padding:clamp(25px,3vw,46px) clamp(28px,4.3vw,72px);
+  border:1px solid #d7d4ce; border-radius:14px; background:rgba(251,250,247,.97);
+  box-shadow:0 2px 5px #0002; color:#111;
+}
+.sp-app .pine-login-card h2 { margin:0; font:clamp(39px,4.2vw,66px)/1.08 Georgia,serif; }
+.pine-login-subtitle { margin:0 0 5%; font:clamp(23px,2.15vw,38px)/1.15 Georgia,serif; }
+.pine-login-rule { height:1px; margin:0 0 5%; background:#c4a86b; }
+.sp-app .sp-fields { display:flex; flex-direction:column; min-width:0; }
+.sp-app .sp-label { position:relative; width:100%; margin:0 0 24px; color:#171717; font:clamp(16px,1.25vw,22px)/1.4 Georgia,serif; font-weight:400; }
+.sp-app .sp-input { display:block; height:clamp(44px,6.1vh,60px); margin-top:7px; padding:8px 18px 8px 67px; border:1.5px solid #a8a8aa; border-radius:6px; background:#fff9; color:#222; font:clamp(15px,1.1vw,19px) Georgia,serif; }
+.sp-app .sp-label::before { position:absolute; left:18px; bottom:12px; z-index:1; color:#777c7e; font:23px Arial,sans-serif; }
+.sp-app .sp-label:first-child::before { content:'♙'; }
+.sp-app .sp-label:nth-of-type(2)::before { content:'♙'; }
+.sp-app .sp-btn.primary { width:100%; height:clamp(48px,6.5vh,62px); margin-top:3px; border:0; border-radius:6px; background:#293a2d; color:#fff; font:clamp(17px,1.4vw,24px) Georgia,serif; }
+.pine-login-links { display:flex; justify-content:space-between; margin-top:14px; color:#40564a; text-decoration:underline; font:clamp(14px,1.1vw,19px) Georgia,serif; }
+.pine-login-rule-lower { margin:5.1% 0 3%; }
+.pine-enroll { font:clamp(14px,1.1vw,19px) Georgia,serif; }
+.sp-badge { min-height:0; color:#667269; font-size:12px; }
+.ref-foot {
+  position:relative; z-index:10; flex:none; height:7.6vh; min-height:54px; max-height:76px; padding:0 2.1%;
+  border:0; background:#19271f; color:#f6f4ed; font:14px Georgia,serif;
+}
+.ref-foot-text { display:none; }
+.ref-foot > .ref-tools { position:absolute; right:30px; top:-58px; z-index:12; display:flex; }
+.ref-foot .ref-submit { padding:10px 24px; border:1px solid #bba66e; border-radius:4px; background:#293a2d; font:16px Georgia,serif; }
+.ref-foot .ref-endlink { padding:8px; color:#293a2d; }
+.pine-dock { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; height:100%; }
+.pine-dock-item { display:flex; align-items:center; gap:11px; min-width:0; padding:9px 8px; color:#f2f0e8; white-space:nowrap; font-size:clamp(10px,.9vw,15px); }
+.pine-dock-item.active { border-bottom:3px solid #b29245; }
+.pine-dock-icon { font:clamp(17px,1.6vw,28px)/1 Arial,sans-serif; }
+.pine-dock-status { display:flex; gap:17px; padding-left:20px; border-left:1px solid #8c938d; white-space:nowrap; }
+.ref-panel { z-index:8; border-color:#c8b47d; background:#fbfaf7; }
+.ref-note { z-index:30; top:142px; bottom:auto; left:50%; transform:translateX(-50%); font:16px Georgia,serif; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+.ref-float-dock { position:fixed; right:20px; bottom:82px; height:auto; z-index:20; }
+.ref-float { position:static; }
+.ref-ov { font-family:Georgia,serif; }
+.ref-ov-banner { background:#f6f0e2; color:#293a2d; border-color:#c6af74; }
+@media (max-width:1100px) {
+  .ref-brand { width:270px; padding-left:82px; font-size:27px; }
+  .ref-brand::before { width:66px; height:76px; }
+  .pine-hero-copy { top:7%; width:48%; }
+  .pine-hero-copy h1 { font-size:clamp(36px,5vw,56px); }
+  .sp-app { right:1.4%; width:43%!important; }
+  .sp-login { padding:22px 28px; }
+  .sp-label { margin-bottom:14px; }
+  .pine-dock-item { gap:5px; padding:6px 2px; }
+  .pine-dock-status { padding-left:8px; gap:8px; }
+}
+@media (max-width:760px) {
+  .pine-hero-copy { width:44%; left:3%; }
+  .pine-hero-copy h1 { font-size:34px; }
+  .sp-app { width:49%!important; }
+  .sp-login { padding:18px; }
+  .ref-task::after { display:none; }
+  .pine-dock-item:nth-child(n+5) { display:none; }
+}
+.ref-stage > .sp-app { position:absolute!important; right:1.7%!important; left:auto!important; top:2%!important; width:40.6%!important; height:calc(100% - 2.8%)!important; }
+.ref-stage .pine-hero-copy { display:block!important; position:absolute!important; left:4.8%!important; top:8.5%!important; width:49%!important; z-index:20!important; }
+.sp-app .sp-login {
+  display:flex!important; flex-direction:column!important; align-items:stretch!important;
+  width:100%!important; max-width:none!important; height:100%!important; margin:0!important;
+  padding:clamp(24px,3vw,46px) clamp(26px,3.8vw,64px)!important;
+  border:1px solid #d7d4ce!important; border-radius:14px!important; background:rgba(251,250,247,.97)!important;
+  box-shadow:0 2px 5px #0002!important;
+}
+.sp-app .sp-login > div:first-child { flex:none; margin-bottom:4%; }
+.sp-app .sp-login h2 { margin:0!important; font:clamp(39px,4vw,64px)/1.08 Georgia,serif!important; }
+.sp-app .sp-login > div:first-child p { margin:0!important; color:#111!important; font:clamp(22px,2vw,34px)/1.2 Georgia,serif!important; }
+.sp-app .sp-login > div:first-child p:nth-of-type(2) { display:none!important; }
+.sp-app .sp-fields { display:flex!important; flex-direction:column!important; min-width:0; }
+.sp-app .sp-label { margin:0 0 20px!important; color:#171717!important; font:clamp(16px,1.2vw,21px)/1.4 Georgia,serif!important; font-weight:400!important; }
+.sp-app .sp-input { height:clamp(44px,6vh,60px)!important; margin-top:6px!important; padding:8px 18px!important; border:1.5px solid #a8a8aa!important; border-radius:6px!important; background:#fff9!important; font:clamp(15px,1.1vw,19px) Georgia,serif!important; }
+.sp-app .sp-btn.primary { height:clamp(48px,6.5vh,62px)!important; margin-top:3px!important; border:0!important; border-radius:6px!important; background:#293a2d!important; font:clamp(17px,1.4vw,24px) Georgia,serif!important; }
+.sp-app .sp-login > div:first-child { display:none!important; }
+.pine-hero-copy { position:fixed!important; z-index:500!important; left:5vw!important; top:21vh!important; width:47vw!important; max-width:760px!important; display:block!important; }
+.pine-hero-copy h1 { font-size:clamp(46px,5.1vw,86px)!important; }
+.sp-app .sp-login { width:100%!important; }
+.ref-stage::before { content:'Banking for\A a Brighter Tomorrow'; white-space:pre; position:absolute; z-index:30; left:4.8%; top:8.5%; width:48%; padding-bottom:22px; border-bottom:2px solid #a28442; color:#101814; font:clamp(43px,5.1vw,84px)/.99 Georgia,'Times New Roman',serif; letter-spacing:-.035em; pointer-events:none; }
+.ref-stage::after { content:'Pinecrest Credit Union helps people and communities\A build stronger financial futures together.\A pinecrestcu.org\A\A PEOPLE  /  PURPOSE  /  POSSIBILITIES'; white-space:pre-wrap; position:absolute; z-index:30; left:5%; top:42%; width:46%; color:#152018; font:clamp(17px,1.55vw,26px)/1.35 Georgia,serif; pointer-events:none; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Pinecrest Credit Union: quiet editorial hero and bottom application dock. */
+:root { --bg:#f8f7f4; --panel:#f8f7f4; --fg:#0b100c; --muted:#5d625d; --line:#d7d2c8; --accent:#303f2e; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body { background:#f8f7f4; color:#0b100c; font-family:Georgia, 'Times New Roman', serif; }
+.ref-task {
+  height:14.1vh; min-height:88px; padding:10px 3% 10px 9.2%; gap:26px;
+  background:#f8f7f4; border:0; position:relative; z-index:5;
+}
+.ref-brand {
+  position:absolute; left:9.3%; top:15px; width:330px; height:80px;
+  color:#0a1c11; font:600 clamp(28px,2.8vw,46px)/1 Georgia,serif; letter-spacing:.04em;
+}
+.ref-brand::before {
+  content:'♠'; position:absolute; left:-92px; top:-8px; width:78px; height:82px;
+  color:#a58b51; font:900 78px/1 Georgia,serif; transform:scaleX(.82); text-shadow:0 1px 0 #80673a;
+}
+.ref-brand-sub { display:block; text-align:center; margin-top:5px; color:#79663d; font:600 16px/1.2 Arial,sans-serif; letter-spacing:.28em; }
+.ref-nav { display:none; }
+.ref-instruction {
+  position:absolute; left:27%; top:12px; width:40%; max-height:78%; overflow:auto;
+  font:18px/1.25 Georgia,serif; font-weight:400; color:#35483d;
+}
+.ref-spacer { display:none; }
+.ref-tools { margin-left:auto; position:relative; z-index:8; }
+.ref-task > .ref-tools { position:absolute; right:3%; top:45%; }
+.ref-submit { background:#303f2e; border-radius:5px; padding:10px 22px; font:18px Georgia,serif; }
+.ref-xtra { background:transparent; border:0; border-radius:0; color:#35483d; font:16px Georgia,serif; text-decoration:underline; }
+.ref-body { min-height:0; position:relative; display:flex; }
+.ref-stage {
+  position:relative; display:block; flex:1; min-width:0; overflow:hidden;
+  background:#dbe0e2 url('assets/pinecrest-lake.jpg') center 58%/cover no-repeat;
+}
+.ref-stage::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,rgba(248,247,244,.88) 0%,rgba(248,247,244,.76) 40%,rgba(248,247,244,.12) 65%,rgba(248,247,244,.10) 100%);
+}
+.pine-hero-copy { position:absolute; z-index:1; left:4.8%; top:8%; width:45%; color:#0b100c; }
+.pine-hero-copy h1 { white-space:pre-line; margin:0 0 20px; font:500 clamp(43px,4.6vw,76px)/1.06 Georgia,serif; letter-spacing:-.025em; }
+.pine-rule { width:96px; height:2px; background:#a58b51; margin:22px 0 23px; }
+.pine-hero-copy p { max-width:610px; margin:0 0 8px 4px; font:400 clamp(17px,1.45vw,24px)/1.35 Georgia,serif; }
+.pine-domain { margin:0 0 24px 4px; color:#35483d; font:400 clamp(17px,1.4vw,23px) Georgia,serif; }
+.pine-tagline { margin-left:4px; font:400 14px/1.5 Georgia,serif; letter-spacing:.21em; }
+/* The shared widget remains interactive; this gives its existing form the reference card geometry. */
+.ref-stage > :not(.pine-hero-copy) {
+  position:absolute !important; z-index:2; right:1.8%; top:2.5%; width:40.7%; height:95%;
+  min-width:0; max-width:none; margin:0 !important; padding:3.1% 4.25% !important;
+  border:1px solid #d6d2cb !important; border-radius:14px !important;
+  background:rgba(250,249,246,.97) !important; box-shadow:0 2px 5px rgba(22,25,20,.15) !important;
+  color:#0b100c !important; font-family:Georgia,'Times New Roman',serif !important;
+  font-size:clamp(14px,1.15vw,19px) !important; overflow:auto;
+}
+.ref-stage > :not(.pine-hero-copy) h1,
+.ref-stage > :not(.pine-hero-copy) h2,
+.ref-stage > :not(.pine-hero-copy) h3 { color:#0b100c !important; font:500 clamp(34px,3.6vw,60px)/1 Georgia,serif !important; }
+.ref-stage > :not(.pine-hero-copy) input {
+  min-height:clamp(42px,3.4vw,58px); border:1px solid #a5a5a7 !important; border-radius:5px !important;
+  background:#fff !important; color:#0b100c !important; padding:8px 14px !important;
+  font:18px Georgia,serif !important; box-shadow:inset 0 1px 2px rgba(0,0,0,.06);
+}
+.ref-stage > :not(.pine-hero-copy) button {
+  min-height:44px; border-radius:5px !important; background:#303f2e !important; border-color:#303f2e !important;
+  color:white !important; font:20px Georgia,serif !important;
+}
+.ref-stage > :not(.pine-hero-copy) a { color:#35483d !important; font:17px Georgia,serif !important; }
+.ref-foot {
+  position:relative; flex:none; min-height:70px; height:7.5vh; padding:0 2.1%; gap:12px;
+  background:#233024; border:0; color:#fff; font:14px Georgia,serif;
+}
+.ref-foot-text { display:none; }
+.ref-foot > .ref-tools { z-index:3; }
+.ref-foot > .ref-tools .ref-submit { min-height:40px; }
+.pine-dock { display:flex; align-items:stretch; justify-content:space-between; flex:1; height:100%; gap:10px; }
+.pine-dock-item { display:flex; align-items:center; gap:12px; padding:0 9px; color:#fff; white-space:nowrap; position:relative; }
+.pine-dock-item.active::after { content:''; position:absolute; height:3px; bottom:9px; left:0; right:0; background:#d5af48; }
+.pine-dock-icon { font:25px/1 Arial,sans-serif; color:#f7f7f3; }
+.pine-dock-status { display:flex; align-items:center; gap:22px; padding-left:18px; border-left:1px solid #738071; white-space:nowrap; }
+.ref-side { display:none; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+.ref-note { z-index:20; left:2.5%; bottom:9%; max-width:52%; font:18px/1.35 Georgia,serif; border-color:#cbb985; border-left-color:#a58b51; background:#f8f7f4; }
+.ref-panel { position:fixed; z-index:10; right:7%; top:27%; width:34%; margin:0; border-color:#d6d2cb; background:#f8f7f4; font-family:Georgia,serif; }
+.ref-panel-title { color:#79663d; }
+.ref-panel-text { font:18px/1.35 Georgia,serif; }
+.ref-ov-cookie,.ref-ov-banner { background:#f8f7f4; color:#263327; border-color:#cbb985; font-family:Georgia,serif; }
+.ref-ov-primary { background:#303f2e; border-color:#303f2e; }
+/* Keep the task shell transparent; the credential form is the floating card. */
+.ref-stage > :not(.pine-hero-copy) {
+  inset:0 auto auto 0 !important; width:100% !important; height:100% !important;
+  padding:0 !important; margin:0 !important; border:0 !important; border-radius:0 !important;
+  background:transparent !important; box-shadow:none !important; overflow:visible !important;
+}
+.ref-stage header, .ref-stage nav, .ref-stage aside, .ref-stage footer { display:none !important; }
+.ref-stage form {
+  position:absolute !important; z-index:3; top:2.5% !important; right:1.8% !important;
+  width:40.7% !important; height:95% !important; padding:4.2% 4.25% !important;
+  border:1px solid #d6d2cb !important; border-radius:14px !important;
+  background:rgba(250,249,246,.97) !important; box-shadow:0 2px 5px rgba(22,25,20,.15) !important;
+  color:#0b100c !important; font:19px Georgia,serif !important; overflow:auto !important;
+}
+.ref-stage form h1, .ref-stage form h2, .ref-stage form h3 { color:#0b100c !important; font:500 clamp(34px,3.6vw,60px)/1 Georgia,serif !important; }
+.ref-stage form input { min-height:clamp(42px,3.4vw,58px); border:1px solid #a5a5a7 !important; border-radius:5px !important; background:#fff !important; color:#0b100c !important; padding:8px 14px !important; font:18px Georgia,serif !important; }
+.ref-stage form button { min-height:44px; border-radius:5px !important; background:#303f2e !important; border-color:#303f2e !important; color:#fff !important; font:20px Georgia,serif !important; }
+.ref-stage *:has(> input[readonly]) { display:none !important; }
+.ref-stage h1 { display:none !important; }
+.pine-hero-copy h1 { display:block !important; }
+.ref-stage form::before {
+  content:'Sign In\A to Pinecrest Credit Union'; white-space:pre-line; display:block;
+  color:#0b100c; font:500 clamp(31px,3.4vw,56px)/1.04 Georgia,serif;
+  padding-bottom:22px; margin-bottom:22px; border-bottom:1px solid #c8b47c;
+}
+.ref-stage form label { display:block; margin:0 0 7px; color:#0b100c; font:19px/1.3 Georgia,serif !important; }
+.ref-stage form label { font-size:0 !important; }
+.ref-stage form label:nth-of-type(1)::before { content:'Username'; font:19px/1.3 Georgia,serif; }
+.ref-stage form label:nth-of-type(2)::before { content:'Password'; font:19px/1.3 Georgia,serif; }
+.ref-stage form input { width:100% !important; margin:0 0 18px !important; }
+.ref-stage form button { width:100% !important; margin-top:8px !important; }
+.ref-stage form small { color:#35483d !important; font:16px Georgia,serif !important; }
+.pine-hero-copy { z-index:4; }
+.ref-task:has(.ref-instruction) { height:auto; min-height:14.1vh; padding-bottom:12px; }
+.ref-task:has(.ref-instruction) .ref-instruction {
+  left:32%; top:10px; width:43%; max-height:none; overflow:visible;
+  font-size:clamp(12px,1.05vw,17px); line-height:1.25;
+}
+@media (max-width:1100px) {
+  .ref-task { height:12vh; min-height:72px; }
+  .ref-brand { left:12%; top:15px; }
+  .ref-brand::before { left:-52px; font-size:48px; width:44px; }
+  .ref-stage > :not(.pine-hero-copy) { width:44%; right:2%; padding:3% !important; }
+  .pine-hero-copy { width:47%; top:6%; }
+  .pine-dock { gap:2px; }
+  .pine-dock-item { gap:5px; padding:0 3px; font-size:11px; }
+  .pine-dock-icon { font-size:19px; }
+  .ref-task:has(.ref-instruction) { min-height:98px; }
+  .ref-task:has(.ref-instruction) .ref-instruction { left:34%; width:41%; }
+  .ref-stage form { top:1% !important; height:98% !important; padding:2.5% 3% !important; }
+  .ref-stage form::before { font-size:clamp(25px,3vw,32px); padding-bottom:10px; margin-bottom:10px; }
+  .ref-stage form input { min-height:40px; margin-bottom:10px !important; }
+}
+@media (min-width:1101px) and (max-width:1400px) {
+  .ref-stage form::before { font-size:clamp(31px,2.9vw,40px); padding-bottom:14px; margin-bottom:14px; }
+  .ref-stage form input { margin-bottom:12px !important; }
+}
+@media (max-height:680px) {
+  .ref-task { height:11vh; min-height:66px; }
+  .ref-foot { height:8vh; min-height:50px; }
+  .pine-hero-copy h1 { margin-bottom:8px; }
+  .pine-rule { margin:10px 0; }
+  .pine-domain { margin-bottom:10px; }
+}
+.ref-stage::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(90deg,rgba(248,247,244,.86) 0%,rgba(248,247,244,.72) 39%,rgba(248,247,244,.1) 66%); }
+.ref-stage::after { content:'Banking for\A a Brighter Tomorrow'; white-space:pre; position:absolute; z-index:4; left:4.8%; top:8%; width:48%; padding-bottom:22px; border-bottom:2px solid #a28442; color:#101814; font:clamp(43px,5.1vw,84px)/.99 Georgia,'Times New Roman',serif; letter-spacing:-.035em; pointer-events:none; }
+.ref-stage::before { content:'Pinecrest Credit Union helps people and communities\A build stronger financial futures together.\A pinecrestcu.org\A\A PEOPLE  /  PURPOSE  /  POSSIBILITIES'; white-space:pre-wrap; position:absolute; inset:42% auto auto 5%; z-index:4; width:46%; padding:0; color:#17221b; font:clamp(17px,1.55vw,26px)/1.35 Georgia,serif; background:none; pointer-events:none; }
+.ref-stage form::before { font-size:clamp(28px,2.65vw,44px)!important; line-height:1.12!important; }
+.ref-stage form label { font-size:0!important; }
+.ref-stage form label:nth-of-type(1)::before { content:'Username'; font:19px/1.3 Georgia,serif!important; }
+.ref-stage form label:nth-of-type(2)::before { content:'Password'; font:19px/1.3 Georgia,serif!important; }
+.ref-stage form label::after { content:none!important; }
+.ref-panel { position:fixed!important; left:2%!important; right:auto!important; top:18%!important; width:min(330px,30vw)!important; height:auto!important; max-height:42vh!important; overflow:auto!important; padding:16px 18px!important; }
+.ref-brand::before { content:''!important; left:-104px!important; top:-7px!important; width:88px!important; height:90px!important; transform:none!important; background:#9b7b3e!important; text-shadow:none!important; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpath d='M49 2 43 18 31 12 38 25 24 23 36 34 16 35 33 43 8 49 31 53 4 63 34 62 15 75 39 70 29 83 45 76 42 93 50 82 59 95 56 77 73 85 62 70 86 76 68 62 96 64 70 53 92 50 67 43 84 36 64 35 76 24 60 26 68 12 56 18Z M8 103 51 94 94 104 51 113Z'/%3E%3C/svg%3E") center/contain no-repeat!important; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpath d='M49 2 43 18 31 12 38 25 24 23 36 34 16 35 33 43 8 49 31 53 4 63 34 62 15 75 39 70 29 83 45 76 42 93 50 82 59 95 56 77 73 85 62 70 86 76 68 62 96 64 70 53 92 50 67 43 84 36 64 35 76 24 60 26 68 12 56 18Z M8 103 51 94 94 104 51 113Z'/%3E%3C/svg%3E") center/contain no-repeat!important; }
+.ref-task:not(:has(.ref-brand))::before { content:'PINECREST\A CREDIT UNION'; white-space:pre; position:absolute; left:9.3%; top:24px; z-index:1; padding-left:102px; color:#0a1c11; font:bold clamp(24px,2.6vw,42px)/.95 Georgia,serif; letter-spacing:.05em; }
+.ref-task:not(:has(.ref-brand))::after { content:'♢  Secure Sign In　 │　 ⓘ  Help　 │　 ☎  Contact Us'; position:absolute; right:3.2%; top:50%; transform:translateY(-50%); color:#202831; font:16px Georgia,serif; white-space:nowrap; }
+.ref-stage { background-image:linear-gradient(90deg,rgba(248,247,244,.48) 0%,rgba(248,247,244,.3) 36%,rgba(248,247,244,.03) 63%),url('assets/pinecrest-lake.jpg')!important; background-size:cover!important; background-position:center 55%!important; }
+.ref-stage::before { content:'Pinecrest Credit Union helps people and communities\A build stronger financial futures together.\A pinecrestcu.org\A\A PEOPLE  /  PURPOSE  /  POSSIBILITIES'; white-space:pre-wrap; position:absolute; inset:42% auto auto 5%; z-index:4; width:46%; padding:0; color:#17221b; font:clamp(17px,1.55vw,26px)/1.35 Georgia,serif; background:linear-gradient(90deg,rgba(248,247,244,.18),rgba(248,247,244,.04)); pointer-events:none; }
+.ref-stage::after { content:'Banking for\A a Brighter Tomorrow'; white-space:pre; position:absolute; z-index:4; left:4.8%; top:8%; width:48%; padding-bottom:22px; border-bottom:2px solid #a28442; color:#101814; font:clamp(43px,5.1vw,84px)/.99 Georgia,'Times New Roman',serif; letter-spacing:-.035em; pointer-events:none; }
+.ref-stage form label { color:transparent!important; font-size:0!important; position:relative!important; }
+.ref-stage form label:nth-of-type(1)::before { content:'Username'!important; position:absolute!important; z-index:3; inset:0 0 auto; height:25px; background:#faf9f6; color:#111!important; font:19px/1.3 Georgia,serif!important; pointer-events:none; }
+.ref-stage form label:nth-of-type(2)::before { content:'Password'!important; position:absolute!important; z-index:3; inset:0 0 auto; height:25px; background:#faf9f6; color:#111!important; font:19px/1.3 Georgia,serif!important; pointer-events:none; }
+.ref-stage form label::after { position:absolute!important; left:68px!important; bottom:31px!important; color:#858585!important; font:18px Georgia,serif!important; pointer-events:none; }
+.ref-stage form label:nth-of-type(1)::after { content:'Enter your username'!important; }
+.ref-stage form label:nth-of-type(2)::after { content:'Enter your password'!important; }
+.ref-stage form::after { content:'Forgot username?　　　　　　　　　Forgot password?\A\A New to Pinecrest Credit Union?　 Enroll Now　 →'; display:block; white-space:pre; margin-top:15px; padding-top:16px; border-top:1px solid #c8b47c; color:#35483d; text-decoration:underline; font:clamp(13px,1.1vw,18px)/1.5 Georgia,serif; }
+.ref-stage form { padding:3.1% 4.25% !important; }
+.ref-stage form::before { margin-bottom:16px!important; padding-bottom:16px!important; }
+.ref-stage form label { margin-bottom:13px!important; }
+.ref-stage form input { margin-bottom:12px!important; }
+.ref-stage form label:nth-of-type(1) input { padding-left:60px!important; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='8' r='4' fill='none' stroke='%23777' stroke-width='1.8'/%3E%3Cpath d='M4 21c0-5 3-8 8-8s8 3 8 8' fill='none' stroke='%23777' stroke-width='1.8'/%3E%3C/svg%3E")!important; background-position:16px center!important; background-repeat:no-repeat!important; background-size:23px!important; }
+.ref-stage form label:nth-of-type(2) input { padding-left:60px!important; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='5' y='10' width='14' height='11' rx='2' fill='none' stroke='%23777' stroke-width='1.8'/%3E%3Cpath d='M8 10V7a4 4 0 0 1 8 0v3' fill='none' stroke='%23777' stroke-width='1.8'/%3E%3C/svg%3E")!important; background-position:16px center!important; background-repeat:no-repeat!important; background-size:22px!important; }
+.ref-stage .sp-badge { display:none!important; }
+.ref-stage .sp-app { position:absolute!important; inset:0!important; width:100%!important; height:100%!important; border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; overflow:visible!important; }
+.ref-stage .sp-shell,.ref-stage .sp-work,.ref-stage .sp-content { width:100%!important; height:100%!important; min-height:0!important; border:0!important; background:transparent!important; box-shadow:none!important; overflow:visible!important; }
+.ref-stage .sp-login { position:absolute!important; inset:0 auto auto 0!important; width:100%!important; height:100%!important; margin:0!important; padding:0!important; border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; overflow:visible!important; }
+.ref-stage form { width:40.7%!important; right:1.8%!important; }
+@media (max-width:1100px) { .ref-stage form { width:44%!important; right:2%!important; top:1%!important; height:98%!important; padding:2.5% 3%!important; } }
+.ref-panel { position:fixed!important; left:2%!important; right:auto!important; top:18%!important; width:min(330px,30vw)!important; height:auto!important; max-height:38vh!important; overflow:auto!important; padding:16px 18px!important; }
+.ref-stage .pine-hero-copy { display:block!important; position:absolute!important; z-index:4!important; left:4.8%!important; top:8%!important; width:47%!important; color:#101814!important; }
+.ref-stage .pine-hero-copy::before {
+  content:'Banking for\A a Brighter Tomorrow'; display:block; white-space:pre; margin-bottom:22px; padding-bottom:20px;
+  border-bottom:2px solid #a28442; color:#101814; font:clamp(43px,5.1vw,84px)/.99 Georgia,'Times New Roman',serif; letter-spacing:-.035em;
+}
+.ref-stage .pine-hero-copy h1 { display:none!important; }
+.ref-stage .pine-hero-copy .pine-rule { display:none; }
+.ref-stage .pine-hero-copy p { margin-top:0; }

@@ -1,0 +1,150 @@
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body.brut{background:#ebebeb;color:#111;font-family:'DejaVu Sans Mono','Liberation Mono','Courier New',monospace;font-size:clamp(11px,1.15vw,18px)}
+.shell{position:absolute;inset:0;display:flex;flex-direction:column;border:3px solid #111;background:#ebebeb}
+.head{flex:none;height:7.4%;min-height:44px;background:#ffe23d;border-bottom:4px solid #111;display:flex;align-items:center;justify-content:space-between;padding:0 2%}
+.title{font-size:clamp(20px,2.4vw,40px);font-weight:bold;letter-spacing:.5px}
+.tagline{font-size:clamp(11px,1.2vw,20px);letter-spacing:.3px}
+.content{flex:1;min-height:0;display:flex}
+.left{flex:1;min-width:0;display:flex;flex-direction:column;padding:2% 2.4% 3% 2%;border-right:4px solid #111}
+.task-note{flex:none}
+.instruction{display:inline-block;max-width:98%;background:#ffe23d;border:3px solid #111;box-shadow:6px 6px 0 #111;padding:.55em .9em;font-size:clamp(14px,1.75vw,29px);font-weight:bold;line-height:1.25}
+.instruction-sub{margin:1.2em 0 0 .4em;font-size:clamp(10px,1.12vw,19px)}
+.task-note.instruction-toast,.task-note.instruction-panel{position:relative}
+.note-close{position:absolute;right:4px;top:4px}
+.stage{position:relative;flex:1;min-height:0;margin-top:2.6%;border:2px dashed #b4b4b4;overflow:hidden;background:#ebebeb}
+.aside{flex:none;width:22%;padding:1.2% 1% 1.5% 1%;display:flex;flex-direction:column;gap:2.2%;background:#e6e6e6}
+.aside h3{margin:.5em 0 .3em .3em;font-size:clamp(14px,1.55vw,26px)}
+.card{border:3px solid #111;background:#f4f4f4;font-size:clamp(10px,1.15vw,19px)}
+.card h4{margin:0;padding:.6em .6em;font-size:.93em;letter-spacing:-.4px;white-space:nowrap;background:#e1e1e1}
+.card>div{padding:.35em .8em;white-space:nowrap}
+.card .k{width:5.6em}
+.card .k{display:inline-block;width:6.4em}
+.card.target{background:#ffe23d;box-shadow:4px 4px 0 #111;padding-bottom:.6em}
+.card.target h4{background:#ffe23d;padding-bottom:.4em}
+.card.target .inner{margin:0 .6em;padding:.5em .6em;background:#fffbe0}
+.card.target .inner>div{padding:.3em 0}
+.card.target .k{width:5.6em}
+.card.cur{box-shadow:none}
+.curnote{color:#555}
+.card.selp{padding-bottom:.6em}
+.footer{margin-top:auto;padding:0 8% 4% 8%}
+.submit{width:100%;height:clamp(44px,8vh,80px);background:#ffe23d;border:4px solid #111;box-shadow:6px 6px 0 #111;font:bold clamp(20px,2.4vw,40px) 'DejaVu Sans Mono','Liberation Mono',monospace;color:#111;cursor:pointer}
+
+.rz-wrap{position:absolute;display:block}
+.rz-wrap.col{display:flex;flex-direction:column}
+.rz-area{position:relative}
+.rz-ref{background:#ffe23d;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.rz-box{position:absolute;background:#fff;border:3px solid #111;box-shadow:6px 6px 0 #111;overflow:hidden}
+.rz-title{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:#8ecbff;border-bottom:2px solid #333;font-size:20px;font-weight:bold;flex-direction:row-reverse;color:#111}
+.rz-dots{display:inline-flex;gap:18px;align-items:center}
+.rz-dots i{display:block;width:16px;height:16px;border:3px solid #111}
+.rz-dots i:nth-child(1){border:0;border-bottom:4px solid #111;height:12px}
+.rz-dots i:nth-child(3){border:0;position:relative}
+.rz-dots i:nth-child(3):before,.rz-dots i:nth-child(3):after{content:"";position:absolute;left:8px;top:-2px;width:4px;height:24px;background:#111;transform:rotate(45deg)}
+.rz-dots i:nth-child(3):after{transform:rotate(-45deg)}
+.rz-body{height:calc(100% - 34px);padding:8px 14px;overflow:hidden;font-size:17px;line-height:1.2;background:#fff}
+.rz-message{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rz-message strong{display:none}
+.rz-readout{display:none}
+.rz-box .rz-dots i{border-radius:0!important;background:transparent!important;box-shadow:none!important;width:16px!important;height:16px!important;flex:none}
+.rz-box .rz-dots i:nth-child(1){height:10px!important;border:0!important;border-bottom:4px solid #111!important}
+.rz-box .rz-dots i:nth-child(2){border:3px solid #111!important}
+.rz-box .rz-title{background:#8ecbff!important;height:38px;font-size:22px}
+.rz-box .rz-body{height:calc(100% - 38px)}
+.rz-box .rz-title,.rz-box .rz-title>span:not(.rz-dots){color:#111!important;text-shadow:none!important;font-size:20px}
+.rz-message p{order:1;margin:0;padding:4px 14px;white-space:nowrap;border:2px solid #aaa;border-radius:10px;background:#f0f0f0;box-shadow:0 2px 0 #bbb}
+.rz-message em{order:2;font-style:normal;font-size:.7em;color:#888}
+.rz-message:nth-child(2){flex-direction:row-reverse;justify-content:flex-start}
+.rz-message:nth-child(2) p{background:#ffe23d;border-color:#b9a640}
+.rz-message:nth-child(2){margin-left:auto;width:fit-content}
+.rz-readout{position:absolute;bottom:6px;padding:2px 8px;background:#fff;border:2px solid #111;font-size:14px}
+.rz-ghost{position:absolute;border:3px dashed #111;background:#ffe23d33;pointer-events:none}
+.rz-ruler{position:absolute;pointer-events:none;color:#444;font-size:11px}
+.rz-ruler i{position:absolute;background:#444}
+.rz-ruler b{position:absolute;font-weight:normal}
+.rz-handle{position:absolute;touch-action:none;z-index:5}
+.rz-handle.c{width:26px;height:26px;margin:-22px 0 0 -22px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 0 45%,#111 45% 55%,transparent 55% 65%,#111 65% 75%,transparent 75%)}
+.rz-handle.c.nesw{cursor:nesw-resize}
+.rz-handle.x,.rz-handle.y{width:14px;height:14px;margin:-7px 0 0 -7px;background:#ffe23d;border:2px solid #111}
+.rz-well{position:absolute;left:0;z-index:1;padding:.5em .9em;background:#fff;border:3px solid #111;box-shadow:4px 4px 0 #111;font-size:clamp(11px,1.15vw,19px);font-weight:500;pointer-events:none;white-space:nowrap}
+.rz-well>div+div{display:none}
+.rz-well>div{display:flex;gap:.5em}
+
+.obstruction{position:fixed;z-index:50;right:20px;bottom:20px}
+.obstruction-box{background:#fff;border:3px solid #111;box-shadow:6px 6px 0 #111;padding:12px 16px;max-width:320px}
+.obstruction h3{margin:0 0 6px}
+.obstruction p{margin:0 0 10px}
+.dismiss{background:#ffe23d;border:2px solid #111;font:inherit;padding:4px 10px;margin-right:6px;cursor:pointer}
+
+/* Reference workbench proportions and strong outlines.  Qualify widget rules
+   so the primitive's later injected baseline cannot replace this widget. */
+.shell{border-radius:8px;border-width:4px;background:#eee}
+.head{height:7.6%;background:#ffe63d;padding:0 1.8%;border-bottom-width:5px}
+.title{font-size:clamp(24px,2.4vw,40px);letter-spacing:-1px}
+.tagline{font-size:clamp(12px,1.3vw,22px);letter-spacing:-.7px}
+.left{padding:2% 1.9% 3.2%;border-right-width:6px;background:#eee}
+.instruction{display:flex;align-items:center;width:100%;max-width:none;min-height:clamp(56px,9vh,85px);padding:.55em .55em;font-size:clamp(20px,2vw,34px);border-width:4px;border-radius:4px;box-shadow:8px 8px 0 #111;background:#ffe63d}
+.instruction-sub{font-size:clamp(13px,1.25vw,22px);line-height:1.3;margin:1.2em .4em 0}
+.stage{margin-top:2.5%;background:#eee}
+.aside{width:26%;padding:1.1% 1.1% 3%;gap:2%;background:#e4e4e4}
+.aside h3{font-size:clamp(20px,1.8vw,30px);letter-spacing:-1px;margin:.2em 0 .1em .4em}
+.card{font-size:clamp(13px,1.3vw,22px);border-radius:5px;flex-shrink:0}
+.card h4{font-size:.95em;letter-spacing:-.7px;padding:.7em .85em}
+.card>div{padding:.4em .85em}
+.card .k{width:6.7em}
+.card.target{background:#ffe63d;box-shadow:5px 5px 0 #111;padding-bottom:.65em}
+.card.target h4{background:#ffe63d}
+.card.target .inner{background:#f2f2f2;border-radius:7px;margin:0 .6em;padding:.2em .7em}
+.card.target .k{width:4.65em}
+.card.target .inner>div{padding:.35em 0}
+.card.cur{padding-bottom:.65em}
+.card.cur .k{width:4.65em}
+.card.selp{padding-bottom:.8em}
+.card.selp>div{padding:.4em .85em}
+.footer{padding:0 6% 2%}
+.submit{height:clamp(70px,11.4vh,108px);font-size:clamp(30px,2.9vw,49px);border-radius:7px;box-shadow:8px 8px 0 #111;background:#ffe63d}
+.clear{align-self:flex-end;border:0;background:transparent;text-decoration:underline;font:inherit;font-size:.65em;cursor:pointer;padding:0 8px}
+body .rz-area{border:0;border-radius:0;background:none}
+body .rz-box{border:4px solid #111;border-radius:4px;box-shadow:8px 8px 0 #111;background:#fff}
+body .rz-box .rz-title{height:var(--title-height)!important;padding:0 20px;border-bottom:2px solid #777;background:#8acafa!important}
+body .rz-box .rz-title,body .rz-box .rz-title>span:not(.rz-dots){font-size:clamp(19px,1.6vw,28px)!important;font-weight:700}
+body .rz-dots{gap:24px}
+body .rz-box .rz-dots i{width:20px!important;height:20px!important}
+body .rz-box .rz-dots i:nth-child(1){width:22px!important}
+body .rz-box .rz-dots i:nth-child(2){border-width:4px!important}
+body .rz-box .rz-body{height:calc(100% - var(--title-height) - var(--preview-height) - 14px);padding:4px 20px;display:flex;flex-direction:column;justify-content:space-around;font-size:var(--message-size);line-height:1.2}
+body .rz-message{margin:0;gap:12px;min-height:0;flex-shrink:0}
+body .rz-message p{padding:.45em 1em;border-radius:12px;box-shadow:none;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+body .rz-message em{font-size:.8em;white-space:nowrap}
+body .rz-message:nth-child(2){max-width:100%}
+body .rz-preview{position:absolute;left:7px;right:7px;bottom:7px;height:var(--preview-height);border:2px solid #aaa;border-radius:5px;background:#fafafa;color:#777;display:flex;align-items:center;padding:0 9px;white-space:nowrap;overflow:hidden;font-size:var(--message-size)}
+body .rz-well{font-size:clamp(13px,1.3vw,22px);font-weight:700;padding:.4em .5em;box-shadow:6px 6px 0 #111}
+body .rz-handle{border:0;border-radius:0;box-shadow:none;background:#ffe63d}
+body .rz-handle.c{width:30px;height:30px;margin:-26px 0 0 -26px;background:linear-gradient(135deg,transparent 0 43%,#111 43% 50%,#fff 50% 61%,#111 61% 68%,#fff 68% 79%,#111 79% 86%,transparent 86%)}
+body [data-role='handle-se']:after{content:'';position:absolute;left:22px;top:22px;width:34px;height:42px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 42'%3E%3Cpath d='M3 2L30 23L19 25L25 36L18 40L12 28L4 36Z' fill='white' stroke='%23111' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+body .rz-handle.x,body .rz-handle.y{border:2px solid #111}
+body .rz-readout{display:none}
+body .rz-box.compact .rz-body{font-size:var(--compact-size);padding:2px 12px}
+body .rz-box.compact .rz-message p{padding:.1em .6em;border-radius:7px;border-width:1.5px;line-height:1}
+body .rz-box.compact .rz-preview{font-size:var(--compact-size);bottom:3px;left:4px;right:4px}
+@media(max-width:1100px){.aside{gap:1.4%}.card{font-size:12px}.card h4{font-size:12px;padding:.6em .6em}.card>div,.card.selp>div{padding:.35em .6em}.card .k{width:6.7em}.card.target .k,.card.cur .k{width:4.65em}.aside h3{font-size:19px}.instruction-sub{font-size:12px}.submit{height:70px}}
+.head,.instruction,.card.target,.card.target h4,.submit{background:linear-gradient(110deg,#ffe948,#ffe139 65%,#ffe844)}
+.left,.stage{background:linear-gradient(110deg,#f0f0f0,#ececec)}
+
+/* Episode controls retain the workbench's outlined yellow utility style. */
+.head-tools{display:flex;align-items:center;gap:12px;flex:none}
+.head:has(.head-tools){gap:16px}
+.head:has(.head-tools) .tagline{margin-left:auto}
+.toolbar-submit,.chrome-xtra{font:700 clamp(13px,1.25vw,21px) 'DejaVu Sans Mono','Liberation Mono',monospace;border:3px solid #111;border-radius:3px;padding:.35em .7em;box-shadow:3px 3px 0 #111;cursor:pointer;white-space:nowrap}
+.toolbar-submit{background:#ffe63d}
+.chrome-xtra{background:#f4f4f4}
+.end-link{display:block;text-align:center;color:#111;font:700 clamp(21px,2vw,34px) 'DejaVu Sans Mono','Liberation Mono',monospace;padding:.4em 0;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
+.aside>.instruction-panel{flex-shrink:0;order:0}
+.instruction-panel .instruction{font-size:clamp(15px,1.3vw,22px);min-height:0;padding:.7em;line-height:1.35}
+.instruction-panel .instruction-sub{display:none}
+.task-note.instruction-toast{align-self:flex-end;width:min(78%,780px);padding-right:3px}
+.instruction-toast .instruction{font-size:clamp(15px,1.3vw,22px);min-height:0;padding:.7em 2em .7em .7em;line-height:1.35;box-shadow:5px 5px 0 #111}
+.instruction-toast .instruction-sub{display:none}
+.note-close{border:2px solid #111;background:#fff;font:700 18px monospace;cursor:pointer}
+[hidden]{display:none!important}

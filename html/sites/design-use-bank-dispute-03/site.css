@@ -1,0 +1,620 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Rivermere's paper-and-orange banking workspace. */
+:root {
+  --bg: #f7fafc;
+  --panel: #fff;
+  --fg: #0b1020;
+  --muted: #5e6f89;
+  --line: #dfe6ee;
+  --accent: #ff6b25;
+}
+body {
+  background: #f7fafc;
+  color: #0b1020;
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-size: 16px;
+}
+.ref-task {
+  height: 62px;
+  min-height: 62px;
+  padding: 0 30px;
+  gap: 22px;
+  background: #fff;
+  border-bottom: 1px solid #dfe6ee;
+  box-shadow: 0 1px 3px rgba(11,16,32,.04);
+}
+.ref-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0b1020;
+  white-space: nowrap;
+}
+.ref-brand::before {
+  content: "";
+  display: inline-block;
+  width: 31px;
+  height: 30px;
+  margin-right: 15px;
+  vertical-align: -7px;
+  background: #ff6b25;
+  clip-path: polygon(12% 15%, 100% 0, 81% 35%, 0 100%, 22% 56%, 3% 47%);
+}
+.ref-instruction {
+  color: #3d485d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.ref-submit {
+  border-radius: 7px;
+  background: #0066e5;
+  font-weight: 500;
+}
+.ref-xtra { border-radius: 7px; }
+.ref-body { min-height: 0; background: #f7fafc; }
+.ref-stage { align-items: stretch !important; justify-content: stretch !important; padding: 0; }
+.ref-panel, .ref-side {
+  background: #fff;
+  border-color: #dfe6ee;
+  border-radius: 8px;
+}
+.ref-foot { background: #fff; border-color: #dfe6ee; }
+/* The bank page is a focused dispute tool; retain its working content while removing
+   the base widget's surrounding account-navigation frame. */
+.ref-stage nav, .ref-stage aside { display: none !important; }
+.ref-stage > header, .ref-stage > [role="navigation"] { display: none !important; }
+.ref-stage > * { font-family: Arial, "Segoe UI", sans-serif; }
+.ref-stage button, .ref-stage input, .ref-stage textarea, .ref-stage select {
+  font-family: inherit;
+  border-color: #cfd9e4;
+  border-radius: 6px;
+}
+.ref-stage input:focus, .ref-stage textarea:focus { outline-color: #ff6b25; }
+.ref-stage table { border-color: #dfe6ee; }
+.ref-stage th { background: #f7fafc; color: #5e6f89; font-weight: 500; }
+.ref-stage td { border-color: #dfe6ee; color: #3d485d; }
+.ref-stage [role="button"] { border-radius: 6px; }
+
+/* Rivermere's early-2000s intranet frame: deep green masthead over the notebook. */
+:root {
+  --bg: #eaf5ee;
+  --panel: #f8fbf8;
+  --fg: #14252a;
+  --muted: #426257;
+  --line: #b8d7ca;
+  --accent: #17664e;
+}
+body {
+  background: #eaf5ee;
+  color: #15272a;
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+}
+.ref-task {
+  height: 64px;
+  min-height: 64px;
+  padding: 0 32px;
+  gap: 20px;
+  color: #fff;
+  background: linear-gradient(105deg, #10563f, #17654d 56%, #0f503e);
+  border: 0;
+  box-shadow: 0 2px 5px rgba(13, 61, 45, .22);
+}
+.ref-brand {
+  color: #fff;
+  font: bold 40px/1 Georgia, "Times New Roman", serif;
+  letter-spacing: .005em;
+}
+.ref-brand::before {
+  width: 54px;
+  height: 42px;
+  margin-right: 24px;
+  vertical-align: -9px;
+  background: #79c966;
+  clip-path: polygon(0 45%, 13% 16%, 28% 34%, 52% 0, 54% 48%, 84% 5%, 78% 55%, 100% 30%, 81% 80%, 55% 100%, 36% 75%, 16% 84%);
+}
+.ref-instruction { color: #e7f2ec; font-size: 15px; }
+.ref-submit { background: #17664e; border: 1px solid #a4cdbb; border-radius: 2px; }
+.ref-xtra {
+  color: #eef7f1;
+  border-color: rgba(226, 244, 234, .42);
+  border-radius: 2px;
+  background: rgba(255,255,255,.06);
+}
+.ref-body { background: linear-gradient(120deg, #e8f4eb, #f3f9f4 48%, #e5f2e9); }
+.ref-stage { background: transparent; }
+.ref-panel, .ref-side {
+  color: #172a2d;
+  background: rgba(250, 253, 250, .84);
+  border-color: #b6d7c9;
+  border-radius: 2px;
+}
+.ref-foot { color: #365a4d; background: #e5f1e9; border-color: #b6d7c9; }
+.ref-stage button, .ref-stage input, .ref-stage textarea, .ref-stage select {
+  border-color: #a8cbbd;
+  border-radius: 2px;
+}
+.ref-stage input:focus, .ref-stage textarea:focus { outline-color: #17664e; }
+.ref-stage table { border-color: #c2dacf; }
+.ref-stage th { background: #dcebe1; color: #182a2d; font-weight: 700; }
+.ref-stage td { border-color: #c9ded3; color: #17272b; }
+
+.bank-notebook-nav {
+  flex: none;
+  height: 75px;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  padding: 12px 20px 0;
+  border-bottom: 1px solid #b4d2c5;
+  background: linear-gradient(#e5f0e8, #f3f8f3);
+}
+.bank-notebook-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 190px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 16px;
+  border: 1px solid #b2cfc2;
+  border-bottom: 0;
+  color: #16272a;
+  text-decoration: none;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.bank-tab-index {
+  flex: none;
+  width: 29px;
+  height: 29px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #d6e6dc;
+  color: #1e342d;
+  font-weight: 700;
+}
+.bank-notebook-tab.is-current { color: #fff; background: #155b45; border-color: #155b45; font-weight: 700; }
+.bank-notebook-tab.is-current .bank-tab-index { background: #317b61; color: #fff; }
+.ref-body { gap: 14px; padding: 12px 19px 70px; align-items: stretch; }
+.bank-account-rail, .bank-help-rail { flex: none; min-width: 0; }
+.bank-account-rail { width: clamp(180px, 16vw, 268px); display: flex; flex-direction: column; gap: 10px; }
+.bank-help-rail { width: clamp(205px, 17.4vw, 290px); }
+.bank-rail-block, .bank-help-block {
+  overflow: hidden;
+  border: 1px solid #b4d5c5;
+  border-radius: 3px;
+  background: rgba(250, 253, 250, .8);
+}
+.bank-rail-block h2, .bank-help-block > h2 {
+  margin: 0;
+  padding: 10px 15px;
+  color: #fff;
+  background: linear-gradient(90deg, #155b45, #1b6a50);
+  font-size: 20px;
+  line-height: 1.35;
+}
+.bank-card-current, .bank-card-secondary, .bank-rail-link {
+  display: block;
+  padding: 10px 16px;
+  border-bottom: 1px solid #c8ded2;
+  color: #182a2d;
+  text-decoration: none;
+  white-space: pre-line;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.bank-card-current { background: #c8e5d4; font-weight: 600; }
+.bank-rail-link.is-current { position: relative; background: #c6e3d2; font-weight: 700; }
+.bank-rail-link.is-current::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: #207457; }
+.bank-rail-link:last-child { border-bottom: 0; }
+.bank-help-block { min-height: 100%; padding-bottom: 15px; }
+.bank-help-block > h3 { margin: 17px 19px 7px; font-size: 19px; line-height: 1.25; }
+.bank-help-block > p, .bank-help-block > ul { margin: 7px 19px 13px; font-size: 17px; line-height: 1.45; }
+.bank-help-block > ul { padding-left: 24px; }
+.bank-help-block > li { margin: 2px 0; }
+.ref-stage { border: 1px solid #b4d5c5; background: rgba(250,253,250,.7); }
+.ref-stage a { color: #17664e; }
+.ref-stage button, .ref-stage [role="button"] {
+  border-color: #a8cbbd;
+  border-radius: 2px;
+}
+.ref-stage button:not([aria-label]), .ref-stage [role="button"] { color: #18352b; }
+.ref-stage button:hover, .ref-stage [role="button"]:hover { background-color: #e3f0e7; }
+.ref-stage input, .ref-stage textarea { background: #fff; }
+@media (max-width: 1150px) {
+  .bank-notebook-nav { height: 60px; padding: 8px 12px 0; gap: 3px; }
+  .bank-notebook-tab { gap: 7px; padding: 0 8px; font-size: 14px; }
+  .bank-tab-index { width: 24px; height: 24px; }
+  .ref-body { padding: 9px 10px 55px; gap: 8px; }
+  .bank-account-rail { width: 180px; }
+  .bank-help-rail { width: 205px; }
+  .bank-rail-block h2, .bank-help-block > h2 { padding: 8px 10px; font-size: 16px; }
+  .bank-card-current, .bank-card-secondary, .bank-rail-link { font-size: 13px; }
+  .bank-help-block { padding-bottom: 5px; }
+  .bank-help-block > h3 { margin: 11px 10px 4px; font-size: 13px; }
+  .bank-help-block > p, .bank-help-block > ul { margin: 4px 10px 7px; font-size: 12px; line-height: 1.3; }
+}
+
+/* Reference-specific finishing: 2000-era bank masthead and framed dispute sub-window. */
+.ref-task {
+  position: relative;
+  height: 64px;
+  min-height: 64px;
+  padding: 0 34px;
+  background: linear-gradient(105deg, #10583f, #17664d 55%, #10523e);
+  box-shadow: 0 2px 5px rgba(13,61,45,.18);
+}
+.ref-brand { font-size: 40px; }
+.bank-masthead-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 0;
+  color: #f2f7f3;
+  font: 17px/1 Arial, "Segoe UI", sans-serif;
+}
+.bank-masthead-link {
+  padding: 0 17px;
+  border-right: 1px solid rgba(239,248,242,.65);
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.bank-masthead-link:last-child { border: 0; padding-right: 0; }
+.bank-masthead-link:hover { text-decoration: underline; }
+.ref-task > .ref-tools { position: absolute; right: 12px; top: 4px; opacity: 0; pointer-events: none; }
+.ref-task > .ref-tools .ref-submit { pointer-events: auto; opacity: 1; }
+.bank-notebook-nav { height: 75px; }
+.ref-body { padding-top: 12px; }
+
+/* The template's first frame is the in-page tool window. Turn its portal header into
+   the squared dark-green section bar while leaving all task controls and anchors alone. */
+.ref-stage > :first-child {
+  border: 1px solid #b5d6c8 !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+  background: rgba(250,253,250,.78) !important;
+}
+.ref-stage > :first-child header,
+.ref-stage > :first-child > div:first-child {
+  border-radius: 0 !important;
+}
+.ref-stage > :first-child h1,
+.ref-stage > :first-child h2 {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 7px 20px !important;
+  color: #fff !important;
+  background: linear-gradient(90deg, #155b45, #1b6a50) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font: bold 24px/1.35 Georgia, "Times New Roman", serif !important;
+}
+.ref-stage > :first-child > header { display: none !important; }
+.ref-stage > :first-child [class*="brand"],
+.ref-stage > :first-child [class*="topbar"] { display: none !important; }
+.ref-stage > :first-child h3 { color: #173b2f !important; }
+.ref-stage > :first-child button,
+.ref-stage > :first-child input,
+.ref-stage > :first-child textarea,
+.ref-stage > :first-child select {
+  border-radius: 3px !important;
+}
+.ref-stage > :first-child table { border-collapse: collapse; }
+.ref-stage > :first-child th { color: #182a2d; background: #dcebe1; }
+.ref-stage > :first-child td { color: #17272b; }
+.ref-stage { padding: 0; }
+.ref-stage > :first-child {
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif !important;
+  color: #172a2d !important;
+}
+/* Suppress the embedded portal's account identity strip; the bank notebook above
+   already supplies the site's navigation and identity. */
+.ref-stage > :first-child > div:first-child {
+  display: none !important;
+}
+.ref-stage > :first-child h1,
+.ref-stage > :first-child h2 {
+  display: block !important;
+  min-height: 42px;
+  margin: 0 !important;
+  padding: 6px 20px !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 24px !important;
+  line-height: 30px !important;
+}
+.ref-stage > :first-child div:has(> h1),
+.ref-stage > :first-child div:has(> h2) {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+.ref-stage > :first-child h1,
+.ref-stage > :first-child h2 { width: 100% !important; }
+.ref-stage > :first-child table {
+  width: 100%;
+  border: 1px solid #c2dacf !important;
+  border-collapse: collapse !important;
+  background: rgba(250,253,250,.72) !important;
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif !important;
+  font-size: 15px !important;
+}
+.ref-stage > :first-child th {
+  padding: 8px 11px !important;
+  border: 1px solid #c9ded3 !important;
+  background: #dcebe1 !important;
+  color: #182a2d !important;
+  font-size: 15px !important;
+}
+.ref-stage > :first-child td {
+  padding: 7px 11px !important;
+  border: 1px solid #c9ded3 !important;
+  color: #17272b !important;
+  font-size: 15px !important;
+}
+.ref-stage > :first-child tr:nth-child(even) td { background: #edf4ef !important; }
+.ref-stage > :first-child button,
+.ref-stage > :first-child input,
+.ref-stage > :first-child textarea,
+.ref-stage > :first-child select {
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif !important;
+  font-size: 15px !important;
+  color: #172a2d !important;
+  border-color: #a8cbbd !important;
+  box-shadow: none !important;
+}
+.ref-stage > :first-child a { color: #17664e !important; }
+.bank-masthead-actions { margin-right: 0; }
+.ref-task > .ref-tools { right: 12px; top: 4px; }
+.ref-task > .ref-tools .ref-xtra { display: none !important; }
+.ref-task > .ref-tools .ref-submit { display: inline-flex; }
+.ref-instruction { max-width: 520px; overflow-wrap: anywhere; }
+.ref-task:has(.ref-instruction) {
+  min-height: 82px;
+  height: 82px;
+  padding-bottom: 19px;
+}
+.ref-task:has(.ref-instruction) .ref-instruction {
+  position: absolute;
+  left: 112px;
+  right: 20px;
+  bottom: 3px;
+  max-width: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 15px;
+}
+@media (max-width: 1150px) {
+  .ref-brand { font-size: 28px; }
+  .ref-brand::before { width: 40px; height: 32px; margin-right: 12px; }
+  .bank-masthead-link { padding: 0 8px; font-size: 13px; }
+  .ref-instruction { max-width: 320px; font-size: 12px; }
+  .ref-task:has(.ref-instruction) { min-height: 76px; height: 76px; padding-bottom: 17px; }
+  .ref-task:has(.ref-instruction) .ref-instruction { left: 72px; right: 10px; font-size: 10px; }
+  .ref-stage > :first-child td, .ref-stage > :first-child th { padding: 5px 6px !important; font-size: 12px !important; }
+}
+
+/* The dispute workspace uses two squared fieldsets, not the activity dashboard. */
+body { font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif; color: #111827; }
+.ref-task { background: linear-gradient(105deg,#195540,#195540 65%,#1c5945); box-shadow:none; }
+.bank-masthead-actions { font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif; font-size:18px; }
+.bank-notebook-nav { padding:12px 19px 14px; height:75px; }
+.bank-notebook-tab { max-width:none; flex:0 1 184px; background:#e3eee5; border-bottom:1px solid #a8cdbd; border-radius:3px 3px 0 0; }
+.bank-notebook-tab:nth-child(5), .bank-notebook-tab:nth-child(6) { flex-basis:210px; }
+.bank-notebook-tab:last-child { flex-basis:231px; }
+.ref-body { background:#edf7f1; padding-bottom:82px; }
+.bank-rail-block, .bank-help-block { background:#eaf3ed; }
+.bank-rail-block h2, .bank-help-block > h2 { padding:8px 15px; background:linear-gradient(100deg,#195540,#215f49); }
+.bank-card-current, .bank-card-secondary, .bank-rail-link { font-size:18px; font-weight:400; padding:8px 27px; line-height:1.45; }
+.bank-card-current { font-weight:600; padding-left:15px; background:#bfdfcd; }
+.bank-rail-link.is-current { background:#bfdfcd; }
+.bank-help-block > h3 { font-size:20px; }
+.bank-help-block > p, .bank-help-block > ul { font-size:18px; line-height:1.3; }
+.bank-help-block > h3:not(:first-of-type) { border-top:1px solid #a8cdbd; padding-top:20px; margin-top:18px; }
+.ref-stage { border:0; border-radius:3px; }
+.ref-stage > .bk { font-family:"Arial Narrow", "Segoe UI", Arial,sans-serif !important; height:calc(100% - 10px) !important; }
+.bk .bk-layout, .bk .bk-main { min-height:0; }
+.bk .bk-heading { display:block !important; border:0; padding:0 !important; }
+.bk .bk-crumb, .bk .bank-draft-state { display:none; }
+.ref-stage > .bk .bk-heading h2 { padding:6px 30px !important; background:linear-gradient(100deg,#195540,#205e48) !important; }
+.bk .bk-scroll.bank-edit-pane { display:flex; flex-direction:column; overflow:hidden; padding:12px 12px 0 !important; scrollbar-gutter:auto; }
+.bank-dispute-columns { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:12px; flex:1; min-height:0; }
+.bank-selector, .bank-dispute-details { min-width:0; min-height:0; border:1px solid #a8cdbd; border-radius:3px; background:#f8faf7; display:flex; flex-direction:column; overflow:hidden; }
+.bank-fieldset-title { flex:none; display:flex; align-items:center; gap:8px; margin:0; padding:9px 22px; min-height:44px; border-bottom:1px solid #c4dbcd; background:#e0ece3; color:#073e32; font-size:20px; font-weight:700; }
+.ref-stage > .bk .bank-fieldset-title h3 { margin:0; font-size:20px; line-height:1.25; white-space:nowrap; }
+.ref-stage > .bk input.bank-transaction-filter { margin-left:auto; width:86px; min-width:0; height:24px; padding:2px 5px; font-size:13px !important; border:1px solid #c5d8cc; background:#f3f8f3; }
+.bank-transaction-scroll { flex:1; overflow:auto; padding-bottom:3px; margin:5px 5px 40px; min-height:0; scrollbar-color:#c2d5ca #e8f0eb; scrollbar-width:thin; }
+.ref-stage > .bk .bank-transaction-table { border:1px solid #d5e6db !important; font-size:18px !important; }
+.ref-stage > .bk .bank-transaction-table th { position:sticky; top:0; z-index:1; text-transform:none; letter-spacing:0; padding:7px 13px !important; font-size:16px !important; font-weight:700; background:#e0ece3; border:1px solid #c6dcd0 !important; white-space:nowrap; }
+.ref-stage > .bk .bank-transaction-table td { padding:6px 13px !important; font-size:18px !important; line-height:1.25; border:0 !important; border-right:1px solid #dce8e1 !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ref-stage > .bk .bank-transaction-table tr:nth-child(even) td { background:#edf2ee !important; }
+.bank-transaction-table tr { cursor:pointer; }
+.ref-stage > .bk .bank-transaction-table tr.selected td { background:#bfdfcd !important; }
+.bank-amount { text-align:right; }
+.bank-dispute-fields { display:flex; flex-direction:column; gap:22px; padding:22px 17px 28px; flex:1; min-height:0; }
+.bank-dispute-fields .bk-label { font-size:18px; color:#111827; }
+.bank-dispute-fields .bk-field { gap:7px; }
+.bank-dispute-fields .bk-field.wide { flex:1; min-height:0; }
+.bank-dispute-fields .bk-inputwrap { display:flex; flex:1; min-height:0; }
+.ref-stage > .bk .bank-dispute-fields .bk-control { height:44px; padding:8px 12px; background:white; color:#111827 !important; border-color:#9eafb7 !important; font-size:20px !important; }
+.ref-stage > .bk .bank-dispute-fields textarea.bk-control { height:100%; min-height:90px; resize:none; }
+.bank-dispute-fields .bk-hint { display:none; }
+.bk .bk-footer { justify-content:flex-end; min-height:32px; padding:3px 14px; border:0; background:transparent; }
+.ref-stage > .bk .bk-btn.primary { color:white !important; background:#195540; border-color:#195540 !important; font-size:14px !important; padding:4px 10px; }
+@media(max-width:1300px) {
+  .bank-account-rail { width:18%; }
+  .bank-help-rail { width:19%; }
+  .bank-fieldset-title { padding:8px 12px; font-size:17px; }
+  .ref-stage > .bk .bank-fieldset-title h3 { font-size:17px; }
+  .ref-stage > .bk input.bank-transaction-filter { width:56px; }
+  .ref-stage > .bk .bank-transaction-table td { font-size:14px !important; padding:6px !important; }
+  .ref-stage > .bk .bank-transaction-table th { font-size:13px !important; padding:6px !important; }
+  .bank-dispute-fields { padding:18px 12px; gap:18px; }
+  .bank-dispute-fields .bk-label { font-size:16px; }
+  .ref-stage > .bk .bank-dispute-fields .bk-control { font-size:17px !important; }
+  .ref-body { padding-bottom:45px; }
+}
+
+/* Episode notes and controls remain part of the notebook in every display mode. */
+.ref-task { height:auto; flex-wrap:wrap; gap:6px 18px; padding:10px 32px; }
+.ref-brand { display:flex; align-items:center; gap:25px; font-size:40px; }
+.ref-brand::before { display:none; }
+.bank-leaf { width:50px; height:42px; flex:none; order:-1; }
+.ref-spacer { display:none; }
+.bank-masthead-actions { margin-left:auto; }
+.ref-task > .ref-tools { position:static; opacity:1; pointer-events:auto; gap:6px; }
+.ref-task > .ref-tools:empty { display:none; }
+.ref-task > .ref-tools .ref-xtra { display:inline-flex !important; }
+.ref-task > .ref-tools .ref-submit { opacity:1; }
+.ref-task .ref-submit, .ref-task .ref-xtra { padding:6px 10px; font-size:14px; }
+.ref-task:has(.ref-instruction) { height:auto; min-height:64px; padding:10px 32px; }
+.ref-task:has(.ref-instruction) .ref-instruction { position:static; order:4; flex:1 0 100%; max-width:none; white-space:normal; overflow:visible; color:#f2f7f4; font-size:16px; line-height:1.3; font-weight:400; }
+.ref-panel { margin:0; width:230px; border-radius:2px; padding:14px; background:#e0ece3; }
+.ref-panel-title { color:#073e32; font-size:17px; text-transform:none; letter-spacing:0; font-weight:700; }
+.ref-panel-text { font-size:16px; font-weight:400; }
+.ref-note { background:#e0ece3; border-color:#a8cdbd; border-radius:2px; box-shadow:0 2px 6px #19554022; font-size:15px; font-weight:400; }
+.ref-foot, .ref-float-dock { min-height:42px; height:42px; background:#edf7f1; border:0; }
+.ref-foot { padding:4px 24px; }
+.ref-foot .ref-xtra { color:#195540; border-color:#a8cdbd; background:#e0ece3; }
+.ref-endlink { color:#195540; }
+.bank-account-rail, .bank-help-rail { overflow:auto; min-height:0; scrollbar-width:thin; scrollbar-color:#b8d3c4 #edf7f1; }
+.bank-rail-block { flex-shrink:0; }
+.bank-help-block { min-height:100%; }
+.bank-card-current, .bank-card-secondary { padding-top:11px; padding-bottom:11px; }
+.bank-card-current, .bank-card-secondary { position:relative; padding-left:36px; padding-right:10px; letter-spacing:-.5px; }
+.bank-card-current::before { content:'▸'; position:absolute; left:14px; top:11px; color:white; }
+.bank-card-name, .bank-card-number { display:block; white-space:nowrap; line-height:25px; }
+.bank-card-number { font-weight:400; letter-spacing:0; }
+.ref-body.ref-panel-right { flex-direction:row; }
+.bank-help-block > .ref-panel { width:auto; margin:12px; padding:12px; background:#d5e9dd; }
+.bank-help-block .ref-panel-text { font-size:14px; line-height:1.35; }
+.bank-rail-link { padding-top:9px; padding-bottom:9px; }
+.bank-rail-block:last-child .bank-rail-link:last-child { padding-bottom:18px; }
+.ref-stage > .bk .bank-transaction-table td { font-size:17px !important; color:#111827 !important; letter-spacing:-.4px; padding-top:7px !important; padding-bottom:7px !important; }
+.bank-dispute-fields .bk-choice svg { width:18px; height:18px; }
+.bank-change-transaction { margin-left:auto; }
+.bank-fieldset-title:has(.bank-change-transaction) { flex-wrap:wrap; }
+.bank-fieldset-title:has(.bank-change-transaction) .bank-transaction-filter { margin-left:0 !important; }
+.ref-ov { background:#e0ece3; color:#111827; border-color:#a8cdbd; border-radius:2px; }
+.ref-ov-btn { background:#f8fbf8; border-color:#a8cdbd; border-radius:2px; }
+.ref-ov-primary { background:#195540; color:white; }
+.ref-ov-box { background:#edf7f1; border:1px solid #a8cdbd; border-radius:3px; }
+.ref-ov-promo { background:#163d3044; }
+.ref-ov-cookie { bottom:48px; }
+.ref-ov-chat { bottom:70px; }
+.ref-ov-banner { top:64px; position:fixed; order:initial; border:1px solid #a8cdbd; }
+body:has(.ref-instruction) .ref-ov-banner { top:82px; }
+@media(max-width:1300px) {
+  .ref-task { padding:10px 20px; }
+  .ref-brand { font-size:32px; gap:16px; }
+  .bank-leaf { width:40px; height:35px; }
+  .bank-masthead-actions { font-size:14px; }
+  .bank-masthead-link { padding:0 10px; }
+  .bank-card-current, .bank-card-secondary, .bank-rail-link { font-size:14px; padding:7px 12px; }
+  .bank-card-name, .bank-card-number { white-space:normal; line-height:20px; }
+  .bank-card-current::before { display:none; }
+  .bank-rail-block h2, .bank-help-block > h2 { font-size:17px; padding:8px 12px; }
+  .bank-help-block > h3 { margin:13px 12px 6px; font-size:16px; }
+  .bank-help-block > p, .bank-help-block > ul { margin:6px 12px 10px; font-size:14px; }
+  .bank-help-block > h3:not(:first-of-type) { padding-top:13px; margin-top:13px; }
+  .ref-stage > .bk .bank-transaction-table td { font-size:13px !important; letter-spacing:-.3px; padding:6px 4px !important; }
+  .bank-dispute-fields .bk-label { font-size:14px; }
+  .ref-body { padding-bottom:30px; }
+}
+@media(max-width:1100px) {
+  .ref-brand { font-size:28px; gap:12px; }
+  .ref-task { padding:9px 18px; gap:6px 12px; }
+  .ref-task:has(.ref-instruction) { padding:9px 18px; }
+  .ref-task:has(.ref-instruction) .ref-instruction { font-size:13px; line-height:1.3; }
+  .bank-masthead-actions { font-size:13px; }
+  .bank-masthead-link { padding:0 8px; }
+  .bank-account-rail { width:16%; }
+  .bank-help-rail { width:18%; }
+  .bank-notebook-tab { font-size:14px; padding:0 8px; gap:7px; }
+  .bank-help-block > h3 { font-size:14px; }
+  .bank-help-block > p, .bank-help-block > ul { font-size:12px; line-height:1.3; }
+  .bank-card-current, .bank-card-secondary, .bank-rail-link { font-size:12px; padding:6px 10px; }
+  .bank-card-name, .bank-card-number { line-height:17px; }
+  .bank-rail-block h2, .bank-help-block > h2 { font-size:15px; padding:7px 10px; }
+  .bank-fieldset-title { min-height:38px; padding:7px 8px; }
+  .ref-stage > .bk .bank-fieldset-title h3, .bank-fieldset-title { font-size:15px; }
+  .ref-stage > .bk input.bank-transaction-filter { width:48px; font-size:11px !important; }
+  .ref-stage > .bk .bank-transaction-table th { font-size:11px !important; padding:6px 3px !important; }
+  .ref-stage > .bk .bank-transaction-table td { font-size:12px !important; padding:6px 3px !important; }
+  .bank-dispute-fields { padding:15px 10px; gap:18px; }
+  .ref-stage > .bk .bank-dispute-fields .bk-control { font-size:15px !important; height:38px; }
+  .ref-stage > .bk .bank-dispute-fields textarea.bk-control { height:100%; }
+  .bank-transaction-scroll { margin-bottom:20px; }
+}

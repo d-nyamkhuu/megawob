@@ -1,0 +1,153 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.gem{--line:#000;--panel:#f2f2f2;--bg:#e9e9e9;--fg:#000;--muted:#000;--accent:#000;position:relative;background:#33a03c;color:#000;font-family:'Courier New','Liberation Mono',monospace;font-weight:bold;font-size:clamp(11px,1.15vw,19px)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:#e4e4e4;border:2px solid #000;border-radius:0;padding:.3em .9em;box-shadow:2px 2px 0 #000}
+button:active{background:#000;color:#fff}
+button:focus-visible,.slc-hit:focus-visible{outline:2px dotted #000;outline-offset:2px}
+.menubar{position:absolute;left:0;right:0;top:0;height:4.1%;min-height:20px;background:#ececec;border-bottom:2px solid #000;display:flex;align-items:center;padding:0 2.8%;gap:3.6vw;font-size:1.3em;letter-spacing:.06em}
+.menubar .apple{font-size:1em;margin-right:-1vw}.clock{margin-left:auto;white-space:pre}
+.window{position:absolute;left:1.3%;right:1.2%;top:8.2%;bottom:10.3%;background:#f0f0f0;border:2px solid #000;box-shadow:3px 3px 0 #000;display:flex;flex-direction:column}
+.titlebar{flex:none;height:5.2vh;min-height:24px;display:flex;align-items:center;gap:.8vw;padding:0 .4vw;border-bottom:2px solid #000;background:#ececec}
+.gadget{flex:none;width:2.6vw;height:70%;min-width:22px;border:2px solid #000;background:#f6f6f6;position:relative}
+.gadget.close:after{content:'';position:absolute;left:25%;right:25%;top:30%;bottom:30%;border:2px solid #000;background:#ccc}
+.gadget.full:after{content:'';position:absolute;left:20%;right:20%;top:20%;bottom:20%;border:2px solid #000}
+.stripes{flex:1;height:60%;background:repeating-linear-gradient(#000 0 1px,#ececec 1px 3px)}
+.wtitle{font-size:1.25em;letter-spacing:.08em;white-space:nowrap;padding:0 .4vw}
+.wbody{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 1.6% 1.2%}
+.task{flex:none;display:flex;align-items:center;justify-content:center;padding:2.2vh 0 2vh;text-align:center}
+.instruction{font-size:clamp(15px,2.25vw,40px);line-height:1.15;letter-spacing:.01em;font-family:'Courier New','Liberation Mono',monospace;font-weight:bold}
+.instruction-close{display:block;margin:.4em auto 0;font-size:.4em}
+.instruction-hidden .rule{visibility:hidden}
+.rule{flex:none;width:100%;border:0;border-top:2px solid #000;margin:0 0 2.4vh}
+.panels{flex:1;min-height:0;display:grid;grid-template-columns:33.4% 1fr;gap:2.2%}
+.preview{border:2px solid #000;background:#e2e2e2;padding:0 .8% .8%;display:flex;flex-direction:column;min-height:0;box-shadow:inset -1px -1px 0 #888}
+.panel-title{font-size:1.25em;padding:.4em .3em;letter-spacing:.06em}
+.pic{flex:1;min-height:0;border:2px solid #000;background:#fff}
+.pic-img{width:100%;height:100%;background:#fff url(assets/mountain-reference.webp) 5.546% 64.899%/322.78% 238.83% no-repeat;image-rendering:pixelated}
+.setting{border:2px solid #000;background:#ebebeb;display:flex;flex-direction:column;min-height:0;padding:1.2% 2%;gap:2%}
+.record-stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.note{flex:none;margin:0 3.6% 1.6%;border:2px solid #000;background:#d8d8d8;padding:.8em 1.4em;font-weight:normal;line-height:1.5;font-size:1.05em}
+.actions{flex:none;display:flex;justify-content:flex-end;gap:1.2vw;padding-top:1.6vh}
+.actions button{font-size:1.45em;letter-spacing:.06em;padding:.25em 1.6em;border-width:2px;background:#dcdcdc}
+.actions .reset{font-size:1em;padding:.3em 1em;align-self:center}
+.trash{position:absolute;left:1.6%;bottom:.6%;display:flex;flex-direction:column;align-items:center;font-size:1.05em;font-weight:normal;line-height:1}
+.trash-icon{width:2.4vw;min-width:26px;height:auto}
+.trash span{background:#fff;border:0;padding:.1em .5em;margin-top:2px}
+
+/* slider widget (widget classes) */
+.record-stage .slc-card{position:static!important;border:0;border-radius:0;background:transparent;box-shadow:none;padding:1.6% 2% 0;width:100%;font-weight:bold}
+.record-stage .slc-grid{display:block}
+.record-stage .slc-body.slc-h{display:block;position:relative}
+.record-stage .slc-label{display:block;text-align:left;min-width:0;font-size:1.3em;letter-spacing:.06em;margin-bottom:.9em}
+.record-stage .slc-body{margin:0 .4em 3.6em;padding:0}
+.record-stage .slc-hit{height:34px!important}
+.record-stage .slc-rail{height:20px!important;border:2px solid #000;border-radius:0;background:repeating-conic-gradient(#999 0 25%,#e8e8e8 0 50%) 0 0/4px 4px}
+.record-stage .slc-fill{display:none}
+.record-stage .slc-thumb{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0}
+.record-stage .slc-thumb:before{content:'';position:absolute;left:50%;top:50%;width:1.7vw;min-width:18px;height:3.4vw;min-height:30px;max-height:44px;transform:translate(-50%,-50%);background:#ccc;border:2px solid #000;box-shadow:inset 3px 3px 0 #f8f8f8}
+.record-stage .slc-thumb.active:before{background:#9a9a9a}
+.record-stage .slc-ticks{color:#000;font-size:1.15em;font-weight:normal}
+.record-stage .slc-h .slc-ticks{top:100%;height:2.4em}
+.record-stage .slc-h .slc-tick{top:.7em}
+.record-stage .slc-tick:before{background:#000;width:2px!important;height:12px!important;top:-1.1em!important}
+.record-stage .slc-readout{display:block;width:auto;max-width:18em;margin:0 auto;border:2px solid #000;border-radius:0;background:#fff;background-clip:content-box;padding:.35em .35em .35em 9.5em;position:relative;text-align:center;font-weight:normal;font-size:1.25em;margin-top:.4em}
+.record-stage .slc-readout:before{content:'Current value:';position:absolute;left:.7em;top:.35em;font-size:.95em}
+
+/* dialogs */
+.gem-dialog{position:fixed;right:2%;bottom:12%;width:28%;z-index:40;background:#f0f0f0;border:2px solid #000;box-shadow:4px 4px 0 #000;font-weight:normal}
+.overlay-banner,.overlay-cookie{left:30%;right:auto;top:30%;bottom:auto;width:40%}
+.gem-dialog-title{display:flex;align-items:center;gap:.6em;height:2em;padding:0 .4em;border-bottom:2px solid #000;background:repeating-linear-gradient(#000 0 1px,#ececec 1px 3px);font-weight:bold}
+.gem-dialog-title span{background:#ececec;padding:0 .5em}
+.survey-x{width:1.2em;height:1.2em;padding:0;box-shadow:none;background:#f6f6f6}
+.gem-dialog-body{padding:.8em 1em 1em;display:flex;flex-direction:column;gap:.6em}
+.survey-choices{display:flex;flex-direction:column;gap:.3em}.survey-choices label{display:flex;gap:.5em;align-items:center}
+.survey-dropdown{position:relative}.survey-select{width:100%;text-align:left}
+.survey-options{position:absolute;top:100%;left:0;right:0;z-index:1;border:2px solid #000;background:#fff}
+.survey-options button{display:block;width:100%;border:0;box-shadow:none;text-align:left}
+.survey-close{align-self:flex-end}
+
+/* Reference proportions: monochrome GEM window and a wide logarithmic instrument. */
+body.gem{background:#339d40;font-size:clamp(15px,1.8vw,30px);background-image:repeating-conic-gradient(#ffffff05 0 25%,#00000005 0 50%);background-size:3px 3px}
+.menubar{height:4%;padding:0 2.4%;gap:2.6vw;font-size:.95em;letter-spacing:.02em;background:#dedede}
+.menubar .apple{width:1.2vw;height:1.4vw;margin-right:0}.apple svg{width:100%;height:100%}
+.window{top:8.1%;bottom:10.8%;background:#e5e5e5;box-shadow:inset 4px 4px 0 #fff,inset -4px -4px 0 #888,3px 3px 0 #000}
+.titlebar{height:4.8vh;background:#ddd;gap:.7vw}
+.gadget{width:2.2vw;height:72%;box-shadow:inset 2px 2px 0 #fff,inset -2px -2px 0 #777}
+.stripes{background:repeating-linear-gradient(#666 0 1px,#ddd 1px 3px);height:72%}
+.wtitle{font-size:1em;letter-spacing:.04em;padding:0 .5vw}
+.wbody{padding:0 1.6% 1.1%}
+.task{height:15.3vh;padding:1.4vh 2%;position:relative}
+.instruction{line-height:1.07;text-shadow:.7px 0 #000,-.7px 0 #000;letter-spacing:-.025em}
+.instruction-close{position:absolute;right:0;bottom:.5vh;font-size:12px;padding:2px 8px;box-shadow:none}
+.rule{margin:0 0 4vh}
+.panels{grid-template-columns:35% 1fr;gap:2%;}
+.preview{padding:0 .8% .8%;background:#ddd}
+.panel-title{font-size:1em;padding:.2em .25em;letter-spacing:.03em}
+.setting{margin-bottom:1.8vh;padding:1.8% 1.8% 1.2%;gap:0;background:#ddd}
+.record-stage{align-items:flex-start;justify-content:flex-start}
+.record-stage .slc-card{padding:0;width:100%}
+.record-stage .slc-label{font-size:1em;line-height:1.2;margin-bottom:.9em;letter-spacing:.02em}
+.record-stage .slc-body{margin:0 .2em 3em}
+.record-stage .slc-hit{height:34px!important}
+.record-stage .slc-rail{height:28px!important;background:repeating-conic-gradient(#777 0 25%,#ddd 0 50%) 0 0/3px 3px}
+.record-stage .slc-thumb:before{width:1.7vw;height:4.3vh;max-height:none;background:repeating-conic-gradient(#999 0 25%,#eee 0 50%) 0 0/3px 3px;box-shadow:inset 3px 3px 0 #eee}
+.record-stage .slc-ticks{font-size:1em}
+.record-stage .slc-h .slc-tick{top:.7em}
+.record-stage .slc-tick:before{height:20px!important;top:-.9em!important}
+.slc-minor{position:absolute;top:0;width:2px;height:9px;background:#000}
+.record-stage .slc-readout{font-size:1em;width:14.4em;max-width:none;margin:.4em 0 0 calc(50% - 7.2em - 2.4vw);padding:.22em .4em .22em 8.8em;background:#ddd;box-shadow:inset -1px -1px 0 #fff;font-weight:bold}
+.record-stage .slc-readout:before{top:.27em;left:.5em;font-size:.95em;font-weight:normal}
+.slc-value{display:block;border:2px solid #777;background:#e5e5e5;line-height:1.15;box-shadow:inset 1px 1px 0 #fff;padding:.08em 0}
+.note{margin:0 4.3% 1.8% .2em;font-size:.88em;line-height:1.25;padding:.7em 1.1em;background:#d5d5d5}
+.note-help{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actions{padding-top:0;min-height:6vh;margin-top:0;align-items:center;padding-right:.7%}
+.actions button{font-size:1em;letter-spacing:.03em;padding:.3em 1.6em;box-shadow:inset 3px 3px 0 #fff,inset -3px -3px 0 #888,2px 2px 0 #000}
+.trash{left:1.6%;bottom:1.3%;font-size:.65em}
+.trash-icon{width:2.6vw;height:5.8vh;background:url(assets/mountain-reference.webp) 3.993% 96.149%/3715.56% 1622.41% no-repeat;image-rendering:pixelated}
+.trash-icon>*{visibility:hidden}
+.trash span{min-width:7.2vw;text-align:center;background:#e6e6e6}
+.gem-dialog{font-size:clamp(13px,1.15vw,19px);max-height:78%;overflow:auto}
+
+/* Episode frame keeps the GEM gadgets and the reference's usual footer action. */
+.task[hidden]{display:none}
+.instruction{overflow-wrap:anywhere}
+.instruction-card{flex:none;border:2px solid #000;background:#e5e5e5;margin:.5em .2em .2em;padding:.55em;position:relative}
+.instruction-card .instruction{font-size:clamp(15px,1.55vw,26px)!important;line-height:1.2;text-align:left;text-shadow:none;letter-spacing:0}
+.instruction-caption{font-size:.75em;border-bottom:1px solid #000;margin-bottom:.4em;padding-bottom:.2em}
+.instruction-card-panel{order:-1;margin-top:.3em}
+.instruction-card-toast{box-shadow:2px 2px 0 #000;padding-bottom:1.7em}
+.instruction-card .instruction-close{font-size:12px;bottom:.4em;right:.5em}
+.instruction-panel .rule,.instruction-toast .rule,.instruction-hidden .rule{display:none}
+.instruction-panel .panels,.instruction-toast .panels,.instruction-hidden .panels{margin-top:2vh}
+.titlebar-end{font-size:.65em;white-space:nowrap;max-width:30%;padding:.15em .6em;box-shadow:inset 1px 1px 0 #fff,1px 1px 0 #000}
+.actions:empty{display:none}
+.actions-link{justify-content:flex-start}
+.end-link{color:#000;font-size:1em;text-decoration:underline;padding:.3em .6em;cursor:pointer}
+.actions .end-xtra{font-size:.7em;padding:.25em .8em;margin-right:auto;order:-1}
+.actions-link .end-xtra{order:1;margin-right:0;margin-left:auto}
+.record-stage .gem-multiple{height:100%;font-size:clamp(12px,1.3vw,20px)}
+.record-stage .gem-multiple .slc-grid{display:grid;height:calc(100% - 28px);grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(var(--slider-count),minmax(0,1fr));row-gap:8px;column-gap:0}
+.record-stage .gem-multiple .slc-grid>.slc-h{display:grid!important;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;align-items:start;min-height:0}
+.record-stage .gem-multiple .slc-label{grid-column:1;grid-row:1;margin:0;align-self:center}
+.record-stage .gem-multiple .slc-readout{grid-column:2;grid-row:1;margin:0;font-size:.85em}
+.record-stage .gem-multiple .slc-body{grid-column:1 / -1;grid-row:2;margin:3px .2em 0}
+.record-stage .gem-multiple .slc-tick:before{height:12px!important}
+.setting:has(.gem-multiple) .note{font-size:.7em;line-height:1.2;padding:.45em .8em;margin-bottom:.5%}
+
+/* Shared frame behavior, placed in the GEM title bar and window footer. */
+.gem-title-tools{display:flex;align-items:center;gap:.45em;flex:none;max-width:48%;font-size:.65em}
+.gem-title-tools:empty{display:none}
+.gem-title-tools button{font-size:inherit;white-space:nowrap;padding:.15em .6em;background:#dcdcdc;color:#000;border:2px solid #000;border-radius:0;box-shadow:inset 1px 1px 0 #fff,1px 1px 0 #000}
+.gem-title-tools .titlebar-end{max-width:none}
+.gem-title-tools .ref-icon{width:auto;height:auto}
+.gem-action-tools{display:contents}
+.actions button{color:#000;border:2px solid #000;border-radius:0}
+.actions .ref-xtra{font-size:.7em;padding:.25em .8em;margin-right:auto;order:-1}
+.actions-link .ref-xtra{order:1;margin-right:0;margin-left:auto}
+.actions .end-link{color:#000;text-decoration:underline}
+body.gem .panels{padding:0;flex-direction:row}
+.instruction-card{width:auto;align-self:stretch;border-radius:0}
+.ref-spacer{display:none}
+.gem .ref-shift{font:normal .55em/1.3 'Courier New','Liberation Mono',monospace;min-height:0;padding:.4em;background:#ddd;color:#000;border:1px solid #000}
+body.gem{line-height:normal}
+.gem .ref-submit{font-weight:bold}

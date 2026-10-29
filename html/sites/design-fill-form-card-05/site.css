@@ -1,0 +1,145 @@
+:root{--bg:#fff;--panel:#fff;--fg:#1b2433;--accent:#14305c;--muted:#4a5568;--line:#8a97ab;--font:Verdana,Tahoma,"DejaVu Sans",sans-serif;--navy:#12294f;--rust:#b84a14;--bar:#bdc9da;--bar2:#a9b8cd}
+*{box-sizing:border-box;transition:none!important;animation:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);background:#fff;color:var(--fg);display:flex;flex-direction:column;font-size:clamp(11px,1.14vw,19px)}
+button,input,textarea{font-family:inherit}button{cursor:pointer}
+input,textarea{caret-color:transparent!important}
+.ds-top{flex:none;height:7.7vh;min-height:44px;background:var(--navy);color:#fff;display:flex;align-items:center;padding:0 1.6%;position:relative}
+.ds-brandbox{flex:none}
+.ds-brand{font-size:1.65em;font-weight:700;line-height:1.1;letter-spacing:.01em}
+.ds-brandsub{font-size:.68em;letter-spacing:.3em;margin-top:.1em}
+.ds-toplinks{position:absolute;left:55%;top:0;bottom:0;transform:translateX(-50%);display:flex;align-items:center;font-size:1em;white-space:nowrap;margin-left:-5%}
+.ds-toplinks i{font-style:normal;margin:0 .9em}
+.ds-date{margin-left:auto;font-size:1em}
+.ds-menu{flex:none;height:4.5vh;min-height:28px;background:var(--rust);display:flex;border-bottom:1px solid #7d300a;border-top:1px solid #d9744a}
+.ds-menu span{display:flex;align-items:center;padding:0 2.3em;color:#fff;font-weight:700;font-size:1em;border-right:1px solid #e08a60;border-left:1px solid #8c3910}
+.ds-menu span:first-child{padding:0 2.3em;border-left:0}
+.ds-body{flex:1;min-height:0;display:flex;background:#fff}
+.ds-content{flex:1 1 auto;min-width:0;min-height:0;display:flex;padding:1.5% 1.1% 1.2% 1%;background:#fff}
+.ds-side{flex:0 0 22.3%;min-width:0;padding:1.2% 1% 0 1.3%;border-left:1px solid #c5ccd6;background:linear-gradient(#fff,#e9edf3);overflow:hidden;display:flex;flex-direction:column;gap:1.6vh}
+.ds-panel{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;border:1px solid #9aa6b8;background:#fff}
+.ds-title{margin:0;flex:none;padding:.5em .7em;font-size:1.2em;font-weight:700;color:var(--navy);background:linear-gradient(#cdd6e3,#b7c4d6);border-bottom:1px solid #8c9ab0}
+.ds-header-note{flex:none;margin:1.2% 1.1% .6%;padding:.7em 1.1em;background:#fffbe3;border:1px solid #e8c24a}
+.ds-instruction{font-size:1.15em;font-weight:700;color:var(--navy);line-height:1.4}
+.ds-main{flex:1;min-height:0;display:flex;padding:0 1.1%}
+.ds-stage{position:relative;flex:1;min-width:0;min-height:0;display:flex;align-items:flex-start}
+.ds-footer{flex:none;display:flex;align-items:center;gap:1.2em;padding:.7em 1.4%;border-top:1px solid #c5ccd6;background:#f1f3f7}
+.ds-submit,.ds-cancel{font-size:1.1em;min-width:6.5em;padding:.45em 1.4em;color:#111b2c;background:linear-gradient(#f4f6f9,#c9d0da);border:1px solid #6f7c90;border-radius:2px;box-shadow:inset 1px 1px 0 #fff}
+.ds-submit{font-weight:700;font-size:1.25em;min-width:5.6em}
+.ds-cancel{font-size:1em}
+.ds-box{border:1px solid #9aa6b8;background:#fff;flex:none}
+.ds-box h3{margin:0;padding:.5em .7em;font-size:1.1em;color:var(--navy);background:linear-gradient(#cdd6e3,#b7c4d6);border-bottom:1px solid #8c9ab0}
+.ds-box p{margin:0;padding:.7em .8em;font-size:1em;line-height:1.45}
+.ds-kv{width:100%;border-collapse:collapse}
+.ds-kv th,.ds-kv td{text-align:left;padding:.45em .7em;border-bottom:1px solid #c5ccd6;font-size:.9em}
+.ds-kv th{width:42%;background:#e6ebf2;border-right:1px solid #c5ccd6;color:var(--navy)}
+.ds-kv tr:last-child th,.ds-kv tr:last-child td{border-bottom:0}
+.ds-toast{margin:1% 1.1% 0;padding:.6em 1em;background:#fffbe3;border:1px solid #e8c24a}
+.ds-modal-controls{display:none}
+.ds-overlay{z-index:1000;position:fixed;padding:1.2em;max-width:420px;background:#fff;border:2px solid var(--navy);box-shadow:0 6px 20px #0005;right:24px;bottom:70px}
+.ds-overlay button{padding:.4em 1em;margin:.8em .5em 0 0;font:inherit;background:var(--rust);color:#fff;border:1px solid #7d300a}
+.ds-overlay-cookie{left:0;right:0;bottom:0;max-width:none;display:flex;align-items:center;justify-content:space-between}
+.ds-overlay-banner{top:12vh;bottom:auto;left:15%;right:15%;max-width:none}
+.ds-overlay-promo{top:27%;bottom:auto;left:35%;right:auto}
+.ds-overlay-chat{width:330px}
+.ds-overlay-toast{top:12vh;bottom:auto}
+
+/* fill-form widget */
+.ds-stage .ff-root{width:100%!important;margin:0!important;padding:1.2% 0 1.2%!important;gap:1.6%!important;flex-direction:row-reverse;align-items:flex-start!important;justify-content:flex-start!important;min-height:0;flex-shrink:0}
+.ds-stage .ff-root.tabs{flex-direction:column;gap:0!important}
+.ds-stage .ff-docpane,.ds-stage .ff-formpane{flex:1 1 0!important;width:auto!important;min-width:0;max-width:none!important;align-items:flex-start}
+.ds-stage .ff-root.tabs .ff-docpane,.ds-stage .ff-root.tabs .ff-formpane{width:100%!important}
+.ds-stage .ff-docpane{display:block}
+.ds-stage .ff-form,.ds-stage .ff-card,.ds-stage .ff-email,.ds-stage .ff-invoice,.ds-stage .ff-mail,.ds-stage .ff-plainmail{border:1px solid #9aa6b8!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;width:100%!important;font-family:inherit!important}
+.ds-stage .ff-form{padding:0 0 1.2em!important}
+.ds-stage .ff-form h2,.ds-stage .ff-phead{margin:0 0 .9em!important;padding:.5em .7em!important;font-size:1.05em!important;font-weight:700;color:var(--navy);background:linear-gradient(#cdd6e3,#b7c4d6);border-bottom:1px solid #8c9ab0}
+.ds-stage .ff-form .ff-sub{display:none}
+.ds-stage .ff-grid,.ds-stage .ff-grid.two{padding:0 1em;gap:.9em!important;grid-template-columns:1fr!important}
+.ds-box p{font-size:1.1em}.ds-kv th,.ds-kv td{font-size:1em}
+.ds-stage .ff-field:not(.ff-wide){display:grid;grid-template-columns:36% minmax(0,1fr);align-items:center;gap:.5em}
+.ds-stage .ff-field .ff-label{margin:0;font-size:.9em!important;font-weight:400!important;color:#1b2433}
+.ds-stage .ff-input,.ds-stage .ff-ddbtn{height:2.2em!important;font-size:.9em!important;background:#fff!important;color:#111!important;border:1px solid #6f7d94!important;border-radius:1px!important;box-shadow:none!important}
+.ds-stage .ff-root.tabs .ff-field:not(.ff-wide){grid-template-columns:30% minmax(0,1fr)}
+.ds-stage .ff-paper,.ds-stage .ff-receipt{box-shadow:none!important;border:1px solid #9aa6b8}
+.ds-stage .ff-card{overflow:hidden}
+.ds-stage .ff-band{background:linear-gradient(#cdd6e3,#b7c4d6)!important;color:var(--navy)!important;border-bottom:1px solid #8c9ab0}
+.ds-stage .ff-avatar{background:var(--navy)!important;border-radius:0!important}
+.ds-stage .ff-photo{border-radius:0!important}
+.ds-stage .ff-profile .ff-ptable td{border:1px solid #9aa6b8;padding:.55em .7em}
+.ds-stage .ff-ptable td:first-child{background:#e6ebf2;color:var(--navy);font-weight:700;width:34%}
+.ds-stage .ff-ptable td:last-child{font-weight:400}
+.ds-stage .ff-ptable tr:nth-child(even) td:last-child{background:#fff}
+.ds-stage .ff-profile{padding:0 .6em .6em!important}
+.ds-stage .ff-profile .ff-phead{margin:0 -.6em .6em!important}
+.ds-stage .ff-ctable .ff-doclabel{font-weight:700;color:var(--navy)}
+.ds-stage .ff-tabs{padding:0}
+.ds-stage .ff-tab{background:#e6ebf2;border:1px solid #9aa6b8;color:var(--navy)}
+.ds-stage .ff-tab[aria-selected="true"]{background:var(--rust);color:#fff}
+.ds-stage .ff-dd{isolation:isolate}
+body{font-size:clamp(10px,1.02vw,17px)}
+.ds-brand{font-size:1.55em}
+.ds-menu span{font-size:1em;padding:0 2.9em}
+.ds-box p{font-size:1.1em}.ds-kv th,.ds-kv td{font-size:1.05em;padding:.5em .7em}
+.ds-box h3{font-size:1.2em}.ds-title{font-size:1.25em}
+.ds-stage .ff-root:not(.tabs){align-items:stretch!important}
+.ds-stage .ff-root:not(.tabs) .ff-formpane>*,.ds-stage .ff-root:not(.tabs) .ff-docpane>*{height:100%}
+@media(max-height:720px){.ds-header-note{margin-top:.8%}.ds-side{gap:1vh}.ds-box p{padding:.4em .6em}.ds-kv th,.ds-kv td{padding:.25em .6em}}
+
+/* Reference geometry: two bordered work panels and an action row inside the form. */
+:root{--font:Arial,Helvetica,sans-serif;--fg:#101725;--navy:#10294e;--rust:#b44710}
+body{font-size:clamp(13px,1.2vw,20px)}
+.ds-top{height:7.76vh;background:linear-gradient(110deg,#142c53,#0c294c)}
+.ds-brand{font-size:1.5em;letter-spacing:.015em}
+.ds-brandsub{font-size:.75em;font-weight:700;letter-spacing:.32em;margin-top:.2em}
+.ds-toplinks{left:55%;transform:none;margin-left:0;font-size:.95em}
+.ds-date{font-size:.95em}
+.ds-menu{height:4.68vh;background:linear-gradient(#b94910,#b0420c)}
+.ds-menu span,.ds-menu span:first-child{padding:0;font-size:.95em;justify-content:center;width:9.25%;border-color:#e19b70}
+.ds-menu span:nth-child(2){width:10.3%}.ds-menu span:nth-child(3){width:10.15%}.ds-menu span:nth-child(4){width:8.8%}.ds-menu span:nth-child(5){width:12.5%}
+.ds-content{padding:1.6vh .9% 1.8vh 1.05%}
+.ds-side{flex-basis:23.9%;padding:1.75vh 1% 0 .95%;gap:1.65vh;background:linear-gradient(#f6f8fc,#eaf0f5);border-color:#9ba7b9}
+.ds-title{font-size:1.2em;padding:.47em .75em;letter-spacing:.015em;line-height:1.1}
+.ds-title,.ds-box h3,.ds-stage .ff-form h2,.ds-stage .ff-phead{background:linear-gradient(#c6d1dd,#bcc8d5);color:#071b46;border-color:#8fa0b7}
+.ds-header-note{margin:1.65vh 1.2% 0;padding:.65em 1.05em;border-color:#e5ad12;background:#fffce9}
+.ds-instruction{font-size:1.2em;line-height:1.3;color:#070c43}
+.ds-main{padding:0 1.2%;position:relative}
+.ds-stage{padding-top:3.3vh;align-items:stretch}
+.ds-panel>.ds-footer{position:absolute;visibility:hidden}
+.ds-stage .ff-root:not(.tabs){height:calc(100% - 8.5vh);padding:0!important;gap:2%!important;align-items:stretch!important}
+.ds-stage .ff-formpane{flex:1.06 1 0!important}
+.ds-stage .ff-form{display:flex;flex-direction:column;padding:0!important}
+.ds-stage .ff-form h2,.ds-stage .ff-phead{font-size:clamp(16px,1.43vw,24px)!important;line-height:1.1;padding:.5em .7em!important;margin:0!important;flex:none}
+.ds-stage .ff-phead b{font-size:1em}
+.ds-stage .ff-grid,.ds-stage .ff-grid.two{flex:1;padding:1.1em 1em .8em;gap:.55em!important;align-content:space-around}
+.ds-stage .ff-field:not(.ff-wide){grid-template-columns:33% minmax(0,1fr);gap:.55em}
+.ds-stage .ff-field .ff-label{font-size:1em!important;color:#0e1420}
+.ds-stage .ff-input,.ds-stage .ff-ddbtn{font-size:1em!important;height:2.1em!important}
+.ds-stage .ff-root[data-density=dense] .ff-grid{padding-top:.7em;padding-bottom:.6em;gap:.2em!important}
+.ds-stage .ff-root[data-density=dense] .ff-field .ff-label,.ds-stage .ff-root[data-density=dense] .ff-choice{font-size:1em!important}
+.ds-stage .ff-root[data-density=dense] .ff-input,.ds-stage .ff-root[data-density=dense] .ff-ddbtn{font-size:1em!important;height:1.9em!important}
+.ds-footer{font-size:clamp(14px,1.25vw,21px);margin:0 .8em;padding:1.4em .2em 1.9em;border-top:1px solid #98a5b7;background:#fff;gap:1.2em;flex:none}
+.ds-submit{font-size:1.15em;min-width:7.6em;padding:.5em 1em}
+.ds-cancel{font-size:1em;min-width:6.6em;padding:.55em 1em}
+.ds-submit,.ds-cancel{background:linear-gradient(#dde2e9,#c8d0da);border-color:#596474;color:#080d15;box-shadow:inset 1px 1px 0 #f7f8fa}
+.ds-stage .ff-profile{display:flex;flex-direction:column;padding:0 .55em 1.7em!important}
+.ds-stage .ff-profile .ff-phead{margin:0 -.55em .55em!important}
+.ds-stage .ff-ptable{flex:1;height:auto;font-size:1em;table-layout:fixed}
+.ds-stage .ff-profile .ff-ptable td{padding:.3em .7em;border-color:#99a9bd;color:#101722;vertical-align:top;overflow-wrap:anywhere}
+.ds-stage .ff-ptable td:first-child{width:29%;background:#e3ebf2;color:#080f1a}
+.ds-box h3{font-size:1.1em;padding:.48em .65em;line-height:1.15}
+.ds-box p{font-size:1.1em;line-height:1.4;padding:.6em .8em .8em}
+.ds-kv th,.ds-kv td{font-size:.95em;padding:.52em .7em;color:#0c1423;border-color:#aab7c8}
+.ds-kv th{width:40%;background:#e5edf4}
+@media(max-width:1400px){.ds-stage .ff-grid{padding:.7em .8em}.ds-footer{padding:1em .2em 1.2em}.ds-stage .ff-profile{padding-bottom:1em!important}}
+@media(max-width:1100px){.ds-header-note{padding:.55em .8em}.ds-stage{padding-top:2.5vh}.ds-box p{font-size:1.02em}.ds-kv th,.ds-kv td{padding:.5em .5em}.ds-stage .ff-grid,.ds-stage .ff-grid.two{gap:.3em!important}.ds-footer{padding:.9em .2em 1.1em}}
+
+/* Episode actions use the existing extranet button and inspector treatments. */
+.ds-title{position:relative}
+.ds-header-end{position:absolute;right:.65em;top:50%;transform:translateY(-50%);font-size:.8em;min-width:5em;padding:.22em .7em}
+.ds-inspector-actions{padding:.55em .7em;border-top:1px solid #aab7c8;background:#e5edf4}
+.ds-endlink{display:inline-block;font-size:1em;font-weight:700;min-width:0;padding:0;border:0;background:none;box-shadow:none;color:#10294e;text-decoration:underline}
+.ds-navtools{margin-left:auto;padding:0 1em;display:flex;align-items:center}
+.ds-xtra{font-size:.9em;min-width:0;padding:.2em .8em;white-space:nowrap}
+.ds-panel-note p{background:#fffce9;color:#070c43}
+.ds-title>.ds-tab-footer{position:absolute;right:.65em;top:50%;transform:translateY(-50%);padding:0;margin:0;border:0;background:none;gap:.6em;font-size:inherit}
+.ds-tab-footer .ds-submit,.ds-tab-footer .ds-cancel{font-size:.8em;min-width:5em;padding:.22em .7em}

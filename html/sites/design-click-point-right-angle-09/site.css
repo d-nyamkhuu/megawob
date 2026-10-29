@@ -1,0 +1,83 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--fg);font:16px var(--font);position:relative}
+button{font-family:var(--font);cursor:pointer;color:inherit}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+body *{transition:none!important;animation:none!important}
+
+.nb-page{position:absolute;left:6.3%;right:1.1%;top:1.2%;bottom:1.2%;background:var(--panel);border-radius:16px;box-shadow:-4px 0 0 #eee9dc,-7px 0 0 #c9c1b0,-10px 0 0 #eee9dc,-14px 0 0 #c9c1b0,-18px 0 0 #eee9dc,-23px 0 0 #d7cfbe,-27px 0 0 #e9e3d5,0 5px 28px #0004;padding:0 3% 0 2.6%;display:flex;flex-direction:column;min-height:0;z-index:3}
+.nb-tabs{position:absolute;left:.9%;top:5.1%;width:4.7%;height:72.5%;display:flex;flex-direction:column;gap:4px;z-index:4}
+.nb-tab{flex:1;border:1px solid #d4cec0;border-right:0;background:linear-gradient(100deg,#f1eee6,#ddd8cc);border-radius:20px 0 0 20px;font:400 clamp(17px,1.6vw,27px)/1 "Times New Roman",serif;color:#4a463e;text-align:center;padding:0;box-shadow:-4px 6px 18px #0002;transform-origin:left}
+.nb-tab.active{background:linear-gradient(#c8404a,#a8222c);color:#fff;border-color:#8e1a22}
+.nb-mast{position:relative;flex:none;height:9.5%;min-height:46px;border-bottom:2px solid #111;margin-top:.4%}
+.nb-title{position:absolute;left:0;top:-5px;font:900 clamp(42px,5.5vw,92px)/1 "Times New Roman","Liberation Serif",serif;letter-spacing:-.04em;transform:scaleX(.69);transform-origin:left top;white-space:nowrap}
+.nb-motto{position:absolute;left:59.5%;top:30%;font-size:clamp(11px,1.15vw,19px);letter-spacing:.03em;color:#555;white-space:pre}
+.nb-date{position:absolute;right:0;top:30%;font-size:clamp(12px,1.2vw,20px);color:#444}
+.nb-sub{flex:none;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #444;padding:.65% 0;font-size:clamp(10px,1.1vw,18px);letter-spacing:.14em;color:#333}
+.nb-tag{white-space:pre}
+.nb-nav{display:flex;gap:1.6em;letter-spacing:.08em}.nb-nav i{font-style:normal;color:#666}
+.nb-kicker{flex:none;margin-top:2.1%;color:#a8222c;font-weight:700;font-size:clamp(12px,1.2vw,20px);letter-spacing:.06em;white-space:pre}
+.task-note{flex:none;padding:.3% 0 1.4%;border-bottom:1px solid #444}
+.instruction{font:600 clamp(24px,3.8vw,63px)/1.04 "Times New Roman","Liberation Serif",Georgia,serif;letter-spacing:-.025em;max-width:100%}
+.task-note{height:clamp(95px,9.2vw,154px);min-height:0;overflow:hidden}
+.long-instruction .instruction{font-size:clamp(24px,3.2vw,53px);line-height:1.13}
+.nb-row{flex:1;min-height:0;display:flex;gap:1.8%;margin-top:1.1%;padding-bottom:2.4%}
+.stage{flex:1;min-width:0;min-height:0;display:flex;justify-content:center;align-items:center;overflow:hidden;position:relative;border:1px solid #ddd6c6;background-color:var(--panel);background-image:linear-gradient(#e2dccd 1px,transparent 1px),linear-gradient(90deg,#e2dccd 1px,transparent 1px);background-size:24px 24px}
+.nb-side{flex:none;width:20.6%;display:flex;flex-direction:column;gap:3%;min-height:0}
+.nb-box{flex:1;min-height:0;border:1px solid #d3ccbb;padding:4.2% 7% 6%;overflow:hidden;display:flex;flex-direction:column}
+.nb-box h4{margin:.4em 0 .4em;font-size:clamp(9px,.85vw,14px);letter-spacing:.08em;font-weight:700}
+.nb-box p{margin:0;font-size:clamp(11px,1.15vw,19px);line-height:1.3}
+.nb-box hr{border:0;border-top:1px solid #a49e93;margin:8% 0 3%;width:100%;flex:none}
+.nb-btn{display:flex;align-items:center;gap:14%;width:100%;margin:2% 0 3%;padding:0 6%;height:clamp(28px,5.3vh,50px);border:1px solid #bbb4a4;background:#f4f1ea;font-size:clamp(11px,1.15vw,19px);border-radius:3px}
+.nb-btn.on{background:linear-gradient(110deg,#b63b40,#ad3035);border-color:#8e1a22;color:#fff}
+.nb-btn svg{flex:none;height:70%;width:auto}
+.submit{flex:none;width:100%;height:clamp(40px,7.4vh,70px);background:linear-gradient(110deg,#a91d21,#ad2528);color:#fff;border:1px solid #8e1a22;border-radius:5px;font:700 clamp(24px,2.5vw,42px) "Times New Roman","Liberation Serif",serif;letter-spacing:-.025em}
+.nb-side .submit{transform:none}
+.instruction-toast{position:fixed;bottom:12px;left:20px;max-width:65vw;z-index:1800;background:var(--panel);box-shadow:0 3px 20px #0003;border:1px solid var(--line);padding:12px 45px 12px 16px}
+.instruction-toast .instruction{font-size:16px}
+.note-close{position:absolute;right:8px;top:8px;border:0;background:none}
+.instruction-panel{border-left:5px solid var(--accent)}
+.stage .cp-wrap{gap:0}.stage .cp-board{border:0;border-radius:0;box-shadow:none;background:transparent}
+.stage .cp-hint{display:none}
+.stage .cp-label{font-family:Georgia,"Times New Roman",serif!important;font-style:italic!important;font-weight:400!important;font-size:28px!important}
+.stage .cp-board>svg>rect{fill:transparent}
+.stage .cp-board svg>rect[fill^='url']{display:none}
+.stage .cp-fig{color:var(--fg)}
+.stage .cp-fig circle[stroke-dasharray]{fill:none!important;stroke:#333!important;stroke-width:1.2px!important;stroke-dasharray:4 3!important}
+.nb-box p,.nb-btn{font-size:clamp(12px,1.38vw,22px)!important}
+.nb-box h4{font-size:clamp(10px,.95vw,15px)}
+.instruction{font-weight:600}
+body{background:radial-gradient(ellipse at 45% 40%,#f0e9db,#d6cdbc)}
+.nb-page,.nb-tab{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.035' filter='url(%23n)'/%3E%3C/svg%3E")}
+.stage{background-size:36px 36px;background-image:linear-gradient(#dcd8cf 1px,transparent 1px),linear-gradient(90deg,#dcd8cf 1px,transparent 1px)}
+.nb-btn{border-radius:5px;box-shadow:inset 0 0 2px #fff8;margin:1% 0;gap:14%;padding:0 11%;background:linear-gradient(#f7f4ee,#ebe7e0)}
+.nb-box p{line-height:1.16}
+.nb-box h4{margin:.25em 0 .55em}
+.nb-nav{letter-spacing:0}
+.nb-tab span{display:inline-block;transform:scaleX(.78);white-space:nowrap}
+.nb-tab.active{background:#af383d}
+.nb-mast{height:8.8%}
+.nb-btn{flex:none}
+.nb-btn svg{height:58%;stroke-linejoin:round}
+body.display-panel .task-note,body.display-hidden .task-note{display:none}
+body.display-hidden .nb-task,body.display-toast .nb-task{display:none}
+body.display-toast .task-note{position:relative;left:auto;bottom:auto;max-width:none;z-index:auto;background:#f8f4eb;border:1px solid #cfc8b8;box-shadow:0 2px 7px #0002;padding:7px 34px 7px 10px;height:auto;min-height:0;max-height:74px;margin-top:.65%;overflow:hidden}
+body.display-toast .task-note .instruction{font-size:clamp(13px,1.45vw,20px);line-height:1.18;font-weight:400;letter-spacing:0}
+body.display-toast .task-note .note-close{right:5px;top:4px;font-size:18px}
+.nb-end-masthead{flex:none;margin-left:12px;padding:3px 12px;border:1px solid #8e1a22;border-radius:3px;background:linear-gradient(#b63b40,#ad3035);color:#fff;font-size:clamp(11px,1vw,16px);line-height:1.1;white-space:nowrap}
+.nb-pq{border:0;background:transparent;color:#a8222c;padding:2px 7px;font-size:clamp(9px,.82vw,13px);text-decoration:underline;white-space:nowrap}
+.nb-submit-inside{width:100%;height:clamp(30px,4.4vh,44px);margin-top:10px;font-size:clamp(16px,1.45vw,23px);letter-spacing:0}
+.nb-box .nb-submit-inside{flex:none}
+/* Let text shrink within the flex panel so the in-panel end control cannot be clipped. */
+.nb-box:has(>.nb-submit-inside)>p{min-height:0;overflow:auto}
+.nb-side>.submit{height:clamp(40px,7.4vh,70px)}
+@media(max-width:1300px){.nb-box p,.nb-btn{font-size:14px!important}.nb-box h4{font-size:11px}.nb-box hr{margin:6% 0 3%}.nb-box{padding:4% 5%}.nb-btn{height:34px}}
+@media(max-width:1100px){.nb-motto{left:56%;font-size:11px}.nb-box p,.nb-btn{font-size:14px!important}.nb-box{padding:4% 5%}.nb-box hr{margin:6% 0 3%}.nb-btn{height:34px}.nb-box h4{font-size:10px}.instruction{font-size:36px}.nb-page{padding-bottom:0}.nb-row{padding-bottom:2%}}
+.obstruction{position:fixed;z-index:2500;right:24px;bottom:95px;max-width:420px}
+.obstruction-box{background:var(--panel);border:1px solid var(--line);box-shadow:0 8px 25px #0003;border-radius:8px;padding:22px;white-space:pre-line}
+.obstruction h3{margin:0 0 12px;font-size:22px}.obstruction p{line-height:1.5;color:var(--muted)}
+.dismiss{padding:10px 18px;margin-right:10px;border:1px solid var(--line);background:var(--bg);border-radius:4px}
+.obstruction-cookie{left:25%;right:25%;top:34%;bottom:auto;max-width:none}
+.obstruction-banner{left:20%;right:20%;top:12px;bottom:auto;max-width:none}
+.obstruction-toast{top:25px;bottom:auto}
+.obstruction-promo{left:35%;right:auto;top:30%;bottom:auto}

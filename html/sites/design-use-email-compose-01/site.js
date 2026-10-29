@@ -1,0 +1,60 @@
+// Design on templates/site/app-email-unread-04.js: only what this site changed.
+(function () {
+  'use strict';
+  env.site({
+    name: 'design-use-email-compose-01',
+    styles: ['site.css'],
+    scripts: [],
+    template: 'site/use-email-unread-04',
+    design: {
+      C: {
+        'style': 'editorial',
+        'brand': 'Mail',
+        'nav': '',
+        'bg': '#fffefa',
+        'surface': '#fffefa',
+        'fg': '#171522',
+        'line': '#8c8b89',
+        'title': '#fffefa',
+        'control': '#f6f4f1',
+        'accent': '#a31318',
+        'accentfg': '#fff',
+        'sel': '#f3e8e5',
+        'selfg': '#171522',
+        'font': 'Georgia,serif',
+        'note': 'right:2%;top:7%;width:25%',
+        'end': 'left:2%;bottom:3%',
+        'geo': {
+          'folders': 'left:2%;top:6%;width:24%;height:35%',
+          'ledger': 'left:14%;top:14%;width:56%;height:58%',
+          'document': 'right:2%;top:58%;width:32%;height:39%',
+          'editor': 'right:2%;top:50%;width:36%;height:47%',
+          'contacts': 'display:none',
+        },
+        'site': 'design-use-email-compose-01',
+        'scenario': 'compose',
+        'platform': 'desktop',
+        'account': 'jane.doe@example.com     │     Settings     │     Help',
+        'noteTitle': 'Task',
+        'folderLabels': {
+          'sent': 'Sent',
+          'drafts': 'Drafts',
+          'junk': 'Junk',
+          'spam': 'Spam',
+          'templates': 'Templates',
+          'compose': 'Compose',
+        },
+        'folderList': ['inbox', 'sent', 'drafts', 'archive', 'trash'],
+        'rowHeight': 40,
+        'stack': false,
+        'dock': [],
+      },
+      parts: {
+        'frame.7': () => () => {},
+        'frame.8': () => () => {},
+        'frame.9': () => () => {},
+        'frame.10': () => () => {},
+      },
+    },
+  });
+})();

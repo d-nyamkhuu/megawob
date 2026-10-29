@@ -1,0 +1,158 @@
+// Design on templates/click-point/base.js: the base site's click-point widget for this scenario (it was scaffolded from
+// it), with the units this site changed as parts.
+env.widget({
+  task: 'click-point',
+  site: 'design-click-point-path-mid-04',
+  name: 'design',
+  split: 'train',
+  scenarios: ['path-mid'],
+  template: 'click-point/base',
+  design: {
+    parts: {
+      'drawPath': (base, S) => function drawPath(util, g) {
+        const { f1, label, px } = S;
+        const pts = S.spec.pts.map((p) => px(p).map(f1).join(',')).join(' ');
+        util.svg('polyline', { points: pts, fill: 'none', stroke: '#155bea', 'stroke-width': 7, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, g);
+        const a = S.spec.pts[0];
+        const b = S.spec.pts[S.spec.pts.length - 1];
+        for (const [p, color] of [[a, '#ed1717'], [b, '#078b19']]) {
+          const [x, y] = px(p);
+          util.svg('circle', { cx: f1(x), cy: f1(y), r: 12, fill: color, stroke: '#111', 'stroke-width': 1.5 }, g);
+        }
+        const W = S.spec.board.w * S.scale;
+        const H = S.spec.board.h * S.scale;
+        // Put each end label on the first side (away from the path, then across it) where it fits unclamped.
+        const side = (p, q) => {
+          const th = Math.atan2(p[1] - q[1], p[0] - q[0]);
+          for (const t of [th, th + Math.PI / 2, th - Math.PI / 2, th + Math.PI]) {
+            const [x, y] = px(p);
+            const lx = x + Math.cos(t) * 22;
+            const ly = y + Math.sin(t) * 22;
+            if (lx >= 14 && lx <= W - 14 && ly >= 14 && ly <= H - 12) return t;
+          }
+          return th;
+        };
+        label(util, g, a, side(a, S.spec.pts[1]), 'A');
+        label(util, g, b, side(b, S.spec.pts[S.spec.pts.length - 2]), 'B');
+      },
+      'build': (base, S) => function build(ctx, flavor) {
+        const { FILLS, bindClicks, buildCad, drawAxis, drawBisect, drawCenter, drawDense, drawGrid, drawMap, drawMidpoint, drawPath, drawRightAngle, ensureStyle, placeCard, showMarker } = S;
+          ensureStyle();
+          const { util, rng, size } = ctx;
+          S.spec = ctx.spec;
+          S.afterClick = null;
+          S.posEl = null;
+          S.style = {
+            flavor,
+            grid: rng.pick(['dots', 'lines', 'lines', 'plain']),
+            gridStep: rng.int(20, 32),
+            sw: rng.pick([2, 2.5, 3, 4]),
+            point: rng.pick(['dot', 'dot', 'cross', 'ring']),
+            guide: rng.bool(0.5),
+            angleMark: rng.bool(0.6),
+            rayEnd: rng.pick(['arrow', 'dot', 'none']),
+            minDash: rng.pick(['2 5', '5 5', '1 4']),
+            minFill: rng.bool(0.4),
+            fill: rng.pick(FILLS),
+            edges: rng.bool(0.5),
+            dashOutline: rng.bool(0.2),
+            serif: rng.bool(0.3),
+            labelTurn: rng.float(-0.7, 0.7),
+            rulerFill: rng.pick(['#f6e7b0', '#e9eef3', '#f3f0e6', '#dfe9d8']),
+            minorGrid: rng.bool(0.5),
+            markers: rng.bool(0.6),
+            water: rng.pick(['#b9d6ea', '#a9cbe3', '#c3dcec']),
+            land: rng.pick(['#e9e4d0', '#e4ead2', '#efe9dc']),
+            graticule: rng.pick(['rgba(40,60,90,.45)', 'rgba(20,20,20,.35)']),
+            gratDash: rng.pick(['none', '4 4']),
+            casing: rng.pick(['#c9c3b3', '#bfc5cc']),
+            road: rng.int(7, 11),
+          };
+
+          const aspect = S.spec.board.w / S.spec.board.h;
+          const fit = Math.min(size.height - 72 - (flavor === 'cad' ? 52 : flavor === 'tiles' ? 58 : 0), (size.width - 80 - (flavor === 'cad' ? 22 : 0)) / aspect);
+          let H = Math.floor(Math.min(fit, rng.int(440, 600)));
+          if (S.spec.scenario === 'path-mid') H = Math.floor(Math.min(fit, H * 1.25));
+          S.scale = H / S.spec.board.h;
+          const W = Math.round(S.spec.board.w * S.scale);
+
+          const wrap = util.el('div', 'cp-wrap', ctx.stage);
+          let board;
+          let rulers = null;
+          let card = null;
+          if (flavor === 'cad') {
+            // corner | top ruler / left ruler | board / status bar / command line (a 2-column grid)
+            card = util.el('div', 'cp-cad', wrap);
+            util.el('div', 'cp-corner', card);
+            rulers = {
+              top: util.svg('svg', { class: 'cp-ruler', width: W, height: 22, viewBox: `0 0 ${W} 22` }, card),
+              left: util.svg('svg', { class: 'cp-ruler', width: 22, height: H, viewBox: `0 0 22 ${H}` }, card),
+            };
+            board = util.el('div', 'cp-board', card);
+          } else if (flavor === 'tiles') {
+            card = util.el('div', 'cp-tiles', wrap);
+            const head = util.el('div', 'cp-head', card);
+            util.el('span', '', head, rng.pick(['Atlas', 'Wayfinder', 'City map', 'Cartograph']));
+            util.el('div', 'cp-search', head, 'Search places');
+            const zoom = util.el('div', 'cp-zoom', head);
+            for (const sign of ['+', '−']) {
+              const b = util.el('button', '', zoom, sign);
+              b.type = 'button';
+              b.setAttribute('aria-label', sign === '+' ? 'Zoom in' : 'Zoom out');
+              b.addEventListener('click', () => ctx.log('decoy', { what: 'zoom' }));
+            }
+            board = util.el('div', 'cp-board', card);
+          } else board = util.el('div', 'cp-board', wrap);
+          S.svg = util.svg('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, board);
+          S.svg.dataset.role = 'board';
+          if (S.spec.scenario === 'path-mid') Object.assign(S.style, { grid: 'lines', gridStep: S.spec.grid * S.scale });
+          if (S.spec.scenario === 'map' || S.spec.scenario === 'axis' && S.spec.kind !== 'ruler') S.style.grid = 'plain';
+          drawGrid(util, W, H);
+          if (S.spec.scenario === 'path-mid') {
+            const nx = 10, ny = 10;
+            for (let x = 0; x <= nx; x++) {
+              const X = x * W / nx;
+              util.svg('line', { x1:X, y1:0, x2:X, y2:H, stroke:x===0?'#555':'#b8b8b8', 'stroke-width':x===0?1.4:1 }, S.svg);
+              const tx = util.svg('text', { x:X, y:H-7, 'text-anchor':'middle', 'font-family':'Tahoma,Arial,sans-serif', 'font-size':18, fill:'#111' }, S.svg);
+              tx.textContent = String(x);
+            }
+            for (let y = 0; y <= ny; y++) {
+              const Y = H-y*H/ny;
+              util.svg('line', { x1:0, y1:Y, x2:W, y2:Y, stroke:y===0?'#555':'#b8b8b8', 'stroke-width':y===0?1.4:1 }, S.svg);
+              const ty = util.svg('text', { x:5, y:Y+5, 'text-anchor':'start', 'font-family':'Tahoma,Arial,sans-serif', 'font-size':18, fill:'#111' }, S.svg);
+              ty.textContent = String(y);
+            }
+          }
+          const g = util.svg('g', { class: 'cp-fig' }, S.svg);
+          if (S.spec.scenario === 'center') drawCenter(util, g);
+          else if (S.spec.scenario === 'midpoint') drawMidpoint(util, g);
+          else if (S.spec.scenario === 'bisect') drawBisect(util, g);
+          else if (S.spec.scenario === 'right-angle') drawRightAngle(util, g);
+          else if (S.spec.scenario === 'axis') drawAxis(util, g, rng);
+          else if (S.spec.scenario === 'map') drawMap(util, g, rng, W, H);
+          else if (S.spec.scenario === 'path-mid') drawPath(util, g);
+          else drawDense(util, g, rng);
+          S.markG = util.svg('g', { class: 'cp-mark' }, S.svg);
+          showMarker(util, ctx.model);
+          S.surface = bindClicks(ctx);
+          if (flavor === 'cad') buildCad(ctx, card, rulers, W, H);
+          if (flavor === 'tiles') util.el('div', 'cp-attrib', card, 'Map data © contributors');
+
+          if (flavor !== 'cad') {
+            const hint = util.el('div', 'cp-hint', wrap);
+            hint.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="9" cy="9" r="1.6" fill="var(--accent)"/></svg>';
+            util.el('span', '', hint, flavor === 'tiles' ? rng.pick(['Click the map to drop a pin. Clicking again moves it.', 'Click to place the pin; click again to move it.'])
+              : rng.pick(['Click on the board to place the marker. Clicking again moves it.', 'Click to drop a marker; click again to move it.', 'One click places the marker.']));
+            S.posEl = util.el('span', 'cp-pos', hint);
+            showMarker(util, ctx.model);
+          }
+          const sync = (m) => {
+            S.surface.set(m.point);
+            showMarker(util, m);
+          };
+          placeCard(wrap, ctx);
+          return { anchors: [S.svg], sync };
+      },
+    },
+  },
+});

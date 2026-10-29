@@ -1,0 +1,95 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{--panel:#dcd8d1;--bg:#dcd8d1;--fg:#1a1a1a;--muted:#5a1214;--line:#7a2024;--accent:#6e1418;background:#dcd8d1;color:var(--fg);font-family:'Liberation Sans',Arial,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+button:focus-visible{outline:2px dotted #222;outline-offset:-5px}
+[hidden]{display:none!important}
+.shell{height:100%;width:100%;display:grid;grid-template-rows:3.7% 4.4% minmax(0,1fr) 6.1%;background:#d4d1ca;container-type:size;border:1px solid #8b8a86}
+.title-bar{display:flex;align-items:center;gap:1.2cqh;background:#3a4e6b;color:#fff;font-size:2.15cqh;min-height:0;padding-left:.6%;letter-spacing:.02em}
+.app-icon{height:70%;aspect-ratio:1;background:#c9a53a;color:#4b3500;font-size:1.8cqh;text-align:center;line-height:1.5cqh;border:1px solid #fff6}
+.title{flex:1;white-space:nowrap}
+.window-controls{height:100%;display:flex;gap:2px;padding:2px 3px}
+.window-button{height:100%;aspect-ratio:1;background:#d3d0c9;border:2px outset #eceae4;font:bold 2.2cqh 'Liberation Sans',sans-serif;line-height:.5;padding:0;color:#111}
+.menu-bar{display:flex;align-items:center;gap:2.4cqh;padding:0 1.2%;font-size:2.3cqh;border-bottom:.8cqh solid #7a2024;background:#dcd8d1;min-height:0}
+.menu-item{border:0;background:none;padding:0;white-space:nowrap}
+.body{display:grid;grid-template-columns:62.3% 37.7%;min-height:0;min-width:0}
+.left-col{display:flex;flex-direction:column;min-height:0;min-width:0;border-right:3px double #444;position:relative;padding:0 .5% 0 .3%}
+.task-note{position:relative;padding:1.2cqh 3% .4cqh;min-height:0;height:10cqh;flex:none;display:flex;align-items:center;overflow:hidden}
+.instruction{font-size:3.1cqh;line-height:1.12;font-weight:bold;color:#6a0f12;letter-spacing:-.01em;white-space:normal;max-width:100%}
+.long-instruction{font-size:2.75cqh}
+.display-panel{margin:.7cqh 1.5% 0;padding:.6cqh 1.2%;height:8.4cqh;border:1px solid #aaa69f;background:#d5d2cb;box-shadow:inset 1px 1px #eeeae2}
+.display-panel .instruction{font-size:2.65cqh;line-height:1.08}
+.display-panel .long-instruction{font-size:2.4cqh}
+.display-toast{margin:.7cqh 1.5% 0;padding:.5cqh 1.2%;height:7.8cqh;border:1px solid #8c7771;background:#e3e0d9;box-shadow:1px 1px 0 #aaa69f}
+.display-toast .instruction{font-size:2.65cqh;line-height:1.08;font-weight:normal}
+.display-toast .long-instruction{font-size:2.35cqh}
+.note-close{position:absolute;right:5px;top:2px;background:var(--panel);border:1px outset #e3e2d9;font-size:18px;z-index:2}
+.stage{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden}
+.colormatch .stage .cp{display:flex!important;flex-direction:column;height:100%!important;width:100%!important;max-width:none!important;position:absolute!important;inset:0!important;align-items:stretch!important;padding:0;border:0;border-radius:0;gap:0;box-shadow:none;background:transparent;left:0;top:0}
+.top-row{display:flex;align-items:flex-start;padding:0 2.8%;flex:none;height:34.2cqh}
+.top-blk{flex:none}
+.tb-target{width:31.2%;margin-left:10.2%}
+.tb-current{width:31.6%;margin-left:14.2%}
+.blk-label{font-size:2.3cqh;color:#111;font-weight:normal;line-height:1.3;margin-bottom:.1cqh}
+.colormatch .stage .cp-swatch{height:18cqh;width:100%;border:1px solid #222;border-radius:0;box-shadow:none;background-clip:padding-box}
+.readouts{margin:1.6cqh 0 0 1%;display:grid;grid-template-columns:auto 1fr;gap:1.2cqh 2.2cqh;font:2.0cqh 'DejaVu Sans Mono','Liberation Mono',monospace;color:#222;white-space:pre}
+.readouts dt,.readouts dd{margin:0}
+.adjust-head{margin:0 1.8%;border-top:1px solid #7a2024;border-bottom:1px solid #7a2024;padding:.7cqh 0 .4cqh .5%;font-size:2.5cqh;font-weight:bold;color:#71191a;flex:none;height:4.2cqh}
+.adjust-row{display:flex;flex:1;min-height:0;padding:1.2cqh 1.8% 4.5cqh;gap:1.4%}
+.picker-controls{position:relative;flex:1;min-height:0;min-width:0;margin-left:1.5%}
+.values-box{flex:none;width:27.5%;border:1px solid #aaa69f;align-self:stretch;margin-top:-1.2cqh;margin-bottom:1cqh;padding:1.2cqh 0 0;display:flex;flex-direction:column;background:transparent}
+.values-title{white-space:nowrap;font-size:2.1cqh;font-weight:normal;color:#71191a;padding:0 2.5% .5cqh;margin-top:0;border-bottom:1px solid #aaa69f;align-self:stretch;margin-left:3%}
+.values-grid{margin:1.4cqh 6% 0;display:grid;grid-template-columns:27% 1fr;gap:.6cqh 0;font:1.85cqh 'DejaVu Sans Mono','Liberation Mono',monospace;color:#222}
+.values-grid dt,.values-grid dd{margin:0}
+.vrule{grid-column:1/3;border-top:1px solid #8a8680;margin:.8cqh 0}
+.colormatch .stage .cp-hit{position:absolute;padding:0;touch-action:none}
+.colormatch .stage .cp-hit[data-role=sv]{left:0;top:0}
+.colormatch .stage .cp-hit[data-role=hue]{top:0}
+.colormatch .stage .cp-sv,.colormatch .stage .cp-hue{border:1px solid #333!important;border-radius:0!important}
+.colormatch .stage .cp-knob{border:2px solid #fff;box-shadow:0 0 0 1px #222;border-radius:50%}
+.colormatch .stage .cp-bar{left:-1px;right:-1px;height:3px;margin-top:-1px;border:0;border-radius:0;background:#e8e6ff;box-shadow:0 0 0 1px #333}
+.sv-axis,.saturation-axis,.hue-label{display:none}
+.right-col{display:flex;flex-direction:column;min-width:0;min-height:0;padding:1.4cqh 3% 1.4cqh 2%;background:transparent}
+.rp-head{font-size:2.5cqh;font-weight:bold;color:#5a1013;border-bottom:1px solid #7a2024;padding:0 0 .4cqh .4%;margin-bottom:1.2cqh;flex:none}
+.ctl-head{margin-top:2.2cqh;border-top:1px solid #7a2024;padding-top:1.2cqh}
+.prev-row{display:flex;gap:9.2%;padding:1cqh 4% 0 6%;flex:none}
+.prev-blk{flex:1;min-width:0}
+.prev-label{font-size:2.3cqh;color:#111;font-weight:normal;margin-bottom:.6cqh}
+.prev-swatch{height:25.8cqh;border:1px solid #222;background-clip:padding-box}
+.diff-box{margin:3.9cqh .7% 0;border:1px solid #a9a59e;padding:1.2cqh 3% 1.2cqh;flex:none;height:12.2cqh}
+.diff-title{font-size:2.1cqh;color:#5a1013;border-bottom:1px solid #a9a59e;padding-bottom:.6cqh;font-weight:bold}
+.diff-value{margin-top:2.2cqh;font:2.9cqh 'DejaVu Sans Mono','Liberation Mono',monospace;display:flex;gap:4cqh;padding-left:1%}
+.ctl-rows{display:flex;flex-direction:column;gap:1.8cqh;flex:none;padding:.8cqh 2.8% 0}
+.ctl-row{display:flex;gap:3%}
+.ctl-row.one .push{width:49%;margin-left:.5%}
+.ctl-row.two .push{flex:1}
+.push{height:5.1cqh;background:linear-gradient(120deg,#d8d5ce,#cfccc5);border:2px outset #f0eee9;border-color:#f3f1ec #7d7a75 #7d7a75 #f3f1ec;box-shadow:0 0 0 1px #222;font-size:2.2cqh;white-space:nowrap;padding:0 2px;color:#111}
+.submit{margin:2cqh 2.8% 0;height:8cqh;flex:none;background:linear-gradient(115deg,#752329,#6e2325 52%,#792727);border:2px solid #3d0e11;box-shadow:inset 1px 1px #a05358,0 0 0 1px #888;color:#fff;font-size:3.1cqh;font-weight:bold;letter-spacing:.02em}
+.status-bar{display:flex;align-items:center;justify-content:space-between;border-top:.8cqh solid #7a2024;padding:0 1.2%;font:1.7cqh 'DejaVu Sans Mono','Liberation Mono',monospace;background:#dcd8d1;white-space:pre;min-height:0}
+.st-info{font-size:1.6cqh}
+.obstruction{position:fixed;z-index:2500;right:24px;bottom:120px;width:330px;max-width:80%}
+.obstruction-box{padding:18px;background:#dcd8d1;border:2px solid #222;box-shadow:4px 4px 0 #0006;font-size:16px}
+.obstruction h3{font-size:16px;font-weight:normal;background:#3a4e6b;color:#fff;margin:-18px -18px 14px;padding:5px 12px}
+.obstruction p{line-height:1.4}
+.dismiss{padding:6px 16px;background:#d6d3cc;border:2px outset #f0eee9}
+.obstruction-cookie,.obstruction-promo{left:35%;right:auto;top:30%;bottom:auto;width:420px}
+.obstruction-banner{left:20%;right:20%;top:10%;bottom:auto;width:auto}
+.obstruction-toast{top:12%;bottom:auto}
+.left-col{background:linear-gradient(115deg,#d8d5ce,#d2cfc8)}
+.menu-bar,.status-bar{background:#d1cec7}
+.title-bar{background:linear-gradient(#3d516a,#304157)}
+.industrial-hue-ring{border-radius:50%;background:conic-gradient(from 0deg,#f00,#f0f,#00f,#0ff,#0f0,#ff0,#f00);mask:radial-gradient(circle,transparent 49.5%,#000 50%)}
+.hue-ring-marker{position:absolute;width:3.6cqh;height:3.6cqh;border:4px solid #fff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.industrial-value{position:relative;border:1px solid #222}
+.value-bar{position:absolute;left:0;right:0;height:1px;background:#ccc;pointer-events:none}
+.value-bar:after{content:'';position:absolute;right:-2cqh;top:-1.2cqh;width:1.7cqh;height:2.4cqh;background:#222;clip-path:polygon(0 50%,100% 0,100% 100%)}
+.value-bar:before{content:'';position:absolute;right:-1.8cqh;top:-.95cqh;width:1.3cqh;height:1.9cqh;background:#cbc8c1;clip-path:polygon(0 50%,100% 0,100% 100%);z-index:1}
+.app-icon{position:relative;background:repeating-linear-gradient(105deg,#b6882f 0 1px,#e8c65e 1px 2px,#a97b29 2px 3px);box-shadow:inset 0 0 0 2px #dfc06a;color:#fff5;font-family:serif}
+.window-button{font-weight:normal;font-size:2.7cqh}
+.window-button[aria-label=Maximize]{font-size:0;position:relative}
+.window-button[aria-label=Maximize]:before{content:'';position:absolute;inset:20%;border:2px solid #111}
+.end-title{height:72%;align-self:center;margin-right:.35%;padding:0 .55em;background:linear-gradient(#e1ded7,#c9c6bf);border:2px outset #eceae4;box-shadow:0 0 0 1px #111;font-size:1.65cqh;line-height:1;white-space:nowrap;color:#111}
+.end-status{margin-left:auto;margin-right:.6%;padding:.12cqh .75%;background:linear-gradient(#e1ded7,#c9c6bf);border:2px outset #eceae4;box-shadow:0 0 0 1px #222;font:1.55cqh 'Liberation Sans',Arial,sans-serif;white-space:nowrap;color:#111}
+.end-xtra{padding:.12cqh .55%;background:transparent;border:0;border-left:1px solid #999;color:#333;font:1.45cqh 'Liberation Sans',Arial,sans-serif;text-decoration:underline;white-space:nowrap}
+@container (max-width:1400px){.values-title{font-size:1.8cqh}}
+@container (max-width:1100px){.instruction{font-size:3.25cqh}.values-title{font-size:1.6cqh}.push{font-size:1.95cqh}}

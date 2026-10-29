@@ -1,0 +1,785 @@
+@import url("../../templates/site/css/design-179c67.css");
+
+.ref-ov-banner {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: ref-spin .8s linear infinite;
+}
+.ref-spinner { animation:none!important; }
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+.ref-hz { position: fixed; z-index: 1100; color: var(--fg); font-size: 14px; line-height: 1.4; }
+.ref-hz-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.ref-hz-btn {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--fg); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.ref-hz-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-link { border: 0; background: none; color: var(--muted); text-decoration: underline; }
+.ref-hz-x { border: 0; background: none; color: var(--muted); padding: 2px 8px; font-size: 16px; }
+.ref-hz-title { font-weight: 700; font-size: 15px; }
+.ref-hz-text { margin-top: 6px; }
+.ref-hz-from { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.ref-hz-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.ref-hz-field input {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; user-select: text;
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+
+/* Accounts Payable, early web application frame. */
+:root {
+  --bg: #eaf0f5;
+  --panel: #e5edf4;
+  --fg: #101722;
+  --muted: #596575;
+  --line: #a9bfd2;
+  --accent: #376da8;
+}
+html, body { margin: 0; width: 100%; height: 100%; }
+body {
+  background: linear-gradient(135deg, #f2f6f8 0%, #e3ebf1 50%, #f5f7f8 100%);
+  color: #111820;
+  font: 16px/1.25 Verdana, Arial, sans-serif;
+}
+.ref-task {
+  min-height: 44px;
+  height: auto;
+  gap: 14px;
+  padding: 7px 14px;
+  color: #fff;
+  background: linear-gradient(#376da8, #275b94);
+  border-bottom: 1px solid #163f70;
+  box-shadow: inset 0 1px rgba(255,255,255,.2);
+}
+.ap-title { order: 0; flex: none; font-size: 19px; font-weight: bold; white-space: nowrap; }
+.ap-date { order: 5; flex: none; margin-left: auto; font-size: 15px; white-space: nowrap; }
+.ref-brand, .ref-nav { display: none !important; }
+.ref-instruction {
+  order: 1;
+  flex: 1 1 auto;
+  min-width: 80px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.25;
+}
+.ref-spacer { order: 2; flex: 1; }
+.ref-tools { order: 6; gap: 5px; }
+.ref-submit, .ref-xtra {
+  border: 1px solid #8da7bd;
+  border-radius: 2px;
+  background: linear-gradient(#fff, #dce5ec);
+  color: #172536;
+  box-shadow: inset 0 1px #fff;
+  font: 13px Verdana, Arial, sans-serif;
+  padding: 5px 12px;
+}
+.ref-submit:hover, .ref-xtra:hover { background: #d4e6f5; }
+.ref-icon { width: 31px; height: 29px; padding: 0; border-radius: 2px; }
+.ref-body { min-height: 0; background: transparent; }
+.ref-stage {
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  padding: 0;
+  min-height: 0;
+  font-family: Verdana, Arial, sans-serif;
+}
+.ref-stage, .ref-stage * { font-family: Verdana, Arial, sans-serif; }
+.ref-stage { color: #101722; }
+.ref-stage input, .ref-stage select, .ref-stage textarea, .ref-stage button { font-family: Verdana, Arial, sans-serif !important; }
+.ref-stage table { border-collapse: collapse; }
+.ref-stage th, .ref-stage td { border: 1px solid #b9c9d7; }
+.ref-stage th, .ref-stage [class*="section-title"], .ref-stage [class*="panel-title"], .ref-stage [class*="card-title"] {
+  background: linear-gradient(#c3d8e9, #9ebbd3);
+  color: #11243a;
+  font-weight: bold;
+}
+.ref-stage button, .ref-stage select, .ref-stage input, .ref-stage textarea {
+  border-color: #9db2c4 !important;
+  border-radius: 2px !important;
+}
+.ref-panel {
+  border: 1px solid #a9bfd2;
+  border-radius: 0;
+  background: linear-gradient(140deg, #e4edf4, #f5f8fa);
+  box-shadow: none;
+}
+.ref-side { background: #e3ebf2; border-color: #a9bfd2; }
+.ref-foot { min-height: 34px; padding: 4px 12px; background: #dce7f0; border-color: #a9bfd2; font-size: 12px; }
+.ref-endlink { color: #173f6a; }
+.ref-note { border-radius: 2px; background: #edf4fa; box-shadow: 1px 2px 5px #56687955; }
+
+@media (max-width: 700px) {
+  .ref-task { gap: 7px; padding: 6px 8px; flex-wrap: wrap; }
+  .ap-title { font-size: 15px; }
+  .ap-date { font-size: 11px; }
+  .ref-instruction { flex-basis: 100%; order: 8; }
+}
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* 1988 Macintosh accounting desk */
+:root { --bg:#f5f5f5; --panel:#fff; --fg:#000; --muted:#444; --line:#000; --accent:#000; }
+html, body { margin:0; width:100%; height:100%; }
+body {
+  position:relative; display:flex; flex-direction:column; overflow:hidden; padding:0 5px 6px;
+  background:#fff; color:#000; font:18px/1.2 Arial, Helvetica, sans-serif;
+  border:2px solid #111; outline:1px solid #777; outline-offset:-4px;
+}
+.mac-menu {
+  flex:none; height:29px; margin:0 -5px; padding:1px 18px; display:flex; align-items:center; gap:22px;
+  background:#fff; border-bottom:2px solid #111; font-size:18px; font-weight:700; white-space:nowrap;
+}
+.mac-apple { font-size:20px; width:24px; text-align:center; position:relative; }
+.mac-apple:after { content:'●'; position:absolute; left:5px; top:0; font-size:18px; color:#000; }
+.mac-menu-right { margin-left:auto; }
+.mac-menubar-right { margin-left:auto; font:700 14px/1 monospace; }
+.mac-titlebar {
+  position:relative; margin:4px 0 0; padding:0 42px; height:38px; min-height:38px; justify-content:center;
+  border:2px solid #111; border-bottom:1px solid #111; color:#000;
+  background-color:#f5f5f5;
+  background-image:repeating-linear-gradient(135deg, transparent 0 2px, #d8d8d8 2px 3px);
+  box-shadow:inset 0 1px #fff; gap:0;
+}
+.ap-title { order:0; position:absolute; left:50%; transform:translateX(-50%); font-size:20px; font-weight:700; white-space:nowrap; background:#f5f5f5; padding:0 10px; }
+.mac-window-box { position:absolute; z-index:2; width:28px; height:26px; top:4px; display:grid; place-items:center; border:2px solid #000; background:#f5f5f5; font-weight:700; line-height:1; }
+.mac-close { left:5px; }.mac-min { right:44px; }.mac-max { right:5px; }
+.ap-date, .ref-brand, .ref-nav, .ref-instruction, .ref-spacer { display:none !important; }
+.ref-tools { position:absolute; right:80px; top:2px; z-index:3; gap:5px; }
+.ref-submit, .ref-xtra {
+  padding:4px 10px; border:2px solid #000; border-radius:0; background:#fff; color:#000;
+  box-shadow:inset 1px 1px #fff, inset -2px -2px #bbb; font:16px Arial,sans-serif;
+}
+.ref-submit:hover, .ref-xtra:hover { background:#e5e5e5; }
+.mac-tabs {
+  flex:none; height:54px; margin:0 0 7px; display:flex; align-items:stretch; justify-content:center;
+  border-bottom:2px solid #111; background:#f5f5f5; gap:0;
+}
+.mac-tab {
+  width:14%; max-width:235px; display:flex; align-items:center; justify-content:center; gap:13px;
+  border:2px solid #222; border-bottom:0; border-radius:8px 8px 0 0; margin:4px 1px 0;
+  background:#e8e8e8; box-shadow:inset 1px 1px #fff; font-size:18px;
+}
+.mac-tab.active { background:#fff; font-weight:700; position:relative; z-index:1; }
+.mac-tab-icon { font-size:27px; line-height:1; }
+.mac-body { flex:1; min-height:0; gap:10px; padding:0 8px 3px; background:#fff; border:2px solid #111; border-radius:4px; }
+.mac-help {
+  flex:none; width:18%; min-width:205px; margin:0; padding:0 0 8px; border:2px solid #111; border-radius:3px;
+  background:#fff; overflow:hidden; font-size:18px; line-height:1.28;
+}
+.mac-help-head {
+  display:flex; align-items:center; gap:12px; padding:7px 10px; height:43px; border-bottom:2px solid #111;
+  background-color:#e8e8e8; background-image:repeating-linear-gradient(135deg,transparent 0 2px,#c9c9c9 2px 3px);
+  font-size:19px;
+}
+.mac-help-copy { padding:3px 16px; }
+.mac-help-copy p { margin:12px 0 16px; }
+.mac-help-copy hr { border:0; border-top:2px solid #555; margin:15px 0; }
+.mac-legend { margin-top:8px; line-height:2.05; white-space:nowrap; }
+.ref-stage { flex:1; padding:4px 3px; overflow:hidden; justify-content:flex-start!important; align-items:stretch!important; color:#000; font:18px/1.2 Arial,Helvetica,sans-serif; }
+.ref-stage, .ref-stage * { font-family:Arial,Helvetica,sans-serif; }
+.ref-stage input, .ref-stage select, .ref-stage textarea, .ref-stage button { font:18px Arial,Helvetica,sans-serif!important; color:#000; }
+.ref-stage table { border-collapse:collapse; }
+.ref-stage th, .ref-stage td { border:1px solid #777; }
+.ref-stage th, .ref-stage [class*="section-title"], .ref-stage [class*="panel-title"], .ref-stage [class*="card-title"] {
+  color:#000; background-color:#e8e8e8; background-image:repeating-linear-gradient(135deg,transparent 0 2px,#ddd 2px 3px);
+}
+.ref-stage button, .ref-stage select, .ref-stage input, .ref-stage textarea {
+  border:2px solid #111!important; border-radius:0!important; background:#fff;
+  box-shadow:inset 1px 1px #fff, inset -1px -1px #bbb;
+}
+.ref-stage [disabled] { color:#777!important; background:#e8e8e8!important; border-color:#888!important; }
+.ref-panel { display:none!important; }
+.ref-side { display:none!important; }
+.ref-foot { min-height:32px; padding:3px 12px; background:#eee; color:#000; border-top:2px solid #111; font-size:14px; }
+.ref-endlink { color:#000; text-decoration:underline; }
+.ref-note { left:1%; bottom:2%; max-width:47%; border:2px solid #111; border-radius:0; background:#fff; color:#000; box-shadow:3px 3px #aaa; font-size:17px; }
+.ref-float-dock { height:0; }
+.ref-float { right:20px; bottom:16px; box-shadow:2px 2px #aaa; }
+.ref-has-note .ref-body { padding-bottom:0; }
+.ref-instruction { display:block!important; position:relative; order:1; flex:none; margin:2px 0 0; padding:3px 10px; color:#000; background:#fff; border:1px solid #000; font-size:14px; font-weight:400; line-height:1.15; }
+.mac-instruction-row { max-height:35px; overflow:hidden; text-align:left; }
+.mac-tabs { order:2; }
+.mac-body { order:3; }
+.ref-foot, .ref-float-dock { order:4; }
+.ref-stage { filter:grayscale(1); }
+.ref-stage > * { width:100%!important; max-width:none!important; height:100%; min-width:0; }
+.ref-stage nav, .ref-stage aside { display:none!important; }
+.ref-stage header { display:none!important; }
+.ref-stage button, .ref-stage [role="button"] { border-radius:0!important; }
+.ref-stage input, .ref-stage select, .ref-stage textarea { color:#000!important; background:#fff!important; }
+.ref-stage [class*="pink"], .ref-stage [class*="rose"], .ref-stage [class*="accent"] { color:#000!important; }
+.ref-stage [class*="activity"], .ref-stage [class*="sidebar"], .ref-stage [class*="side-nav"], .ref-stage [class*="navigation"] { display:none!important; }
+.ref-stage [class*="workspace-nav"], .ref-stage [class*="global-nav"], .ref-stage [class*="app-nav"] { display:none!important; }
+.ref-stage [class*="policy"] { border:1px solid #000!important; border-radius:0!important; background:#eee!important; color:#000!important; }
+.ref-stage [class*="invoice"] { border-radius:0!important; }
+.ref-stage [class*="route"] { border-radius:0!important; }
+.ref-stage [class*="approval"] { color:#000; }
+.ref-stage [class*="button"], .ref-stage button { box-shadow:inset 1px 1px #fff,inset -2px -2px #aaa!important; }
+.ref-panel { display:flex!important; position:absolute; left:1%; top:17%; z-index:5; width:17%; max-height:44%; margin:0; padding:10px; background:#fff; border:2px solid #000; overflow:auto; }
+.ref-panel-title { color:#000; font-size:16px; }
+.ref-panel-text { font-size:15px; line-height:1.35; }
+.ref-body.ref-panel-right .ref-panel { left:auto; right:1%; }
+.ref-note { z-index:45; }
+.ref-ov { filter:grayscale(1); border-radius:0!important; }
+.ref-ov-btn { border-radius:0; }
+
+/* Tighten the workspace to the reference's classic window proportions. */
+body { padding:0 5px 6px; font-family:Arial,Helvetica,sans-serif; }
+.mac-menu { height:31px; padding:0 18px; gap:22px; border-bottom:2px solid #111; }
+.mac-menu-item { line-height:1; }
+.mac-titlebar { margin-top:3px; height:39px; min-height:39px; }
+.ap-title { font-size:20px; }
+.mac-tabs { height:55px; margin:0 0 7px; padding:0 18%; }
+.mac-tab { width:20%; max-width:235px; margin:4px 1px 0; border-radius:8px 8px 0 0; }
+.mac-body { gap:10px; padding:8px 8px 3px; }
+.mac-help { width:18%; min-width:205px; }
+.mac-help-head { height:43px; }
+.mac-help-copy { padding:3px 16px; }
+.mac-help-copy p { margin:12px 0 16px; }
+.ref-stage { padding:4px 3px; }
+.ref-stage > * { min-height:0; }
+.ref-stage [class*="policy"] { background:#fff!important; }
+.ref-stage [class*="policy"] th,
+.ref-stage [class*="policy"] [class*="header"] { background-color:#e8e8e8!important; }
+.ref-stage [class*="staff"], .ref-stage [class*="route"] { border:1px solid #111!important; }
+.ref-stage [class*="staff"] [class*="row"],
+.ref-stage [class*="route"] [class*="row"] { border-bottom:1px solid #888!important; }
+.ref-stage [class*="invoice"] [class*="selected"],
+.ref-stage [aria-selected="true"] { background:#111!important; color:#fff!important; }
+.ref-stage [class*="table"] { border-color:#111!important; }
+.ref-stage [class*="toolbar"], .ref-stage [class*="summary"] { box-shadow:none!important; }
+.ref-panel { border-radius:0!important; box-shadow:2px 2px #777; }
+.ref-note { line-height:1.25; }
+@media(max-width:1100px) {
+  .mac-tabs { padding:0 8%; }
+  .mac-body { gap:6px; padding:4px; }
+}
+
+/* Superseded dashboard positioning (kept isolated from the designed workspace). */
+@media not all {
+.ref-stage > * { position:relative!important; }
+.ref-stage [class*="open-invoice"],
+.ref-stage [class*="invoice-list"],
+.ref-stage [class*="invoice-selector"] {
+  position:absolute!important; left:0!important; top:0!important; width:40%!important; height:34%!important;
+  max-width:none!important; min-width:0!important; overflow:auto!important;
+}
+.ref-stage [class*="invoice-detail"],
+.ref-stage [class*="invoice-form"],
+.ref-stage [class*="invoice-info"] {
+  position:absolute!important; left:0!important; top:35%!important; width:40%!important; height:64%!important;
+  max-width:none!important; min-width:0!important; overflow:auto!important;
+}
+.ref-stage [class*="policy"] {
+  position:absolute!important; left:41%!important; top:0!important; width:59%!important; height:33%!important;
+  max-width:none!important; min-width:0!important; overflow:auto!important;
+}
+.ref-stage [class*="staff-list"],
+.ref-stage [class*="approver-list"],
+.ref-stage [class*="approver-directory"],
+.ref-stage [class*="staff-directory"] {
+  position:absolute!important; left:41%!important; top:35%!important; width:30%!important; height:64%!important;
+  max-width:none!important; min-width:0!important; overflow:auto!important;
+}
+.ref-stage [class*="approval-route"],
+.ref-stage [class*="route-list"] {
+  position:absolute!important; left:72%!important; top:35%!important; width:28%!important; height:64%!important;
+  max-width:none!important; min-width:0!important; overflow:auto!important;
+}
+/* Template wrappers are nested; flatten positioned wrappers so panes share the stage grid. */
+.ref-stage :has([class*="policy"]),
+.ref-stage :has([class*="approval-route"]),
+.ref-stage :has([class*="invoice-list"]),
+.ref-stage :has([class*="invoice-selector"]) { position:static!important; }
+.ref-stage [class*="policy"] { left:41%!important; top:0!important; width:59%!important; height:33%!important; }
+.ref-stage [class*="global-nav"], .ref-stage [class*="workspace-nav"],
+.ref-stage [class*="app-nav"], .ref-stage [class*="recently-paid"],
+.ref-stage [class*="read-only"], .ref-stage [class*="invoice-summary"],
+.ref-stage [class*="payment-summary"] { display:none!important; }
+@media(max-width:1100px) {
+  .ref-stage [class*="invoice-list"], .ref-stage [class*="invoice-selector"],
+  .ref-stage [class*="open-invoice"] { width:40%!important; }
+  .ref-stage [class*="staff-list"], .ref-stage [class*="approver-list"],
+  .ref-stage [class*="approver-directory"], .ref-stage [class*="staff-directory"] { width:30%!important; }
+}
+@media(max-width:1100px) {
+  .ref-instruction { font-size:11px; }
+  .ref-panel { width:20%; }
+}
+@media(max-height:700px) {
+  .ref-stage > * { transform:scale(.72); transform-origin:top left; width:138.9%!important; height:138.9%; }
+  .mac-instruction-row { max-height:25px; font-size:11px; padding:2px 5px; }
+  .mac-body { min-height:0; }
+}
+@media(max-height:650px) {
+  .ref-stage > * { transform:scale(.62); width:161.3%!important; height:161.3%; }
+}
+}
+@media(max-width:1100px) {
+  .mac-menu { gap:12px; padding:1px 9px; font-size:15px; }
+  .mac-titlebar { height:32px; min-height:32px; }
+  .mac-tabs { height:42px; }
+  .mac-tab { font-size:15px; gap:7px; }
+  .mac-tab-icon { font-size:20px; }
+  .mac-help { min-width:170px; font-size:14px; }
+  .mac-help-head { font-size:15px; height:34px; }
+  .mac-help-copy { padding:2px 9px; }
+  .mac-help-copy p { margin:7px 0 9px; }
+  .mac-legend { line-height:1.7; }
+  .ref-stage input, .ref-stage select, .ref-stage textarea, .ref-stage button { font-size:14px!important; }
+}
+
+/* The approval desk is a source-built grid; all task targets retain their handlers. */
+.mac-menu { font-size:22px; height:31px; gap:25px; }
+.mac-titlebar { height:44px; min-height:44px; margin-top:5px; }
+.ap-title { font-size:24px; }
+.mac-tabs { height:54px; padding:0 9% 0 19%; margin-bottom:0; }
+.mac-tab { font-size:21px; }
+.mac-body { border-top:0; padding:8px 8px 5px; }
+.mac-help { font-size:20px; line-height:1.2; }
+.mac-help-head { font-size:22px; }
+.mac-help-copy p { margin:14px 0 18px; }
+.mac-legend { line-height:1.9; }
+.ref-stage { padding:0; border:2px solid #111; border-radius:3px; }
+.ref-stage > .af-app { position:relative!important; inset:auto; width:100%!important; height:100%; border:0; border-radius:0; box-shadow:none; transform:none!important; }
+.ref-stage .af-shell,.ref-stage .af-main { width:100%; height:100%; min-width:0; }
+.ref-stage .af-work.approve { display:grid; grid-template-columns:minmax(0,42fr) minmax(0,27fr) minmax(0,28fr)!important; grid-template-rows:37% minmax(0,1fr); gap:14px 24px; padding:10px 12px; }
+.ref-stage .af-column { border:0; overflow:hidden; }
+.ref-stage .af-colhead { height:34px; padding:0 5px 7px; color:#000; background:#fff; border:0; font-size:23px; font-weight:700; }
+.ref-stage .mac-invoices { grid-area:1/1; }
+.ref-stage .mac-details { grid-area:2/1; border:1px solid #888; border-radius:2px; }
+.ref-stage .mac-details .af-colhead { height:38px; border-bottom:1px solid #888; padding:4px 12px; }
+.ref-stage .mac-staff { grid-area:2/2; }
+.ref-stage .mac-route-panel { grid-area:2/3; }
+.ref-stage .mac-policy { grid-area:1/2/2/4; min-width:0; }
+.ref-stage .mac-policy h3 { font-size:23px; margin:0 0 10px; line-height:1.1; }
+.ref-stage .mac-policy h3 span { font-weight:400; font-size:20px; }
+.ref-stage .mac-policy table { width:100%; border:2px solid #111; font-size:18px; table-layout:fixed; }
+.ref-stage .mac-policy th { padding:8px 10px; font-size:18px; background:#eee; text-align:left; }
+.ref-stage .mac-policy th:first-child { width:24%; }
+.ref-stage .mac-policy td { height:49px; padding:6px 12px; line-height:1.2; }
+.ref-stage .mac-policy .mac-current-band { background:#ccc; }
+.ref-stage .mac-invoice-head,.ref-stage .af-invoice { display:grid; grid-template-columns:22% 34% 22% 22%; align-items:center; }
+.ref-stage .mac-invoice-head { border:2px solid #111; border-bottom:1px solid #777; margin-right:24px; min-height:31px; background:repeating-linear-gradient(135deg,#eee 0 1px,#fff 1px 3px); font-size:19px; }
+.ref-stage .mac-invoice-head span { padding:2px 8px; border-right:1px solid #888; }
+.ref-stage .af-scrollbox { border:2px solid #111; }
+.ref-stage .af-pane { inset:0 23px 0 0; }
+.ref-stage .af-content { padding:0!important; }
+.ref-stage .af-invoice { width:100%; min-height:29px; padding:2px 0; margin:0; background:#fff; color:#000; border:0!important; box-shadow:none!important; font-size:19px!important; white-space:nowrap; overflow:hidden; }
+.ref-stage .af-invoice span { padding:0 8px; overflow:hidden; text-overflow:ellipsis; }
+.ref-stage .af-invoice span:last-child { text-align:right; }
+.ref-stage .af-invoice.selected { color:#fff!important; background:#000!important; border:0!important; }
+.ref-stage .af-track { visibility:visible!important; top:24px; bottom:24px; width:23px; background:repeating-linear-gradient(135deg,#fff 0 1px,#ddd 1px 2px); border-left:2px solid #111; }
+.ref-stage .af-track:before,.ref-stage .af-track:after { position:absolute; left:-2px; right:-1px; height:24px; text-align:center; background:#fff; border:2px solid #111; color:#000; line-height:20px; font-size:21px; }
+.ref-stage .af-track:before { content:'▲'; top:-25px; }
+.ref-stage .af-track:after { content:'▼'; bottom:-25px; }
+.ref-stage .af-thumb { border:1px solid #111; left:0; right:0; border-radius:0; background:#fff; max-height:36%; }
+.ref-stage .mac-detail-fields { padding:9px 21px; flex:1; display:flex; flex-direction:column; gap:7px; min-height:0; }
+.ref-stage .mac-detail-line { display:grid; grid-template-columns:23% minmax(0,1fr); align-items:center; gap:6px; font-size:19px; min-height:31px; }
+.ref-stage .mac-value { min-height:31px; padding:3px 8px; border:2px solid #111; background:#fff; box-shadow:inset 1px 1px #ddd; white-space:pre-line; overflow:hidden; }
+.ref-stage .mac-description { flex:1; min-height:62px; align-items:start; }
+.ref-stage .mac-description .mac-value { height:100%; }
+.ref-stage .mac-value-menu { position:relative; padding-right:29px; }
+.ref-stage .mac-value-menu:after { content:'▼'; position:absolute; top:0; right:0; bottom:0; width:25px; border-left:2px solid #111; text-align:center; background:#eee; }
+.ref-stage .mac-terms { border:0; box-shadow:none; }
+.ref-stage .mac-staff-head,.ref-stage .mac-route-head { height:37px; flex:none; display:grid; font-size:19px; background:repeating-linear-gradient(135deg,#eee 0 1px,#fff 1px 3px); border:2px solid #111; border-bottom:1px solid #888; }
+.ref-stage .mac-staff-head { grid-template-columns:48% 52%; margin-right:23px; }
+.ref-stage .mac-staff-head span,.ref-stage .mac-route-head span { padding:6px 9px; border-right:1px solid #888; }
+.ref-stage .mac-staff .af-scrollbox { flex:none; height:68%; border-top:0; }
+.ref-stage .af-person { min-height:33px; height:33px; padding:0; border:0; }
+.ref-stage .af-person .mac-person-button { display:grid; grid-template-columns:22px minmax(0,1fr) minmax(0,1fr); gap:5px; width:100%; height:33px; min-height:0; border:0!important; padding:0 5px; box-shadow:none!important; background:#fff; font-size:18px!important; font-weight:400; }
+.ref-stage .mac-person-button span { align-self:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ref-stage .mac-person-icon { font-size:24px; }
+.ref-stage .mac-person-button:hover { color:#fff; background:#000; }
+.ref-stage .mac-route-head { grid-template-columns:12% 38% 50%; }
+.ref-stage .mac-route-body { flex:1; min-height:0; overflow:auto; border:2px solid #111; border-top:0; }
+.ref-stage .af-routechip { display:grid; grid-template-columns:10% 37% minmax(0,1fr) 20px; width:100%; border:0; border-bottom:1px solid #888; border-radius:0; padding:7px 5px; font-size:17px; background:#fff; }
+.ref-stage .af-routechip button { min-height:20px; padding:0; border:0!important; box-shadow:none!important; }
+.ref-stage .af-routechip svg { width:15px; height:15px; }
+.ref-stage .mac-route-controls { display:flex; gap:7px; margin-top:13px; flex:none; height:43px; }
+.ref-stage .mac-route-controls button { min-height:0; padding:3px 8px; font-size:17px!important; border-radius:3px!important; white-space:nowrap; }
+.ref-stage .mac-route-controls button:nth-child(-n+2) { font-size:27px!important; padding:2px 7px; }
+.ref-stage .mac-add-route { flex:1; }
+.ref-stage .af-footer { border:0; background:#fff; padding:0; margin-top:12px; min-height:45px; display:block; }
+.ref-stage .af-footer > .af-svg,.ref-stage .af-notice { display:none; }
+.ref-stage .af-footer .primary { display:flex; flex-direction:row-reverse; align-items:center; justify-content:center; gap:15px; width:100%; height:45px; font-size:20px!important; font-weight:400; color:#000; background:#fff; border-radius:3px!important; }
+.ref-stage .af-footer .primary .af-svg { width:25px; height:25px; background:#888; color:#fff; border-radius:3px; stroke-width:3px; }
+.ref-stage .af-btn:disabled { opacity:1; color:#888!important; background:#eee!important; }
+.ref-stage .mac-policy,.ref-stage .mac-staff,.ref-stage .mac-route-panel,.ref-stage .mac-route-controls { border:0!important; }
+.ref-stage .mac-policy td { height:clamp(25px,calc((var(--desk-height) * .37 - 110px) / 3),58px); }
+.ref-stage .mac-policy th:first-child { width:24%; }
+.ref-stage .mac-policy td:first-child { white-space:nowrap; padding:6px 10px; font-size:17px; }
+.ref-stage .mac-staff-head,.ref-stage .mac-route-head { border:2px solid #111!important; border-bottom:1px solid #888!important; }
+.ref-stage .mac-route-body { border:2px solid #111!important; border-top:0!important; }
+.ref-stage .mac-invoices .af-scrollbox { border-top:0; }
+.ref-stage .mac-invoices .af-track { top:-5px; }
+.ref-stage .mac-staff .af-track { top:-13px; }
+.ref-stage .mac-person-icon { height:22px; width:19px; fill:currentColor; }
+.ref-stage .mac-person-button .mac-person-name { white-space:normal; line-height:1.05; font-size:17px; }
+.ref-stage .mac-route-controls { gap:9px; }
+.ref-stage .mac-route-controls button { box-shadow:inset 1px 1px #fff,inset -1px -1px #aaa!important; }
+.ref-stage .mac-route-controls button:disabled { border-color:#888!important; }
+.ref-stage .mac-detail-fields { overflow:auto; }
+.ref-stage .mac-short-value { width:40%; min-width:145px; }
+.ref-stage .mac-policy th { background-image:repeating-linear-gradient(135deg,#eee 0 1px,#fff 1px 3px); }
+.mac-bitmap-icon { width:29px; height:29px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linejoin:miter; stroke-linecap:square; flex:none; }
+.mac-icon-filled,.mac-apple { fill:currentColor; stroke:none; }
+.mac-apple { width:24px; height:24px; }
+.mac-tab-icon { width:33px; height:33px; }
+.mac-help-head .mac-bitmap-icon { width:30px; height:30px; }
+.mac-legend-row { display:flex; align-items:center; gap:18px; min-height:38px; }
+.mac-legend-row .mac-bitmap-icon { width:27px; height:27px; }
+.mac-titlebar,.mac-help-head { background-image:repeating-linear-gradient(135deg,transparent 0 1px,#999 1px 1.5px,transparent 1.5px 3px); }
+.mac-help-copy .ref-panel { display:block!important; position:static; width:100%; margin:15px 0 12px; padding:12px; max-height:none; border:1px solid #777; background:#eee; box-shadow:none; }
+.mac-help-copy .ref-panel-title { display:none; }
+.mac-help-copy .ref-panel-text { font-size:18px; }
+.ref-body:has(.ref-panel) .mac-help { display:block; }
+.ref-panel { position:static; flex:none; width:18%; max-height:none; height:auto; box-shadow:none; }
+.ref-body.ref-panel-right { flex-direction:row; }
+.ref-note { bottom:20px; top:auto; left:19px; max-width:16%; font-size:17px; }
+.mac-instruction-row { max-height:none; overflow:visible; font-size:18px; padding:5px 12px; }
+.ref-float-dock { height:34px; position:relative; }
+.ref-float { bottom:2px; right:12px; }
+@media(max-width:1400px) {
+  .ref-stage .af-work.approve { gap:10px 15px; padding:8px; }
+  .ref-stage .af-colhead,.ref-stage .mac-policy h3 { font-size:19px; }
+  .ref-stage .mac-policy h3 span { font-size:16px; }
+  .ref-stage .mac-policy table,.ref-stage .mac-policy th,.ref-stage .mac-invoice-head { font-size:15px; }
+  .ref-stage .mac-policy td { height:39px; padding:5px 8px; }
+  .ref-stage .af-invoice { font-size:15px!important; }
+  .ref-stage .af-person .mac-person-button { font-size:14px!important; grid-template-columns:18px minmax(0,1fr) minmax(0,1fr); gap:3px; }
+  .ref-stage .mac-detail-fields { padding:8px 12px; gap:5px; }
+  .ref-stage .mac-detail-line { font-size:16px; min-height:27px; }
+  .ref-stage .mac-value { min-height:27px; padding:2px 5px; }
+  .ref-stage .mac-route-controls { gap:4px; height:35px; }
+  .ref-stage .mac-route-controls button { padding:2px 5px; font-size:12px!important; }
+  .ref-stage .mac-route-controls button:nth-child(-n+2) { padding:2px 4px; font-size:20px!important; }
+  .ref-stage .af-footer .primary { font-size:16px!important; height:37px; }
+  .ref-stage .af-footer { min-height:37px; }
+  .mac-help { font-size:17px; }
+  .mac-help-head { font-size:18px; }
+  .mac-help-copy p { margin:10px 0 14px; }
+  .mac-legend { line-height:1.8; }
+  .ap-title { font-size:21px; left:38%; }
+}
+@media(max-width:1100px), (max-height:700px) {
+  .mac-menu { font-size:16px; gap:14px; height:26px; }
+  .mac-titlebar { height:34px; min-height:34px; }
+  .ap-title { font-size:18px; left:34%; }
+  .mac-tabs { height:42px; }
+  .mac-tab { font-size:16px; }
+  .mac-help { font-size:14px; }
+  .mac-help-head { font-size:16px; }
+  .mac-help-copy p { margin:8px 0 10px; }
+  .ref-stage .af-work.approve { gap:8px 10px; padding:6px; }
+  .ref-stage .af-colhead { font-size:16px; height:29px; }
+  .ref-stage .mac-policy h3 { font-size:16px; margin-bottom:7px; }
+  .ref-stage .mac-policy h3 span { font-size:13px; }
+  .ref-stage .mac-policy table,.ref-stage .mac-policy th { font-size:12px; }
+  .ref-stage .mac-policy td { padding:4px 6px; height:31px; }
+  .ref-stage .mac-policy th { padding:5px 6px; }
+  .ref-stage .mac-invoice-head,.ref-stage .af-invoice { font-size:12px!important; }
+  .ref-stage .mac-invoice-head span,.ref-stage .af-invoice span { padding:2px 4px; }
+  .ref-stage .af-invoice { min-height:25px; }
+  .ref-stage .mac-detail-fields { padding:6px 10px; gap:4px; }
+  .ref-stage .mac-detail-line { min-height:23px; font-size:13px; }
+  .ref-stage .mac-value { min-height:23px; }
+  .ref-stage .mac-description { min-height:38px; }
+  .ref-stage .mac-staff-head,.ref-stage .mac-route-head { height:29px; font-size:14px; }
+  .ref-stage .mac-staff-head span,.ref-stage .mac-route-head span { padding:4px; }
+  .ref-stage .af-person,.ref-stage .af-person .mac-person-button { height:30px; min-height:30px; }
+  .ref-stage .af-person .mac-person-button { font-size:12px!important; gap:2px; padding:0 2px; grid-template-columns:14px minmax(0,1fr) minmax(0,1fr); }
+  .ref-stage .mac-person-icon { font-size:19px; }
+  .ref-stage .mac-route-controls { flex-wrap:wrap; height:auto; gap:3px; margin-top:8px; }
+  .ref-stage .mac-add-route { min-width:100%; height:28px; text-align:center; }
+  .ref-stage .af-footer { margin-top:8px; }
+  .ref-stage .af-footer .primary { font-size:13px!important; height:33px; gap:6px; }
+  .ref-stage .af-footer .primary .af-svg { width:19px; height:19px; }
+  .mac-instruction-row { font-size:14px; }
+}
+@media(max-width:1400px) {
+  .ref-stage .mac-policy td { height:clamp(25px,calc((var(--desk-height) * .37 - 95px) / 3),43px); }
+  .ref-stage .mac-policy td:first-child { font-size:14px; white-space:normal; }
+  .ref-stage .mac-person-button .mac-person-name { font-size:14px; }
+  .mac-legend-row { min-height:33px; gap:12px; }
+  .mac-legend-row .mac-bitmap-icon { width:23px; height:23px; }
+  .mac-tab-icon { width:28px; height:28px; }
+  .mac-help { font-size:14px; line-height:1.15; }
+  .mac-help-head { height:38px; }
+  .mac-help-copy p { margin:8px 0 10px; }
+  .mac-help-copy hr { margin:10px 0; }
+  .mac-legend-row { min-height:27px; }
+  .ref-stage .mac-detail-fields { padding:6px 12px; gap:3px; }
+  .ref-stage .mac-detail-line { font-size:14px; min-height:23px; }
+  .ref-stage .mac-value { min-height:23px; padding:2px 5px; }
+  .ref-stage .mac-details .af-colhead { height:32px; }
+  .ref-stage .mac-description { min-height:40px; }
+  .ref-stage .mac-short-value { min-width:125px; }
+  .ref-stage .mac-invoice-head,.ref-stage .af-invoice { grid-template-columns:25% 31% 25% 19%; }
+  .ref-stage .af-invoice { font-size:14px!important; }
+  .ref-stage .af-invoice span { padding:0 5px; }
+}
+@media(max-width:1100px), (max-height:700px) {
+  .mac-help { font-size:12px; line-height:1.15; }
+  .mac-help-copy p { margin:5px 0 7px; }
+  .mac-help-copy hr { margin:10px 0; }
+  .mac-legend-row { min-height:24px; gap:10px; }
+  .mac-legend-row .mac-bitmap-icon { width:21px; height:21px; }
+  .mac-tab-icon { width:25px; height:25px; }
+  .mac-help-head .mac-bitmap-icon { width:25px; height:25px; }
+  .ref-stage .mac-policy td { height:31px; }
+  .ref-stage .mac-policy td:first-child { font-size:12px; }
+  .ref-stage .mac-invoice-head,.ref-stage .af-invoice { grid-template-columns:28% 30% 23% 19%; font-size:11px!important; }
+  .ref-stage .mac-detail-fields { padding:5px 8px; gap:3px; }
+  .ref-stage .mac-detail-line { font-size:12px; min-height:22px; }
+  .ref-stage .mac-value { min-height:22px; }
+  .ref-stage .mac-details .af-colhead { height:29px; }
+  .ref-stage .mac-description { min-height:32px; }
+  .ref-stage .mac-short-value { min-width:98px; }
+  .ref-stage .af-person,.ref-stage .af-person .mac-person-button { height:37px; min-height:37px; }
+  .ref-stage .mac-person-button .mac-person-name { font-size:11px; }
+  .ref-stage .mac-person-button .mac-person-role { white-space:normal; font-size:11px; line-height:1.05; }
+  .ref-stage .mac-person-icon { width:14px; height:18px; }
+  .ref-stage .mac-route-controls { gap:4px; }
+  .ref-stage .mac-staff .af-track { top:-5px; }
+}
+
+/* Native utility messages share the desk's outlined controls and stippled frame. */
+.ref-ov { color:#000; font:17px/1.25 Arial,Helvetica,sans-serif; }
+.ref-ov-btn { border:2px solid #000; border-radius:3px; padding:5px 14px; min-height:31px; background:#fff; color:#000; box-shadow:inset 1px 1px #fff,inset -1px -1px #bbb; }
+.ref-ov-primary { color:#000; background:#eee; font-weight:700; }
+.ref-ov-cookie { left:19%; right:16px; bottom:8px; padding:8px 12px; gap:14px; border:2px solid #111; background:#fff; box-shadow:2px 2px #777; border-radius:5px!important; }
+.ref-ov-cookie .ref-ov-text { font-size:16px; }
+.ref-ov-banner { position:fixed; z-index:1100; top:76px; left:8px; right:8px; margin:0; min-height:45px; padding:7px 12px; border:2px solid #111; border-radius:4px!important; color:#000; background:#fff; }
+.ref-ov-banner .ref-ov-text { font-size:17px; font-weight:700; }
+.ref-ov-banner .ref-ov-btn { min-height:28px; padding:3px 10px; }
+.ref-ov-chat,.ref-ov-toast { border:2px solid #111; border-radius:4px!important; background:#fff; box-shadow:3px 3px #777; }
+.ref-ov-chat { bottom:85px; right:22px; }
+.ref-ov-toast { top:155px; }
+.ref-ov-chat .ref-ov-btn,.ref-ov-toast .ref-ov-btn { padding:0 4px; border:1px solid #111; min-height:24px; color:#000; }
+.ref-ov-promo { inset:145px 0 85px; background:transparent; pointer-events:none; }
+.ref-ov-box { pointer-events:auto; padding:26px; width:min(520px,calc(100vw - 40px)); border:3px double #000; border-radius:4px; background:#fff; box-shadow:4px 4px #777; font-size:20px; }
+.ref-stage .mac-route-panel { border-left:1px solid #aaa!important; margin-left:-12px; padding-left:12px; }
+@media(max-width:1100px), (max-height:700px) {
+  .ref-ov { font-size:14px; }
+  .ref-ov-cookie { left:20px; padding:7px 10px; }
+  .ref-ov-cookie .ref-ov-text,.ref-ov-banner .ref-ov-text { font-size:13px; }
+  .ref-ov-btn { font-size:13px; padding:4px 9px; }
+  .ref-ov-banner { min-height:36px; padding:4px 8px; }
+  .ref-ov-box { font-size:16px; }
+  .ref-stage .mac-route-panel { margin-left:-5px; padding-left:5px; }
+}
+.mac-help { container-type:size; }
+.mac-help-head { font-size:clamp(16px,2.8cqh,22px); }
+.mac-help-copy { font-size:clamp(12px,2.55cqh,20px); line-height:1.2; }
+.mac-help-copy p { margin:clamp(5px,1.5cqh,12px) 0 clamp(7px,2cqh,16px); }
+.mac-legend-row { min-height:clamp(24px,4.9cqh,38px); }
+.mac-help-copy .ref-panel-text { font-size:clamp(14px,2.3cqh,18px); font-weight:400; }
+.ref-stage .mac-detail-fields { gap:clamp(2px,calc(var(--desk-height) * .006),5px); }
+.ref-stage .mac-detail-line { min-height:clamp(21px,calc(var(--desk-height) * .04),31px); font-size:clamp(12px,calc(var(--desk-height) * .026),19px); }
+.ref-stage .mac-value { min-height:clamp(21px,calc(var(--desk-height) * .04),31px); }
+.ref-stage .mac-description { min-height:clamp(32px,calc(var(--desk-height) * .08),62px); }
+.ref-stage,.ref-stage *,.mac-help,.mac-help * { font-family:'Arial Narrow','Liberation Sans Narrow',Arial,Helvetica,sans-serif!important; }
+.mac-help,.mac-help * { font-family:Arial,Helvetica,sans-serif!important; }
+.mac-help-copy { padding-left:20px; padding-right:20px; font-size:clamp(12px,min(2.7cqh,7cqw),20px); letter-spacing:.25px; }
+.mac-help-copy .mac-legend { letter-spacing:0; }
+.mac-titlebar,.mac-help-head { background-image:repeating-conic-gradient(#aaa 0 25%,#fff 0 50%); background-size:2px 2px; }
+.ref-stage .mac-invoice-head,.ref-stage .mac-staff-head,.ref-stage .mac-route-head,.ref-stage .mac-policy th { background-image:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%); background-size:2px 2px; }
+.ref-stage .mac-staff-head { position:relative; }
+.ref-stage .mac-staff-head span:first-child { padding-left:36px; }
+.ref-stage .mac-staff-head:before { content:''; position:absolute; top:0; bottom:0; left:29px; border-left:1px solid #888; }
+@media(max-width:1400px) {
+  .mac-help-copy { padding-left:12px; padding-right:12px; letter-spacing:0; }
+  .ref-stage .mac-staff-head span:first-child { padding-left:29px; }
+  .ref-stage .mac-staff-head:before { left:23px; }
+}
+@media(max-width:1100px) {
+  .ref-stage .mac-staff-head span:first-child { padding-left:24px; }
+  .ref-stage .mac-staff-head:before { left:18px; }
+}
+.ref-stage .mac-route-controls button:nth-child(3),.ref-stage .mac-add-route { display:flex; align-items:center; justify-content:center; gap:6px; }
+.mac-control-icon { width:25px; height:29px; fill:none; stroke:currentColor; stroke-width:1.8; flex:none; }
+.mac-control-arrow { width:26px; fill:currentColor; stroke:none; }
+@media(min-width:1401px) {
+  .ref-stage .af-colhead,.ref-stage .mac-policy h3 { font-size:24px; }
+  .ref-stage .mac-policy table,.ref-stage .mac-policy th { font-size:20px; }
+  .ref-stage .mac-policy td:first-child { font-size:19px; }
+  .ref-stage .af-invoice { font-size:20px!important; }
+  .ref-stage .mac-invoice-head,.ref-stage .mac-staff-head,.ref-stage .mac-route-head { font-size:20px; }
+  .ref-stage .af-person .mac-person-button { font-size:20px!important; grid-template-columns:22px minmax(0,1.15fr) minmax(0,1fr); }
+  .ref-stage .mac-person-button .mac-person-name { font-size:19px; }
+  .ref-stage .mac-detail-line { font-size:clamp(12px,calc(var(--desk-height) * .027),20px); }
+  .ref-stage .mac-route-controls button { font-size:18px!important; }
+}
+@media(max-width:1400px) {
+  .mac-control-icon { width:19px; height:24px; }
+  .mac-control-arrow { width:21px; }
+  .ref-stage .mac-route-controls button:nth-child(3),.ref-stage .mac-add-route { gap:3px; }
+}

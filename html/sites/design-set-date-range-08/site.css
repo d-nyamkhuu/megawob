@@ -1,0 +1,136 @@
+:root{--bg:#fcf8ee;--panel:#ffffff;--fg:#0c0b28;--accent:#ff665f;--lilac:#c3b5ff;--muted:#727792;--line:#dcdfea;--font:"Segoe UI","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;transition:none!important;animation:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;font-size:16px;position:relative}
+button,input,textarea{font-family:inherit}
+button{cursor:pointer}
+input,textarea{caret-color:transparent!important}
+.ds-top,.ds-menu,.ds-rail{display:none}
+.ds-body{flex:1;min-height:0;display:flex;position:relative;z-index:1}
+.ds-content{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;position:relative;padding:0 14px 16px 17px}
+.ds-main{flex:1;min-height:0;display:flex}
+.ds-stage{position:relative;flex:1;min-width:0;min-height:0}
+
+/* header zone */
+.ds-header-note{position:relative;flex:0 0 28.05vh;min-height:0;padding:2.4vh 0 14px 7.9vw;background:transparent;border:0}
+.ds-icon{position:absolute;left:1.3vw;top:2.5vh}
+.ds-icon svg{width:5.3vw;height:10.3vh}
+.ds-eyebrow{font-size:clamp(11px,1.15vw,19px);letter-spacing:.24em;color:#3a3560;margin-bottom:2px}
+.ds-instruction{font-size:min(var(--hero-size,4.1vw),7.4vh);line-height:1.02;font-weight:900;letter-spacing:-.045em;color:#080824;max-width:59vw;position:relative;z-index:2}
+.ds-hot{color:var(--accent);white-space:nowrap}
+.ds-sub{margin-top:1.7vh;font-size:clamp(11px,1.3vw,22px);color:#6c6a86;position:relative;z-index:2}
+.ds-scribble{position:absolute;right:1.6vw;top:13.2vh;width:4.6vw;white-space:pre-line;text-align:center;font:italic 600 clamp(14px,1.55vw,26px)/1.05 "Segoe Print","Comic Sans MS",cursive;color:#111128;transform:rotate(-14deg)}
+.ds-scribble::after{content:"";display:block;width:3.2vw;border-top:4px solid var(--accent);margin:14px auto 0;transform:rotate(-10deg)}
+.ds-header-note::after{content:"";position:absolute;right:6.6vw;bottom:0;width:4.6vw;height:5.7vh;background:radial-gradient(circle,#cbc1fb 3px,transparent 4px) 0 0/1.16vw 2.1vh}
+.ds-blob{position:absolute;pointer-events:none;z-index:1}
+.ds-blob-a{left:49.5vw;top:0;width:15vw;height:11.2vh;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 105' preserveAspectRatio='none'><path d='M0 0H250L215 105Q85 87 0 0Z' fill='%23c3b5ff'/></svg>") center/100% 100% no-repeat}
+.ds-blob-b{left:64.5vw;top:2.2vh;width:5vw;height:5vw;border-radius:50%;background:#ff8588;border:2px solid #fff}
+
+/* task card */
+.ds-stage .fd-card{left:0!important;top:0!important;width:100%!important;height:100%!important;padding:2.7vh 2.2vw!important;background:#fff!important;border:1.5px solid var(--line)!important;border-radius:14px!important;box-shadow:none!important;overflow:hidden}
+.fd-card::before{content:"Select Dates";display:block;font-size:clamp(18px,1.9vw,31px);font-weight:800;letter-spacing:-.01em;color:#120d33}
+.fd-title,.fd-sub,.fd-today,.fd-notes{display:none!important}
+.ds-stage .fd-row{margin-bottom:0}
+.fd-row:has(.fd-control)::before{content:"Choose a pick-up date and return date for your trip.";display:block;font-size:clamp(11px,1.2vw,20px);line-height:1.3;color:var(--muted);margin:4px 0 2vh}
+.fd-label{display:none!important}
+.fd-help{display:none}
+.ds-stage .fd-help:not(:empty){display:block;position:absolute;bottom:2vh;left:15vw;right:2.2vw;font-size:clamp(11px,1vw,16px);color:var(--muted);margin:0;min-height:0}
+.ds-stage .fd-control{height:calc(7.1vh + 30px);padding:0;border:0!important;background:transparent;box-shadow:none!important;overflow:visible;display:block;cursor:default}
+.ds-stage .fd-control>svg{display:none}
+.ds-stage .fd-control .fd-txt{display:grid;grid-template-columns:1fr 1fr;gap:2vw;overflow:visible;padding-top:30px}
+.fd-control .fd-arrowr{display:none}
+.fd-txt>span{position:relative;display:block;height:7.1vh;line-height:calc(7.1vh - 4px);border:1.5px solid #1d1745;border-radius:10px;background-color:#fff;padding:0 46px 0 5.1vw;font-size:clamp(13px,1.3vw,21px);font-weight:500;white-space:nowrap;cursor:pointer;color:#1d1745}
+.fd-txt>span{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231d1745' stroke-width='1.8'><rect x='3' y='5' width='18' height='16' rx='2'/><path d='M3 10h18M8 2v5M16 2v5'/></svg>"),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%231d1745' stroke-width='2.4'><path d='M3 7l7 7 7-7'/></svg>");background-repeat:no-repeat;background-position:1.7vw center,right 1.7vw center;background-size:1.7vw 1.7vw,1.2vw 1.2vw}
+.fd-txt>span.fd-ph::after{content:"Select date";font-size:clamp(13px,1.3vw,21px);color:var(--muted)}
+.fd-txt>span::before{content:attr(data-cap);position:absolute;left:0;top:-27px;line-height:22px;font-size:clamp(12px,1.3vw,21px);font-weight:500;color:#1d1745}
+.fd-txt>span.fd-ph{font-size:0;color:var(--muted)}
+.fd-txt>span.fd-ph::before{font-size:clamp(12px,1.3vw,21px)}
+.fd-txt>span.fd-ph{padding-right:0}
+.fd-txt>span.fd-ph>*{display:none}
+.fd-ph{color:var(--muted)}
+.fd-control.open .fd-txt>span{box-shadow:none}
+
+/* calendars */
+.fd-row:not(:has(.fd-control)){display:none}
+.ds-stage .fd-grid{grid-auto-rows:5.1vh}
+.ds-stage .fd-month:has(.fd-grid>:nth-child(36)) .fd-grid{grid-auto-rows:4.25vh}
+.ds-stage .fd-adjacent{cursor:default;opacity:1;color:#a3a5b4}
+.ds-stage .fd-adjacent:hover{background:transparent}
+.ds-stage .fd-pop{position:relative!important;top:auto!important;height:auto!important;margin-top:2.3vh;left:0!important;width:100%!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important}
+.ds-stage .fd-months{display:grid;grid-template-columns:1fr 1fr;gap:2vw}
+.ds-stage .fd-month{border:1.5px solid var(--line);border-radius:8px;padding:0 1.4vw 1.6vh;background:#fff;min-height:37.9vh}
+.ds-stage .fd-month .fd-nav svg{width:1.3vw;height:2.5vh}
+.ds-stage .fd-head{height:6.5vh}
+.ds-stage .fd-mtitle{font-size:clamp(14px,1.4vw,23px);font-weight:800;color:#120d33}
+.ds-stage .fd-nav{color:#1d1745}
+.ds-stage .fd-dow,.ds-stage .fd-grid{grid-template-columns:repeat(7,1fr)}
+.ds-stage .fd-dow{height:4.1vh;font-size:clamp(10px,.95vw,16px);font-weight:500;color:#a5a2bb}
+.ds-stage .fd-day{font-size:clamp(12px,1.25vw,20px);font-weight:500;color:#120d33;border-radius:10px}
+.ds-stage .fd-day.out{color:#a3a5b4}
+.ds-stage .fd-day.today{box-shadow:inset 0 0 0 2px #1d1745}
+.ds-stage .fd-day.inr{background:#ece8fb;border-radius:0}
+.ds-stage .fd-day.sel,.ds-stage .fd-day.sel:hover,.ds-stage .fd-day.out.sel{background:var(--accent);color:#fff}
+.ds-stage .fd-day:hover{background:#f1eeff}
+
+/* side zone */
+.ds-side{flex:0 0 21.7vw;margin:14px 14px 16px 0;padding:3.3vh 1.3vw;background:linear-gradient(120deg,#efebff,#eeebfc);border-radius:16px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.ds-side h3{margin:0 0 4.2vh;font-size:clamp(18px,1.9vw,31px);font-weight:800;color:#080824}
+.ds-car{display:flex;align-items:center;gap:1.3vw;font-size:clamp(14px,1.45vw,24px);font-weight:700;padding-bottom:3.2vh;border-bottom:1.5px solid #cfccdf;height:8.1vh;flex:none}
+.ds-car svg{width:3vw;height:4.8vh;flex:none}
+.ds-fact{display:flex;gap:1.8vw;align-items:flex-start;padding:3.5vh 0 0;border-bottom:0;font-size:clamp(12px,1.2vw,20px);height:11vh;flex:none}
+.ds-fact:nth-of-type(3){height:13.8vh;border-bottom:1.5px solid #cfccdf}
+.ds-fact:nth-of-type(4){height:13.5vh}
+.ds-gl{flex:none;width:2.4vw;padding-top:9px}
+.ds-gl svg{width:2.4vw;height:4vh}
+.ds-k{color:#080824;margin-bottom:1.4vh}
+.ds-v{color:var(--muted)}
+.ds-footer{flex:none;height:auto;display:flex;flex-direction:column;gap:2.1vh;padding:0;margin-top:2.4vh;background:none;border:0}
+.ds-submit{height:min(8vh,75px);font-size:clamp(16px,1.6vw,26px);font-weight:800;background:var(--accent);color:#fff;border:0;border-radius:10px;width:100%}
+.ds-clear{height:min(7vh,64px);font-size:clamp(13px,1.1vw,18px);font-weight:500;background:transparent;color:#120d33;border:2px solid #1d1745;border-radius:10px;width:100%}
+.ds-dots{position:absolute;right:2.9vw;bottom:1.2vh;width:10.6vw;height:8.3vh;background-image:radial-gradient(circle,#ff8b85 5px,transparent 5.5px);background-size:1.75vw 2.8vh;pointer-events:none}
+.ds-side::after{content:"";position:absolute;right:-8vw;bottom:-19vh;width:17vw;height:36vh;border-radius:50%;background:var(--lilac);z-index:0;pointer-events:none}
+.ds-dots{z-index:1}
+body::before{content:"";position:fixed;left:0;bottom:0;width:6.8vw;height:15.3vh;background:var(--lilac);clip-path:polygon(0 0,100% 100%,0 100%);z-index:2;pointer-events:none}
+.ds-zig{position:absolute;left:4.2vw;bottom:1.8vh;width:9.3vw;height:6.4vh;z-index:3;pointer-events:none}
+.ds-zig svg{width:100%;height:100%}
+
+/* kit-owned overlays and toast */
+.ds-toast{position:relative;flex:none;max-width:none;margin:8px 18px;padding:12px 18px;z-index:9;background:#fff8db;color:#211f16;border:1px solid #c7af75;border-radius:8px}
+.ds-toast .ds-instruction{font-size:17px!important;line-height:1.3!important;max-width:none}
+.ds-brief{flex:0 0 27%;padding:24px 20px 24px 8px;background:transparent;border:0}
+.ds-brief h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;margin:0 0 12px}
+.ds-brief .ds-instruction{font-size:clamp(22px,2.4vw,38px);max-width:none}
+.ds-main{gap:16px}
+.ds-overlay{z-index:1000;position:fixed;padding:22px;max-width:420px;background:#fff;border:2px solid #1d1745;box-shadow:0 12px 40px #0004;border-radius:10px;right:24px;bottom:85px}
+.ds-overlay button{padding:8px 16px;margin:16px 8px 0 0;font:inherit;background:var(--accent);color:#fff;border:0;border-radius:6px}
+.ds-overlay-cookie{left:0;right:0;bottom:0;max-width:none;display:flex;align-items:center;justify-content:space-between}
+.ds-overlay-banner{top:12px;bottom:auto;left:15%;right:15%;max-width:none}
+.ds-overlay-promo{top:27%;bottom:auto;left:35%;right:auto}
+.ds-overlay-chat{width:330px}
+.ds-overlay-toast{top:60px;bottom:auto}
+
+/* episode settings: instruction scenarios and end actions */
+.ds-header-note[data-display="panel"],.ds-header-note[data-display="hidden"]{flex-basis:19vh}
+.ds-header-note[data-display="toast"]{flex-basis:19vh}
+.ds-submit-head{position:absolute;right:2vw;top:.5vh;z-index:5;width:auto;padding:0 22px;min-width:100px;height:5.5vh;border:2px solid #1d1745;box-shadow:3px 3px 0 #c3b5ff}
+.ds-task-note{flex:none;margin:0 0 1.6vh;padding:1.2vh 1vw;background:#fff;border:1px solid #d8d2f2;border-left:4px solid #ff665f;border-radius:8px;font-size:clamp(11px,1vw,16px);line-height:1.3;color:#1d1745;overflow-wrap:anywhere}
+.ds-task-note strong{display:block;margin-bottom:.35vh;font-size:clamp(12px,1.1vw,18px);font-weight:800}
+.ds-toast-note{flex:none;position:relative;z-index:4;margin:0 0 1.2vh 7.9vw;padding:8px 14px;max-width:67vw;border:1px solid #d8d2f2;border-left:4px solid #ff665f;border-radius:8px;background:#fff;color:#1d1745;font-size:clamp(11px,1vw,16px);line-height:1.25;overflow-wrap:anywhere}
+.ds-toast-note strong{margin-right:10px;color:#7064d5}
+.ds-end-link{height:auto;min-height:3.2vh;padding:3px 2px;border:0;background:transparent;color:#1d1745;text-decoration:underline;font-size:clamp(12px,1.1vw,18px);font-weight:700}
+.ds-xtra{height:3vh;min-height:20px;padding:0 8px;border:1px solid #1d1745;border-radius:6px;background:transparent;color:#7064d5;font-size:clamp(10px,.9vw,14px);font-weight:600}
+
+.ds-has-head-submit .ds-instruction{max-width:46vw}
+
+/* Shared frame controls, arranged in the trip planner's existing zones. */
+.ds-header-note>.ref-tools{position:absolute;right:2vw;top:.5vh;z-index:5;display:flex;align-items:center;gap:6px;max-width:30vw;flex-wrap:wrap;justify-content:flex-end}
+.ds-header-note .ds-submit{width:auto;min-width:60px;height:5.5vh;padding:0 16px;border:2px solid #1d1745;box-shadow:3px 3px 0 #c3b5ff}
+.ds-header-note .ref-icon{min-width:48px}
+.ds-task-note .ref-panel-title{display:block;margin-bottom:.35vh;font-size:clamp(12px,1.1vw,18px);font-weight:800}
+.ds-footer>.ref-tools,.ds-footer .ref-float-dock{display:contents}
+.ds-footer .ds-xtra{order:3}
+.ds-footer .ds-clear{order:2}
+.ds-end-link{display:block;text-align:center;cursor:pointer}
+.ds-toast-note{display:flex;align-items:center;gap:12px}
+.ref-note-text{flex:1}
+.ref-note-x{border:0;background:transparent;color:#7064d5;font:inherit;font-size:20px;cursor:pointer}

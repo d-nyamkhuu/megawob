@@ -1,0 +1,469 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Rivermere's paper-and-orange banking workspace. */
+:root {
+  --bg: #f7fafc;
+  --panel: #fff;
+  --fg: #0b1020;
+  --muted: #5e6f89;
+  --line: #dfe6ee;
+  --accent: #ff6b25;
+}
+body {
+  background: #f7fafc;
+  color: #0b1020;
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-size: 16px;
+}
+.ref-task {
+  height: 62px;
+  min-height: 62px;
+  padding: 0 30px;
+  gap: 22px;
+  background: #fff;
+  border-bottom: 1px solid #dfe6ee;
+  box-shadow: 0 1px 3px rgba(11,16,32,.04);
+}
+.ref-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0b1020;
+  white-space: nowrap;
+}
+.ref-brand::before {
+  content: "";
+  display: inline-block;
+  width: 31px;
+  height: 30px;
+  margin-right: 15px;
+  vertical-align: -7px;
+  background: #ff6b25;
+  clip-path: polygon(12% 15%, 100% 0, 81% 35%, 0 100%, 22% 56%, 3% 47%);
+}
+.ref-instruction {
+  color: #3d485d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.ref-submit {
+  border-radius: 7px;
+  background: #0066e5;
+  font-weight: 500;
+}
+.ref-xtra { border-radius: 7px; }
+.ref-body { min-height: 0; background: #f7fafc; }
+.ref-stage { align-items: stretch !important; justify-content: stretch !important; padding: 0; }
+.ref-panel, .ref-side {
+  background: #fff;
+  border-color: #dfe6ee;
+  border-radius: 8px;
+}
+.ref-foot { background: #fff; border-color: #dfe6ee; }
+/* The bank page is a focused dispute tool; retain its working content while removing
+   the base widget's surrounding account-navigation frame. */
+.ref-stage nav, .ref-stage aside { display: none !important; }
+.ref-stage > header, .ref-stage > [role="navigation"] { display: none !important; }
+.ref-stage > * { font-family: Arial, "Segoe UI", sans-serif; }
+.ref-stage button, .ref-stage input, .ref-stage textarea, .ref-stage select {
+  font-family: inherit;
+  border-color: #cfd9e4;
+  border-radius: 6px;
+}
+.ref-stage input:focus, .ref-stage textarea:focus { outline-color: #ff6b25; }
+.ref-stage table { border-color: #dfe6ee; }
+.ref-stage th { background: #f7fafc; color: #5e6f89; font-weight: 500; }
+.ref-stage td { border-color: #dfe6ee; color: #3d485d; }
+.ref-stage [role="button"] { border-radius: 6px; }
+
+/* Account inspector and utility strip from the Rivermere dispute workspace. */
+.ref-task { min-height: 62px; height: auto; padding: 8px 30px; }
+.ref-tools { margin-left: auto; gap: 14px; }
+.bank-date { color: #252d3d; font-size: 14px; white-space: nowrap; }
+.bank-tool-divider { width: 1px; height: 24px; background: #dfe6ee; }
+.bank-bell { position: relative; width: 24px; height: 28px; }
+.bank-bell::before { content: ''; position: absolute; left: 6px; top: 5px; width: 10px; height: 14px; border: 1.7px solid #111827; border-radius: 8px 8px 4px 4px; }
+.bank-bell::after { content: ''; position: absolute; left: 4px; top: 17px; width: 14px; height: 4px; border-bottom: 1.7px solid #111827; border-radius: 0 0 8px 8px; box-shadow: 5px 5px 0 -3px #111827; }
+.bank-avatar { position: relative; width: 32px; height: 32px; border-radius: 50%; background: #dce2e9; overflow: hidden; }
+.bank-avatar::before { content: ''; position: absolute; left: 11px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #a6b0bc; }
+.bank-avatar::after { content: ''; position: absolute; left: 6px; bottom: -5px; width: 20px; height: 17px; border-radius: 12px 12px 6px 6px; background: #a6b0bc; }
+.ref-body { background: #f7fafc; }
+.bank-account {
+  flex: 0 0 21%; min-width: 230px; max-width: 350px; align-self: stretch;
+  margin: 22px 20px 0 28px; padding: 18px 20px; height: fit-content;
+  border: 1px solid #dfe6ee; border-radius: 12px; background: #fff;
+  box-shadow: 0 2px 8px rgba(11,16,32,.035); color: #0b1020;
+}
+.bank-account-title { font-size: clamp(18px, 1.4vw, 23px); font-weight: 700; letter-spacing: -.03em; }
+.bank-account-title::before { content: ''; display: inline-block; width: 5px; height: 38px; margin: -5px 14px -10px -20px; border-radius: 4px; background: #ff6b25; }
+.bank-account-title::after { content: '⌄'; float: right; margin: 0 2px 0 10px; color: #0b1020; font-size: 20px; font-weight: 400; }
+.bank-account-number { margin: 2px 0 18px; color: #3d485d; font-size: 18px; letter-spacing: .04em; }
+.bank-card { position: relative; height: clamp(130px, 11vw, 184px); padding: 16px; border-radius: 13px; overflow: hidden; color: white; background: linear-gradient(155deg,#26343d 0%,#1c2932 60%,#2b3a44 60%); }
+.bank-card::before { content: ''; position: absolute; inset: -30% -10% 30% 0; transform: skewY(-18deg); background: linear-gradient(165deg,rgba(255,255,255,.045),transparent 65%); }
+.bank-card::after { content: ''; position: absolute; inset: 30% -10% -40% 5%; transform: skewY(-18deg); background: linear-gradient(165deg,rgba(255,255,255,.035),transparent 72%); }
+.bank-card-brand { position: relative; z-index: 1; display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
+.bank-card-brand::before { content: ''; display: inline-block; flex: 0 0 26px; height: 25px; background: #ff6b25; clip-path: polygon(0 66%, 18% 36%, 73% 5%, 100% 0, 85% 28%, 46% 48%, 25% 70%, 5% 100%, 13% 72%); }
+.bank-card-bottom { position: absolute; z-index: 1; left: 18px; bottom: 20px; font-size: 18px; }
+.bank-card-network { position: absolute; z-index: 1; right: 18px; bottom: 14px; font-size: 23px; font-style: italic; }
+.bank-balance { display: flex; flex-direction: column; gap: 3px; padding: 15px 0; border-bottom: 1px solid #dfe6ee; color: #3d485d; font-size: 16px; }
+.bank-balance strong { color: #0b1020; font-size: 20px; font-weight: 500; }
+.bank-balance-primary strong { font-size: 32px; font-weight: 700; letter-spacing: -.04em; }
+.bank-status { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding-top: 15px; color: #0b1020; font-size: 18px; }
+.bank-status-label { grid-column: 1 / -1; color: #3d485d; font-size: 16px; }
+.bank-status-line { display: flex; align-items: center; gap: 10px; }
+.bank-status-value { color: #0b1020; font-size: 18px; }
+.bank-status-dot { width: 17px; height: 17px; border-radius: 50%; background: #20b43b; }
+.ref-stage { padding: 22px 24px 24px 20px; align-items: stretch !important; justify-content: stretch !important; }
+.ref-stage > * { min-width: 0; }
+.ref-stage [class*="panel"], .ref-stage section { border-radius: 8px; }
+.ref-brand::before {
+  width: 35px; height: 32px; margin-right: 12px; vertical-align: -8px;
+  clip-path: polygon(4% 46%, 18% 24%, 78% 2%, 100% 0, 86% 27%, 47% 43%, 24% 64%, 4% 100%, 11% 70%, 0 63%);
+}
+.ref-brand::after {
+  content: ''; display: inline-block; position: absolute; left: 32px; top: 28px;
+  width: 16px; height: 11px; transform: skew(-35deg) rotate(-20deg);
+  border-radius: 90% 0 90% 0; background: #ff6b25;
+}
+.ref-stage table { font-size: 14px !important; }
+.ref-stage th { padding-top: 10px !important; padding-bottom: 10px !important; font-size: 13px !important; }
+.ref-stage td { padding-top: 9px !important; padding-bottom: 9px !important; color: #3d485d !important; font-size: 14px !important; font-weight: 400 !important; }
+.ref-stage input, .ref-stage textarea, .ref-stage select, .ref-stage button { font-size: 14px; }
+.ref-stage h1 { font-size: 36px !important; line-height: 1.15 !important; }
+.ref-stage h2 { font-size: 23px !important; }
+.ref-stage p { font-size: 16px; }
+.ref-stage [class*="title"], .ref-stage h1, .ref-stage h2 { letter-spacing: -.025em; }
+@media (max-width: 1180px) {
+  .bank-account { min-width: 210px; max-width: 300px; margin-left: 16px; margin-right: 12px; padding: 14px; }
+  .ref-stage { padding: 16px 14px; }
+  .bank-card { height: 125px; }
+}
+@media (max-width: 760px) {
+  .bank-account { display: none; }
+  .bank-date, .bank-tool-divider, .bank-bell, .bank-avatar { display: none; }
+}
+
+/* Focused dispute workspace. The task template supplies actions and dialogs;
+   these panels replace the inherited portal structure. */
+body { background:#fff; }
+.ref-task { padding:8px 30px; gap:22px; background:linear-gradient(115deg,#fbfdff,#f6f9fc); }
+.ref-brand { display:flex; align-items:center; gap:12px; font-size:26px; letter-spacing:-.025em; }
+.ref-brand::before,.ref-brand::after,.bank-card-brand::before { content:none; }
+.bank-mark { flex:none; width:35px; height:39px; }
+.ref-tools { gap:18px; }
+.ref-instruction { font-size:16px; line-height:1.4; }
+.ref-body { background:#fff; }
+.ref-body.ref-panel-right { flex-direction:row; }
+.bank-workspace { display:flex; flex-direction:column; flex:1; min-width:0; min-height:0; }
+.bank-workspace > .ref-instruction { position:relative; order:0; flex:none; flex-basis:auto; margin:0; padding:14px 24px 14px 44px; background:#fff; border-bottom:1px solid #e8edf3; color:#111827; }
+.bank-workspace > .ref-instruction::before { content:''; position:absolute; width:4px; top:14px; bottom:14px; left:24px; border-radius:3px; background:#ff702b; }
+.bank-inspector { flex:0 0 23.6%; min-width:230px; padding:22px 20px 20px 28px; border-right:1px solid #e8edf3; background:#f7fafc; }
+.bank-account { width:100%; max-width:none; min-width:0; margin:0; padding:16px 20px 21px; border-radius:11px; background:linear-gradient(120deg,#fcfdff,#f5f8fb); }
+.bank-account-title { font-size:25px; letter-spacing:-.035em; line-height:1.3; position:relative; white-space:nowrap; }
+.bank-account-title::before { position:absolute; left:-21px; top:-4px; height:41px; margin:0; }
+.bank-account-title::after { font-size:22px; margin:0 0 0 5px; }
+.bank-account-number { font-size:20px; line-height:1.4; margin:0 0 15px; letter-spacing:.02em; }
+.bank-card { height:auto; aspect-ratio:1.67; margin-left:-2px; width:calc(100% + 2px); padding:17px 20px; border:2px solid #26333e; background:linear-gradient(120deg,#23323a,#303c46); box-shadow:inset 0 0 18px #182a3340; }
+.bank-card::before,.bank-card::after { content:none; }
+.bank-card-art { position:absolute; inset:0; width:100%; height:100%; }
+.bank-card-brand { gap:7px; font-size:18px; letter-spacing:-.02em; }
+.bank-card-brand .bank-mark { width:28px; height:32px; }
+.bank-card-bottom { left:19px; bottom:20px; font-size:20px; }
+.bank-card-network { right:17px; bottom:12px; font-size:26px; font-weight:800; letter-spacing:-.04em; }
+.bank-balance { padding:16px 0 17px; font-size:18px; }
+.bank-balance-primary { padding:25px 0 12px; }
+.bank-balance strong { font-size:23px; }
+.bank-balance-primary strong { font-size:36px; letter-spacing:-.025em; line-height:1.3; }
+.bank-status { padding-top:10px; gap:5px; margin-top:-7px; }
+.bank-status-label { font-size:18px; }
+.bank-status-value { font-size:20px; }
+.ref-stage { padding:24px 23px 24px; }
+.ref-stage .bk { width:100%; height:100%; max-width:100%; max-height:100%; min-height:0; background:#fff; border:0; border-radius:0; box-shadow:none; font:16px/1.4 Arial,sans-serif; }
+.ref-stage .bk-main { background:#fff; }
+.rm-heading { position:relative; flex:none; padding:0 0 26px 23px; }
+.rm-heading::before { content:''; position:absolute; left:0; top:0; width:6px; height:45px; border-radius:4px; background:#ff702b; }
+.ref-stage .rm-heading h1 { margin:0; font-size:40px!important; line-height:1.16!important; font-weight:700; letter-spacing:-.035em; }
+.ref-stage .rm-subtitle { color:#5b6c86; font-size:22px; margin:4px 0 0; line-height:1.4; letter-spacing:-.018em; }
+.rm-actions { position:absolute; top:0; right:0; display:flex; gap:8px; }
+.ref-stage .rm-actions .bk-btn { font-size:12px; padding:6px 10px; background:transparent; color:#53627b; border:1px solid #dfe6ee; font-weight:500; }
+.rm-edit .rm-heading h1 { padding-right:130px; }
+.rm-hidden { display:none; }
+.ref-stage .bk-scroll,.ref-stage .bk.compact .bk-scroll { padding:0; scrollbar-gutter:auto; }
+.rm-columns { display:grid; grid-template-columns:minmax(0,.89fr) minmax(0,1fr); gap:24px; height:100%; min-height:0; }
+.rm-transactions,.rm-dispute { display:flex; flex-direction:column; min-width:0; min-height:0; border:1px solid #dce3ed; border-radius:8px; background:linear-gradient(115deg,#fff,#fdfdff); overflow:hidden; }
+.rm-panel-heading { position:relative; flex:none; display:flex; align-items:center; justify-content:space-between; padding:17px 22px 14px; min-height:62px; }
+.rm-panel-heading::before { content:''; position:absolute; left:0; top:13px; height:41px; width:5px; border-radius:3px; background:#ff702b; }
+.ref-stage .rm-panel-heading h2 { margin:0; font-size:24px!important; font-weight:700; line-height:1.3; letter-spacing:-.035em; }
+.rm-search { position:relative; width:29px; height:30px; flex:none; }
+.ref-stage .rm-search svg { position:absolute; inset:3px; width:25px; height:25px; pointer-events:none; }
+.ref-stage .rm-search input::placeholder { color:transparent; }
+.ref-stage .rm-search input:focus::placeholder { color:#7b8595; }
+.ref-stage .rm-search input { position:absolute; right:0; top:0; width:29px; height:30px; padding:0; border:0; background:transparent; color:transparent; cursor:text; outline:none; }
+.ref-stage .rm-search input:focus { width:230px; padding:4px 32px 4px 8px; color:#334155; background:#fff; border:1px solid #cfd9e4; }
+.rm-table-scroll { flex:1; min-height:0; overflow:auto; overflow-y:scroll; scrollbar-gutter:stable; scrollbar-color:#c2c3c5 #f1f3f7; scrollbar-width:auto; }
+.rm-table-scroll::-webkit-scrollbar { width:16px; background:#f1f3f7; }
+.rm-table-scroll::-webkit-scrollbar-thumb { background:#c2c3c5; border:3px solid #f1f3f7; border-radius:9px; }
+.ref-stage .rm-table { width:100%; table-layout:fixed; border-collapse:collapse; font-size:16px!important; }
+.ref-stage .rm-table th { position:sticky; top:0; z-index:1; padding:3px 16px 11px!important; background:#fbfcff; color:#596982; text-align:left; font-size:16px!important; font-weight:400; border-bottom:1px solid #dce3ed; }
+.rm-table th:nth-child(1) { width:20%; }.rm-table th:nth-child(2) { width:39%; }.rm-table th:nth-child(3) { width:17%; }.rm-table th:nth-child(4) { width:24%; }
+.ref-stage .rm-table td { display:table-cell!important; padding:10px 16px!important; height:44.8px; border-bottom:1px solid #e8edf3; color:#3d485d!important; font-size:16px!important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ref-stage .rm-table th { display:table-cell!important; }
+.ref-stage .rm-table td:last-child { color:#6b788e!important; }
+.rm-table tr[role=button] { cursor:pointer; }
+.rm-table tbody tr:hover { background:#f5f8fc; }
+.rm-table tbody tr.selected { background:#fff0e7; box-shadow:inset 4px 0 #ff702b; }
+.rm-form-subtitle { color:#53627b; margin:-6px 20px 37px!important; font-size:18px!important; }
+.rm-fields { flex:1; min-height:0; display:flex; flex-direction:column; gap:30px; padding:0 20px 27px; }
+.rm-fields .bk-field { gap:6px; }
+.rm-fields .bk-label { position:relative; font-size:18px; font-weight:600; padding-left:7px; letter-spacing:-.025em; }
+.rm-fields .bk-label::before { content:''; position:absolute; width:4px; height:23px; background:#ff702b; border-radius:3px; left:-6px; top:0; }
+.rm-fields .bk-control { height:55px; padding:12px 17px; border:1px solid #c9d3e1; border-radius:6px; background:transparent; font-size:18px; box-shadow:0 0 0 .3px #c9d3e1; }
+.rm-reason .bk-choice span { color:#7b8595; }
+.ref-stage .rm-reason .bk-choice svg { color:#0b1020; width:22px; height:22px; }
+.rm-details { flex:1; min-height:80px; }
+.rm-details .bk-inputwrap { flex:1; min-height:0; }
+.rm-details textarea.bk-control { height:100%; min-height:70px; padding:12px 17px; resize:none; }
+.rm-details .bk-inputwrap::after { content:''; position:absolute; bottom:4px; right:4px; width:11px; height:11px; background:repeating-linear-gradient(135deg,transparent 0 2px,#8992a0 2px 3px,transparent 3px 5px); clip-path:polygon(100% 0,100% 100%,0 100%); pointer-events:none; }
+.rm-fields .bk-hint { display:none; }
+.rm-fields .bk-error { font-size:12px; }
+.ref-panel { width:230px; margin:22px 0 22px 18px; border-left:4px solid #ff702b; padding:16px; }
+.ref-body.ref-panel-right .ref-panel { order:3; margin:22px 22px 22px 0; }
+.ref-stage .rm-change { font-size:11px; padding:2px 0; }
+.ref-foot-text { display:none; }
+.ref-foot { justify-content:flex-end; }
+.ref-foot:has(.ref-tools:empty) { display:none; }
+.bank-bell::before,.bank-bell::after { content:none; }
+.bank-bell svg { width:24px; height:27px; }
+.bank-avatar { background:linear-gradient(#bfc8d3,#a2adbb); }
+.bank-avatar::before,.bank-avatar::after { background:#fff; }
+.ref-stage .bk.compact .rm-heading h1 { font-size:32px!important; }
+.ref-stage .bk.compact .rm-subtitle { font-size:18px; }
+.ref-stage .bk.compact .rm-table th,.ref-stage .bk.compact .rm-table td { font-size:13px!important; padding-left:9px!important; padding-right:6px!important; }
+.ref-stage .bk.compact .rm-table td { height:38px; padding-top:8px!important; padding-bottom:8px!important; }
+.ref-stage .bk.compact .rm-panel-heading h2 { font-size:20px!important; }
+.ref-stage .bk.compact .rm-table th:nth-child(1) { width:22%; }
+.ref-stage .bk.compact .rm-table th:nth-child(2) { width:33%; }
+.ref-stage .bk.compact .rm-table th:nth-child(3) { width:19%; }
+.ref-stage .bk.compact .rm-table th:nth-child(4) { width:26%; }
+.ref-ov-cookie { left:20px; right:20px; border:1px solid #dfe6ee; border-radius:10px; background:#fff; box-shadow:0 3px 16px #14283d18; }
+.ref-ov-cookie::before { content:'●'; color:#ff702b; font-size:30px; }
+.ref-ov-primary { background:#ff702b; border-color:#ff702b; }
+.ref-ov-banner { background:#edf9f1; color:#193823; border-color:#d5e9dc; }
+.ref-ov-promo { background:#18263438; }
+.ref-ov-chat { border-radius:10px; }
+@media(max-width:1400px) {
+  .bank-inspector { padding:20px 16px; min-width:210px; }
+  .bank-account { padding:15px; }
+  .bank-account-title { font-size:20px; }
+  .bank-account-title::before { left:-16px; }
+  .bank-card { padding:13px 12px; }
+  .bank-card-brand { font-size:15px; }.bank-card-brand .bank-mark { width:23px; height:27px; }
+  .bank-balance { font-size:16px; padding:13px 0; }.bank-balance-primary strong { font-size:30px; }
+  .bank-status-label { font-size:16px; }
+  .ref-stage { padding:20px 18px; }
+  .ref-stage .rm-heading h1 { font-size:32px!important; }.ref-stage .rm-subtitle { font-size:18px; }
+  .rm-columns { gap:18px; }
+  .ref-stage .rm-panel-heading h2 { font-size:20px!important; }
+  .rm-panel-heading { padding:14px 16px 12px; min-height:56px; }
+  .ref-stage .rm-table td,.ref-stage .rm-table th { padding-left:10px!important; padding-right:8px!important; font-size:13px!important; }
+  .ref-stage .rm-table td { height:38px; padding-top:8px!important; padding-bottom:8px!important; }
+  .rm-fields { gap:24px; padding:0 16px 20px; }.rm-fields .bk-control { font-size:16px; height:46px; }
+  .rm-details textarea.bk-control { height:100%; }
+  .rm-fields .bk-label { font-size:16px; }
+  .rm-form-subtitle { font-size:16px!important; margin:0 16px 28px!important; }
+  .ref-brand { font-size:22px; }.ref-task { padding:8px 20px; gap:18px; }.ref-tools { gap:10px; }
+  .bank-date { font-size:12px; }
+}
+@media(max-width:1100px) {
+  .bank-inspector { flex-basis:23%; min-width:200px; padding:16px 12px; }
+  .bank-account { padding:12px; }.bank-account-title { font-size:18px; }.bank-account-title::before { left:-13px; }
+  .bank-account-number { font-size:16px; }.bank-card-brand { font-size:12px; }.bank-card { padding:12px 9px; }
+  .bank-card-bottom { font-size:15px; left:12px; bottom:14px; }.bank-card-network { font-size:20px; right:10px; bottom:10px; }
+  .bank-balance-primary strong { font-size:26px; }.bank-balance strong { font-size:20px; }.bank-balance-primary strong { font-size:26px; }
+  .bank-status-value { font-size:17px; }.bank-status-dot { width:14px; height:14px; }
+  .ref-stage { padding:18px 14px; }.rm-heading { padding-left:18px; padding-bottom:20px; }
+  .ref-stage .rm-heading h1 { font-size:28px!important; }.ref-stage .rm-subtitle { font-size:16px; }
+  .ref-stage .bk.compact .rm-heading h1 { font-size:28px!important; }.ref-stage .bk.compact .rm-subtitle { font-size:16px; }
+  .rm-edit .rm-heading h1 { padding-right:115px; }.ref-stage .rm-actions .bk-btn { font-size:11px; padding:5px 7px; }
+  .rm-columns { gap:14px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .ref-stage .rm-panel-heading h2 { font-size:18px!important; }.rm-panel-heading { padding:13px 12px; }
+  .ref-stage .bk.compact .rm-panel-heading h2 { font-size:18px!important; }
+  .ref-stage .rm-table td,.ref-stage .rm-table th { padding-left:8px!important; padding-right:5px!important; font-size:12px!important; }
+  .rm-table th:nth-child(1) { width:23%; }.rm-table th:nth-child(2) { width:33%; }.rm-table th:nth-child(3) { width:18%; }.rm-table th:nth-child(4) { width:26%; }
+  .ref-stage .rm-table td { height:34px; padding-top:6px!important; padding-bottom:6px!important; }
+  .ref-stage .bk.compact .rm-table td,.ref-stage .bk.compact .rm-table th { padding-left:8px!important; padding-right:5px!important; font-size:12px!important; }
+  .ref-stage .bk.compact .rm-table td { height:34px; padding-top:6px!important; padding-bottom:6px!important; }
+  .rm-fields { padding:0 12px 16px; gap:22px; }.rm-form-subtitle { font-size:14px!important; margin:0 12px 25px!important; }
+  .ref-task { flex-wrap:wrap; gap:8px 16px; }.ref-instruction { order:3; flex-basis:100%; font-size:14px; }
+  .bank-date { display:none; }.ref-tools { gap:8px; }.ref-brand { font-size:21px; }
+  .bank-workspace > .ref-instruction { padding:12px 18px 12px 32px; }
+  .bank-workspace > .ref-instruction::before { left:14px; top:12px; bottom:12px; }
+}
+
+/* Pinecrest Bank: white utility bar, grey rail, full-width transaction list with two-line rows. */
+.ref-task { height:68px; min-height:68px; padding:0 28px 0 30px; gap:0; background:#fff; border-bottom:1px solid #eceff3; box-shadow:none; }
+.ref-brand { font-size:27px; font-weight:700; letter-spacing:-.02em; color:#1e6e4c; gap:10px; }
+.ref-brand .bank-mark { width:34px; height:38px; }
+.ref-tools { gap:16px; }
+.bank-date, .bank-msg, .bank-signout { font-size:15px; color:#3d4a59; white-space:nowrap; }
+.bank-msg, .bank-signout { display:inline-flex; align-items:center; gap:8px; }
+.bank-tool-divider { width:1px; height:20px; background:#d5dce4; }
+.bank-bell { width:24px; height:24px; }
+.bank-bell svg { width:22px; height:22px; }
+.bank-avatar { display:none; }
+.bank-inspector { flex:0 0 12.6%; min-width:170px; max-width:220px; padding:0; border-right:0; background:#f4f6f8; }
+.bank-rail { display:flex; flex-direction:column; padding-top:6px; }
+.bank-account { display:none; }
+.bank-rail-item { position:relative; display:flex; align-items:center; gap:16px; height:56px; padding:0 14px 0 26px; font-size:16px; color:#3b4655; }
+.bank-rail-item svg { flex:none; width:24px; height:24px; fill:none; stroke:#3b4655; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.bank-rail-item.on { background:#dcf4e7; color:#111a26; }
+.bank-rail-item.on svg { stroke:#1e6e4c; }
+.bank-rail-item.on::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:#1e8a5c; }
+.ref-body { background:#fff; }
+.bank-workspace { position:relative; }
+.bank-workspace > .ref-instruction { padding-right:320px; border-bottom:0; }
+.bank-tip { position:absolute; z-index:2; top:14px; right:26px; display:flex; align-items:center; gap:12px; padding:10px 18px 10px 12px; border-radius:6px; background:#e9f7ef; color:#1d2735; font-size:16px; font-weight:600; }
+.bank-tip-icon { width:34px; height:34px; border-radius:50%; background:#1e7a52; color:#fff; display:inline-flex; align-items:center; justify-content:center; font:italic 700 20px Georgia,serif; }
+.ref-stage { padding:26px 28px 24px 34px; }
+.ref-stage .rm-heading { padding:0 0 18px 0; }
+.ref-stage .rm-heading::before { display:none; }
+.ref-stage .rm-heading h1 { font-size:38px!important; font-weight:600; color:#1e2733; letter-spacing:-.02em; line-height:1.2!important; }
+.ref-stage .rm-subtitle { color:#6b7787; font-size:15px; margin-top:4px; }
+.rm-columns { grid-template-columns:minmax(0,1fr) 300px; gap:28px; }
+.rm-transactions { border:0; border-radius:0; background:#fff; }
+.rm-dispute { border:1px solid #e3e8ee; border-radius:8px; background:#fff; }
+.rm-panel-heading { padding:0 0 12px; min-height:0; }
+.rm-panel-heading::before { display:none; }
+.ref-stage .rm-panel-heading h2 { font-size:18px!important; color:#1e2733; }
+.ref-stage .rm-table th { background:transparent; border-bottom:0; padding:10px 16px!important; color:#3d4a59; font-size:15px!important; font-weight:400; }
+.ref-stage .rm-table thead tr { background:#f1f4f7; }
+.ref-stage .rm-table, .ref-stage .rm-table thead, .ref-stage .rm-table tbody { display:block; width:100%; table-layout:auto; }
+.ref-stage .rm-table tr { display:grid; grid-template-columns:minmax(0,1fr) 13% 14%; grid-template-areas:"id amt dt" "mer amt dt"; }
+.ref-stage .rm-table thead tr { grid-template-areas:"id amt dt"; }
+.ref-stage .rm-table th, .ref-stage .rm-table td { display:flex!important; align-items:center; min-width:0; width:auto!important; }
+.ref-stage .rm-table th:nth-child(2) { display:none!important; }
+.ref-stage .rm-table th:nth-child(1), .ref-stage .rm-table td:nth-child(1) { grid-area:id; }
+.ref-stage .rm-table td:nth-child(2) { grid-area:mer; padding-top:0!important; }
+.ref-stage .rm-table th:nth-child(3), .ref-stage .rm-table td:nth-child(3) { grid-area:amt; }
+.ref-stage .rm-table th:nth-child(4), .ref-stage .rm-table td:nth-child(4) { grid-area:dt; }
+.ref-stage .rm-table td { height:auto!important; padding:8px 16px!important; border-bottom:1px solid #eceff3; color:#2b3645!important; font-size:16px!important; line-height:1.35; }
+.ref-stage .rm-table td:nth-child(2) { color:#4a5563!important; }
+.ref-stage .rm-table td:nth-child(3) { color:#2b3645!important; }
+.ref-stage .rm-table td:last-child { color:#4a5563!important; }
+.ref-stage .rm-table td:nth-child(3), .ref-stage .rm-table td:nth-child(4) { align-self:stretch; }
+.ref-stage .rm-table tbody tr { border-bottom:0; }
+.rm-columns { grid-template-columns:minmax(0,1fr) 270px; gap:24px; }
+.ref-stage .rm-table tr { grid-template-columns:minmax(0,1fr) 15% 17%; }
+.ref-stage .rm-table td { padding:4px 16px!important; min-height:0; }
+.ref-stage .rm-table td:nth-child(1) { padding-top:9px!important; }
+.ref-stage .rm-table td:nth-child(3), .ref-stage .rm-table td:nth-child(4) { padding-top:9px!important; padding-bottom:9px!important; }
+.ref-stage .rm-table td:nth-child(2) { padding-top:0!important; }
+.ref-stage .rm-table td:nth-child(1), .ref-stage .rm-table td:nth-child(3), .ref-stage .rm-table td:nth-child(4) { align-items:center; }
+.ref-stage .rm-table th:nth-child(1) { padding-left:16px!important; }
+.ref-stage .rm-table tr[role=button] { min-height:56px; grid-template-rows:auto auto; }
+/* One scroller only: the template's .bk-scroll pane (mirror() measures rows against it). */
+.ref-stage .bk-main { min-height:0; }
+.ref-stage .bk-scroll { flex:1; min-height:0; overflow-x:hidden; overflow-y:auto; }
+.rm-columns { height:auto; min-height:0; align-items:start; padding:8px 0 12px; }
+.rm-dispute { top:8px; }
+.rm-actions { top:60px; }
+body:has(.ref-float-dock) .ref-stage { padding-bottom:78px; }
+.ref-stage .rm-heading { min-height:96px; }
+.rm-transactions, .rm-dispute { overflow:visible; min-height:0; }
+.rm-dispute { position:sticky; top:0; }
+.rm-table-scroll { flex:none; overflow:visible; overflow-y:visible; scrollbar-gutter:auto; }
+.ref-stage .rm-table thead { position:sticky; top:0; z-index:2; }
+.ref-stage .rm-table th { position:static; }
+/* Back to the template's structure: .rm-table-scroll is the scroller and fills the pane (the oracle wheels at its centre). */
+.ref-stage .bk-scroll { overflow:hidden; }
+.ref-stage .bk-scroll { display:flex; flex-direction:column; }
+.rm-columns { flex:1 1 0; height:auto; min-height:0; align-items:stretch; padding:8px 0 12px; box-sizing:border-box; }
+.rm-transactions, .rm-dispute { overflow:hidden; }
+.rm-dispute { position:static; }
+.rm-table-scroll { flex:1; min-height:0; overflow-y:auto; scrollbar-gutter:stable; }
+body:has(.ref-float-dock) .ref-stage { padding-bottom:24px; }
+.rm-columns { grid-template-rows:minmax(0,1fr); }
+.rm-dispute { overflow-y:auto; }
+.rm-dispute .rm-fields { flex:none; min-height:0; }
+.rm-dispute .rm-details { min-height:110px; }
+/* Row divider belongs to the row, not to its cells. */
+.ref-stage .rm-table td { border-bottom:0; }
+.ref-stage .rm-table tbody tr { border-bottom:1px solid #eceff3; }
+/* Short windows: give the list the height. */
+@media (max-height:740px) {
+  .ref-stage { padding-top:12px; }
+  .ref-stage .rm-subtitle { display:none; }
+  .ref-stage .rm-heading { min-height:0; padding-bottom:8px; }
+  .ref-stage .rm-heading h1 { font-size:28px!important; }
+  .rm-actions { top:2px; right:300px; }
+  .bank-tip { top:8px; padding:5px 12px 5px 8px; font-size:14px; gap:8px; }
+  .bank-tip-icon { width:26px; height:26px; font-size:16px; }
+  .ref-stage .rm-table td { padding-top:3px!important; padding-bottom:3px!important; }
+  .ref-stage .rm-table td:nth-child(1), .ref-stage .rm-table td:nth-child(3), .ref-stage .rm-table td:nth-child(4) { padding-top:6px!important; padding-bottom:6px!important; }
+  .ref-stage .rm-table td:nth-child(2) { padding-top:0!important; }
+}

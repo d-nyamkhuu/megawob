@@ -1,0 +1,89 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--fg);font:16px var(--font)}
+button{font-family:var(--font);cursor:pointer;color:inherit}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+body.design *{transition:none!important;animation:none!important}
+.shell{height:100vh;display:flex;flex-direction:column}
+.head{flex:none;height:7.6vh;min-height:48px;background:#5a1a24;display:flex;align-items:center;padding:0 3vw 0 2.4vw;gap:1.6vw;border-bottom:1px solid #3e0f17}
+.logo{height:70%;width:auto}
+.title{font-size:clamp(20px,2.4vw,40px);font-variant:small-caps;letter-spacing:.07em;color:#f5ead0;white-space:nowrap}
+.menu{margin-left:auto;display:flex;gap:2vw;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(11px,1.1vw,18px);color:#f0e4c6}
+.content{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 24.8%}
+.left{min-width:0;min-height:0;display:flex;flex-direction:column;padding:1.2vh 2.4vw 1.2vh 2.3vw}
+.left h1,.side-h{margin:0;font-size:clamp(22px,2.4vw,40px);color:#6a1a28;font-weight:bold;line-height:1.2;padding-top:.5vh}
+.left hr,.aside hr{border:0;border-top:1px solid #a8a090;margin:.9vh 0;width:100%}
+.left h2{margin:.8vh 0 1.4vh;font-size:clamp(18px,1.9vw,30px);font-weight:normal;color:#3a1a20}
+.stage{flex:1;min-height:0;min-width:0;display:flex;justify-content:center;align-items:center;overflow:hidden;position:relative;background:var(--panel);border:1px solid #b9b09c}
+.meta{margin:1.2vh 0 0;flex:none}
+.meta div{display:flex;border-bottom:1px solid #8a8272;padding:.75vh 0;font-size:clamp(14px,1.5vw,22px);line-height:1.2}
+.meta dt{width:8.2%;min-width:70px;margin:0;font-weight:bold;color:#3a1a20;white-space:nowrap}
+.meta dd{margin:0 0 0 2.5%}
+.aside{min-width:0;border-left:1px solid #c9c0aa;padding:1.2vh 1.4vw 1.2vh 1.6vw;background:#faf6e9;overflow:hidden}
+.side-h{margin-bottom:1vh}
+.task-note{padding:1.8vh 1.2vw;border:1px solid #d6b45c;background:#fbf0cf}
+.instruction{font-size:clamp(16px,1.85vw,31px);line-height:1.3;font-weight:bold;color:#1c0f12}
+.aside hr{margin:2.4vh 0}
+.aside h3{margin:0 0 1.2vh;font-size:clamp(16px,1.7vw,26px);font-weight:normal;color:#3a1a20}
+.tool{display:flex;align-items:center;gap:1vw;padding:1.9vh 1.2vw;border:1px solid #a9a08c;background:#e6e3dc;font-size:clamp(15px,1.75vw,28px);box-shadow:inset 0 0 0 1px #fff8}
+.actions{display:flex;gap:.9vw}
+.clear,.submit{padding:1.9vh 1.2vw;font-size:clamp(15px,1.7vw,27px);border:1px solid #9a927e;background:#e3e0d8;box-shadow:inset 0 0 0 1px #fff8}
+.submit{flex:1;font-weight:bold;background:#6a1a28;color:#fff;border:1px solid #3e0f17;font-size:clamp(18px,2vw,32px);box-shadow:inset 0 0 0 1px #8a3a48}
+.stage .cp-wrap{gap:0;flex:none}.stage .cp-board{border:0;border-radius:0;box-shadow:none;background:transparent}.stage .cp-hint{display:none}
+.stage .cp-label{font-family:Georgia,"Times New Roman",serif!important}
+.stage .cp-board>svg>rect{fill:var(--panel)}.stage .cp-board svg>rect[fill^='url']{display:none}
+.stage .cp-fig{--fg:#5c1a24;--muted:#2a1418}
+.stage .cp-fig line{stroke-width:3px}
+.stage .cp-label.serif,.stage .cp-label{font:italic 400 26px Georgia,"Times New Roman",serif!important;fill:#1c0f12;stroke:none}
+.stage .cp-fig circle[stroke-dasharray]{stroke:#1c0f12;stroke-width:1.6px}
+.instruction-toast{position:fixed;bottom:12px;left:20px;max-width:calc(100vw - 300px);z-index:1800;background:#fbf0cf;box-shadow:0 3px 20px #0003;border:1px solid #d6b45c;padding:10px 40px 10px 14px}
+.instruction-toast .instruction{font-size:15px}
+.note-close{position:absolute;right:8px;top:6px;border:0;background:none;font-size:18px}
+.obstruction{position:fixed;z-index:2500;right:24px;bottom:95px;max-width:420px}
+.obstruction-box{background:var(--panel);border:1px solid var(--line);box-shadow:0 8px 25px #0003;padding:20px;contain:paint}
+.obstruction h3{margin:0 0 10px;font-size:22px;color:#6a1a28}.obstruction p{line-height:1.5;margin:0 0 12px}
+.dismiss{padding:8px 16px;margin-right:10px;border:1px solid #9a927e;background:#e3e0d8}
+.obstruction-cookie{left:25%;right:25%;top:34%;bottom:auto;max-width:none}
+.obstruction-banner{left:20%;right:20%;top:90px;bottom:auto;max-width:none}
+.obstruction-toast{top:90px;bottom:auto}
+.obstruction-promo{left:30%;right:auto;top:30%;bottom:auto}
+[hidden]{display:none!important}
+/* Bibliographic proportions and native-looking catalog controls. */
+body{color:#0b1120;background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.74' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.025' filter='url(%23n)'/%3E%3C/svg%3E")}
+.head{height:7.55vh;padding-right:2.3vw;gap:2.1vw;background-color:#541923;background-image:radial-gradient(ellipse at 35% 0%,#6a283044,transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.055' filter='url(%23n)'/%3E%3C/svg%3E")}
+.logo{height:72%;width:5.3vw;overflow:visible}
+.title{font-size:clamp(20px,2.15vw,36px);letter-spacing:.08em;font-variant:normal;text-transform:uppercase}
+.menu{font-size:clamp(11px,1.2vw,20px);gap:1.9vw}
+.left{padding-left:2.25vw;padding-right:1.65vw;padding-bottom:3.7vh}
+.left h1,.side-h{line-height:1.05}
+.left hr{margin:.65vh 0}
+.left h2{margin:1.3vh 0 2.4vh;font-size:clamp(18px,1.85vw,31px)}
+.stage{border-color:#bfbdb4;background:transparent}
+.stage .cp-board>svg>rect{fill:transparent}
+.meta{margin:2.1vh 0 0}
+.meta div{font-size:clamp(14px,1.4vw,23px);padding:.65vh 0;border-color:#aaa89f}
+.meta dt{width:8.1%;min-width:57px;font-weight:normal;color:#0b1120}
+.meta dd{margin:0}
+.aside{padding:1.2vh 1.05vw 1.2vh 1.3vw;background:transparent;border-color:#aaa89f}
+.side-h{margin-bottom:1.1vh}
+.task-note{min-height:23.4vh;padding:1.8vh 1.15vw;background:rgba(245,237,208,.2);border-color:#c79931}
+.instruction{font-size:clamp(17px,1.74vw,29px);line-height:1.26;color:#080f1d}
+.aside hr{margin:3.1vh .25vw 2.1vh;width:calc(100% - .5vw);border-color:#aaa89f}
+.aside h3{font-size:clamp(16px,1.45vw,24px);margin:0 .25vw 1.05vh;color:#0b1120}
+.tool{height:6.7vh;width:10vw;min-width:110px;margin-left:.25vw;padding:.8vh 1.05vw;gap:1.1vw;font-size:clamp(16px,1.5vw,25px);border:2px solid #aaa9a5;border-radius:4px;background:linear-gradient(#ecebe6,#e3e2dd);color:#0b1120}
+.tool svg{width:1.8vw;min-width:22px;height:3.6vh}
+.tool+hr{margin-top:3.6vh;margin-bottom:2.1vh}
+.actions{gap:1.1vw;margin:0 .25vw;align-items:center}
+.clear{width:40%;height:6.4vh;font-size:clamp(16px,1.5vw,25px);padding:0;border:2px solid #aaa9a5;border-radius:4px;background:linear-gradient(#efefee,#e1e2e3);color:#0b1120}
+.submit{height:7.2vh;padding:0;font-size:clamp(19px,1.9vw,32px);font-weight:bold;border:2px solid #350e15;border-radius:4px;background:linear-gradient(125deg,#641923,#6b202a);box-shadow:inset 0 0 0 1px #85343c}
+.stage .cp-label.serif,.stage .cp-label{font:italic 400 clamp(21px,1.9vw,32px) "Times New Roman",Times,serif!important}
+.stage .cp-fig line{stroke-width:4px}
+.stage .cp-fig circle[stroke-dasharray]{stroke-width:2.2px;stroke-dasharray:1 6;stroke-linecap:round;fill:none}
+/* Hidden and toast instruction modes retain the response column's spacing. */
+.instruction-header{min-height:0!important;margin:0 0 1vh;padding:1vh 1vw!important;font-size:clamp(14px,1.4vw,22px);background:rgba(245,237,208,.36)}
+.instruction-header .instruction{font-size:clamp(14px,1.4vw,22px);line-height:1.25}
+.submit-toolbar{display:block;width:100%;height:auto;margin:-.3vh 0 1.4vh;padding:.6vh .5vw;font-size:clamp(14px,1.3vw,21px);border:1px solid #9a927e;border-radius:3px;background:#e7e2d4;color:#42151d;text-align:left}
+.submit-footer{display:block;width:calc(100% - .5vw);height:6vh;margin:2.2vh .25vw 0;padding:0;font-size:clamp(18px,1.7vw,27px)}
+.end-link{display:inline-block;margin:1.2vh .25vw 0;color:#641923;font-size:clamp(16px,1.45vw,24px);text-decoration:underline;text-underline-offset:3px}
+.end-xtra{display:block;margin:1vh .25vw 0;padding:.4vh .7vw;border:1px solid #aaa9a5;border-radius:3px;background:#efede7;color:#4b3835;font-size:clamp(13px,1.2vw,19px)}
+.aside:has(.instruction-toast)::before{content:'';display:block;height:23.4vh}
+.instruction-toast{min-height:0}

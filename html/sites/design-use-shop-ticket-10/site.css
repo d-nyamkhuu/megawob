@@ -1,0 +1,207 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Georgia,"Times New Roman",serif;font-size:15px;background:#fbf9f4;color:var(--fg)}
+button,input{font-family:inherit}button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+
+.site-shell{height:100vh;display:grid;grid-template-columns:30% minmax(0,1fr);background:linear-gradient(90deg,#fffefb,#f6f3ec 70%,#efebe1)}
+.task-note{grid-column:1;position:relative;padding:calc(13vh) 2.2vw 0 2.2vw;font-family:Georgia,serif;color:#2b2119;overflow:hidden}
+.note-head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #b9b3a6;margin-bottom:5vh}
+.note-head svg{width:34px;height:34px;flex:none}
+.note-head h2{margin:0;font-size:clamp(20px,2.2vw,32px);font-weight:400}
+.food-task{margin:0;font-size:clamp(22px,2.9vw,44px);line-height:1.3;font-weight:400}
+.note-sketch{position:absolute;left:3vw;right:3vw;bottom:6vh;height:30vh;opacity:.55}
+.note-sketch svg{width:100%;height:100%}
+.note-sketch img{width:100%;height:100%;object-fit:contain}
+.note-hand{position:absolute;left:8vw;bottom:5vh;font:italic clamp(14px,1.5vw,22px) "Segoe Script","Brush Script MT",cursive;color:#9a958a;transform:rotate(-8deg)}
+
+.book{grid-column:2;position:relative;margin:0 0 0 0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr);
+ background:linear-gradient(90deg,#4a2a14,#7a4a28 4%,#5c361b 8%);padding:1.4vh 3.6vw 1.6vh 3.2vw;border-radius:14px 0 0 14px;box-shadow:-4px 0 14px #0003}
+.book:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.2vw;background:linear-gradient(90deg,#5a3318,#8b5a33 40%,#6a3f20);border-right:2px solid #2d170a;border-radius:14px 0 0 14px}
+.book>*{position:relative;z-index:1}
+.design-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1.6vh 1.4vw 1.2vh;background:#f7f1e1;border-radius:4px 4px 0 0;border-bottom:1px solid #cfc4a8;margin:0 0 0 0}
+.design-brand{display:flex;align-items:center;gap:12px;font-size:clamp(22px,2.6vw,40px);color:#35241a;font-weight:400;white-space:nowrap}
+.design-brand svg{width:clamp(28px,3vw,46px);height:auto}
+.tagline{font:italic clamp(12px,1.3vw,19px) "Segoe Script","Brush Script MT",cursive;color:#8f887a}
+.stage{position:relative;min-width:0;min-height:0;overflow:hidden;background:linear-gradient(#f7f1e1,#f3ecd8)}
+.design-footer{display:flex;align-items:center;justify-content:flex-end;gap:2vw;padding:1.4vh 1.2vw 1.6vh;background:#f3ecd8;border-top:1px solid #cfc4a8;border-radius:0 0 4px 4px}
+.foot-bus{margin-right:auto;width:12vw;height:7vh;opacity:.6}
+.foot-bus svg{width:100%;height:100%}
+.foot-bus img{width:14vw;height:10vh;object-fit:contain}
+.clear-sel{height:clamp(34px,5.2vh,50px);padding:0 1.6vw;font:clamp(14px,1.5vw,22px) Georgia,serif;color:#2b2119;border:1px solid #9d9482;border-radius:4px;background:linear-gradient(#fbf8ef,#e2dac5);box-shadow:0 1px 2px #0004,inset 0 1px #fff}
+.end-control{min-width:clamp(120px,15vw,240px);height:clamp(40px,6.4vh,62px);border:1px solid #14355d;border-radius:5px;background:linear-gradient(#3d78b8,#1e4f8c 50%,#1a4478);color:#fff;font:clamp(18px,2vw,30px) Georgia,serif;box-shadow:0 1px 3px #0006,inset 0 1px #8fb6e0;text-shadow:0 -1px #0007}
+.tool-strip{position:absolute;right:0;top:0;bottom:0;width:3.6vw;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2vh;padding-top:1.6vh;background:linear-gradient(90deg,#3a2314,#4e2f19)}
+.tool-strip span{width:2.4vw;min-width:26px;height:2.4vw;min-height:26px;display:block;color:#a79a86}
+.tool-strip span.on{background:#6e4527;border-radius:6px;color:#e8d6b0;width:3.2vw;height:3.2vw}
+.tool-strip svg{width:100%;height:100%}
+
+body.instruction-hidden .task-note{display:none}
+body.instruction-hidden .site-shell{grid-template-columns:minmax(0,1fr)}
+body.instruction-hidden .book{grid-column:1}
+body.instruction-toast .task-note{padding-top:3vh}
+body.instruction-toast .note-head{margin-bottom:2vh}
+body.instruction-toast .note-sketch,body.instruction-toast .note-hand{display:none}
+
+/* ticket widget restyle */
+body .as-app{background:transparent;border:0;box-shadow:none;border-radius:0}
+body .as-top{display:none}
+body .as-pane{border:0;background:transparent;border-radius:0}
+body .tk-name{font-size:clamp(15px,1.5vw,22px)!important}
+body .tk-place{font-size:clamp(12px,1.1vw,16px)!important}
+body .tk-time{font-size:clamp(14px,1.4vw,21px)!important}
+body .tk-dur{font-size:clamp(12px,1.1vw,16px)!important}
+body .tk-price{font-size:clamp(16px,1.6vw,24px)!important}
+body .tk-buy{font-size:clamp(13px,1.3vw,19px)!important;height:auto;min-height:32px}
+body .tk-title{font-size:clamp(14px,1.3vw,19px)!important}
+@media(max-width:1250px){
+body .tk-row{gap:8px!important;padding:0 8px!important}
+body .tk-date{width:40px!important}
+body .tk-when{width:104px!important}
+body .tk-price{width:56px!important}
+body .tk-buy{width:58px!important}
+body .tk-name{font-size:14px!important}
+body .tk-time,body .tk-dur,body .tk-place{font-size:12px!important}
+body .tk-main{padding:1vh .8vw}
+}
+body .tk-main{padding:1.2vh 1.4vw 1.2vh}
+body .tk-title{font:400 clamp(15px,1.6vw,22px) Georgia,serif;color:#35241a}
+body .tk-sub{font-family:Georgia,serif;font-style:italic;color:#7a6f5c}
+body .tk-sort{font-family:Georgia,serif;color:#6b604d}
+body .tk-trigger{background:linear-gradient(#efe7d2,#fbf8ef);border:1px solid #a89f8a;box-shadow:inset 0 1px 3px #0003;border-radius:4px;color:#2b2119}
+body .tk-pop{background:#fbf6e6;border:1px solid #a89f8a;border-radius:4px}
+body .tk-row{font-family:Georgia,serif;color:#2b2119;background:#fbf8ee;border:1px solid #ddd3b9;border-radius:6px;box-shadow:0 1px 2px #0002,inset 0 1px #fff}
+body .tk-row.bought{background:#e8efd8}
+body .tk-date{background:#efe6cf;border-radius:3px;border:1px solid #d7ccae}
+body .tk-dw,body .tk-dm{color:#7a6a4c}
+body .tk-dd{font-weight:400}
+body .tk-name{font-weight:400;font-size:clamp(14px,1.3vw,19px)}
+body .tk-place,body .tk-dur{color:#6b604d}
+body .tk-time{font-weight:400}
+body .tk-price{font-weight:400;font-size:clamp(16px,1.5vw,22px)}
+body .tk-buy,body .tk-buy.primary{font-family:Georgia,serif;color:#2b2119;background:linear-gradient(#f4ecd6,#d8cdb2);border:1px solid #9d9482;border-radius:4px;box-shadow:0 1px 2px #0004,inset 0 1px #fff;font-weight:400}
+body .tk-buy.mine{background:linear-gradient(#cfe0b8,#aac389)}
+body .as-foot{font-family:Georgia,serif;color:#6b604d}
+body .as-dialog,body .as-dlg-b{font-family:Georgia,serif}
+
+.reference-overlay{position:fixed;z-index:1000;border:1px solid #9d9482;background:#fbf6e6;color:#2b2119;box-shadow:0 10px 28px #0005;border-radius:6px;max-width:calc(100vw - 40px);font-family:Georgia,serif;font-size:16px}
+.reference-overlay h2{margin:0;padding:12px 18px;background:#e7dcc0;border-bottom:1px solid #b9ad90;font-size:20px;font-weight:400}
+.reference-overlay .overlay-copy{padding:18px 22px;line-height:1.5}
+.reference-overlay .overlay-actions{display:flex;justify-content:flex-end;gap:10px;padding:0 18px 16px}
+.reference-overlay button{height:36px;border:1px solid #9d9482;border-radius:4px;padding:0 18px;background:linear-gradient(#f4ecd6,#d8cdb2);color:#2b2119;font-size:15px}
+.reference-overlay button.primary{background:linear-gradient(#3d78b8,#1e4f8c);color:#fff}
+.reference-overlay.cookie{left:1vw;top:42%;transform:none;width:min(490px,29vw)}
+.reference-overlay.toast{right:25px;top:80px;width:350px}
+.reference-overlay.chat{right:24px;bottom:90px;width:320px}
+.reference-overlay.promo{left:54%;top:40%;transform:translate(-50%,-50%);width:450px}
+.reference-overlay.banner{left:20px;right:20px;top:12px}
+.reference-overlay.banner .overlay-copy{padding:10px 22px}
+.reference-overlay.banner .overlay-actions{position:absolute;right:6px;top:8px}
+.reference-overlay.banner h2{padding-right:230px}
+
+/* The offset paper organizer, with comparison columns rather than itinerary tiles. */
+.site-shell{grid-template-columns:30.2% minmax(0,1fr);background:radial-gradient(ellipse at 18% 40%,#fffefb,#f7f4ee)}
+.task-note{padding:11.8vh 1.5vw 0 2.15vw}
+.note-head{gap:1vw;padding-bottom:2vh;margin-bottom:4.5vh}
+.note-head svg{width:3.8vw;height:6.5vh}
+.note-head h2{font-size:2.5vw}
+.food-task{font-size:2.32vw;line-height:1.3;color:#211710}
+.note-sketch{left:3vw;right:3.2vw;bottom:27vh;height:27vh;opacity:.5}
+.note-hand{left:7vw;right:7vw;bottom:20vh;text-align:center;font-size:1.7vw;line-height:1.3}
+.book{padding:1.4vh 4.8vw 2.1vh 3.2vw;border-radius:18px 0 0 18px;background-color:#4a301f;background-image:repeating-linear-gradient(33deg,#ffffff04 0 1px,#00000004 1px 3px),linear-gradient(90deg,#402616,#6c452b 4%,#3e291b 9%);box-shadow:-5px 3px 10px #0004,inset 0 0 0 2px #2b1b10}
+.book:before{top:1vh;bottom:1vh;width:2.5vw;background:repeating-linear-gradient(22deg,#ffffff07 0 1px,#0000000c 1px 3px),linear-gradient(90deg,#432511,#795337 45%,#432916);border:1px solid #2b170c;box-shadow:inset 2px 0 4px #b4916855,2px 1px 3px #0008}
+.book:after{content:"";position:absolute;inset:1.5vh .8vw 1.6vh 2.4vw;border:1px dashed #bd8a4f;border-radius:15px 28px 28px 15px;pointer-events:none}
+.design-header,.stage,.design-footer{background-color:#f8f2e3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.075' filter='url(%23n)'/%3E%3C/svg%3E");box-shadow:inset 3px 0 5px #89754a20,inset -3px 0 5px #89754a20}
+.design-header{height:9.7vh;padding:1.5vh 1.8vw;border-radius:12px 7px 0 0;border-bottom:0}
+.design-header:after{content:"";position:absolute;bottom:0;left:1.7vw;right:1.4vw;border-bottom:1px solid #b6aa91}
+.design-brand{font-size:2.6vw;gap:.8vw}
+.design-brand svg{width:3.8vw;height:5.5vh}
+.tagline{font-size:1.5vw;margin-right:6vw}
+.design-footer{height:14.5vh;padding:2.5vh 1.5vw 2vh 1.8vw;gap:1.4vw;border:0;border-radius:0 0 8px 12px}
+.design-footer:before{content:"";position:absolute;top:0;left:1.7vw;right:1.4vw;border-top:1px solid #b6aa91}
+.foot-bus{width:23vw;height:10vh;display:flex;align-items:center;gap:.7vw;opacity:.6}
+.foot-bus svg{width:14vw;height:10vh;flex:none}
+.foot-bus:after{content:"Explore Further";font:italic 1.7vw "Segoe Script","Brush Script MT",cursive;color:#806e53;transform:rotate(-10deg)}
+.clear-sel{width:13vw;height:6.2vh;padding:0 .5vw;font-size:1.6vw;box-shadow:0 2px 3px #0003,inset 0 0 0 2px #fff8;background:linear-gradient(#f7f1e5,#ddd1b6);border-color:#98846a}
+.end-control{width:15.5vw;min-width:0;height:8vh;font-size:2vw;background:linear-gradient(#477ca1,#245274);box-shadow:0 3px 5px #0004,inset 0 0 0 2px #9eb7c080}
+.tool-strip{right:.9vw;top:4.5vh;bottom:3vh;width:3.8vw;background:transparent;gap:1.5vh;padding:0;color:#ded0ad}
+.tool-strip span{width:3.4vw;height:6.8vh;border-bottom:1px solid #241509;padding:.9vw .6vw;color:#d2c3a4;filter:drop-shadow(1px 2px 1px #140b05)}
+.tool-strip span.on{width:3.7vw;height:8.5vh;padding:1vw .6vw;background:linear-gradient(90deg,#573d28,#795334);border:1px solid #3f2816;border-radius:6px}
+body .as-app{left:0!important;top:0!important;bottom:0!important;width:100%!important}
+body .tk-main{padding:0 1.1vw 1.5vh 1.7vw}
+body .tk-head{position:absolute;bottom:0;left:1.8vw;right:1.2vw;height:3vh;display:flex;align-items:center;margin:0;z-index:3}
+body .tk-head>div:first-child{display:none}
+body .tk-sort{font-size:11px;gap:6px}
+body .tk-trigger{min-width:150px;height:22px;font-size:11px;padding:0 6px;border-color:#b7ac97;background:#f4eddf;box-shadow:none}
+body .tk-pop{top:auto;bottom:calc(100% + 4px);font-size:13px}
+body .tk-columns,body .tk-row{display:grid;grid-template-columns:18% 18% 12% 12% 14% 10% 16%;gap:0!important;padding:0!important}
+body .tk-columns{flex:none;height:6.5vh;align-items:center;font-size:1.03vw;text-transform:uppercase;color:#615441;text-align:center;padding-right:9px!important}
+body .tk-row{background:linear-gradient(110deg,#fffcf7b0,#faf7eea0);border:1px solid #d8cbb0;border-radius:8px;box-shadow:inset 0 1px #fff8,0 1px 1px #b4a17b18;text-align:center;overflow:hidden}
+body .tk-operator{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px}
+body .tk-operator-logo{width:4.5vw;height:3.5vh;line-height:0}
+body .tk-operator-logo svg{width:100%;height:100%}
+body .tk-name{font-size:1.38vw!important;color:#174f66;line-height:1.1;white-space:normal;font-weight:600}
+body .tk-date{display:flex;align-items:center;justify-content:center;gap:3px;width:auto!important;background:none;border:0;padding:2px 0 0;border-radius:0}
+body .tk-dw,body .tk-dd,body .tk-dm{font-size:9px!important;line-height:1;color:#8e8068;font-weight:400}
+body .tk-info,body .tk-when{display:contents}
+body .tk-place{font-size:1.45vw!important;line-height:1.3;white-space:normal;text-align:left;padding-left:.4vw;color:#19130f;margin:0}
+body .tk-time,body .tk-arrival,body .tk-dur,body .tk-price{font-size:1.45vw!important;color:#19130f;margin:0;font-weight:400;white-space:nowrap;width:auto!important;text-align:center}
+body .tk-arrival sup{font-size:9px;color:#8b7c61}
+body .tk-buy,body .tk-buy.primary{width:7.1vw!important;height:5.5vh;min-height:0;justify-self:center;padding:0 4px;font-size:1.45vw!important;border-color:#948063;box-shadow:0 2px 3px #0003,inset 0 0 0 2px #fff7;background:linear-gradient(#f4edde,#d8ccb0)}
+body .tk-buy:disabled{opacity:1}
+body .as-foot{min-height:24px;margin:5px 0 0;font-size:11px}
+body .as-foot>span{display:none}
+body .as-pane{flex:none;overflow:hidden}
+body .as-track{width:9px;border:0;background:transparent}
+body .as-thumb{left:2px;right:1px;background:#b1a08488}
+body .as-track.idle{visibility:hidden}
+@media(max-width:1100px){.tagline{font-size:1.4vw;margin-right:1vw}.foot-bus{gap:0}.foot-bus:after{font-size:1.4vw}body .tk-name{font-size:1.25vw!important}body .tk-date{gap:2px}body .tk-dw,body .tk-dd,body .tk-dm{font-size:8px!important}.food-task{font-size:2.35vw}body .tk-trigger{min-width:110px}body .tk-sort{font-size:10px}}
+.note-hand,.tagline,.foot-bus:after{font-family:"URW Chancery L","Z003","Segoe Script","Brush Script MT",cursive;font-weight:400}
+.note-hand:after{content:"";display:block;width:5vw;height:1.4vh;border-top:1px solid #a28e70;border-radius:70%;margin:1vh 0 0 6vw;transform:rotate(-5deg)}
+body .tk-name{color:inherit}
+body .tk-place span{display:block}
+.header-mountain{position:absolute;right:1vw;top:1.8vh;width:6.4vw;height:6vh;object-fit:cover;object-position:center 25%;opacity:.6}
+.tool-strip span svg{overflow:visible}
+.note-sketch{opacity:.68}
+.note-hand{left:5vw;right:5vw;bottom:18vh;font-size:1.95vw;line-height:1.15}
+.note-hand:after{margin-left:8vw;width:5.5vw}
+.tagline{font-size:1.75vw}
+.foot-bus:after{font-size:1.95vw;line-height:1.1}
+.header-mountain{opacity:.85}
+body .tk-dw,body .tk-dd,body .tk-dm{font-size:clamp(11px,.75vw,13px)!important}
+body .tk-head{right:auto}
+body .as-foot{position:absolute;bottom:0;left:235px;right:1.2vw;height:28px;margin:0;min-height:0}
+body .as-receipt{font-size:11px;padding:4px 6px}
+body .as-foot .as-btn{font-size:11px;height:25px;padding:0 7px}
+
+/* Episode instruction and completion scenarios, kept in the organizer's paper style. */
+.task-note[hidden]{display:none!important}
+.instruction-panel .task-note{display:block}
+.instruction-toast .task-note{display:block;align-self:start;margin-top:1.5vh;padding:2.2vh 1.25vw 2.5vh;background:#f8f2e3;border:1px solid #c9baa0;border-radius:5px;box-shadow:0 2px 5px #4b341d20}
+.instruction-toast .note-head{margin-bottom:2.2vh}
+.instruction-toast .food-task{font-size:clamp(16px,1.75vw,25px);line-height:1.35}
+.design-header:has(.header-instruction){height:auto;min-height:9.7vh;flex-wrap:wrap;align-content:center;padding-bottom:1.2vh}
+.header-instruction{order:1;flex:0 0 100%;max-width:100%;font:clamp(12px,1.05vw,16px)/1.25 Georgia,serif;color:#514331;white-space:normal;overflow-wrap:anywhere;padding:.25vh .1vw .15vh}
+.end-control.header-end{width:auto;min-width:0;height:4.3vh;min-height:30px;padding:0 1vw;font-size:clamp(14px,1.25vw,19px);white-space:nowrap}
+.end-link{display:inline-flex;align-items:center;justify-content:center;min-width:8vw;padding:.7vh .9vw;color:#274c68;font:clamp(17px,1.7vw,25px) Georgia,serif;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.chrome-xtra{height:3.7vh;min-height:26px;max-width:10vw;padding:0 .6vw;border:1px solid #b4a587;border-radius:4px;background:linear-gradient(#f8f2e6,#e2d7bf);color:#594936;font:clamp(11px,.95vw,14px) Georgia,serif;white-space:nowrap;box-shadow:inset 0 1px #fff8,0 1px 2px #0002}
+.design-header .chrome-xtra{align-self:center}
+.design-footer .chrome-xtra{align-self:center}
+.design-header:has(.header-end,.chrome-xtra){flex-wrap:wrap;gap:.8vh .8vw;height:auto;min-height:9.7vh}
+.design-header:has(.header-end,.chrome-xtra) .tagline,.design-header:has(.header-end,.chrome-xtra) .header-mountain{display:none}
+.design-header:has(.header-end,.chrome-xtra) .design-brand{margin-right:auto}
+.design-header .header-end,.design-header .chrome-xtra{flex-shrink:0}
+.design-footer:has(.chrome-xtra){gap:.7vw}
+.design-footer:has(.chrome-xtra) .foot-bus{flex:1;min-width:0;overflow:hidden}
+.design-footer .clear-sel,.design-footer .end-control,.design-footer .end-link,.design-footer .chrome-xtra{flex-shrink:0}
+.reference-overlay.cookie .overlay-actions{flex-wrap:wrap}
+.reference-overlay.cookie button{flex:none;max-width:100%;height:auto;min-height:36px;white-space:normal;padding:8px 14px}
+@media(max-width:1100px){.instruction-toast .note-head{margin-bottom:1.5vh}.instruction-toast .food-task{font-size:clamp(15px,1.8vw,20px)}.header-instruction{max-width:100%}.chrome-xtra{max-width:12vw}}
+@media(max-width:1100px){body .as-foot{left:185px}.tagline{font-size:1.5vw}.header-mountain{display:none}body .tk-operator{padding:0}.note-hand{font-size:2vw}.foot-bus:after{font-size:1.8vw}}
+.design-footer{padding-top:1.3vh;padding-bottom:3.1vh}
+.design-header{border-top:1px solid #b7a68a}
+.design-header,.stage,.design-footer{border-left:1px solid #a99b81;border-right:1px solid #a99b81}
+.design-footer{border-bottom:1px solid #ab9d80;box-shadow:inset 3px 0 5px #89754a20,inset -3px 0 5px #89754a20,0 2px 0 #d6cbb4,0 4px 0 #3d2a19}
+.clear-sel{color:#17130f;background:linear-gradient(#f8f2e6,#dcd0b5)}
+.end-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.15' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(#44799e,#1e4b6a)}
+.book{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.4' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.16' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(90deg,#402616,#6c452b 4%,#3e291b 9%)}

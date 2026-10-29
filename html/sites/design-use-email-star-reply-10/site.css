@@ -1,0 +1,168 @@
+@import url("../../templates/site/css/use-email-star-reply-cf59bf.css");
+
+
+/* GNOME / libadwaita restyle */
+:root{--barh:clamp(30px,2.27vw,40px);--rowline:#e5e7eb;--blue:#1c64d6;--selection:#dce8fb}
+body{font-family:"Cantarell","Inter","Segoe UI","Noto Sans",system-ui,Arial,sans-serif;background:#f1f2f4;color:#1d1d20}
+button{border-radius:8px}
+.desktop-bar{background:#1b1b1d;color:#fff;height:var(--barh);border:0;padding:0 1.25vw;gap:2.9vw;font-weight:600;font-size:1.05vw}
+.desktop-bar .brand{font-size:1.05vw;padding-left:0;font-weight:500}
+.desktop-bar .brand:before,.desktop-bar .brand:after{content:none;display:none}
+.desktop-bar .nav{font-size:1.05vw;background:none;padding:0;margin-left:0;text-decoration:none;word-spacing:0;color:#fff;font-weight:500}
+.chrome-nav{font-size:1.05vw;text-decoration:none;margin:0;padding:0;border:0;color:#fff;display:flex;align-items:center;gap:.8vw}
+.chrome-nav:hover{text-decoration:none}
+.chrome-nav:before{content:"";width:1.25vw;height:1.25vw;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='2' y='4' width='20' height='16' rx='2.500' fill='white'/><path d='M3 7l9 6 9-6' fill='none' stroke='%231b1b1d' stroke-width='1.800'/></svg>") center/contain no-repeat}
+.desktop-bar .account{display:block;position:absolute;left:50%;transform:translateX(-50%);font-size:1.05vw;font-weight:500;white-space:pre}
+.desktop-bar:after{content:"";position:absolute;right:.9vw;top:0;bottom:0;width:9.6vw;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 17a16 16 0 0 1 22 0M16 21.500a10 10 0 0 1 14 0M20 26a4 4 0 0 1 6 0'/><path d='M51 16h4l6-5v18l-6-5h-4z' fill='white'/><path d='M65 15a7 7 0 0 1 0 10'/><rect x='95' y='13' width='10' height='15' rx='2' fill='white'/><path d='M98 11h4' stroke-width='3'/><path d='M133 17l6 6 6-6'/></svg>") right center/100% 100% no-repeat}
+
+.task-note{left:.9%;top:5.85%;width:98.2%;height:10.4%;padding:0 12.5vw 0 8.4vw;border:0;border-block:0;border-radius:14px;background:#dce7f9;color:#1b2a55;font-size:1.85vw;font-weight:700;display:flex;align-items:center;line-height:1.3}
+.task-note:before{content:"";position:absolute;left:2vw;top:50%;margin-top:-2vw;width:4vw;height:4vw;border-radius:50%;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c64d6' stroke-width='1.600' stroke-linecap='round' stroke-linejoin='round'><path d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4M14 3l5 5v3M14 3v5h5M8.500 12h5M8.500 15.500h3M14 18.500l2 2 4-4.500'/></svg>") center/55% no-repeat}
+.end-control{right:1.85%;top:7.65%;bottom:auto;width:10.2%;height:6.9%;padding:0;background:var(--blue);color:#fff;border:0;border-radius:10px;font:600 1.7vw "Cantarell","Inter","Segoe UI","Noto Sans",system-ui,Arial,sans-serif}
+
+.stage{background:transparent}
+.mail-surface .panel{box-shadow:none}
+.folders{display:flex!important;left:.9%;top:15.5%;width:4.5%;height:60%;border:0!important;background:transparent;overflow:visible;padding:0;z-index:3}
+.folders>.window-title{display:none}
+.mail-surface .folders.folder-popup{left:.9%!important;top:15.5%!important;width:4.5%!important;height:60%!important;max-height:none;box-shadow:none!important;background:transparent!important;overflow:visible!important}
+.folders .folder{width:100%;height:3.9vw;min-height:48px;margin-bottom:.35vw;padding:0;justify-content:center;border-radius:12px;color:#444}
+.folders .folder.active{background:#d9e6fb}
+.folders .folder span,.folders .folder svg{display:none}
+.folders .folder:before{content:"";width:1.8vw;height:1.8vw;background:center/contain no-repeat}
+.folder[data-target="folder:inbox"]:before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='2' y='4' width='20' height='16' rx='2.500' fill='%231c64d6'/><path d='M3 7l9 6 9-6' fill='none' stroke='white' stroke-width='1.800'/></svg>")}
+.folder[data-target="folder:starred"]:before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.600' stroke-linecap='round'><rect x='3.500' y='5' width='17' height='16' rx='2.500'/><path d='M3.500 10h17M8 3v4M16 3v4'/></svg>")}
+.folder[data-target="folder:important"]:before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.600' stroke-linecap='round'><circle cx='9' cy='8' r='3.200'/><path d='M3 20c0-3.500 2.700-6 6-6s6 2.500 6 6M15.500 5a3 3 0 0 1 0 6M17.500 14.500c2 .7 3.500 2.600 3.500 5.500'/></svg>")}
+.folder[data-target="folder:archive"]:before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.600' stroke-linejoin='round'><path d='M3 3h8.500l9.500 9.500-8.500 8.500L3 11.500z'/><circle cx='7.500' cy='7.500' r='1.300'/></svg>")}
+.folder[data-target="folder:trash"]:before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.600' stroke-linejoin='round'><circle cx='12' cy='12' r='3'/><path d='M12 2.500l1.800 2.300 2.900-.5.900 2.800 2.600 1.400-.9 2.800.9 2.800-2.600 1.400-.9 2.800-2.900-.5L12 21.500l-1.800-2.300-2.900.5-.9-2.800-2.600-1.400.9-2.800-.9-2.800 2.600-1.400.9-2.800 2.900.5z'/></svg>")}
+
+.mail-surface .ledger{display:flex!important;left:6.4%;top:14.8%;width:34.1%;height:85.2%;border:1px solid #e1e3e8;border-radius:14px 0 0 0;background:#f7f7f9}
+.mail-surface .ledger>.window-title{height:5.5vw;min-height:5.5vw;background:transparent;border:0;padding:0 1.8vw 0 2vw;font-size:2.15vw;font-weight:600;color:#1d1d20;cursor:default}
+.ledger .window-title .gadgets{font-size:0;letter-spacing:0;width:8.1vw;height:3.35vw;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 56' fill='none' stroke='%23333' stroke-width='2.200' stroke-linecap='round'><circle cx='28' cy='28' r='28' fill='%23e8e9ed' stroke='none'/><circle cx='107' cy='28' r='28' fill='%23e8e9ed' stroke='none'/><circle cx='27' cy='27' r='7.500'/><path d='M32.500 32.500l6 6'/><path d='M97 21h20M97 28h20M97 35h14'/></svg>") center/100% 100% no-repeat}
+.ledger .columns,.ledger .ledger-status{display:none}
+.ledger .list-wrap{background:transparent}
+.mail-row{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:auto auto auto;align-content:center;align-items:center;column-gap:.6vw;row-gap:.2vw;padding:0 1.5vw;margin:0 .5vw;border:0;border-radius:10px;box-shadow:inset 0 -1px 0 var(--rowline);font-size:1.2vw}
+.mail-row:nth-child(even){background:transparent}
+.mail-row.selected{background:var(--selection);box-shadow:none}
+.mail-row>input{display:none}
+.mail-row .sender{grid-column:1;grid-row:1;font-size:1.2vw;font-weight:700;color:#1d1d20}
+.mail-row .time{grid-column:2;grid-row:1;font-size:1.1vw;color:#666;text-align:right}
+.mail-row .row-flags{grid-column:3;grid-row:1}
+.mail-row .row-ico:not(.on){display:none}
+.mail-row .row-ico.on{color:#e5a50a}
+.mail-row .subject{grid-column:1/-1;grid-row:2/4;display:flex;flex-direction:column;gap:.2vw;min-width:0;font-size:1.2vw;color:#1d1d20}
+.mail-row .subject-text{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mail-row .snippet{display:block;font-size:1.1vw;color:#666;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mail-row.unread .sender{font-weight:700}
+.scrolltrack{background:transparent;border:0;width:8px}
+.scrollthumb{left:1px;width:5px;border:0;border-radius:3px;background:#c9ccd3}
+
+.mail-surface .document{left:40.5%;top:14.8%;width:58.5%;height:85.2%;border:1px solid #e1e3e8;border-radius:0 14px 0 0;background:#fff;overflow:hidden}
+.document .document-inner{padding-bottom:40%}
+.document .doc-meta{padding:1.9vw 2.4vw 0 4vw;border:0;font-size:1.1vw}
+.document .doc-meta:before{content:none;display:none}
+.document .doc-meta h2{display:block;font-size:2.05vw;font-weight:600;margin:0 0 1.45vw;line-height:1.2}
+.sender-row{display:flex;align-items:center;gap:1vw}
+.avatar{width:3.5vw;height:3.5vw;border-radius:50%;background:#a98bd8;color:#1d1d20;display:flex;align-items:center;justify-content:center;font-size:1.7vw;flex:none}
+.sender-text{flex:1;min-width:0}
+.sender-text .from{font-size:1.2vw}
+.sender-text .from strong{font-weight:600}
+.doc-meta .sender-text .address{font-size:1.2vw;color:#555}
+.to-line{font-size:1.1vw;color:#555;margin-top:.25vw}
+.time-stamp{font-size:1.1vw;color:#555;margin-right:10vw}
+.document .message-content{font-size:1.2vw;line-height:1.4;padding:2vw 1vw 1.2vw 2.5vw;margin:0 1.5vw;border-bottom:1px solid #dcdee3;background:transparent;color:#1d1d20}
+.document .doc-tools{top:6.3vw;right:15%;padding:0;min-height:0;gap:0;border:0}
+.document .doc-tools button{border:0;background:transparent;padding:4px;color:#333}
+.document .doc-tools button span{display:none}
+.document .doc-tools button.on svg{fill:#e5a50a;stroke:#e5a50a}
+.document .doc-tools button.back-control,.document .doc-tools button[data-target=back]{display:none!important}
+.document .doc-actions{display:flex;position:absolute;top:6.3vw;right:2.6%;padding:0;gap:22px;border:0}
+.document .doc-actions button{border:0;background:transparent;padding:4px;color:#333}
+.document .doc-actions button span{display:none}
+.document .doc-actions button svg{width:28px;height:28px}
+.document .doc-actions button:not([data-target="action:reply"]){display:none}
+.document .doc-actions:after{content:"";width:36px;height:36px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36' fill='%23333'><circle cx='18' cy='9' r='2.200'/><circle cx='18' cy='18' r='2.200'/><circle cx='18' cy='27' r='2.200'/></svg>") center/contain no-repeat}
+
+.mail-surface .editor{display:flex;left:41.4%;top:67.9%;width:56.3%;height:29.1%;border:1px solid #dcdee3;border-radius:14px;background:#fff;padding:0;z-index:5}
+.editor:before{content:"A";position:absolute;left:1.3vw;top:.65vw;width:3.1vw;height:3.1vw;border-radius:50%;background:#8e929a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7vw}
+.editor .window-title{background:transparent;border:0;height:3.4vw;min-height:3.4vw;padding:0 0 0 6.4vw;font:400 1.15vw "Cantarell","Inter","Segoe UI","Noto Sans",system-ui,Arial,sans-serif;color:#555}
+.editor .window-title .gadgets{display:none}
+.editor .editor-fields,.editor .formatbar{display:none}
+.mail-surface .editor textarea{flex:none;height:6.6vw;margin:0 1vw 0 5.7vw;padding:.9vw;border:1px solid #d5d7dc;border-radius:8px;font-size:1.2vw;background:#fff}
+.editor textarea::placeholder{color:transparent}
+.mail-surface .editor-actions{display:flex;flex:none;padding:.85vw 1vw 1.5vw 5.7vw;gap:0;align-items:center}
+.editor-actions:before{content:"";flex:1;height:3.35vw;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' fill='none' stroke='%23555' stroke-width='1.600' stroke-linecap='round' stroke-linejoin='round'><path d='M17 15v10a3.500 3.500 0 0 1-7 0V11a5 5 0 0 1 10 0v13'/><circle cx='73' cy='20' r='10'/><path d='M69 22a4.500 4.500 0 0 0 8 0M69.500 17v1M76.500 17v1'/><path d='M124 29h16M126 25l6-14 6 14M128 20h8'/></svg>") left center/auto 100% no-repeat}
+.mail-surface .editor-actions button:not(.send){display:none}
+.mail-surface .editor-actions .send{margin-left:0;order:0;height:3.35vw;min-width:6.1vw;padding:0;background:var(--blue);color:#fff;border:0;border-radius:8px 0 0 8px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.editor-actions .send svg{display:none}
+.editor-actions .send span{font-size:0}
+.editor-actions .send span:after{content:"Reply";font-size:1.3vw;font-weight:600}
+.editor-actions:after{content:"";width:2.6vw;height:3.35vw;margin-left:2px;background:var(--blue) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>") center/50% no-repeat;border-radius:0 8px 8px 0}
+.status-toast{left:42%}
+.task-note{font-size:1.65vw;font-weight:600}
+.mail-surface .ledger>.window-title{font-size:1.95vw;font-weight:600}
+.document .doc-meta h2{font-size:1.85vw}
+.end-control{font-size:1.5vw}
+.document .doc-tools button svg,.document .doc-actions button svg{width:1.7vw;height:1.7vw}
+.document .doc-tools button,.document .doc-actions button{padding:.25vw}
+.document .doc-actions{gap:1.3vw}
+.document .doc-actions:after{width:2.15vw;height:2.15vw}
+
+/* Review: reference geometry and a single compact system sans stack. */
+body{font-family:Arial,"Segoe UI",sans-serif;background:#f5f6f8;color:#10121b}
+:root{--blue:#1e6de5;--selection:#e2edfd;--rowline:#eef0f4}
+.desktop-bar{background:linear-gradient(110deg,#282828,#202020)}
+.desktop-bar .brand,.desktop-bar .nav,.desktop-bar .account{font-size:1.14vw}
+.desktop-bar{gap:2.9vw}
+.task-note{font-size:1.91vw;font-weight:700;color:#0b1c48;background:linear-gradient(110deg,#e0ebfe,#dce9fd);height:10.55%;padding-left:8.5vw}
+.task-note:before{left:2.1vw;width:4.1vw;height:4.1vw;margin-top:-2.05vw;background-size:65%;box-shadow:inset 10px 0 15px #dfebfc}
+.end-control{font-family:Arial,"Segoe UI",sans-serif;font-size:1.62vw;background:linear-gradient(#2274e8,#1e6be0);border:1px solid #1e6be0}
+
+/* Per-episode completion affordances stay within the app's existing GNOME frame. */
+.end-control.end-link{top:8.5%;right:2.4%;bottom:auto;width:auto;height:auto;padding:8px 10px;background:transparent;border:0;border-radius:6px;color:#1767d2;font-size:clamp(14px,1.2vw,19px);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.end-control.end-icon{top:7.15%;right:2.1%;bottom:auto;width:44px;height:44px;padding:0;border:0;border-radius:10px;background:linear-gradient(#2274e8,#1e6be0);color:#fff;font-size:22px;font-weight:700;line-height:1;display:grid;place-items:center}
+.chrome-pq{position:absolute;z-index:4;left:185px;top:5px;padding:3px 9px;border:1px solid #555;border-radius:5px;background:#303030;color:#f1f1f1;font-size:11px}
+.folders{top:15.35%}
+.folders .folder{height:4.05vw;margin-bottom:.2vw;color:#545d6d}
+.folders .folder:before{width:2vw;height:2vw}
+.mail-surface .ledger{left:6.3%;width:34.2%;background:#fdfdfd}
+.mail-surface .ledger>.window-title{padding-left:2.1vw;font-size:1.91vw;color:#0c111c;background:#fafafa}
+.ledger .window-title .gadgets{background-color:transparent}
+.message-list{right:0}
+.mail-row{border-radius:0;box-shadow:none;border-bottom:1px solid var(--rowline);font-size:1.2vw;padding-left:1.6vw;padding-right:1.4vw}
+.mail-row.selected{border-radius:9px}
+.mail-row .sender,.mail-row .subject{color:#0c1118}
+.mail-row .sender{font-size:1.22vw}
+.mail-row .snippet,.mail-row .time{font-size:1.14vw;color:#5b6473}
+.mail-surface .document{background:#fdfefe}
+.document .document-inner{padding-bottom:0;flex:none!important;height:59.2%}
+.document .doc-meta{padding:1.7vw 1.6vw 0 2.4vw}
+.document .doc-meta h2{font-size:1.91vw;color:#080c15;margin-bottom:1.55vw;line-height:1.2}
+.sender-row{gap:1.15vw}
+.sender-text .from,.doc-meta .sender-text .address{font-size:1.2vw}
+.doc-meta .sender-text .address,.to-line,.time-stamp{color:#596272}
+.to-line,.time-stamp{font-size:1.14vw}
+.sender-text .from{white-space:nowrap}
+.sender-text{overflow:hidden}
+.sender-text .from{overflow:hidden;text-overflow:ellipsis}
+.avatar{background:linear-gradient(130deg,#bba0e2,#a389cf);font-size:1.8vw}
+.time-stamp{margin-right:0;flex:none;white-space:nowrap}
+.document .doc-tools,.document .doc-actions{position:static;flex:none;padding:0;gap:1.4vw;min-height:0}
+.document .doc-tools button,.document .doc-actions button{color:#596272;padding:.25vw}
+.document .doc-actions{gap:1.2vw;margin-left:.35vw}
+.document .doc-actions:after{display:none}
+.document .doc-actions button.more-actions{display:flex}
+.more-actions svg{fill:currentColor;stroke:none}
+.document .message-content{padding:2vw 1.5vw 1.2vw;margin:0 .9vw;font-size:1.2vw;line-height:1.4;color:#101625}
+.mail-surface .editor{background:#f8f9fb}
+.editor .window-title{font-family:Arial,"Segoe UI",sans-serif;font-size:1.2vw;color:#596272}
+.editor:before{background:linear-gradient(125deg,#9da2a9,#90959b)}
+.mail-surface .editor textarea{background:#fefefe;font-size:1.2vw}
+.mail-surface.composing .editor-actions button[data-target="compose:discard"]{display:block;order:0;border:0;background:transparent;color:#596272;padding:.4vw .7vw;font:1vw Arial,sans-serif}
+.document.recovery-flags .doc-tools button.back-control,.document.trash-view .doc-tools button.back-control{display:flex!important}
+.mail-row{line-height:1.35}
+.editor-actions button{font-family:Arial,"Segoe UI",sans-serif}
+.editor-actions:before{background-size:auto 85%}
+.mail-surface .editor textarea{border-radius:11px}
+.perturb,.obstruction{border:1px solid #dce0e6;border-radius:14px;font-family:Arial,"Segoe UI",sans-serif;color:#101625}
+.perturb button,.obstruction button{background:var(--blue);color:white;border:0;border-radius:8px}
+.ledger .window-title .gadgets{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 56' fill='none' stroke='%23545d6b' stroke-width='2.5' stroke-linecap='round'><circle cx='28' cy='28' r='28' fill='%23eff0f2' stroke='none'/><circle cx='107' cy='28' r='28' fill='%23eff0f2' stroke='none'/><circle cx='26' cy='26' r='8.5'/><path d='M32 32l7 7M102 20h15M102 28h15M102 36h10M96 20h1M96 28h1M96 36h1'/></svg>")}
+.desktop-bar:after{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 16a16 16 0 0 1 22 0M16 20a10 10 0 0 1 14 0M20 24a4 4 0 0 1 6 0'/><circle cx='23' cy='28' r='1' fill='white'/><path d='M51 16h4l6-5v18l-6-5h-4z' fill='white'/><path d='M65 15a7 7 0 0 1 0 10M68 12a11 11 0 0 1 0 16'/><rect x='94' y='11' width='12' height='20' rx='1.5'/><path d='M98 8h4'/><path d='M97 17h6v11h-6z' fill='white' stroke='none'/><path d='M133 17l6 6 6-6'/></svg>")}

@@ -1,0 +1,115 @@
+:root{--bg:#c4c4c4;--panel:#f1f1f1;--fg:#000;--accent:#000;--muted:#333;--line:#000;--font:monospace;--fs:24px;--rowh:42px;--gap:20px;--lab:225px;--ctl:338px}
+*{box-sizing:border-box;transition:none!important;animation:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);color:#000;display:flex;flex-direction:column;font-size:var(--fs);background:#aaa}
+button,input,textarea{font-family:inherit}button{cursor:pointer}
+.ds-content,.ds-menu,.ds-tabs,.ds-overlay{font-family:var(--font)}
+.ds-menu{letter-spacing:-2px}
+.ds-tab{letter-spacing:-1.5px}
+input,textarea{caret-color:transparent!important}
+.ds-menu{flex:none;height:40px;display:flex;align-items:center;gap:40px;padding:0 24px 0 85px;background:#ececec;border:2px solid #000;font-size:25px;font-weight:600;letter-spacing:-1px;position:relative;z-index:5}
+.ds-menu .ds-sysbox{position:absolute;left:24px;top:10px;width:26px;height:18px;border:2px solid #000;background:#000}
+.ds-menu .ds-sysbox:after{content:"";position:absolute;left:3px;top:2px;width:12px;height:8px;border-left:2px solid #fff;border-bottom:2px solid #fff;background:repeating-linear-gradient(135deg,transparent 0 3px,#fff 3px 4px);transform:skew(-10deg)}
+.ds-menu .ds-clock{margin-left:auto;font-size:23px}
+.ds-body{flex:1;min-height:0;position:relative;background-color:#ddd;background-image:repeating-linear-gradient(130deg,#111 0 1.5px,transparent 1.5px 4px);border:2px solid #000;border-top:0}
+.ds-tabs{position:absolute;left:1.2%;top:6.5%;bottom:16.3%;width:6.4%;display:flex;flex-direction:column;gap:16px;z-index:4}
+.ds-tab{flex:1;border:2px solid #000;border-right:0;border-radius:20px 0 0 20px;background-color:#d8d8d8;background-image:radial-gradient(#444 .6px,transparent .9px);background-size:3px 3px;box-shadow:3px 3px 0 #000;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;letter-spacing:-.5px}
+.ds-tab.on{flex:1;margin-bottom:0;background:#f1f1f1;background-image:none;box-shadow:none;border-right:0;font-size:26px;width:calc(100% + 22px);margin-top:0;z-index:3;justify-content:flex-start;padding-left:19px}
+.ds-spiral{position:absolute;left:7.6%;top:3.4%;bottom:5%;width:20px;z-index:3;background:repeating-linear-gradient(180deg,transparent 0 3px,#000 3px 8px,#fff 8px 10px,#000 10px 12px,transparent 12px 16px);border:0}
+.ds-spiral:after{content:"";position:absolute;left:10px;width:10px;top:0;bottom:0;background:repeating-linear-gradient(180deg,transparent 0 3px,#000 3px 12px,transparent 12px 16px)}
+.ds-content{position:absolute;left:6.8%;right:2.6%;top:2.4%;bottom:3.8%;background:var(--panel);background-image:repeating-linear-gradient(130deg,transparent 0 3px,#e8e8e8 3px 4px);border:3px solid #000;outline:3px double #000;outline-offset:5px;box-shadow:10px 10px 0 #000;display:flex;flex-direction:column;padding:0 .6% 0 5.1%;min-width:0}
+.ds-pagehead{flex:none;display:flex;align-items:flex-end;padding-bottom:10px;margin:0;border-bottom:2px solid #000;font-size:38px;font-weight:700;letter-spacing:.02em;word-spacing:0;height:10%}
+.ds-title{min-width:0}
+.ds-headtools{margin-left:auto;display:flex;align-items:center;gap:16px;padding-left:16px;flex:none}
+.ds-headtools:empty{display:none}
+.ds-headtools .ds-toolbar-submit,.ds-headtools .ds-toolbar-xtra{height:42px;min-width:100px;font-size:20px;padding:0 16px}
+.ds-footer .ds-endlink{display:flex;align-items:center;justify-content:center;text-decoration:underline;background:transparent;box-shadow:none;border:0;color:#000}
+.ds-main{flex:1;min-height:0;display:flex;margin-top:28px}
+.ds-stage{position:relative;flex:1;min-width:0;min-height:0;container-type:size;--lab:clamp(130px,16cqw,225px);--ctl:clamp(170px,24cqw,338px)}
+/* Decorative form content must never intercept the separate episode end control. */
+.ds-stage{isolation:isolate}
+.ds-footer{position:relative;z-index:25}
+@container (max-width:860px){.ds-order{font-size:14px;padding-left:18px}.ds-order svg{width:85px;height:94px}}
+.ds-brief{flex:0 0 28%;padding:16px;border:2px solid #000;background:#ddd;margin-right:16px}
+.ds-brief h2{font-size:22px;margin:0 0 12px}
+.ds-instruction{font-weight:700;letter-spacing:.04em;overflow-wrap:anywhere}
+.ds-header-note{flex:1;min-width:0;margin:0}
+.ds-header-note .ds-instruction{font-size:28px;line-height:1.2;padding:16px 30px;border:2px solid #000;background-color:#d2d2d2;background-image:radial-gradient(#666 .8px,transparent 1px);background-size:3px 3px;letter-spacing:-.4px}
+.ds-footer{flex:none;height:15.5%;display:flex;align-items:center;gap:28px;padding:0 18px 0 0;min-height:70px}
+.ds-footer>span{display:none}
+.ds-submit,.ds-motif-action{height:46px;min-width:130px;padding:0 24px;font:700 21px var(--font);background:#e6e6e3;color:#000;border:2px solid #000;border-radius:0;box-shadow:3px 3px 0 #000}
+.ds-motif-action{height:46px;min-width:124px}.ds-submit{height:58px;min-width:174px;margin-left:0;font-size:23px}
+.ds-submit,.ds-motif-action{background:linear-gradient(#e3e3e3,#bcbcbc);box-shadow:inset 2px 2px #fff,inset -2px -2px #777,3px 3px #000}
+.ds-footer>.ds-motif-action:first-of-type{margin-left:auto}
+.ds-toast{flex:none;margin:8px 0;padding:10px 16px;border:2px solid #000;background:#ddd}
+/* order summary */
+.ds-order{position:absolute;z-index:3;left:45.3%;top:14%;width:40%;font-size:24px;line-height:1.4;border-left:2px solid #000;padding-left:44px;height:47.5%;letter-spacing:-1px;pointer-events:none}
+.ds-order svg{width:130px;height:140px;display:block;margin:18px 0 22px 14px}
+.ds-order .ds-ord{letter-spacing:.04em}
+/* process panel */
+.ds-stage .fp-wrap{position:absolute;inset:0}
+.ds-stage .fp-card{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;border:2px solid #000!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:0 0 24px!important;font-size:var(--fs)}
+.ds-ptitle{height:54px;flex:none;border-bottom:2px solid #000;display:flex;align-items:center;padding:0 24px;font-size:29px;font-weight:700;letter-spacing:.03em;margin-bottom:28px;background:transparent}
+.ds-stage .fp-note,.ds-stage .fp-status{display:none!important}
+.ds-motif-field,.ds-stage .fp-field{display:grid;grid-template-columns:var(--lab) var(--ctl);align-items:center;margin:0 0 var(--gap)!important;padding:0 0 0 34px;font-size:var(--fs);letter-spacing:-1px;position:relative;flex:none}
+.ds-stage .fp-label{margin:0!important;font-size:var(--fs)!important;font-weight:400!important;text-transform:none!important;letter-spacing:-1px}
+.ds-stage .fp-label:after{content:":"}
+.ds-motif-field input{height:var(--rowh);border:2px solid #000;border-radius:0;background:#faf9f7;font:var(--fs) var(--font);padding:0 12px;width:100%;min-width:0;letter-spacing:.02em}
+.ds-stage .fp-ctl{height:var(--rowh);border:2px solid #000!important;border-radius:0!important;background:#faf9f7!important;font-size:var(--fs);padding:0 0 0 14px;gap:0;letter-spacing:.04em;box-shadow:none!important}
+.ds-stage .fp-trigger.open{border-width:3px!important}
+.ds-stage .fp-trigger .fp-chev{display:none}
+.ds-stage .fp-trigger:after{content:"";flex:none;width:calc(var(--rowh) - 2px);height:100%;border-left:2px solid #000;background:#faf9f7 conic-gradient(from 0deg,transparent 0) ;background-image:linear-gradient(#000,#000);background-size:0 0}
+.ds-stage .fp-trigger{position:relative}
+.ds-stage .fp-trigger:before{content:"";position:absolute;right:11px;top:50%;margin-top:-4px;border:9px solid transparent;border-top:12px solid #000;border-bottom:0;width:0;height:0;z-index:1}
+.ds-stage .fp-trigger .fp-val.empty{color:#000}
+.ds-stage .fp-pop{border:2px solid #000!important;border-radius:0!important;background:#faf9f7!important;padding:0!important;box-shadow:3px 3px 0 #000!important;top:100%!important;font-size:calc(var(--fs) - 2px)}
+.ds-stage .fp-opt{border-radius:0!important;padding:0 16px!important;letter-spacing:.04em}
+.ds-stage .fp-opt .fp-tick{display:none}
+.ds-stage .fp-opt:hover,.ds-stage .fp-opt.active{background:#cfcfcf!important}
+.ds-stage .fp-opt.sel{color:#000;font-weight:700}
+.ds-stage .fp-dd{width:100%}
+.ds-notes{display:flex;align-items:stretch;height:calc(var(--rowh)*2.5);margin-left:34px;margin-top:2px;margin-right:34px;border:2px solid #000;background:#faf9f7;position:relative}
+.ds-notes-lab{position:absolute;left:0}
+.ds-notewrap{display:grid;grid-template-columns:var(--lab) minmax(0,1fr);align-items:start;padding:0 16.2% 0 34px;margin-top:25px}
+.ds-notewrap .ds-notes{margin:0}
+.ds-notewrap .ds-nl{padding-top:6px;letter-spacing:-1.4px;white-space:nowrap}
+.ds-notes .ds-nt{flex:1}
+.ds-notes .ds-sb{width:30px;border-left:2px solid #000;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-size:16px}
+.ds-notes .ds-sb span{display:block;width:100%;height:30px;text-align:center;line-height:30px;border-bottom:2px solid #000}
+.ds-notes .ds-sb span:last-child{border-bottom:0;border-top:2px solid #000}
+/* newsletter overlay */
+.ds-overlay{position:fixed;z-index:1000;right:2.2%;left:auto;top:9.8%;bottom:auto;width:33.8%;max-width:none;padding:4px;background:#eaeaea;border:3px solid #000;box-shadow:6px 6px 0 #000;border-radius:0;font-size:20px}
+.ds-nl-bar{height:58px;display:flex;align-items:center;gap:18px;padding:0 12px 0 22px;border:2px solid #000;background-color:#bdbdbd;background-image:radial-gradient(#555 .6px,transparent .9px);background-size:3px 3px;font-size:24px;font-weight:700;letter-spacing:.08em}
+.ds-nl-bar .t{flex:1;padding:2px 12px;text-align:left;letter-spacing:-1px;white-space:nowrap}
+.ds-nl-x{width:46px;height:42px;border:3px solid #000;background:#f6f6f3;font:700 28px var(--font);padding:0;line-height:1;box-shadow:none}
+.ds-nl-body{padding:22px 32px 18px;display:grid;grid-template-columns:130px 1fr;gap:20px 46px;align-items:center;border:2px solid #000;border-top:0}
+.ds-nl-body>div:first-child{margin-left:28px}
+.ds-nl-body p{margin:0;font-size:24px;line-height:1.25;letter-spacing:-1.5px;align-self:start}
+.ds-nl-form{grid-column:1/-1;display:flex;gap:22px;align-items:center;margin-top:14px}
+.ds-nl-form .em{flex:1;height:44px;border:2px solid #000;background:#faf9f7;padding:0 14px;display:flex;align-items:center;font-size:21px;color:#444}
+.ds-nl-btn{height:48px;min-width:150px;padding:0 20px;font:700 22px var(--font);background:#dcdcd8;border:2px solid #000;border-radius:0;box-shadow:3px 3px 0 #000;color:#000;margin:0}
+.ds-nl-foot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-top:14px;margin-right:-14px}
+.ds-nl-foot a{text-decoration:underline;font-size:21px;cursor:pointer}
+.ds-nl-foot{gap:12px;min-width:0}
+.ds-nl-foot a{min-width:0;overflow-wrap:anywhere}
+.ds-nl-foot .ds-nl-btn{flex:none}
+.ds-overlay .ds-nl-btn{margin:0;padding:0 20px;background:linear-gradient(#ddd,#bcbcbc);color:#000;border:2px solid #000;border-radius:0;box-shadow:inset 2px 2px #fff,inset -2px -2px #777,3px 3px #777}
+@media(max-height:820px){
+:root{--fs:15px;--rowh:28px;--gap:11px;--lab:160px;--ctl:240px}
+.ds-menu{height:30px;font-size:15px;gap:30px;padding-left:60px}.ds-menu .ds-sysbox{top:6px;left:18px;width:20px;height:15px}.ds-menu .ds-clock{font-size:14px}
+.ds-pagehead{font-size:23px}
+.ds-headtools{gap:10px;padding-left:10px}
+.ds-headtools .ds-toolbar-submit,.ds-headtools .ds-toolbar-xtra{height:28px;min-width:70px;font-size:14px;padding:0 10px}
+.ds-ptitle{height:38px;font-size:19px;margin-bottom:14px}
+.ds-tab{font-size:13px}.ds-tab.on{font-size:18px}
+.ds-header-note .ds-instruction{font-size:17px;padding:10px 16px}
+.ds-submit,.ds-motif-action{height:34px;min-width:90px;font-size:15px;padding:0 14px}.ds-submit{height:40px;min-width:120px}
+.ds-footer{min-height:50px;gap:14px}
+.ds-order{font-size:15px;padding-left:24px}.ds-order svg{width:80px;height:88px;margin-bottom:12px}
+.ds-nl-bar{height:42px;font-size:16px}.ds-nl-x{width:32px;height:28px;font-size:20px}
+.ds-nl-body{padding:14px 20px;grid-template-columns:80px 1fr;gap:12px 20px}.ds-nl-body p{font-size:15px}
+.ds-nl-body>div:first-child{margin-left:12px}.ds-nl-body>div:first-child svg{width:80px;height:80px}.ds-nl-bar>svg{width:24px;height:30px}.ds-nl-bar .t{padding:2px 0;font-size:14px}.ds-nl-form{gap:12px}.ds-nl-form .em{min-width:0;white-space:nowrap;padding:0 8px;font-size:12px}.ds-nl-foot{margin-right:0}
+.ds-nl-form .em{height:32px;font-size:14px}.ds-nl-btn{height:34px;min-width:100px;font-size:15px}.ds-nl-foot a{font-size:14px}
+.ds-overlay{font-size:14px;width:36%}
+.ds-order{top:14%}
+}

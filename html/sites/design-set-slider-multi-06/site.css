@@ -1,0 +1,78 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.lisa{--ink:#000;--paper:#f3f1e6;color:#000;background:repeating-conic-gradient(#77776e 0 25%,var(--paper) 0 50%) 0 0/2px 2px;font-family:'Times New Roman','Liberation Serif',Georgia,serif;font-size:clamp(14px,1.3vw,22px);display:flex;flex-direction:column}
+body.lisa button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,p{margin:0}
+.menubar{flex:0 0 4.3%;display:flex;align-items:center;gap:clamp(18px,2vw,34px);padding:0 clamp(14px,2.1vw,36px);border-bottom:2px solid #000;font-size:clamp(15px,1.45vw,25px);font-weight:bold;background:var(--paper)}
+.menubar .apple{height:1.3em;width:1em;flex:none}
+.menubar .clock{margin-left:auto;font-size:.92em;white-space:pre}
+.window{flex:1;min-height:0;display:flex;flex-direction:column;margin:7px 2px 0;border:2px solid #000;outline:1px solid #000;outline-offset:-5px;background:var(--paper)}
+.titlebar{flex:0 0 3.6vh;min-height:26px;display:flex;align-items:center;gap:4px;margin:5px 5px 0;border-bottom:2px solid #000;padding:0 14px 3px}
+.tb-box{width:20px;height:20px;border:2px solid #000;background:var(--paper);flex:none}
+.tb-box.zoom{position:relative;background:var(--paper)}
+.tb-box.zoom::before{content:'';position:absolute;left:2px;top:4px;width:10px;height:8px;border:1px solid #000}
+.tb-box.zoom::after{content:'↟';position:absolute;left:3px;top:-5px;font:bold 20px serif}
+.tb-lines{flex:1;height:60%;background:repeating-linear-gradient(#000 0 1px,transparent 1px 4px)}
+.tb-title{font-weight:bold;font-size:1.1em;padding:0 .3em;white-space:nowrap}
+body.lisa .toolbar-end{flex:none;border:2px solid #000;border-radius:2px;background:var(--paper);font-size:.85em;font-weight:bold;line-height:1;padding:0 .7em;box-shadow:1px 1px #000}
+.panes{flex:1;min-height:0;display:flex}
+.pane-left{flex:0 0 calc(60.6% - 6px);min-width:0;display:flex;flex-direction:column;padding:3.8vh 24px 5.1vh 30px}
+.divider{flex:0 0 12px;border-left:2px solid #000;border-right:2px solid #000;margin:0 -1px;background:var(--paper)}
+.pane-right{flex:1;min-width:0;display:flex;flex-direction:column;padding-bottom:5.2vh}
+.instr-row{position:relative;margin-left:0;padding-left:54px}
+.doc-icon{position:absolute;left:0;top:-14px;width:32px;height:50px}
+.instruction{position:relative;border:2px solid #000;min-height:17.65vh;display:flex;flex-direction:column;justify-content:center;padding:10px clamp(12px,1.8vw,32px);font-size:clamp(17px,2.15vw,36px);line-height:1.35;text-align:center;background:var(--paper)}
+.instruction[hidden]{display:none}
+.instruction-hidden .instr-row{min-height:17.65vh}
+.instruction-hidden .doc-icon{display:none}
+.instruction-toast .instruction{padding-bottom:30px}
+body.lisa .instruction-close{position:absolute;bottom:3px;right:8px;display:block;margin:0;font-size:.5em;border:1px solid #000;background:var(--paper);padding:.05em .7em;line-height:1.1}
+.record-stage{position:relative;flex:1;min-height:0;margin-top:4vh}
+.pv-head{font-weight:bold;font-size:1.1em;line-height:1.1;padding:.3em 1em .2em;border-bottom:2px solid #000}
+.pv-frame{flex:1;min-height:0;margin:2.4vh 24px 0;border:2px solid #000;padding:2px;overflow:hidden;background:var(--paper)}
+.scene{display:block;width:100%;height:100%}
+.shelf{flex:0 0 11.6%;min-height:50px;border-top:2px solid #000;display:flex;align-items:center;justify-content:space-between;padding:0 2% 0 2%}
+.shelf-name{font-size:.95em}
+.shelf-actions{display:flex;align-items:center;gap:2.5vw}
+body.lisa .shelf button{border:2px solid #000;border-radius:3px;background:var(--paper);font-weight:bold;font-size:1.15em;line-height:1.15;padding:.35em 1.65em;box-shadow:1px 2px 0 #000}
+body.lisa .shelf button.primary{padding:.38em 1.1em;border-width:3px;box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 4px #000,2px 3px 0 #000;font-size:1.45em;line-height:1.1;border-radius:6px}
+.shelf button:active{background:#000;color:var(--paper)}
+body.lisa .shelf .end-link{border:0;border-radius:0;box-shadow:none;background:none;font-size:1em;font-weight:normal;padding:.3em 0;text-decoration:underline;text-underline-offset:3px}
+.dither{flex:0 0 1.2%;background:repeating-conic-gradient(#77776e 0 25%,#f3f1e6 0 50%) 0 0/2px 2px}
+
+/* slider widget (widget classes) */
+body.lisa .slc-card{position:static;width:100%;height:100%;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+body.lisa .slc-grid{display:grid;height:100%;grid-template-columns:clamp(94px,9.25vw,155px) minmax(0,1fr);column-gap:0;row-gap:4.2vh;grid-auto-rows:minmax(0,1fr);align-items:stretch}
+body.lisa .slc-row{gap:clamp(24px,5vw,90px);justify-content:center;padding-top:6px}
+body.lisa .slc-v{min-width:0;border:2px solid #000;padding:10px 46px 14px 24px;background:var(--paper)}
+body.lisa .slc-v .slc-label{max-width:100%;white-space:normal;overflow-wrap:anywhere;font-weight:bold;font-size:clamp(15px,1.45vw,25px);text-align:center}
+body.lisa .slc-v .slc-ticks{color:#000;font-size:clamp(12px,1.2vw,20px);width:60px}
+body.lisa .slc-v .slc-tick::before{background:#000;width:7px}
+body.lisa .slc-grid .slc-label{min-width:0;text-align:left;font-weight:bold;font-size:clamp(16px,1.8vw,30px);padding:.5em 0 0 .55em;white-space:normal;overflow-wrap:normal;border:2px solid #000;border-right:0;background:var(--paper)}
+body.lisa .slc-grid .slc-body{border:2px solid #000;border-left:0;background:var(--paper)}
+body.lisa .slc-grid .slc-hit{margin:clamp(8px,2.1vh,20px) 44px 36px 0}
+body.lisa .slc-rail{border:2px solid #000;border-radius:0;background:var(--paper)}
+body.lisa .slc-h .slc-rail{height:12px!important}
+body.lisa .slc-v .slc-rail{background:var(--paper)}
+body.lisa .slc-fill{display:none}
+body.lisa .slc-thumb{border:2px solid #000;border-radius:2px;background:repeating-conic-gradient(#555 0 25%,#c9c5b8 0 50%) 0 0/3px 3px;box-shadow:1px 1px 0 #000}
+body.lisa .slc-thumb.active{box-shadow:1px 1px 0 #000;background:repeating-conic-gradient(#222 0 25%,#aaa 0 50%) 0 0/3px 3px}
+body.lisa .slc-h .slc-ticks{left:0;right:auto;top:calc(clamp(8px,2.1vh,20px) + 53px);height:auto;color:#000;font-size:clamp(13px,1.45vw,24px)}
+body.lisa .slc-h .slc-tick{top:calc(clamp(8px,1.8vh,18px) * 0 + 11px)}
+body.lisa .slc-h .slc-tick::before{left:50%;top:-12px;width:1px;height:9px;background:#000}
+body.lisa .slc-minor{position:absolute;top:-1px;width:1px;height:4px;background:#000}
+body.lisa .slc-readout{border:2px solid #000;border-radius:0;background:var(--paper);margin:0 0 0 10px;align-self:start}
+body.lisa .slc-grid .slc-readout{width:70px;max-width:100%;padding:4px;font-size:clamp(12px,1.2vw,20px)}
+body.lisa .slc-hit:focus-visible,body.lisa .slc-hit.focused{box-shadow:none;outline:2px dotted #000;outline-offset:3px}
+/* Preserve the normal instruments; compact only when a long note leaves short rows. */
+body.lisa .slc-grid.compact .slc-hit{margin-top:4px;margin-bottom:0}
+body.lisa .slc-grid.compact .slc-ticks{top:var(--compact-ticks);font-size:var(--compact-font)}
+body.lisa .slc-grid.compact .slc-tick{top:0}
+body.lisa .slc-grid.compact .slc-tick::before{top:-7px;height:5px}
+body.lisa .slc-grid.compact .slc-minor{top:-7px;height:3px}
+
+/* overlays */
+.survey-drawer{position:fixed;right:3%;top:22%;width:30%;z-index:40;background:var(--paper);border:2px solid #000;box-shadow:4px 5px 0 #000;padding:1.2em 1.4em 1.2em;font-size:clamp(15px,1.3vw,22px)}
+.survey-drawer h2{font-size:1.2em;border-bottom:2px solid #000;padding-bottom:.3em;margin-bottom:.6em}
+.survey-x{position:absolute;right:.5em;top:.3em;padding:0 .3em;border:2px solid #000;background:var(--paper);font-family:Arial,sans-serif;font-size:1.1em;line-height:1}
+.survey-close{display:block;margin:1em 0 0 auto;border:2px solid #000;border-radius:5px;background:var(--paper);font-weight:bold;padding:.3em 1.2em;box-shadow:1px 2px 0 #000}
+.overlay-toast{top:auto;bottom:14%}

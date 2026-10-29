@@ -1,0 +1,70 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{--bg:#d9d9d9;--panel:#e6e6e6;--line:#4a4a4a;--fg:#111;--muted:#555;--accent:#1a3f94;
+  font-family:"Liberation Sans","Helvetica Neue",Arial,sans-serif;background:#d4d4d4;color:#111;font-size:clamp(14px,1.45vw,24px)}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #000;outline-offset:2px}[hidden]{display:none!important}
+.win{position:absolute;inset:0;display:flex;flex-direction:column;background:linear-gradient(115deg,#ddd,#ccc);border:7px ridge #ddd;border-top-width:2px}
+.titlebar{height:4.6%;min-height:26px;background:#4469c0;display:flex;align-items:stretch;justify-content:space-between;flex:none}
+.title-tab{background:linear-gradient(#ffd12a,#ffc400);border:1px solid #8a6a00;border-top:0;display:flex;align-items:center;gap:1.1vw;padding:0 4.4vw 0 1.2vw;clip-path:polygon(0 0,97% 0,100% 22%,100% 100%,0 100%);font-size:clamp(14px,1.45vw,24px);color:#111}
+.window-actions{display:flex;gap:2px;align-items:center;padding:0 .4vw}
+.window-action{width:2.1vw;min-width:24px;height:80%;background:#d6d6d6;border:2px outset #eee;padding:0;position:relative}
+.window-action::after{content:"";position:absolute;left:25%;right:25%;top:25%;bottom:25%;border:2px solid #111}
+.window-action.min::after{top:auto;height:2px;border-width:0;background:#111;bottom:25%}
+.window-action.close::after{border:0;background:linear-gradient(45deg,transparent 45%,#111 45%,#111 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,#111 45%,#111 55%,transparent 55%)}
+.menubar{height:4.4%;min-height:24px;display:flex;align-items:center;gap:1.8vw;padding:0 1.2vw;border-bottom:1px solid #777;background:#d9d9d9;flex:none;font-size:clamp(13px,1.35vw,22px)}
+.menu-tools{display:flex;align-items:center;gap:1vw;margin-left:auto;height:100%}
+.chrome-xtra,.end-toolbar{border:2px outset #eee;background:#d4d4d4;padding:0 1vw;line-height:1.1;height:calc(100% - 4px);min-height:20px;font-size:inherit;white-space:nowrap}
+.end-toolbar{background:#bfd0f1;font-weight:700}
+.end-link{border:0;background:transparent;color:#10208f;text-decoration:underline;padding:0 .7vw;font-size:inherit;white-space:nowrap}
+.band{border-top:2px groove #b8b8b8;position:relative}
+.band-instr{flex:0 0 16.5%;display:flex;align-items:center;justify-content:center;background:linear-gradient(115deg,#dedede,#d5d5d5);margin:0;border:0;border-bottom:5px groove #eee}
+.instruction{margin:0;font-size:clamp(22px,3.45vw,58px);font-weight:700;color:#10208f;text-align:center;line-height:1.15;padding:0 2vw;transform:translateY(-.6vh)}
+.band-main{flex:1 1 0;min-height:0;margin:0;display:grid;grid-template-columns:26% 1fr;grid-template-rows:15% 1fr;padding:0 2.15vw;background:linear-gradient(115deg,#d7d7d7,#cfcfcf)}
+.legend{grid-column:1/3;display:flex;align-items:center;gap:1.1vw;padding-top:2.1vh;font-size:clamp(17px,1.9vw,32px);font-weight:700}
+.legend i{flex:1;height:1px;background:#555}
+.settings{list-style:none;margin:0;padding:0 1.25vw 0 0;border-right:1px solid #888;margin-bottom:3vh}
+.settings li{display:flex;align-items:center;gap:1.95vw;padding:1.2vh 1.25vw;height:11.2vh;font-size:clamp(14px,1.4vw,23px);line-height:1.5}
+.settings li b{font-weight:700;display:block}.settings svg{width:3vw;min-width:28px;height:auto}
+.settings li.sel{background:linear-gradient(115deg,#19448e,#173f8f);color:#fff;height:10.5vh}
+.settings li.sel svg path,.settings li.sel svg circle{stroke:#f2e6c8}
+.settings li.sel svg circle[fill="#222"]{fill:#f2e6c8}
+.settings li:not(.sel) svg path,.settings li:not(.sel) svg circle{stroke:#111}
+.dial-stage{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;margin-bottom:1vh}
+.units{position:absolute;right:2.1vw;bottom:3.8vh;font-size:clamp(13px,1.3vw,22px)}
+.band-foot{flex:0 0 17.5%;display:flex;align-items:center;gap:1vw;padding:0 1.7vw .8vh;background:linear-gradient(115deg,#d4d4d4,#ccc);border-top:6px groove #eee}
+.led{width:1.7vw;height:1.7vw;min-width:20px;min-height:20px;max-width:34px;max-height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b6ffb0,#00d000 60%,#006000);border:2px solid #222;margin-left:.8vw}
+.status{margin-right:auto;margin-left:.8vw;font-size:clamp(14px,1.4vw,23px)}
+.btn{height:8.5vh;min-height:36px;border:4px ridge #eee;background:linear-gradient(125deg,#d5d5d5,#bdbdbd);color:#111;font-size:clamp(14px,1.45vw,24px);padding:0 2.5vw;min-width:11vw;box-shadow:0 0 0 1px #555}
+.reset{margin-right:2vw}
+.submit-button{background:linear-gradient(125deg,#c9d8f7,#a6bce6);border:7px ridge #739de5;box-shadow:0 0 0 2px #183c86,inset 0 0 0 1px #eee;font-weight:700;min-width:12.4vw;height:9.3vh;font-size:clamp(16px,1.6vw,27px)}
+/* rotate widget card, restyled as a bare inset panel */
+.dial-stage .rot-card{background:transparent;border:0;box-shadow:none;padding:0}
+.dial-stage .rot-card,.dial-stage .rot-col{position:absolute!important;inset:0!important;display:block;margin:0;width:100%;height:100%}
+.dial-stage .rot-title{position:absolute;left:0;top:12.6%;width:74.6%;font-weight:700;font-size:clamp(18px,1.8vw,30px);text-align:center;letter-spacing:0}
+.dial-stage{position:absolute;left:27.3%;right:0;top:0;height:100%;padding:0;margin:0;display:block}
+.dial-stage .rot-svg{position:absolute;left:37.3%;top:min(62.3%,calc(100% - var(--dial-half) - 1px));transform:translate(-50%,-50%)}
+.dial-stage .rot-svg text{font-size:clamp(15px,1.45vw,25px)!important;font-weight:400}
+.dial-stage .rot-knob>circle:first-child{stroke:#252525;stroke-width:2;filter:drop-shadow(7px 12px 8px rgba(0,0,0,.25))}
+.dial-stage .rot-knob>circle:nth-child(2){stroke:#e4e4e4;stroke-width:2;stroke-dasharray:none}
+.dial-stage .rot-knob path{stroke:none!important}
+.dial-stage .rot-knob line{display:none}
+.dial-stage .rot-knob>circle:first-child{stroke:#3a3a3a!important}
+.dial-stage .rot-knob>circle:last-of-type{opacity:0}
+.dial-stage [data-role=grip]{opacity:0}
+.dial-stage .rot-muted{display:none}
+.dial-stage .rot-svg text{font:400 clamp(13px,1.2vw,20px) "Liberation Sans",Arial,sans-serif;fill:#111}
+.dial-stage .rot-svg .major{stroke:#111;stroke-width:2.5}.dial-stage .rot-svg .minor{stroke:#111;stroke-width:2}
+.dial-stage .rot-readout{position:absolute;left:65.1%;top:48.3%;width:18.5%;min-width:0;margin:0;padding:1.4vh .5vw;border:2px inset #aaa;border-radius:0;background:#e2e6df;font-size:clamp(26px,3vw,50px);font-weight:700}
+.dial-stage .rot-readout::before{content:attr(data-label);position:absolute;left:-20%;right:-20%;bottom:100%;margin-bottom:1.2vh;font-size:clamp(14px,1.4vw,23px);font-weight:700;font-variant-numeric:normal}
+.dial-stage .rot-muted{grid-column:1/3;font-size:clamp(11px,1vw,16px)}
+.beos-note{position:absolute;z-index:100;top:14vh;right:2vw;width:30vw;min-width:300px;background:#e6e6e6;border:2px outset #eee;border-top:22px solid #fcc419;padding:1.5vh 1.4vw;font-size:clamp(14px,1.3vw,22px)}
+.beos-note h2{margin:0 24px 1vh 0;font-size:1.15em}.beos-note p{margin:0 0 1.5vh}.bubble-close{position:absolute;right:6px;top:-20px;background:none;border:0;font-size:20px;padding:0}
+.tour-actions{display:flex;gap:1vw}.tour-actions button{flex:1;height:5.5vh;min-height:34px;border:2px outset #ddd;background:#cfcfcf}
+.tour-primary{background:#bfd0f5!important}
+.overlay-banner{top:9vh;width:50vw}.overlay-toast{top:auto;bottom:20vh;width:27vw}.overlay-cookie{top:26vh}.overlay-promo{top:25vh}
+.instruction-toast .instruction{position:relative}.instruction-dismiss{font-size:13px;margin-left:12px;border:1px solid #666;background:#ddd;padding:2px 8px}
+.instruction-panel .band-instr{justify-content:flex-end;padding:1vh 2.15vw}
+.instruction-panel .instruction{width:55%;font-size:clamp(18px,2vw,32px);text-align:left;padding:1vh 1.2vw;border:2px outset #eee;border-top:5px solid #fcc419;background:#e4e4e4;transform:none;line-height:1.2}
+.instruction-toast .band-instr{justify-content:flex-end;padding:1vh 2.15vw}
+.instruction-toast .instruction{width:67%;font-size:clamp(18px,2vw,32px);text-align:left;padding:1vh 1.2vw;border:2px outset #eee;background:#e9e8d9;transform:none;line-height:1.2}
+.instruction-hidden .band-instr{display:none}
+@media(max-width:1100px){.instruction-panel .band-instr,.instruction-toast .band-instr{flex-basis:20%;justify-content:center}.instruction-panel .instruction,.instruction-toast .instruction{width:100%;font-size:22px}}

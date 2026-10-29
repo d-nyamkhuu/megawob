@@ -1,0 +1,74 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:monospace;background:#f8f4ed;color:#25272b;font-size:clamp(12px,1.2vw,20px);
+  --bg:#f8f4ed;--panel:#f1eee8;--fg:#25272b;--muted:#5a5d63;--line:#bdb8ae;--accent:#ee6a1c}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #ee6a1c;outline-offset:2px}[hidden]{display:none!important}
+.titlebar{height:5%;min-height:30px;background:linear-gradient(110deg,#303436,#383c3d);color:#e8eaec;display:flex;align-items:center;gap:1vw;padding-left:1.1vw;font-family:"Segoe UI","Liberation Sans",Arial,sans-serif;font-size:clamp(13px,1.2vw,20px)}
+.app-logo{width:1.3vw;min-width:16px;height:1.3vw;min-height:16px;border-radius:3px;background:#ee6a1c;border:2px solid #f5a56e}
+.menu{display:flex;gap:2.6vw;margin-left:1.4vw}
+.window-actions{display:flex;margin-left:auto;height:100%}.window-action{width:3.9vw;min-width:40px;background:transparent;color:#e8eaec;border:0;display:grid;place-items:center}
+.notebook-page{position:absolute;left:0;right:0;top:5%;bottom:18.2%;background:#f8f4ed}
+.crumbs{position:absolute;left:2%;top:2.8%;font-size:clamp(12px,1.2vw,20px);color:#3a3d42;white-space:pre}
+.instruction{position:absolute;left:18%;right:18%;top:8.8%;margin:0;padding:.45em .5em;text-align:center;background:#fde5d6;border:1px solid #f89457;border-radius:6px;font-family:"IBM Plex Sans","Segoe UI","Liberation Sans",Arial,sans-serif;font-size:clamp(20px,2.5vw,42px);font-weight:600;line-height:1.15;color:#111;z-index:2}
+.chamber{position:absolute;left:3.2%;top:27.5%}.chamber h2{margin:0 0 .5em;font-size:clamp(18px,1.9vw,32px);font-weight:600}
+.chamber pre{margin:0;font:inherit;font-size:clamp(12px,1.3vw,22px);line-height:1.6;color:#33363b}
+.cube-stage{position:absolute;left:30%;right:30%;top:24%;bottom:0;display:flex;justify-content:center;align-items:flex-start;min-width:0;min-height:0}
+.control-card{position:absolute;right:2.7%;top:25%;width:21.2%;min-height:50.4%;border:1px solid #d6d1c7;border-radius:6px;background:#f8f4ed;padding:1.6% 1.5%}
+.control-card .lbl{font-size:clamp(12px,1.2vw,20px);font-weight:500}.control-card .big{font-family:"IBM Plex Sans","Segoe UI","Liberation Sans",Arial,sans-serif;font-size:clamp(24px,2.6vw,44px);font-weight:600;margin:.4em 0 .03em}
+.control-card .detail{font-size:clamp(13px,1.6vw,27px);color:#33363b}.control-card hr{border:0;border-top:1px solid #d6d1c7;margin:.95em 0 1.3em}
+.control-card .status{margin-top:.6em;background:#efebe3;border-radius:6px;padding:.8em;font-size:clamp(11px,1.08vw,18px);line-height:1.5;white-space:pre-line;color:#4a4d52}
+/* dial widget restyle */
+.cube-stage .rot-card{border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
+.rot-title{display:none}
+.rot-pad{border:0}
+.cube-stage .rot-svg text{font:500 clamp(14px,1.4vw,24px) monospace!important;fill:#222}
+.cube-stage .rot-svg .minor{stroke:#33363b;stroke-width:1.8}.cube-stage .rot-svg .major{stroke:#222;stroke-width:2.5}
+.rot-knob path{stroke:#4a4b4d!important;stroke-width:3!important}
+.rot-knob .knob-face{stroke:#e9e9e6}
+.rot-knob{filter:drop-shadow(3px 8px 6px #0003)}
+.cube-stage .rot-readout{min-width:0;width:18.7vw;border:1px solid #cfcac0;border-radius:6px;background:#efebe3;font-size:clamp(22px,2.65vw,46px);font-family:"IBM Plex Sans","Segoe UI","Liberation Sans",Arial,sans-serif;font-weight:600;position:relative;padding:1.08em .5em .35em!important;line-height:1.1;margin-top:-1.3em}
+.rot-readout::before{content:"Current Temperature";position:absolute;left:0;right:0;top:.45em;font:clamp(11px,1.15vw,20px) monospace;color:#25272b}
+.rot-muted{display:none}
+.dock{position:absolute;left:0;right:0;bottom:0;height:18.2%;background:linear-gradient(110deg,#292e30,#272c2d);color:#d6d9dd;display:flex;border:1px solid #444;border-radius:4px;font-family:monospace}
+.dock-group{padding:.8% 1.7% 1.6%;border-right:1px solid #3d4248;display:flex;flex-direction:column;gap:.6em;min-width:0}
+.g-controls{padding-left:1.4%;padding-right:1.4%}
+.g-view{padding-left:1.9%;padding-right:1.4%}
+.dock-group:last-child{border-right:0;flex:1}
+.g-view{width:12%}.g-controls{width:27.5%}.g-presets{width:31%}.g-actions{flex:1}
+.dock-title{font-size:clamp(11px,1.15vw,19px);color:#c8ccd0}
+.dock-row{display:flex;gap:.9vw;flex:1;min-height:0;padding-bottom:.4vh}
+.tool{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25em;background:linear-gradient(135deg,#383c3c,#303435);border:1px solid #454b4b;border-radius:6px;color:#cfd3d7;font-size:clamp(10px,1vw,17px);padding:0}
+.tool.active{border:2px solid #ee6a1c;background:#4a3a31;color:#f58a45}
+.g-presets .tool{font-size:clamp(12px,1.2vw,20px)}
+.g-actions .dock-row{align-items:stretch;gap:1.4vw;padding-bottom:.9vh}.g-actions .reset{flex:0 0 43%;flex-direction:row;justify-content:center;gap:.5em;font-size:clamp(12px,1.15vw,19px)}
+.g-actions .reset svg{width:2em;height:2em}
+.submit-button{flex:1;border:1px solid #f38b3d;border-radius:6px;background:linear-gradient(135deg,#f97813,#f3690b);color:#fff;font-family:"IBM Plex Sans","Segoe UI","Liberation Sans",Arial,sans-serif;font-size:clamp(18px,1.55vw,26px);font-weight:600;min-height:44px}
+.titlebar-submit{flex:0 0 auto;align-self:center;min-height:0;height:68%;margin-left:auto;padding:0 1.1em;font-size:clamp(12px,1vw,16px);white-space:nowrap}
+.crumb-submit{position:absolute;right:2.7%;top:2.5%;z-index:3;color:#383b40;font-size:clamp(12px,1.05vw,18px);text-decoration:none;border-bottom:1px solid #777;padding:.15em .25em;white-space:nowrap}
+.chrome-xtra{align-self:center;flex:0 0 auto;min-width:0;max-width:38%;min-height:32px;padding:.35em .65em;border:1px solid #555b5d;border-radius:5px;background:#34393a;color:#d2d5d8;font:clamp(10px,.95vw,15px) monospace;white-space:nowrap}
+.titlebar .chrome-xtra{height:65%;margin-left:.45em;padding:0 .7em;font-family:"Segoe UI","Liberation Sans",Arial,sans-serif}
+.end-away .g-actions .reset{flex:1}
+.tour-bubble{position:absolute;z-index:100;top:12vh;right:1.8vw;width:30.3vw;min-width:330px;border:1px solid #f1b58f;border-radius:5px;background:#fde5d6;box-shadow:0 4px 13px #0003;padding:2.4vh 1.75vw 2.8vh;font-size:clamp(14px,1.3vw,22px);color:#33363b}
+.tour-bubble h2{font-size:clamp(18px,1.7vw,28px);line-height:1.2;margin:0 25px 1.4vh 0;color:#25272b;font-weight:700}.tour-bubble p{margin:0 0 2.3vh;line-height:1.3}.bubble-close{position:absolute;right:1vw;top:1.7vh;background:none;border:0;padding:0;color:#33363b;display:grid;place-items:center}
+.tour-actions{display:flex;gap:1.1vw}.tour-actions button{border:1px solid #c9b8a8;border-radius:4px;height:5.5vh;min-height:38px;font-size:clamp(14px,1.3vw,22px)}.tour-primary{flex:1.25;background:#ee6a1c;color:white;border-color:#ee6a1c!important}.tour-dismiss{flex:1;background:#2a2e34;color:#e8eaec}
+.overlay-banner{top:6vh;width:50vw;right:2vw}.overlay-toast{top:auto;bottom:20vh;width:27vw}.overlay-cookie{top:26vh}.overlay-promo{top:25vh}
+.instruction-hidden .instruction{display:none}
+.notebook-note{position:absolute;left:3.2%;top:54%;width:23%;padding:1em;border:1px solid #d6d1c7;border-radius:5px;background:#efebe3;font-size:clamp(12px,1.1vw,18px);line-height:1.5}
+.notebook-note.instruction-panel{top:53%;width:24%;border-left:3px solid #ee6a1c;background:#f1eee8;white-space:normal;z-index:2}
+.notebook-note.instruction-toast-card{top:auto;left:3.2%;bottom:4%;width:25%;padding:.75em 1em;border-color:#f1a06e;background:#fde5d6;box-shadow:0 3px 10px #0002;z-index:4;white-space:normal}
+.instruction-toast .instruction{text-align:left}.instruction-dismiss{font-size:14px;float:right;margin:0;border:1px solid #888;background:white;padding:3px 8px}
+@media(max-height:700px){.instruction{padding:.35em}.cube-stage{top:22%}.chamber{top:24%}}
+/* Template controls use the notebook's existing frame geometry and finish styles. */
+.titlebar-tools{display:flex;align-items:center;gap:.45em;margin-left:auto;height:100%}
+.titlebar-tools:empty{display:none}.titlebar-tools .chrome-xtra{max-width:none}
+.titlebar-tools .ref-icon{min-width:40px}
+.ref-panel-title,.ref-spacer{display:none}
+.ref-note-x{float:right;border:0;background:transparent;color:inherit;font-size:18px}
+.ref-note-text{display:inline;overflow-wrap:anywhere}
+.ref-endlink.submit-button{display:flex;align-items:center;justify-content:center;text-decoration:none}
+.ref-float-dock{position:absolute;right:2.7%;top:7%;z-index:3}
+.ref-float-dock .crumb-submit{position:static;display:block;min-height:0;padding:.25em .7em;font-size:clamp(12px,1.05vw,18px)}
+.g-actions:has(.chrome-xtra) .reset{flex-basis:30%}
+.g-actions:has(.chrome-xtra) .submit-button{font-size:clamp(14px,1.2vw,21px)}
+/* A fault banner reserves space above the otherwise absolutely positioned page. */
+body:has(>.ref-shift) .notebook-page{top:calc(5% + 48px)}
+.ref-shift{position:absolute;top:5%;left:0;right:0;height:48px;overflow:hidden;z-index:5}

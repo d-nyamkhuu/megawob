@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="92" height="320" viewBox="0 0 92 320">
+<rect width="92" height="320" fill="#edf1f6"/>
+<g font-family="monospace" font-size="2.5" fill="#151c31">
+<text x="6" y="6" fill="#08730b">// WebWorks site tools – formatting utilities</text>
+<text x="6" y="10" fill="#08730b">// (c) 1998 WebWorks</text>
+<text x="6" y="18" fill="blue">function formatResult(item) {</text>
+<text x="10" y="22">var title = item.title || "Untitled";</text>
+<text x="10" y="26">var url = item.url || "";</text>
+<text x="10" y="30">var desc = item.description || "";</text>
+<text x="10" y="38" fill="#ec1010">var html = "&lt;div class=\"result\"&gt;";</text>
+<text x="10" y="42">html += "&lt;h3&gt;" + escapeHtml(title);</text>
+<text x="10" y="46" fill="#ec1010">html += "&lt;a href=\"" + url + "\"&gt;";</text>
+<text x="10" y="50" fill="blue">if (desc) {</text>
+<text x="14" y="54">html += "&lt;p&gt;" + escapeHtml(desc);</text>
+<text x="10" y="58">}</text><text x="10" y="62" fill="#ec1010">html += "&lt;/div&gt;";</text>
+<text x="10" y="66" fill="blue">return html;</text><text x="6" y="70">}</text>
+<text x="6" y="78" fill="blue">function format_card(data) {</text>
+<text x="10" y="82" fill="#ec1010">var out = "&lt;div class=\"card\"&gt;";</text>
+<text x="10" y="86">out += "&lt;h4&gt;" + data.title + "&lt;/h4&gt;";</text>
+<text x="10" y="90" fill="#ec1010">out += "&lt;p&gt;" + data.date + "&lt;/p&gt;";</text>
+<text x="10" y="94" fill="blue">return out + "&lt;/div&gt;";</text><text x="6" y="98">}</text>
+<text x="6" y="108" fill="#08730b">// Escape text for use in a result card</text>
+<text x="6" y="112" fill="blue">function escapeHtml(value) {</text>
+<text x="10" y="116">return String(value)</text>
+<text x="14" y="120" fill="#ec1010">.replace(/&amp;/g, "&amp;amp;")</text>
+<text x="14" y="124" fill="#ec1010">.replace(/&lt;/g, "&amp;lt;")</text>
+<text x="14" y="128" fill="#ec1010">.replace(/&gt;/g, "&amp;gt;");</text>
+<text x="6" y="132">}</text>
+<text x="6" y="142" fill="blue">function renderResults(results) {</text>
+<text x="10" y="146">var html = [];</text><text x="10" y="150" fill="blue">for (var i = 0; i &lt; results.length; i++) {</text>
+<text x="14" y="154">html.push(formatResult(results[i]));</text><text x="10" y="158">}</text>
+<text x="10" y="162" fill="blue">return html.join("\n");</text><text x="6" y="166">}</text>
+<text x="6" y="176" fill="#08730b">// Directory helpers</text>
+<text x="6" y="180" fill="blue">function relatedLinks(items) {</text>
+<text x="10" y="184" fill="#ec1010">var out = "&lt;ul class=\"links\"&gt;";</text>
+<text x="10" y="188" fill="blue">for (var i = 0; i &lt; items.length; i++) {</text>
+<text x="14" y="192">out += format_card(items[i]);</text><text x="10" y="196">}</text>
+<text x="10" y="200" fill="blue">return out + "&lt;/ul&gt;";</text><text x="6" y="204">}</text>
+<text x="6" y="214" fill="blue">function resultCount(items) {</text>
+<text x="10" y="218">return items ? items.length : 0;</text><text x="6" y="222">}</text>
+</g></svg>

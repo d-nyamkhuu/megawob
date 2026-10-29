@@ -1,0 +1,410 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Quiet luxury hotel workspace */
+:root {
+  --bg: #f2f0ea !important;
+  --panel: #faf9f5 !important;
+  --fg: #1c2116 !important;
+  --muted: #77766f !important;
+  --line: #d6c9a4 !important;
+  --accent: #a88f49 !important;
+}
+body {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #f2f0ea;
+  color: #1c2116;
+  font: 16px/1.4 Georgia, "Times New Roman", serif;
+  touch-action: none;
+}
+.ref-task {
+  position: absolute; z-index: 20; inset: 0 auto 0 0;
+  width: 10.6%; min-height: 100%; padding: 92px 0 0; display: block;
+  background: #2b301f; border: 0; color: #f8f5ec;
+}
+.ref-brand {
+  position: absolute; top: 0; left: 0; width: 100%; height: 86px;
+  display: grid; place-items: center; background: #24291b;
+  color: #b5a15c; font-size: 0; border-bottom: 1px solid rgba(214,201,164,.12);
+}
+.ref-brand:before { content: '❧'; font-size: 42px; transform: rotate(-30deg); }
+.ref-nav { display: flex; flex-direction: column; gap: 0; width: 100%; }
+.ref-navlink {
+  display: flex; align-items: center; height: 65px; padding: 0 18px 0 28px;
+  border-left: 3px solid transparent; color: #f3efe4; font: 16px Georgia,serif;
+}
+.ref-navlink:first-child { background: #424732; border-left-color: #b5a15c; }
+.ref-tools { gap: 8px; }
+.ref-instruction { color: #1c2116; font: 14px/1.45 Georgia,serif; font-weight: 400; }
+.ref-task > .ref-instruction { position: fixed; z-index: 22; left: calc(10.6% + 28px); right: 350px; top: 14px; padding: 8px 0; }
+.ref-task > .ref-tools { position: fixed; z-index: 28; right: 28px; bottom: 18px; }
+.ref-submit { background: #424732; color: #fff; border: 1px solid #b5a15c; border-radius: 3px; font: 15px Georgia,serif; }
+.ref-xtra { background: transparent; color: #1c2116; border-color: #d6c9a4; border-radius: 3px; font: 14px Georgia,serif; }
+.ref-body { position: absolute; inset: 0 0 0 10.6%; display: flex; background: #f2f0ea; }
+.ref-stage { width: 100%; height: 100%; padding: 28px 34px 30px 30px; display: block; overflow: hidden; }
+.ref-stage { justify-content: flex-start !important; align-items: stretch !important; }
+.ref-stage > div { width: 100% !important; max-width: none !important; height: 100% !important; margin: 0 !important; }
+.ref-stage > div > div { max-width: none !important; }
+.ref-stage [class*="section"],.ref-stage [class*="pane"],.ref-stage [class*="step"] { width: 100% !important; max-width: none !important; }
+.ref-side { display: none; }
+.ref-panel { position: fixed; right: 12px; top: 10px; z-index: 30; margin: 0; width: 326px; padding: 16px; border: 1px solid #d8d3c5; border-radius: 10px; background: #faf9f5; box-shadow: 0 5px 15px #0002; }
+.ref-panel-title { color: #1c2116; font: 22px Georgia,serif; letter-spacing: 0; text-transform: none; }
+.ref-panel-text { font: 16px Georgia,serif; font-weight: 400; }
+.ref-foot { position: absolute; z-index: 25; bottom: 0; right: 0; width: 89.4%; height: 46px; min-height: 46px; padding: 5px 28px; background: #faf9f5; border-top: 1px solid #d6c9a4; color: #77766f; }
+.ref-float-dock { position: absolute; right: 0; bottom: 0; z-index: 26; }
+.ref-note { left: auto; right: 350px; top: 14px; bottom: auto; max-width: 480px; border-color: #d6c9a4; border-left: 3px solid #b5a15c; background: #faf9f5; color: #1c2116; font: 14px/1.4 Georgia,serif; font-weight: 400; }
+
+/* Widget cards inherit the same parchment, fine rules and editorial typography. */
+.ref-stage h1,.ref-stage h2,.ref-stage h3 { font-family: Georgia,"Times New Roman",serif !important; color: #1c2116 !important; font-weight: 400 !important; }
+.ref-stage input,.ref-stage textarea,.ref-stage button { font-family: Georgia,"Times New Roman",serif !important; }
+.ref-stage [class*="card"],.ref-stage [class*="Card"] { border-color: #d6c9a4 !important; background-color: #faf9f5 !important; border-radius: 7px !important; box-shadow: 0 2px 7px #66552a12 !important; }
+.ref-stage input,.ref-stage textarea { background-color: #fff !important; border-color: #c9c8c1 !important; border-radius: 6px !important; color: #1c2116 !important; }
+.ref-stage input::placeholder,.ref-stage textarea::placeholder { color: #a2a09c !important; }
+.ref-stage hr { border-color: #d6c9a4 !important; }
+
+@media (max-width: 1180px) {
+  .ref-task { width: 120px; }
+  .ref-body { left: 120px; }
+  .ref-stage { padding: 18px; overflow: auto; }
+  .ref-navlink { padding-left: 12px; font-size: 13px; }
+  .ref-panel { width: 260px; }
+  .ref-task > .ref-instruction { left: 140px; right: 18px; top: 8px; padding: 8px 12px; background: #faf9f5; border: 1px solid #d6c9a4; border-radius: 5px; }
+  .ref-task > .ref-tools { right: 14px; bottom: 12px; gap: 12px; max-width: 54vw; }
+  .ref-task > .ref-tools .ref-xtra,.ref-task > .ref-tools .ref-submit { padding: 6px 9px; white-space: nowrap; }
+  .ref-task > .ref-tools { width: max-content; display: flex; justify-content: flex-end; }
+  .ref-task > .ref-tools .ref-xtra { position: fixed !important; z-index: 27; left: 132px; right: auto; bottom: 12px; }
+  .ref-task > .ref-tools .ref-submit { position: fixed !important; z-index: 29; right: 14px; bottom: 12px; margin-left: 0; }
+}
+body:has(.ref-task > .ref-instruction) .ref-stage { padding-top: 104px; }
+
+/* Riverton Public Library: jewel-tone CD-ROM companion. */
+:root {
+  --bg: #07505a !important;
+  --panel: #f2e3c4 !important;
+  --fg: #171714 !important;
+  --muted: #655d50 !important;
+  --line: #b6a17b !important;
+  --accent: #153d78 !important;
+}
+html, body { width:100%; height:100%; min-height:0; }
+body {
+  background: #07505a;
+  color:#171714;
+  font: 17px/1.35 Georgia, "Times New Roman", serif;
+  border: 7px ridge #9a6c2e;
+  outline: 2px solid #d9b667;
+  outline-offset:-10px;
+}
+.ref-task {
+  position:absolute; inset:0 0 auto; z-index:20; display:block;
+  width:auto; height:128px; min-height:0; padding:0;
+  color:#f4d184; border:0;
+  background:
+    linear-gradient(90deg, transparent 0 67%, rgba(4,8,10,.3) 67% 100%),
+    linear-gradient(90deg, transparent 0 67%, transparent 67% 100%),
+    repeating-linear-gradient(90deg, transparent 0 67%, #73491e 67% 68%, #20130b 68% 70%, #713044 70% 73%, #19100a 73% 75%, #174e60 75% 78%, #17100a 79% 81%, #705128 82% 84%, transparent 86% 100%),
+    repeating-linear-gradient(145deg, #092e50 0 3px, #0b3a5d 3px 6px);
+  box-shadow: inset 0 0 0 3px #a97737, inset 0 0 0 6px #152b35;
+}
+.ref-task::before {
+  content:'📖'; position:absolute; left:2%; top:17px; font:62px/1 Georgia,serif;
+  filter:drop-shadow(2px 3px 1px #111); opacity:.95;
+}
+.ref-brand {
+  position:absolute; left:14%; top:8px; width:52%; height:112px; display:block;
+  padding:7px 12px; background:none; border:0; text-align:center;
+  color:#f2c66d; font: bold 0 Georgia,serif; text-shadow:1px 2px #39220b, 0 0 3px #ffe19a;
+}
+.ref-brand::before { content:'Riverton Public Library'; display:block; transform:none; font: bold clamp(29px,3.7vw,58px)/1 Georgia,serif; }
+.ref-brand::after { content:'CD-ROM Companion'; display:block; color:#f5d18a; font:bold clamp(16px,1.7vw,27px)/1.2 Georgia,serif; }
+.ref-nav {
+  position:absolute; left:17%; right:17%; bottom:-58px; height:51px;
+  display:flex; flex-direction:row; justify-content:flex-start; gap:3px; width:auto;
+  z-index:25;
+}
+.ref-navlink {
+  flex:1; height:51px; justify-content:center; padding:0 10px;
+  border:2px outset #d1c0a0; border-bottom:0; background:linear-gradient(#e4d7c2,#c3b298);
+  color:#171512; font:20px Georgia,serif; white-space:nowrap;
+  box-shadow:inset 0 1px #fff1d5;
+}
+.ref-navlink:first-child { background:linear-gradient(#e4d7c2,#c3b298); border-left:2px outset #d1c0a0; }
+.ref-navlink:nth-child(4) { background:linear-gradient(#164176,#092c61); color:#fff; border-color:#d1c0a0; }
+.ref-task > .ref-instruction {
+  position:fixed; z-index:31; left:18%; right:245px; top:12px; max-height:100px;
+  overflow:auto; padding:9px 13px; border:2px ridge #c7a257; background:#092c59;
+  color:#f3dfb1; font:16px/1.32 Georgia,serif;
+}
+.ref-task > .ref-tools { position:fixed; z-index:34; right:28px; top:22px; bottom:auto; }
+.ref-submit,.ref-xtra {
+  padding:8px 17px; border:2px outset #d9c39d; border-radius:2px;
+  background:linear-gradient(#e5d6bd,#b8a486); color:#181512; font:16px Georgia,serif;
+}
+.ref-submit { background:linear-gradient(#1d4a83,#0a2c5d); color:white; border-color:#d4c29f; }
+.ref-body {
+  position:absolute; inset:128px 0 0; display:block; overflow:hidden;
+  background:radial-gradient(ellipse at 62% 55%,#08717a,#034650 72%,#062f3b);
+}
+.ref-body::before {
+  content:'LIBRARY\A STATUS\A ━━━━━━━━━\A Members          1,284\A Items             12,416\A Loans                362\A Reservations        48';
+  white-space:pre; position:absolute; z-index:1; left:1.1%; top:39%; width:14%;
+  padding:12px 12px 16px; color:#f3e7ce; border:3px ridge #bc8d43;
+  background:linear-gradient(145deg,#06383d,#002d34); font:15px/1.75 Georgia,serif;
+  box-shadow:0 0 0 1px #e0bd70, inset 0 0 14px #001d20;
+}
+.ref-body::after {
+  content:''; white-space:pre; position:absolute; z-index:0;
+  left:1.1%; top:6%; width:14%; height:27%; display:grid; place-content:center;
+  border:3px ridge #bc8d43; color:#e5c77f; text-align:center; font:bold 18px Georgia,serif;
+  background: url('assets/library-exterior.webp') center 48% / cover no-repeat;
+  box-shadow:0 0 0 1px #e0bd70;
+}
+.ref-stage {
+  position:absolute; left:16.4%; top:57px; width:83.6%; height:calc(100% - 57px);
+  padding:37px 2.1% 30px; display:block; overflow:hidden;
+  border:7px ridge #aa9b80;
+  background:linear-gradient(135deg,#a69c89,#c5bba6 22%,#928b7f 100%);
+  box-shadow:inset 0 0 0 2px #eee2c8, inset 0 0 0 5px #4f493f;
+}
+.ref-stage::before {
+  content:'Member Purchase'; position:absolute; z-index:5; left:2%; right:2%; top:31px; height:57px;
+  padding:8px 15px; border:3px ridge #d0b36b; background:linear-gradient(90deg,#062c5d,#123e79);
+  color:#f4d797; font:bold 30px/1.2 Georgia,serif; box-shadow:inset 0 0 0 2px #091d3c;
+}
+.ref-stage > div {
+  position:relative; width:100% !important; max-width:none !important; height:100% !important;
+  margin:0 !important; padding-top:73px; display:flex !important; flex-direction:row !important;
+  align-items:stretch !important; gap:14px; overflow:hidden;
+  border:5px ridge #c8b795; border-radius:10px; background:#f1e2c4;
+  box-shadow:0 2px 6px #1118;
+}
+.ref-stage > div > div {
+  min-width:0 !important; max-width:none !important; flex:1 1 0 !important;
+  width:auto !important; height:auto !important; margin:0 !important;
+}
+.ref-stage [class*="section"],.ref-stage [class*="pane"],.ref-stage [class*="step"] {
+  min-width:0 !important; max-width:none !important; width:auto !important;
+  flex:1 1 0 !important; height:100%;
+}
+.ref-stage h1,.ref-stage h2,.ref-stage h3 { color:#70430d !important; font-family:Georgia,"Times New Roman",serif !important; font-weight:bold !important; }
+.ref-stage [class*="card"],.ref-stage [class*="Card"] {
+  border:1px solid #9b835c !important; border-radius:5px !important;
+  background:#f1e3c7 !important; box-shadow:inset 0 0 0 2px #fff4dc, 0 1px 2px #51432944 !important;
+}
+.ref-stage input,.ref-stage textarea {
+  border:2px inset #aaa69e !important; border-radius:2px !important;
+  background:linear-gradient(#fff,#f2f2f0) !important; color:#171717 !important;
+  font:17px Georgia,serif !important;
+}
+.ref-stage button { font-family:Georgia,"Times New Roman",serif !important; }
+/* Keep embedded task cards inside their numbered columns. Their own widgets use absolute
+   placement in a normal stage; the composition host gives each one a narrower card slot. */
+.ref-stage .ft-card,.ref-stage .fd-card,.ref-stage .cp {
+  position:relative !important; left:auto !important; top:auto !important; right:auto !important; bottom:auto !important;
+  width:100% !important; max-width:100% !important; height:auto !important; min-height:0 !important;
+  margin:8px 0 !important; box-sizing:border-box !important;
+}
+.ref-stage .fd-card { padding:12px 14px !important; }
+.ref-stage .ft-card { padding:14px 15px !important; }
+.ref-stage .cp { gap:7px !important; padding:8px !important; }
+.ref-stage .cp-hit { max-width:62%; }
+.ref-stage .cp-sv { max-width:100%; }
+.ref-stage [class*="section"],.ref-stage [class*="step"] { overflow:visible; }
+.ref-foot .ref-tools { position:fixed; right:26px; bottom:14px; z-index:37; }
+.ref-foot .ref-submit,.ref-foot .ref-xtra { padding:7px 15px; }
+.ref-panel {
+  position:fixed; z-index:40; right:2%; top:138px; width:280px; max-height:calc(100vh - 160px);
+  overflow:auto; padding:12px 15px; border:3px ridge #c7a257; border-radius:0;
+  background:#efe0c1; box-shadow:4px 5px 0 #172a35; color:#21190c;
+}
+.ref-panel-title { color:#724909; font:bold 22px Georgia,serif; }
+.ref-panel-text { font:16px/1.35 Georgia,serif; }
+.ref-foot { position:fixed; z-index:36; inset:auto 0 0 16.4%; width:auto; min-height:38px; padding:5px 24px; border-top:2px ridge #bd9853; background:#062f3a; color:#ebd49d; }
+.ref-note { left:auto; right:2%; top:135px; bottom:auto; max-width:320px; padding:12px; border:3px ridge #c7a257; border-left-width:3px; border-radius:0; background:#f1e3c7; color:#1b160e; font:15px/1.35 Georgia,serif; }
+.ref-ov-cookie,.ref-ov-toast,.ref-ov-chat,.ref-ov-banner,.ref-ov-box { border:3px ridge #c7a257; border-radius:0; background:#f1e3c7; color:#20190e; font-family:Georgia,serif; }
+.ref-ov-primary { background:#153d78; color:#fff; }
+.ref-hz-inject,.ref-hz-support,.ref-hz-window { border:3px ridge #c7a257; border-radius:0; background:#f1e3c7; font-family:Georgia,serif; }
+
+@media (max-width:1180px) {
+  .ref-task { width:auto; height:112px; }
+  .ref-brand { left:2%; width:58%; height:95px; }
+  .ref-nav { left:16%; right:14%; bottom:-48px; height:43px; }
+  .ref-navlink { height:43px; font-size:15px; padding:0 4px; }
+  .ref-body { inset:112px 0 0; }
+  .ref-stage { left:16%; top:48px; width:84%; height:calc(100% - 48px); padding:33px 1.2% 24px; }
+  .ref-stage::before { top:27px; height:49px; font-size:24px; }
+  .ref-stage > div { padding-top:64px; gap:7px; }
+  .ref-stage > div > div { padding-left:8px !important; padding-right:8px !important; }
+  .ref-body::before { font-size:12px; padding:7px 5px; }
+  .ref-body::after { font-size:13px; }
+  .ref-stage .ft-card,.ref-stage .fd-card,.ref-stage .cp {
+    transform:scale(.68); transform-origin:top left; width:147% !important;
+  }
+  .ref-task > .ref-instruction { left:4%; right:210px; top:7px; max-height:88px; font-size:14px; }
+  .ref-task > .ref-tools { right:10px; top:14px; max-width:200px; }
+  .ref-panel { top:115px; width:235px; }
+  .ref-note { top:116px; max-width:245px; }
+}
+@media (max-width:700px) {
+ .ref-nav { left:17%; right:2%; }
+ .ref-navlink { font-size:11px; }
+ .ref-stage { left:0; width:100%; top:48px; height:calc(100% - 48px); padding-left:3%; }
+ .ref-stage > div { flex-direction:column !important; overflow:auto; }
+ .ref-stage > div > div { flex:none !important; }
+ .ref-body::before,.ref-body::after { display:none; }
+}
+
+/* Match the 1997 companion window: broad application masthead, tab strip, and
+   a three-column inset work area over the library's persistent home screen. */
+.ref-task {
+  background:
+    radial-gradient(ellipse at 91% 38%,#e4c75c 0 2%,#0d5945 2.5% 6%,transparent 6.5%),
+    repeating-linear-gradient(90deg,#18100b 0 5px,#613b1d 6px 9px,#173b48 10px 16px,#28120f 17px 22px,#a87c36 23px 26px) 68% 0 / 32% 100% no-repeat,
+    linear-gradient(90deg, transparent 0 67%, #1a1009 67% 68%, #553219 68% 69%, transparent 69%),
+    repeating-linear-gradient(145deg,#082b4a 0 2px,#0c3b60 2px 5px,#092f50 5px 7px);
+}
+.ref-task::before {
+  content:'📖'; left:1.2%; top:20px; font:74px/1 Georgia,serif;
+  filter:drop-shadow(2px 3px 2px #100b06);
+}
+.ref-brand { left:13.5%; width:54%; text-align:left; padding-left:0; }
+.ref-brand::before { font-size:clamp(32px,3.8vw,60px); }
+.ref-brand::after { font-size:clamp(17px,1.8vw,28px); }
+.ref-nav { left:17%; right:17%; }
+.ref-body {
+  background:
+    linear-gradient(180deg,transparent 0 79%,#302014 79% 82%,#55351d 82% 84%,#1a120d 84% 100%),
+    repeating-linear-gradient(90deg,#153752 0 26px,#c19b4d 27px 30px,#111820 31px 34px,#6d201f 35px 76px,#d1a74f 77px 80px,#111820 81px 84px,#172e31 85px 122px,#c19b4d 123px 126px,#111820 127px 130px) 1% 100% / 14% 19% no-repeat,
+    radial-gradient(ellipse at 62% 55%,#08717a,#034650 72%,#062f3b);
+}
+.ref-body::before { top:47%; }
+.ref-body::after { top:7%; height:34%; }
+.ref-stage {
+  top:57px; height:calc(100% - 57px);
+  padding:37px 2% 30px;
+}
+.ref-stage::before { top:31px; height:57px; }
+.ref-stage > div {
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  align-items:stretch !important;
+  gap:14px !important;
+  padding:73px 15px 14px !important;
+  overflow:hidden !important;
+}
+.ref-stage > div > div {
+  min-width:0 !important; width:auto !important; max-width:none !important;
+  height:100% !important; padding:10px 5px !important; box-sizing:border-box !important;
+}
+.ref-stage .cp-wrap {
+  display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  width:100% !important; height:100% !important; margin:0 !important;
+  gap:12px !important; padding:0 !important; align-items:stretch !important;
+}
+.ref-stage .cp-head { display:none !important; }
+.ref-stage .cp-card {
+  min-width:0 !important; height:100% !important; padding:12px 14px !important;
+  overflow:hidden !important; box-sizing:border-box !important;
+}
+.ref-stage .cp-box { width:100% !important; min-width:0 !important; overflow:hidden !important; }
+.ref-stage .ft-card,.ref-stage .fd-card,.ref-stage .cp {
+  transform:none !important; position:relative !important;
+  inset:auto !important; width:100% !important; max-width:100% !important;
+  height:auto !important; min-height:0 !important; margin:0 !important;
+  box-sizing:border-box !important;
+}
+.ref-stage .cp-sv { max-width:100% !important; }
+.ref-stage [class*="section"],.ref-stage [class*="step"],.ref-stage [class*="pane"] { overflow:hidden !important; }
+.ref-stage .ft-card h1,.ref-stage .ft-card h2,.ref-stage .fd-card h1,.ref-stage .fd-card h2 { font-size:24px !important; }
+.ref-panel { top:140px; }
+.ref-note { top:136px; }
+@media(max-width:1180px) {
+  .ref-stage { left:16%; width:84%; top:48px; height:calc(100% - 48px); padding:33px 1.2% 24px; }
+  .ref-stage > div { grid-template-columns:repeat(3,minmax(0,1fr)) !important; padding-top:64px !important; gap:7px !important; }
+  .ref-stage > div > div { padding:5px 2px !important; }
+  .ref-stage .cp-wrap { grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:6px !important; }
+}
+@media(max-width:700px) {
+  .ref-stage > div,.ref-stage .cp-wrap { grid-template-columns:1fr !important; overflow:auto !important; }
+}
+
+/* App shell of viewport height: the stage is the scrolling pane (single column of cards that grow with their
+   content), clear of the fixed footer band and of the instruction panel at the right. */
+html.env-scroll .ref-body, html.env-scroll .ref-stage { min-height:0 !important; }
+.ref-stage { overflow:auto !important; height:calc(100% - 57px - 52px) !important; }
+.ref-stage > div { display:block !important; height:auto !important; overflow:visible !important; grid-template-columns:none !important; padding-top:60px !important; }
+.ref-stage > div > div { height:auto !important; margin-bottom:12px !important; }
+.ref-stage .cp-wrap { display:flex !important; flex-direction:column !important; grid-template-columns:none !important; height:auto !important; gap:12px !important; }
+.ref-stage .cp-card { height:auto !important; overflow:visible !important; }
+.ref-stage .cp-box { overflow:visible !important; }
+.ref-stage [class*="section"], .ref-stage [class*="step"], .ref-stage [class*="pane"] { overflow:visible !important; height:auto !important; }
+body:has(.ref-panel) .ref-stage { width:calc(83.6% - 310px) !important; }
+@media(max-width:1180px) { .ref-stage { height:calc(100% - 48px - 52px) !important; } body:has(.ref-panel) .ref-stage { width:calc(84% - 310px) !important; } }
+body:has(.ref-float-dock) .ref-foot .ref-tools { right:190px; }
+.ref-float-dock { z-index:50; }

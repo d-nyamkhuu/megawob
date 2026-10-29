@@ -1,0 +1,25 @@
+// Design on templates/pick-color/picker.js.
+env.widget({
+  task: 'pick-color',
+  site: 'design-pick-color-hex-01',
+  name: 'design',
+  split: 'train',
+  scenarios: ['hex'],
+  traits: { controls: 'sv+hue' },
+  template: 'pick-color/picker',
+  design: {
+    css: '', unitHeight: null, resetEvent: null,
+    sampleSize: false, sidePlacement: 'none', place: false, measured: false,
+    svStyle: null, hueStyle: null, knobStyle: null,
+    sideRows: 'values', editableRows: false, prependCurrent: true, clear: true,
+    targetClass: '', currentClass: '', forceTarget: true, targetSwatch: true, targetCode: 'hex',
+    targetLabel: 'Target Color (match this)', drawCurrentLabel: false, reverseHue: true,
+    parts: {
+      fit: (base, S) => (ctx, card, maxH) => {
+        const g = base(ctx, card, maxH);
+        const H = Math.max(S.task.helpers.MIN_TRACK_PX, Math.min(ctx.size.width * .284, maxH));
+        return { ...g, W: H, H, hueH: H };
+      },
+    },
+  },
+});

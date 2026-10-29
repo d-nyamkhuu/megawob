@@ -1,0 +1,166 @@
+:root{--bg:#fff;--panel:#fff;--fg:#000;--accent:#000;--muted:#000;--line:#000;--font:"Courier New","Liberation Mono",monospace;--hatch:repeating-linear-gradient(135deg,#888 0 1px,#fff 1px 3px)}
+*{box-sizing:border-box;transition:none!important;animation:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:var(--font);background:#fff;color:#000;font-size:min(.957vw,1.7vh)}
+button,input,textarea{font-family:inherit;color:#000}button{cursor:pointer}
+input,textarea{caret-color:transparent!important}
+.gem{position:fixed;inset:0;background:#fff;border:2px solid #000}
+.gem-menu{position:absolute;left:0;right:0;top:0;height:2.5em;border-bottom:2px solid #000;background:#fff;font-size:1.4em;font-size:1.375em}
+.gem-menu>*{position:absolute;top:0;height:100%;display:flex;align-items:center}
+.gem-logo{left:1.4em;width:1.2em;height:.9em!important;top:.55em!important}
+.gem-mi:nth-of-type(2){left:4.4em}.gem-mi:nth-of-type(3){left:8.55em}.gem-mi:nth-of-type(4){left:12.4em}.gem-mi:nth-of-type(5){left:18.2em}
+.gem-clock{right:1.1em;gap:2.6em;font-size:1em}
+.gem-note{position:absolute;left:0;top:2.5em;width:35.5em;bottom:0;display:flex;align-items:center;justify-content:center;padding:0 1.6em}
+.gem-instruction{font-size:2.5em;line-height:1.15;font-weight:700;text-align:center;overflow-wrap:break-word;letter-spacing:-.01em}
+.gem-win{position:absolute;left:35.5em;top:2.6em;right:.75em;bottom:1.2em;border:2px solid #000;background:#fff;outline:2px solid #000;outline-offset:-6px;background:repeating-linear-gradient(135deg,#000 0 1px,#fff 1px 6px)}
+.gem-title{position:absolute;left:0;right:0;top:0;height:3.45em;border-bottom:2px solid #000;background:var(--hatch)}
+.gem-close{position:absolute;left:.25em;top:.25em;width:2.5em;height:2.5em;background:#fff;border:2px solid #000;padding:.1em}
+.gem-wtitle{position:absolute;left:3.6em;top:.65em;font-size:1.45em;line-height:1.1;background:#fff;padding:0 .35em;margin-left:-.35em}
+.gem-panel{position:absolute;left:2em;top:5.5em;right:7.8em;bottom:.9em;background:#fff;border:1px solid #000}
+.gem-stage{position:absolute;left:0;right:0;top:0;bottom:7.8em;overflow:visible}
+.gem-rule{position:absolute;left:1.3em;right:1.4em;bottom:6.7em;border-top:2px solid #000}
+.gem-foot{position:absolute;left:0;right:0;bottom:0;height:6.6em}
+.gem-submit,.gem-clear{position:absolute;background:#efefef;border:2px solid #000;border-radius:0;color:#000}
+.gem-submit{left:16em;top:.4em;width:14.6em;height:3.6em;border-width:4px;border-style:double;border-width:4px;font-size:1.45em;font-weight:700;font-size:1.4em;box-shadow:inset 0 0 0 1px #000}
+.gem-clear{left:34em;top:.75em;width:7.9em;height:3.1em;font-size:1.3em}
+.gem-tools{position:absolute;right:0;top:3.6em;width:5.3em;bottom:0;background:#fff;border:2px solid #000;border-right-width:2px;display:flex;flex-direction:column;align-items:center;padding-top:2em;gap:.9em}
+.gem-ticon{width:2.5em;height:2.5em;margin-bottom:1.3em}.gem-ticon svg{width:100%;height:100%}
+.gem-trule{width:80%;border-top:2px solid #000;margin:-.2em 0 1.2em}
+.gem-tools .gem-ticon{margin-bottom:1.4em}
+
+/* task widget (set-date widget) */
+.gem .fd-card{left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:2.6em 1.3em 0!important;font-size:1em}
+.gem .fd-title{font-size:1.5em!important;font-weight:500;padding:0 0 1.15em 1.2em;margin:0 0 2em!important;border-bottom:2px solid #000;letter-spacing:.02em}
+.gem .fd-sub,.gem .fd-today,.gem .fd-help{display:none!important}
+.gem .fd-row{display:flex;align-items:center;margin:0 0 1.3em!important;padding-left:.5em}
+.gem .fd-label{min-width:9.2em;padding-right:.8em;flex:none;margin:0!important;font-size:1.25em!important;font-weight:500;color:#000!important;white-space:nowrap}
+.gem .fd-label::after{content:':'}
+.gem label.fd-label::after{margin-left:-.4em}
+.gem .fd-label b{display:none}
+.gem .fd-static{width:15.4em;height:2.8em;flex:none;border:1.5px solid #000;border-radius:0;background:#fff;padding:0 .8em;font-size:1.25em;color:#000}
+.gem .fd-row:has(.fd-spin){margin-bottom:2.4em!important}
+.gem .fd-row:has(.fd-spin) .fd-label{width:auto;margin-right:.9em!important}
+.gem .fd-row.fd-notes{align-items:flex-start;flex:none;margin:0!important}
+.gem .fd-notes .fd-static{width:43em;height:6em;flex:none;align-items:flex-start;padding-top:.5em;font-size:1.25em}
+.gem .fd-notes .fd-label{margin-top:.3em!important}
+.gem .fd-input,.gem .fd-control{border:1.5px solid #000;border-radius:0;background:#fff;height:2.8em;font-size:1.25em;box-shadow:none}
+.gem .fd-spin{display:flex;align-items:center;gap:.4em}
+.gem .fd-seg{display:grid;grid-template-columns:1fr 1.7em;grid-template-rows:1fr 1fr;width:6.3em;height:3.1em;border:1.5px solid #000;border-radius:0;background:#fff}
+.gem .fd-val{grid-column:1;grid-row:1/3;height:auto;border:0;justify-content:start;padding-left:.7em;font-size:1.3em;font-weight:400;background:#fff}
+.gem .fd-arr{grid-column:2;height:auto;border-left:1.5px solid #000;background:#efefef;color:#000}
+.gem .fd-arr+.fd-val+.fd-arr{grid-row:2;border-top:1.5px solid #000}
+.gem .fd-seg>.fd-arr:first-child{grid-row:1}
+.gem .fd-arr svg{width:.8em;height:.8em}
+.gem .fd-colon{font-size:1.3em;font-weight:400;margin:0 .1em}
+.gem .fd-ampm{margin-left:.8em;border:1.5px solid #000;border-radius:0;height:3.1em}
+.gem .fd-ap{display:flex;align-items:center;padding:0 .9em;font-size:1.2em;font-weight:400;color:#000}
+.gem .fd-ap.on{background:#000;color:#fff}
+.gem .fd-pop{border:2px solid #000;border-radius:0;box-shadow:.4em .4em 0 #000;background:#fff;z-index:20}
+.gem .fd-day.sel,.gem .fd-opt.on,.gem .fd-year.sel,.gem .fd-mcell.sel{background:#000;color:#fff}
+.gem .fd-btn,.gem .fd-sel,.gem .fd-seg{border-radius:0}
+
+/* update reminder */
+.gem-dlg{position:fixed;left:64.4em;top:7.2em;width:34.7em;background:#fff;border:2px solid #000;box-shadow:.75em .75em 0 #555;z-index:1000;font-size:inherit}
+.gem-dtitle{position:relative;height:2.65em;background:var(--hatch);border-bottom:2px solid #000}
+.gem-dpin{position:absolute;left:.15em;top:.1em;width:2.2em;height:2.2em;background:#fff;border:2px solid #000;padding:.15em}
+.gem-dname{position:absolute;left:2.8em;top:.5em;background:#fff;font-size:1.4em;line-height:1.1;padding:0 .3em;margin-left:-.3em}
+.gem-dx{position:absolute;right:.15em;top:.1em;width:2.2em;height:2.2em;background:#fff;border:2px solid #000;padding:.15em;border-radius:0}
+.gem-dbody{display:flex;align-items:center;padding:1.5em 1.3em 0 1.6em;gap:1.5em;height:6.2em}
+.gem-dwarn{width:4.9em;height:4.7em;flex:none}
+.gem-dtext{font-size:1.3em;line-height:1.65}
+.gem-dbtns{display:flex;justify-content:space-between;padding:1.1em 1.3em 1.15em 1.4em}
+.gem-dbtn{height:2.9em;padding:0 1.2em;background:#efefef;border:2px solid #000;border-radius:0;font-size:1.2em;box-shadow:inset 0 0 0 1px #888}
+.gem-dbtn-def{border-width:3px;box-shadow:0 0 0 1px #000;font-weight:500}
+
+/* GEM document geometry, in units of the reference's 16px desktop grid. */
+.gem,.gem-dlg{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:min(.957vw,1.7vh)}
+.gem-menu{height:2.4rem;height:2.375em;font-size:1em;background:#f5f5f5;font-weight:700}
+.gem-menu .gem-mi,.gem-clock{font-size:1.5em;letter-spacing:-.045em}
+.gem-logo{left:1.9em;width:1.55em;height:1.2em!important;top:.5em!important}
+.gem-mi:nth-of-type(2){left:4em}.gem-mi:nth-of-type(3){left:7.8em}.gem-mi:nth-of-type(4){left:11.35em}.gem-mi:nth-of-type(5){left:16.65em}
+.gem-clock{right:1.2em;gap:1.95em}
+.gem-note{width:35.4em;top:2.4em;padding:0 2em}
+.gem-instruction{font-size:2.9em;line-height:1.12;letter-spacing:-.04em}
+.gem-win{left:35.4em;top:3em;right:.6em;bottom:.8em;background:repeating-linear-gradient(135deg,#bbb 0 1px,#fff 1px 3px);outline-offset:-7px}
+.gem-title{left:.35em;right:.35em;top:.25em;height:2.75em}
+.gem-close{left:0;top:0;width:2.5em;height:2.5em}
+.gem-wtitle{left:2.7em;top:.35em;font-size:1.7em;font-weight:700;letter-spacing:-.055em;background:transparent}
+.gem-panel{left:1.8em;top:5em;right:7.6em;bottom:1.2em;border:0}
+.gem-stage{bottom:7.3em}
+.gem-rule{left:1.3em;right:1.4em;bottom:7.2em}
+.gem-foot{height:7.1em}
+.gem-submit{left:27.5%;top:1.1em;width:25%;height:2.45em;font-size:1.6em;border:3px solid #000;box-shadow:inset 0 0 0 1px #777}
+.gem-clear{left:58.5%;top:1.35em;width:13.5%;height:2.25em;font-size:1.45em;font-weight:700}
+.gem-tools{top:3em;right:.25em;bottom:.25em;width:5.1em;padding-top:2.7em;gap:1.7em;background:#f5f5f5}
+.gem-ticon{width:2.5em;height:2.5em}
+.gem-trule{margin:-.2em 0 .1em}
+.gem .fd-card{padding:0!important;display:block;transform:none!important}
+.gem .fd-title{position:absolute;left:.75em;right:.75em;top:1.5em;padding:0 0 .8em .6em;margin:0!important;font-size:1.75em!important;letter-spacing:-.07em;font-weight:700;white-space:nowrap}
+.gem .fd-row{position:absolute;left:1.7em;right:1.7em;padding:0;margin:0!important;display:flex;flex-direction:row;align-items:center;height:3em}
+.gem .fd-label{width:6.2em;min-width:6.2em;font-size:1.5em!important;font-weight:700;letter-spacing:-.09em;padding:0}
+.gem .fd-static{font-size:1.5em;font-weight:700;letter-spacing:-.06em;height:2em;width:10.3em;padding:0 .55em;border:2px solid #000}
+.gem .gem-room-row{top:8.2em}.gem .gem-date-row{top:12.4em}
+.gem .gem-select-row .fd-static{position:relative;padding-right:1.7em}
+.gem .gem-select-row .fd-static:after{content:'▼';position:absolute;right:0;top:0;bottom:0;width:1.25em;border-left:2px solid #000;background:#eee;display:grid;place-items:center;font-size:.85em}
+.gem .gem-time-row{top:17.1em}
+.gem .gem-time-row .fd-label{width:auto;min-width:0;margin-right:.8em!important}
+.gem .fd-control,.gem .fd-input{font-size:1.5em;font-weight:700;letter-spacing:-.06em;height:2em;width:15em;border:2px solid #000;padding:0 .7em;gap:.8em}
+.gem .fd-control svg{width:1em;height:1em}
+.gem .gem-purpose-row{top:23em}.gem .gem-purpose-row .fd-static{width:19.3em}
+.gem .gem-attendees-row{top:27.4em}.gem .gem-attendees-row .fd-static{width:4.45em;position:relative}
+.gem .gem-attendees-row .fd-static:after{content:'▲\A▼';white-space:pre;position:absolute;right:0;top:0;bottom:0;width:1.25em;border-left:2px solid #000;background:linear-gradient(#eee 49%,#000 49%,#000 52%,#eee 52%);line-height:1.15em;text-align:center;font-size:.85em}
+.gem .fd-row.gem-notes-row{top:32.2em;height:6em;align-items:flex-start;flex-direction:row}
+.gem .gem-notes-row .fd-label{margin-top:.2em!important}
+.gem .gem-notes-row .fd-static{position:relative;display:block;width:calc(100% - 8em);height:4em;padding:.35em 1.8em .3em .55em;white-space:normal;font-size:1.5em;overflow:hidden}
+.gem .gem-notes-row .fd-static:after{content:'▲\A\A▼';white-space:pre;position:absolute;right:0;top:0;bottom:0;width:1.2em;border-left:2px solid #000;background:linear-gradient(#eee 27%,#000 27%,#000 29%,#ddd 29%,#ddd 70%,#000 70%,#000 72%,#eee 72%);line-height:1.45em;text-align:center;font-size:.85em}
+.gem-note-detail{font-size:.7em;margin-top:.3em}
+.gem .fd-seg{width:6.2em;height:3em;border:2px solid #000;grid-template-columns:1fr 1.8em}
+.gem .fd-val{font-size:1.5em;font-weight:700}
+.gem .fd-arr svg{fill:#000;stroke-width:4}
+.gem .fd-ampm{height:3em;border:2px solid #000}
+.gem .fd-ap{font-size:1.3em;padding:0 .6em}
+.gem-dlg{left:61.55%;top:12.3%;width:33.2%;border:3px solid #000;box-shadow:1em 1em 0 #555}
+.gem-dtitle{height:2.65em}
+.gem-dname{font-size:1.7em;font-weight:700;letter-spacing:-.055em;left:2.2em;top:.3em;background:transparent;white-space:nowrap;transform:scaleX(.88);transform-origin:left center}
+.gem-dpin,.gem-dx{width:2.4em;height:2.4em;top:0}
+.gem-dbody{height:8.3em;padding:1.5em 1.1em 1.2em 1.6em;gap:1.4em}
+.gem-dtext{font-size:1.375em;font-weight:700;letter-spacing:-.06em;line-height:1.5;white-space:nowrap;transform:scaleX(.84);transform-origin:left center}
+.gem-dwarn{width:4.9em;height:4.7em}
+.gem-dbtns{padding:.55em 1.2em 1.3em;gap:1em;justify-content:space-between}
+.gem-dbtn{font-size:1.375em;font-weight:700;letter-spacing:-.055em;height:2.05em;padding:0;white-space:nowrap;flex:none;width:29%}
+.gem-dbtn:nth-child(2){width:37%}.gem-dbtn:nth-child(3){width:25%}
+.gem-dbtn span{display:block;transform:scaleX(.86)}
+.gem-dbtn-def{border:3px solid #000}
+.gem .gem-date-row .fd-static{letter-spacing:-.13em}
+.gem .gem-time-row .fd-control{padding:0;border:0;width:auto;background:none;overflow:visible;gap:0}
+.gem .gem-time-row .fd-control>svg{display:none}
+.gem .gem-time-row .fd-txt{display:flex;align-items:center;overflow:visible;gap:.55em}
+.gem-read-hour,.gem-read-minute,.gem-read-ap{position:relative;display:flex;align-items:center;border:2px solid #000;height:2em;width:4.2em;padding-left:.7em;padding-right:1.25em;background:#fff}
+.gem-read-hour:after,.gem-read-minute:after{content:'▲\A▼';white-space:pre;position:absolute;right:0;top:0;bottom:0;width:1.15em;border-left:2px solid #000;background:linear-gradient(#eee 48%,#000 48%,#000 52%,#eee 52%);font-size:.8em;line-height:1.15em;text-align:center}
+.gem-read-ap{width:4.5em;margin-left:.4em}
+.gem-read-ap:after{content:'▼';position:absolute;right:0;top:0;bottom:0;width:1.4em;border-left:2px solid #000;background:#eee;display:grid;place-items:center;font-size:.8em}
+.gem-read-colon{margin:0 -.3em}
+.gem .fd-label{transform:scaleX(.88);transform-origin:left center}
+.gem .gem-time-row .fd-label{width:8.2em;flex:none;margin-right:.65em!important}
+.gem-tools{gap:1.4em}
+.gem-tools>:nth-child(4){transform:translateY(.65em)}
+.gem-tools>:nth-child(5){transform:translateY(.4em)}
+.gem-tools>:nth-child(6){transform:translateY(.25em)}
+.gem .fd-spin .fd-ampm{flex-direction:row}
+/* Episode controls use the existing title strip and document footer. */
+.gem-end{color:#000;font-family:inherit;font-size:1.45em;font-weight:700;white-space:nowrap}
+.gem-end-title{position:absolute;right:.6em;top:.12em;height:1.5em;min-width:5em;padding:0 .6em;background:#efefef;border:2px solid #000;border-radius:0;letter-spacing:-.06em}
+.gem-end-link{position:absolute;left:27.5%;top:1.65em;max-width:28%;text-align:center;text-decoration:underline}
+.gem-xtra{position:absolute;left:3%;top:1.65em;max-width:22%;height:2.25em;padding:0 .5em;background:#efefef;border:2px solid #000;border-radius:0;font-size:1.2em;white-space:nowrap}
+.gem-note-panel .gem-instruction{border:2px solid #000;padding:.7em .4em;background:#f5f5f5;font-size:2.3em}
+.gem-note-toast{align-items:flex-end;padding-bottom:4em}
+.gem-note-toast .gem-instruction{border:2px solid #000;box-shadow:.25em .25em 0 #777;padding:.7em .4em;font-size:2em;text-align:left}
+/* Keep both clock meridiem choices inside their clickable frame. */
+.gem .fd-chead .fd-ampm{flex-direction:row;height:auto;flex:none;margin-left:0}
+.gem .fd-chead .fd-ap{font-size:13px;padding:5px 8px!important}
+.gem .gem-attendees-row:not(.gem-number-row) .fd-static{width:19.3em}
+.gem .gem-attendees-row:not(.gem-number-row) .fd-static:after{display:none}
+.gem .fd-static.gem-long-value{width:auto;max-width:calc(100% - 6.2em);padding-right:1.7em}
+.gem .gem-notes-row .fd-static.gem-long-value{width:calc(100% - 8em);max-width:none}
+.gem .gem-long-value{font-size:1.3em;letter-spacing:-.07em}
+.gem-foot{z-index:30}

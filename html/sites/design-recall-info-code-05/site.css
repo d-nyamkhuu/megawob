@@ -1,0 +1,545 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Windows 2000 appointment-booking widget. */
+:root { --bg:#c0c0c0; --panel:#f7f7f7; --fg:#11112d; --muted:#555; --line:#808080; --accent:#000080; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body {
+  position:relative; display:flex; flex-direction:column; padding:4px; gap:0;
+  border:2px solid #808080; outline:2px solid #fff;
+  background:#c0c0c0; color:#11112d; font:18px/1.28 Tahoma, Arial, sans-serif;
+}
+.ref-task {
+  position:relative; display:block; flex:none; height:270px; min-height:270px;
+  padding:0; border:0; background:#c0c0c0; overflow:hidden;
+}
+.ref-brand {
+  position:absolute; left:0; right:0; top:0; height:43px; padding:7px 52px 6px 55px;
+  color:#fff; font:bold 22px/29px Tahoma,Arial,sans-serif;
+  background:linear-gradient(100deg,#071c80 0%,#005ec5 64%,#008cd5 100%);
+  text-shadow:1px 1px #000; white-space:nowrap;
+}
+.ref-brand::before {
+  content:'▦'; position:absolute; left:10px; top:7px; width:31px; height:28px;
+  border:2px solid #fff; color:#06357e; background:linear-gradient(#fff,#d6e7ff);
+  text-align:center; line-height:24px; font-size:20px; text-shadow:none;
+}
+.ref-brand::after {
+  content:'_  □  ×'; position:absolute; right:6px; top:5px; width:96px; height:31px;
+  box-sizing:border-box; padding:1px 4px; border:2px outset #eee; background:#c0c0c0;
+  color:#111; text-align:center; font:bold 20px/25px Tahoma,Arial,sans-serif; text-shadow:none;
+}
+.ref-nav {
+  position:absolute; left:0; right:0; top:44px; height:62px; display:flex; align-items:stretch; gap:0;
+  padding:3px 12px; border:1px solid #888; border-top:1px solid #fff; border-bottom:2px solid #777;
+  background:linear-gradient(#dedede,#c0c0c0);
+}
+.ref-navlink {
+  position:relative; display:flex; align-items:center; gap:12px; min-width:145px; padding:0 20px;
+  border-right:2px solid #888; color:#11112d; font:18px Tahoma,Arial,sans-serif; text-decoration:none;
+}
+.ref-navlink:first-child { border:2px outset #fff; font-weight:bold; background:linear-gradient(#eee,#d1d1d1); }
+.ref-navlink::before { content:'▣'; color:#003caa; font-size:25px; text-shadow:1px 1px #fff; }
+.ref-navlink:nth-child(2)::before { content:'♟'; color:#ddad00; }
+.ref-navlink:nth-child(3)::before { content:'▤'; color:#1837a1; }
+.ref-navlink:nth-child(4)::before { content:'♟'; color:#158c5e; }
+.ref-navlink:nth-child(5)::before { content:'▥'; color:#c50b24; }
+.ref-spacer { display:none; }
+.ref-instruction {
+  position:absolute; z-index:2; left:20px; right:300px; top:116px; min-height:118px;
+  padding:54px 18px 10px; color:#11112d; font:18px/1.3 Tahoma,Arial,sans-serif;
+  overflow-wrap:anywhere;
+}
+.ref-instruction::before { content:none; }
+.ref-pagehead {
+  position:absolute; left:12px; right:12px; top:116px; height:144px;
+  border:2px ridge #fff; background:linear-gradient(120deg,#a1c4ec,#9abdeb);
+}
+.ref-page-title { position:absolute; top:12px; left:18px; color:#11112d; font:bold 25px Tahoma,Arial,sans-serif; }
+.ref-stats {
+  position:absolute; right:5px; top:5px; width:260px; height:132px; padding:8px 12px;
+  border:3px ridge #fff; background:linear-gradient(120deg,#fff,#eef4fa); color:#11112d;
+  font:18px/1.4 Tahoma,Arial,sans-serif;
+}
+.ref-stats-title { color:#000080; font-weight:bold; margin-bottom:4px; }
+.ref-stats-row { display:flex; justify-content:space-between; padding:0 6px; }
+.ref-tools { position:absolute; z-index:4; right:12px; top:8px; gap:5px; }
+.ref-submit, .ref-xtra {
+  border:2px outset #fff; border-radius:0; padding:6px 14px; background:linear-gradient(#e9e9e9,#c7c7c7);
+  color:#11112d; font:16px Tahoma,Arial,sans-serif; box-shadow:none;
+}
+.ref-xtra { padding:4px 8px; }
+.ref-body { flex:1; min-height:0; display:flex; padding:10px 12px 12px; border:2px ridge #fff; background:#f7f7f7; }
+.ref-stage {
+  --booking-rail:148;
+  flex:1; min-width:0; min-height:0; display:flex;
+  border:0; background:#f7f7f7;
+}
+.ref-stage { position:relative; }
+.ref-stage::before {
+  content:'①  Patient Details                 ②  Choose Service                  ③  Select Date & Time                 ④  Review Details                 ⑤  Enter Reference';
+  position:absolute; left:7%; right:7%; top:12px; height:108px; z-index:3; display:flex; align-items:flex-end;
+  padding:0 0 8px; color:#11112d; font:22px/1.3 Tahoma,Arial,sans-serif; text-align:center;
+  white-space:pre; border-bottom:4px ridge #999; background:
+    radial-gradient(circle at 5% 24%,#003caa 0 27px,#0060f0 28px 30px,transparent 31px),
+    radial-gradient(circle at 27.5% 24%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 50% 24%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 72.5% 24%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 95% 24%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    linear-gradient(transparent 22%,#888 22.5%,#555 25%,transparent 26%);
+}
+.ur-app { border-color:#888!important; border-radius:0!important; background:#f7f7f7!important; color:#11112d!important; box-shadow:none!important; font-family:Tahoma,Arial,sans-serif!important; }
+.ur-btn { border:2px outset #fff; border-radius:0; background:linear-gradient(#eee,#c6c6c6); color:#11112d; font:20px Tahoma,Arial,sans-serif; }
+.ref-panel { width:260px; margin:10px; padding:12px; border:2px ridge #fff; border-radius:0; background:#f7f7f7; }
+.ref-foot { min-height:48px; padding:5px 14px; border-top:2px ridge #fff; background:#c0c0c0; color:#333; font:14px Tahoma,Arial,sans-serif; }
+.ref-endlink { color:#000080; font-weight:normal; text-decoration:underline; }
+.ref-float-dock { height:0; }
+.ref-float { right:22px; bottom:22px; box-shadow:none; }
+.ref-note { left:auto; right:18px; bottom:16px; border:2px ridge #fff; border-left:2px ridge #fff; border-radius:0; background:#fff; font-weight:normal; }
+@media (max-height:740px) {
+  .ref-stage { --booking-rail:90; }
+  .ref-task { height:235px; min-height:235px; }
+  .ref-brand { height:40px; padding-top:5px; font-size:19px; line-height:29px; }
+  .ref-nav { top:41px; height:52px; padding:2px 8px; }
+  .ref-pagehead { top:98px; height:130px; }
+  .ref-stage::before {
+    top:2px; height:76px; font-size:14px; padding-bottom:4px;
+    background:
+      radial-gradient(circle at 5% 30%,#003caa 0 24px,#0060f0 25px 27px,transparent 28px),
+      radial-gradient(circle at 27.5% 30%,#ddd 0 24px,#777 25px 27px,transparent 28px),
+      radial-gradient(circle at 50% 30%,#ddd 0 24px,#777 25px 27px,transparent 28px),
+      radial-gradient(circle at 72.5% 30%,#ddd 0 24px,#777 25px 27px,transparent 28px),
+      radial-gradient(circle at 95% 30%,#ddd 0 24px,#777 25px 27px,transparent 28px),
+      linear-gradient(transparent 28%,#888 28.5%,#555 31%,transparent 32%);
+  }
+  .ref-stats { width:220px; height:120px; padding:6px 9px; font-size:16px; }
+  .ref-instruction { right:235px; top:98px; }
+}
+
+/* 1988 Macintosh device registration window */
+:root { --bg:#bcbcbc; --panel:#fff; --fg:#090909; --muted:#222; --line:#111; --accent:#000; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body {
+  box-sizing:border-box; margin:0; padding:4px 25px 14px; gap:0;
+  border:0; outline:0; background:#bdbdbd; color:#080808;
+  font:clamp(14px,1.34vw,23px)/1.25 "Chicago", "Geneva", "Arial", sans-serif;
+}
+.ref-task {
+  position:relative; flex:none; height:35.2vh; min-height:248px; max-height:340px;
+  margin:0; padding:0; border:3px solid #111; outline:2px solid #fff;
+  background:white; overflow:visible;
+}
+.mac-menu {
+  position:absolute; left:-28px; right:-28px; top:-4px; height:36px; box-sizing:border-box;
+  padding:3px 35px; background:#fff; border-bottom:3px solid #111;
+  font:bold 21px/28px Arial,sans-serif; white-space:nowrap;
+}
+.ref-brand {
+  position:absolute; left:0; right:0; top:34px; height:47px; box-sizing:border-box;
+  padding:6px 48px; color:#000; background-color:#fff;
+  background-image:radial-gradient(#111 0.65px,transparent .8px); background-size:3px 3px;
+  text-align:center; font:bold 23px/32px Arial,sans-serif; white-space:nowrap;
+  border-bottom:3px solid #111; text-shadow:0 0 3px #fff,0 0 5px #fff;
+}
+.ref-brand::before,.ref-brand::after { position:absolute; top:4px; width:28px; height:28px; box-sizing:border-box; background:#fff; border:3px solid #111; color:#111; text-shadow:none; font:bold 17px/21px Arial; }
+.ref-brand::before { content:'□'; left:5px; }
+.ref-brand::after { content:'▣'; right:5px; }
+.device-summary {
+  position:absolute; left:0; right:0; top:81px; bottom:0; display:grid;
+  grid-template-columns:1.15fr 1.25fr .31fr; align-items:center; padding:18px 34px;
+  background:#fff; font-size:clamp(14px,1.35vw,23px);
+}
+.computer-drawing { justify-self:center; width:115px; height:133px; border:4px double #111; border-radius:9px 9px 0 0; font-size:0; position:relative; }
+.computer-drawing:before { content:''; position:absolute; inset:9px 8px 39px; border:5px double #111; }
+.computer-drawing:after { content:'▪                 ▬'; position:absolute; left:9px; right:8px; bottom:9px; height:25px; border-top:3px solid #111; font:bold 15px/22px Arial; }
+.machine-data,.owner-data { align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:5px; padding:0 30px; }
+.machine-data { border-right:3px solid #111; }
+.owner-data { border-right:3px solid #111; }
+.machine-data h1 { margin:0 0 5px; font:bold clamp(22px,2.1vw,34px)/1 Arial,sans-serif; }
+.summary-row { display:grid; grid-template-columns: minmax(145px, .92fr) 1.25fr; gap:6px; white-space:nowrap; }
+.registration-doc { text-align:center; white-space:pre-line; font-size:.9em; }
+.paper-icon { font:58px/1 Arial,sans-serif; margin-bottom:9px; }
+.ref-nav,.ref-instruction,.ref-pagehead { display:none!important; }
+.ref-tools { z-index:9; top:3px; right:4px; }
+.ref-submit,.ref-xtra { border:2px outset #fff; border-radius:0; padding:3px 10px; background:#eee; color:#111; font:bold 15px Arial; box-shadow:none; }
+.ref-body { flex:1; min-height:0; display:flex; padding:0 0 0; border:3px solid #111; outline:2px solid #fff; background:#fff; position:relative; }
+.ref-stage { position:relative; flex:1; min-width:0; min-height:0; display:block; border:0; background:#fff; }
+.ref-stage::before { content:'Devices\A\A ▣　Macintosh II\A　　 F4201ZX93\A ▣　Macintosh SE\A　　 S8820LM14\A ▣　Macintosh Plus\A　　 P3190AA27\A ▣　Macintosh IIci\A　　 C7648KD01\A ▣　Macintosh Classic\A　　 T1002BK44\A ▣　Macintosh LC\A　　 L5527QJ19\A ▣　Macintosh IIsi\A　　 H8931MP66\A ▣　Macintosh Quadra\A　　 Q4020RD33';
+  position:absolute; z-index:0; left:0; top:0; bottom:0; width:22%; box-sizing:border-box; padding:8px 12px; white-space:pre; overflow:hidden; background:linear-gradient(#fff 0 49px,#111 49px 52px,#fff 52px); border-right:3px solid #111; font:clamp(13px,1.2vw,21px)/1.32 Arial,sans-serif; }
+.ref-stage::after { content:''; position:absolute; z-index:1; pointer-events:none; left:22%; top:0; right:0; bottom:0; border-left:3px solid #111; }
+.ur-app { position:absolute!important; z-index:2; left:22%!important; top:0!important; width:78%!important; height:100%!important; box-sizing:border-box!important; border:0!important; border-radius:0!important; background:#fff!important; color:#090909!important; box-shadow:none!important; font-family:Arial,sans-serif!important; }
+.ur-app .ur-bar { display:none!important; }
+.ur-app .ur-body { overflow:hidden!important; }
+.ur-classic-booking-panel .ur-codebox { display:flex!important; align-items:center; justify-content:center; gap:18px; width:min(535px,100%)!important; margin:42px 0 20px!important; padding:10px 14px!important; }
+.ur-classic-booking-panel .ur-codelabel { display:block!important; flex:none; font:bold 22px Arial,sans-serif!important; color:#111!important; }
+.ur-app::after {
+  content:'Recent Registrations\A Date          Device                 Serial Number    Registration Key    Status\A Apr 10, 1988  Macintosh SE           S8820LM14       4H6P-1Q9N-8Z2V     Completed\A Apr  9, 1988  Macintosh IIci          C7648KD01       9B5T-3F0K-7J1M     Completed\A Apr  8, 1988  Macintosh Classic      T1002BK44       2L9V-8D4Q-6P0H     Completed\A Apr  6, 1988  Macintosh LC            L5527QJ19       6M1Z-0K3B-9T5F     Expired\A Apr  3, 1988  Macintosh IIsi          H8931MP66       8Q2D-5V7M-1C3K     Completed';
+  position:absolute; left:3%; right:2%; bottom:20px; height:clamp(190px,27vh,235px); box-sizing:border-box; padding:12px 14px;
+  border:2px solid #111; color:#111;
+  background:linear-gradient(transparent 0 28px,#e7e7e7 28px 55px,transparent 55px),linear-gradient(90deg,transparent 0 15%,#111 15% 15.15%,transparent 15.15% 39%,#111 39% 39.15%,transparent 39.15% 56%,#111 56% 56.15%,transparent 56.15% 78%,#111 78% 78.15%,transparent 78.15%);
+  white-space:pre; overflow:hidden; font:clamp(12px,.88vw,15px)/1.85 "Courier New",monospace;
+}
+.ur-classic-booking-panel h3 { color:#111!important; }
+.ur-classic-booking-panel .ur-codebox { position:relative!important; margin-left:220px!important; width:min(535px,calc(100% - 220px))!important; }
+.ur-classic-booking-panel .ur-codelabel { position:absolute!important; left:-220px!important; top:50%!important; transform:translateY(-50%); width:206px; text-align:right; white-space:nowrap; font-size:17px!important; }
+.ur-classic-booking-panel .ur-code { flex:none!important; white-space:nowrap!important; font-size:clamp(34px,2.8vw,48px)!important; letter-spacing:1px!important; }
+.ref-instruction { display:block!important; position:absolute!important; z-index:6!important; top:83px!important; left:18px!important; right:18px!important; width:auto!important; min-height:0!important; padding:0!important; border:0!important; background:transparent!important; color:#111!important; font:15px/1.25 Arial,sans-serif!important; }
+.ref-instruction:empty { display:none!important; }
+.ref-task:has(.ref-instruction:not(:empty)) { height:calc(35.2vh + 46px)!important; }
+.ref-task:has(.ref-instruction:not(:empty)) .device-summary { top:126px!important; }
+.ref-task:has(.ref-instruction:not(:empty)) .ref-brand { top:34px!important; }
+@media (max-width:1100px) {
+ .ur-classic-booking-panel .ur-codebox { margin:25px 0 15px!important; width:min(535px,100%)!important; }
+ .ur-classic-booking-panel .ur-codelabel { left:0!important; top:-27px!important; transform:none!important; width:100%; text-align:left; font-size:13px!important; }
+ .ur-classic-booking-panel .ur-code { font-size:34px!important; }
+}
+.ur-classic-booking-panel h3 { color:#111!important; }
+.ur-app .ur-work { padding:26px 28px 14px!important; gap:0!important; }
+.ur-app .ur-progress { display:none!important; }
+.ur-panel.ur-classic-booking-panel { border:0; background:transparent; }
+.ur-classic-booking-panel h3 { color:#111!important; font:bold clamp(22px,2vw,34px)/1.2 Arial,sans-serif!important; margin:0 0 8px!important; border-bottom:2px solid #111; padding:0 0 8px; }
+.ur-classic-booking-panel .ur-codebox { border:5px double #111; background:#fff!important; text-align:center; }
+.ur-classic-booking-panel .ur-code { color:#111!important; font:bold clamp(36px,3.25vw,56px)/1.18 "Courier New",monospace!important; letter-spacing:2px!important; }
+.ur-classic-booking-panel .ur-codelabel { font:bold 22px Arial,sans-serif!important; }
+.ur-classic-booking-panel .ur-p,.ur-classic-booking-panel .ur-hint { color:#111!important; font:18px/1.3 Arial,sans-serif!important; }
+.ur-app .ur-foot { min-height:64px!important; border:0!important; background:#fff!important; padding:8px 0 0!important; }
+.ur-foot .ur-btn.primary { min-width:190px!important; height:56px!important; border:3px outset #fff!important; border-radius:7px!important; background:#eee!important; color:#111!important; font:bold 24px Arial,sans-serif!important; }
+.ref-panel { background:#fff; border:2px solid #111; border-radius:0; color:#111; }
+.ref-note { border:2px solid #111; border-radius:0; background:#fff; color:#111; }
+.ref-float { right:18px; bottom:18px; }
+@media (max-width:1100px) {
+  body { padding-left:15px; padding-right:15px; }
+  .ref-task { height:34vh; min-height:224px; }
+  .device-summary { grid-template-columns:.65fr 1fr 1fr; padding:12px 16px; }
+  .computer-drawing { transform:scale(.78); }
+  .machine-data,.owner-data { padding:0 12px; }
+  .summary-row { grid-template-columns:1fr 1.1fr; }
+  .ref-stage::before { width:25%; padding-left:8px; }
+  .ur-app { left:25%!important; width:75%!important; }
+  .ur-stage::after { left:25%; }
+  .ur-app .ur-work { padding:16px!important; }
+}
+@media (max-height:740px) {
+  .ref-task { height:34vh; min-height:214px; }
+  .device-summary { padding-top:8px; padding-bottom:8px; }
+  .computer-drawing { transform:scale(.75); }
+  .ur-app .ur-work { padding:14px 20px 8px!important; }
+  .ur-classic-booking-panel h3 { font-size:22px!important; }
+  .ur-classic-booking-panel .ur-code { font-size:40px!important; }
+  .ur-foot .ur-btn.primary { height:42px!important; font-size:19px!important; }
+}
+
+/* Reference layout: a wide, plain booking form beneath the five-step rail. */
+.ref-stage::before {
+  content:'Patient Details                 Choose Service                 Select Date & Time                 Review Details                 Enter Reference';
+  left:7%; right:7%; top:8px; height:102px; padding:32px 0 6px;
+  border-bottom:0; font:22px/1.25 Tahoma,Arial,sans-serif; color:#11112d;
+  background:
+    radial-gradient(circle at 5% 25%,#003caa 0 28px,#0060f0 29px 31px,transparent 32px),
+    radial-gradient(circle at 27.5% 25%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 50% 25%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 72.5% 25%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    radial-gradient(circle at 95% 25%,#ddd 0 27px,#777 28px 30px,transparent 31px),
+    linear-gradient(transparent 22%,#888 22.5%,#555 25%,transparent 26%);
+}
+.ur-panel.ur-classic-booking-panel {
+  border:0; background:transparent;
+}
+.ur-classic-booking-panel h3 {
+  color:#000080!important; font:bold 27px/1.25 Tahoma,Arial,sans-serif!important;
+}
+.ur-classic-booking-panel .ur-p { font:18px/1.35 Tahoma,Arial,sans-serif; color:#11112d; }
+.ur-classic-booking-panel .ur-codebox {
+  border:2px solid #111; border-radius:0;
+  background:#ffffd0!important; text-align:center;
+}
+.ur-classic-booking-panel .ur-code {
+  color:#000080!important; font:bold 78px/1.15 Tahoma,Arial,sans-serif!important;
+  letter-spacing:0!important;
+}
+.ur-classic-booking-panel .ur-hint { font:24px/1.35 Tahoma,Arial,sans-serif; color:#11112d; }
+.ur-foot {
+  border-top:2px solid #aaa!important;
+}
+.ur-foot .ur-btn.primary {
+  border:3px outset #fff!important; border-radius:0!important;
+  background:linear-gradient(#eee,#c6c6c6)!important; color:#11112d!important;
+  font:23px Tahoma,Arial,sans-serif!important;
+}
+@media (max-height:740px) {
+  .ref-stage::before { top:0; height:72px; padding-top:24px; font-size:15px; }
+  .ur-classic-booking-panel h3 { font-size:20px!important; }
+  .ur-classic-booking-panel .ur-code { font-size:44px!important; }
+  .ur-classic-booking-panel .ur-p,.ur-classic-booking-panel .ur-hint { font-size:15px!important; }
+  .ur-foot .ur-btn.primary { font-size:16px!important; }
+}
+
+/* Final Macintosh overrides after the inherited template widget. */
+.device-summary { grid-template-columns:.42fr 1fr 1.18fr .38fr!important; }
+.computer-drawing { grid-column:1; grid-row:1; }
+.machine-data { grid-column:2; grid-row:1; }
+.owner-data { grid-column:3; grid-row:1; }
+.registration-doc { grid-column:4; grid-row:1; }
+.ref-stage::before {
+  content:'Devices\A\A            Macintosh II\A            F4201ZX93\A            Macintosh SE\A            S8820LM14\A            Macintosh Plus\A            P3190AA27\A            Macintosh IIci\A            C7648KD01\A            Macintosh Classic\A            T1002BK44\A            Macintosh LC\A            L5527QJ19\A            Macintosh IIsi\A            H8931MP66\A            Macintosh Quadra\A            Q4020RD33'!important;
+  left:0!important; right:auto!important; top:0!important; bottom:0!important; width:22%!important; height:auto!important;
+  display:block!important; box-sizing:border-box; z-index:3!important; padding:8px 12px!important;
+  border:0!important; border-right:3px solid #111!important; border-radius:0!important;
+  color:#111!important; background-color:#fff!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='432' viewBox='0 0 36 432'%3E%3Cdefs%3E%3Cpattern id='p' width='36' height='54' patternUnits='userSpaceOnUse'%3E%3Crect x='1.5' y='1.5' width='30' height='29' rx='2' fill='white' stroke='black' stroke-width='2'/%3E%3Crect x='4.5' y='4.5' width='24' height='21' fill='white' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M2 31h29v4H2zM7 35h20v3H7zM5 30h3' fill='white' stroke='black' stroke-width='1.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect y='54' width='36' height='378' fill='url(%23p)'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important; background-position:12px 0!important; background-size:36px 432px!important;
+  font:clamp(13px,1.2vw,21px)/1.32 Arial,sans-serif!important; text-align:left!important; white-space:pre!important;
+}
+.ref-stage::after { left:22%!important; z-index:1!important; border-left:0!important; }
+.ur-app { left:22%!important; width:78%!important; z-index:2!important; }
+.ur-app .ur-work { padding:26px 28px 14px!important; }
+.ur-stage::before { content:none!important; }
+.ur-classic-booking-panel .ur-codebox { background:#fff!important; }
+.ur-classic-booking-panel .ur-code { color:#111!important; font: bold clamp(36px,3.25vw,56px)/1.18 "Courier New",monospace!important; }
+.ur-app .ur-foot { position:absolute!important; top:100px!important; right:7%!important; width:auto!important; min-height:0!important; padding:0!important; border:0!important; background:transparent!important; }
+.ur-foot .ur-btn.primary { min-width:190px!important; height:64px!important; padding:8px 26px!important; border:4px outset #fff!important; border-radius:8px!important; font:bold 25px Arial,sans-serif!important; }
+.ur-app .ur-body { overflow:hidden!important; }
+@media (max-width:1100px) {
+  .ref-stage::before { width:25%!important; font-size:13px!important; }
+  .ur-app { left:25%!important; width:75%!important; }
+  .ref-stage::after { left:25%!important; }
+  .ur-app .ur-foot { top:86px!important; right:3%!important; }
+  .ur-foot .ur-btn.primary { min-width:132px!important; height:44px!important; font-size:18px!important; }
+}
+@media (max-height:740px) {
+  .ref-task { height:34vh!important; min-height:214px!important; }
+  .ur-app .ur-work { padding:14px 20px 8px!important; }
+  .ur-app .ur-foot { top:74px!important; }
+  .ur-foot .ur-btn.primary { height:42px!important; font-size:19px!important; }
+}
+
+/* Final 1-bit Macintosh detail and safe code/action alignment. */
+.ref-task { height:32.4vh; min-height:248px; max-height:320px; }
+.mac-menu { font-family:Arial,sans-serif; letter-spacing:.15px; }
+.ref-brand { background-image:radial-gradient(#111 .7px,transparent .9px); background-size:3px 3px; }
+.computer-drawing {
+  width:112px; height:132px; border:4px solid #111; border-radius:10px 10px 1px 1px;
+  background:linear-gradient(#fff 0 80%,#111 80% 82%,#fff 82%);
+  box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px #111;
+}
+.computer-drawing::before {
+  inset:10px 9px 43px; border:3px solid #111; outline:2px solid #111; outline-offset:3px;
+  background:#fff;
+}
+.computer-drawing::after {
+  content:''; left:9px; right:9px; bottom:11px; height:14px; border:0;
+  background:radial-gradient(circle,#111 0 2px,transparent 2.5px) left 3px top 5px/8px 8px no-repeat,
+    linear-gradient(#111,#111) right 0 top 4px/38px 5px no-repeat;
+}
+.paper-icon {
+  position:relative; display:block; width:49px; height:65px; margin:0 auto 12px;
+  box-sizing:border-box; border:3px solid #111; background:repeating-linear-gradient(to bottom,transparent 0 8px,#111 8px 10px);
+  background-clip:content-box; padding:12px 5px 5px; font-size:0!important;
+}
+.paper-icon::before { content:''; position:absolute; right:-3px; top:-3px; width:14px; height:14px; background:#fff; border-left:3px solid #111; border-bottom:3px solid #111; }
+.paper-icon::after { content:''; position:absolute; left:8px; right:8px; top:20px; height:2px; background:#111; box-shadow:0 9px #111,0 18px #111,0 27px #111; }
+.ur-app .ur-work { padding:26px 28px 14px!important; }
+.ur-classic-booking-panel h3 { color:#111!important; font:bold clamp(22px,2.1vw,34px)/1.2 Arial,sans-serif!important; margin-bottom:12px!important; }
+.ur-classic-booking-panel .ur-codebox {
+  box-sizing:border-box!important; width:min(760px,100%)!important; min-width:0!important;
+  margin:36px 0 20px!important; padding:10px 15px!important; border:5px double #111!important;
+}
+.ur-classic-booking-panel { overflow:visible!important; }
+.ur-classic-booking-panel .ur-codelabel { position:static!important; transform:none!important; width:auto!important; text-align:right!important; white-space:nowrap!important; }
+.ur-classic-booking-panel .ur-p,.ur-classic-booking-panel .ur-hint,.ref-instruction { display:none!important; }
+.ur-classic-booking-panel .ur-codelabel { font:bold clamp(17px,1.55vw,24px) Arial,sans-serif!important; }
+.ur-classic-booking-panel .ur-code { font:bold clamp(34px,3vw,52px)/1.12 'Courier New',monospace!important; letter-spacing:2px!important; }
+.ur-app .ur-foot {
+  position:absolute!important; inset:100px 12% auto auto!important; width:auto!important; min-height:0!important;
+  display:flex!important; justify-content:flex-end!important; align-items:center!important;
+  padding:0!important; border:0!important; background:transparent!important; z-index:5!important;
+}
+.ur-foot .ur-btn.primary {
+  min-width:200px!important; height:64px!important; padding:8px 24px!important;
+  border:4px outset #fff!important; border-radius:8px!important;
+  font:bold clamp(21px,1.8vw,29px) Arial,sans-serif!important;
+}
+.ur-app .ur-body { overflow:hidden!important; }
+@media (max-width:1100px) {
+  .device-summary { grid-template-columns:.36fr 1fr 1.05fr .34fr!important; padding:10px 12px!important; }
+  .computer-drawing { transform:scale(.68); }
+  .machine-data,.owner-data { padding:0 8px!important; }
+  .summary-row { grid-template-columns:minmax(104px,.92fr) 1.1fr!important; }
+  .ref-stage::before { width:25%!important; font-size:12px!important; padding-left:7px!important; }
+  .ur-app { left:25%!important; width:75%!important; }
+  .ur-app .ur-work { padding:14px 20px 8px!important; }
+  .ur-classic-booking-panel .ur-codebox { width:min(calc(100% - 165px),500px)!important; min-width:0!important; margin:20px 0 15px!important; gap:8px; }
+  .ur-classic-booking-panel .ur-code { font-size:clamp(25px,3vw,37px)!important; }
+  .ur-classic-booking-panel .ur-codelabel { font-size:15px!important; }
+  .ur-app .ur-foot { position:absolute!important; inset:86px 3% auto auto!important; width:auto!important; min-height:0!important; justify-content:flex-end!important; padding:0!important; }
+  .ur-foot .ur-btn.primary { min-width:132px!important; height:44px!important; padding:5px 12px!important; font-size:18px!important; }
+}
+@media (max-height:740px) {
+  .ref-task { height:32vh!important; min-height:214px!important; }
+  .ur-app .ur-work { padding-top:13px!important; }
+  .ur-classic-booking-panel h3 { font-size:clamp(20px,2vw,27px)!important; margin-bottom:7px!important; }
+  .ur-classic-booking-panel .ur-codebox { margin-top:20px!important; }
+  .ur-app .ur-foot { top:74px!important; }
+  .ur-foot .ur-btn.primary { height:42px!important; font-size:18px!important; }
+}
+.ref-task > .ref-tools { position:absolute!important; top:3px!important; right:4px!important; }
+.ref-foot { position:fixed!important; z-index:20!important; right:58px!important; bottom:25px!important; display:flex!important; justify-content:flex-end!important; align-items:center!important; padding:5px 18px!important; }
+.ref-foot .ref-tools { position:static!important; margin:0!important; display:flex!important; gap:6px!important; }
+.ref-float-dock { position:fixed!important; z-index:30!important; right:58px!important; bottom:25px!important; width:auto!important; height:auto!important; }
+.ref-float { position:static!important; right:auto!important; bottom:auto!important; }
+.ref-note { left:24px!important; right:auto!important; bottom:16px!important; max-width:min(330px,calc(100vw - 48px))!important; z-index:12!important; }
+
+/* Native Macintosh list and registration ledger. */
+.ref-stage::before,.ur-app::after { content:none!important; display:none!important; }
+.mac-device-list { position:absolute; z-index:4; inset:0 auto 0 0; width:22%; box-sizing:border-box; border-right:3px solid #111; background:#fff; color:#111; font:clamp(13px,1.2vw,20px)/1.18 Arial,sans-serif; }
+.mac-list-title { height:47px; box-sizing:border-box; padding:8px 17px; border-bottom:2px solid #111; font-weight:bold; font-size:1.1em; }
+.mac-list-scroll { width:calc(100% - 28px); height:calc(100% - 47px); overflow-y:auto; scrollbar-width:none; }
+.mac-list-scroll::-webkit-scrollbar { display:none; }
+.mac-list-bar { position:absolute; top:47px; right:0; bottom:0; width:28px; border-left:2px solid #111; background:#fff; box-sizing:border-box; }
+.mac-list-up,.mac-list-down { position:absolute; left:0; right:0; height:28px; box-sizing:border-box; border-bottom:2px solid #111; text-align:center; font:bold 22px/25px Arial,sans-serif; }
+.mac-list-up { top:0; }
+.mac-list-down { bottom:0; border-top:2px solid #111; border-bottom:0; }
+.mac-list-thumb { position:absolute; left:2px; right:2px; top:30px; height:61px; border:2px solid #111; background:radial-gradient(#111 .8px,transparent 1px) 0 0/3px 3px #fff; }
+.mac-list-item { min-height:66px; box-sizing:border-box; display:flex; align-items:center; gap:22px; padding:5px 14px 5px 25px; white-space:nowrap; }
+.mac-list-item.selected { color:#fff; background:#000; }
+.mac-device-words { display:flex; flex-direction:column; gap:1px; }
+.mac-small-computer { position:relative; flex:none; width:31px; height:38px; box-sizing:border-box; border:3px solid currentColor; border-radius:2px 2px 0 0; box-shadow:inset 0 0 0 2px #fff; }
+.mac-small-computer::before { content:''; position:absolute; inset:4px 3px 11px; border:2px solid currentColor; }
+.mac-small-computer::after { content:''; position:absolute; left:-2px; right:-2px; bottom:-6px; height:5px; border:2px solid currentColor; background:#fff; }
+.mac-list-item.selected .mac-small-computer { color:#fff; box-shadow:none; }
+.mac-list-item.selected .mac-small-computer::after { background:#000; }
+.mac-history { display:none; position:absolute; left:2.5%; right:2.3%; bottom:18px; height:clamp(230px,30vh,285px); box-sizing:border-box; padding-top:16px; border-top:2px solid #111; color:#111; font-family:Arial,sans-serif; }
+.ur-app:has(.mac-first-step:not([hidden])) .mac-history { display:block; }
+.mac-history h4 { margin:0 0 10px 10px; font:bold clamp(17px,1.5vw,24px)/1.2 Arial,sans-serif; }
+.mac-history table { width:100%; height:calc(100% - 40px); table-layout:fixed; border:2px solid #111; border-collapse:collapse; font:clamp(13px,1.18vw,20px)/1.25 'Courier New',monospace; }
+.mac-history th { height:36px; box-sizing:border-box; padding:4px 13px; border:1px solid #111; background:#ececec; text-align:left; font-weight:normal; white-space:nowrap; }
+.mac-history td { padding:1px 13px; white-space:nowrap; overflow:hidden; text-overflow:clip; }
+.mac-history th:nth-child(1) { width:15%; }.mac-history th:nth-child(2) { width:24%; }.mac-history th:nth-child(3) { width:19%; }.mac-history th:nth-child(4) { width:23%; }.mac-history th:nth-child(5) { width:19%; }
+
+/* The code label is a peer of the key frame, leaving a dedicated button lane. */
+.mac-code-row { display:flex; align-items:center; gap:3%; width:calc(100% - 440px); min-width:0; margin:55px 0 0 6.5%; }
+.mac-code-row .ur-codelabel { flex:0 0 26%; width:auto!important; text-align:right!important; text-transform:none!important; font:bold clamp(17px,1.5vw,24px) Arial,sans-serif!important; }
+.mac-code-row .ur-codebox { flex:1 1 auto; width:auto!important; min-width:0!important; margin:0!important; padding:10px 8px!important; border:5px double #111!important; background:#fff!important; }
+.mac-code-row .ur-code { display:block; overflow:hidden; text-overflow:clip; font:bold clamp(25px,2.7vw,47px)/1.16 'Courier New',monospace!important; letter-spacing:1px!important; white-space:nowrap; }
+.ur-app .ur-foot { inset:154px 11% auto auto!important; }
+.ur-foot .ur-btn.primary { min-width:190px!important; height:70px!important; }
+.ur-foot .ur-btn.primary::after { content:' ▶'; margin-left:18px; font-size:.8em; }
+.ur-classic-booking-panel h3 { font-size:clamp(24px,2.2vw,35px)!important; }
+.ur-app .ur-work { padding-top:57px!important; }
+.ref-task > .ref-tools { top:43px!important; right:42px!important; }
+.ref-submit,.ref-xtra { border:2px solid #111; background:#fff; color:#111; font:bold 14px Arial,sans-serif; box-shadow:2px 2px #111; }
+.ref-instruction { display:block!important; top:83px!important; left:32px!important; right:32px!important; padding:4px!important; background:#fff!important; font:15px/1.25 Arial,sans-serif!important; }
+@media (max-width:1100px) {
+  .mac-device-list { width:25%; font-size:12px; }
+  .mac-list-item { min-height:49px; gap:7px; padding:3px 5px; }
+  .mac-small-computer { width:25px; height:30px; }
+  .mac-code-row { width:calc(100% - 190px); margin-left:0; gap:8px; }
+  .mac-code-row .ur-codelabel { flex-basis:31%; font-size:14px!important; }
+  .mac-code-row .ur-code { font-size:clamp(20px,2.8vw,29px)!important; letter-spacing:0!important; }
+  .ur-app .ur-foot { inset:77px 2% auto auto!important; }
+  .ur-foot .ur-btn.primary { min-width:128px!important; height:44px!important; }
+  .ur-app .ur-work { padding-top:20px!important; }
+  .mac-history { height:185px; bottom:8px; }
+  .mac-history table { font-size:10px; }
+  .mac-history th,.mac-history td { padding-left:5px; padding-right:4px; }
+}
+@media (max-height:740px) {
+  .mac-code-row { margin-top:20px; }
+  .mac-history { height:180px; }
+  .ur-app .ur-work { padding-top:13px!important; }
+  .ur-app .ur-foot { inset:68px 11% auto auto!important; }
+}
+@media (max-width:1100px) and (max-height:740px) {
+  .ur-app .ur-foot { right:2%!important; }
+  .mac-list-bar { width:21px; }
+  .mac-list-scroll { width:calc(100% - 21px); }
+}
+@media (min-width:1101px) and (min-height:741px) {
+  .ref-task { height:calc(32.4vh + 30px)!important; max-height:340px!important; }
+  .ur-app .ur-work { padding-top:37px!important; }
+}
+
+.ur-app .ur-foot .ur-btn.primary { background:#fff!important; color:#000!important; border:3px solid #000!important; border-radius:8px!important; box-shadow:0 3px 0 #000, 0 3px 0 1px #000!important; background-image:none!important; font-family:Arial,sans-serif!important; }
+
+.ref-task { min-height:250px!important; }
+.mac-history table { font-family:Arial,Helvetica,sans-serif!important; }
+.mac-history th { font-family:Arial,sans-serif; }
+.mac-list-item { gap:18px; }
+
+.ref-foot:not(:has(button)) { display:none!important; }
+.ref-foot { background:#fff!important; border:2px solid #111!important; color:#111!important; }
+
+.ref-foot:not(:has(button,a)) { display:none!important; }
+.ref-foot:has(button,a) { display:flex!important; }
+.mac-small-computer { border:0!important; box-shadow:none!important; width:31px!important; height:38px!important; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 40'%3E%3Crect x='2' y='2' width='28' height='30' rx='3' fill='none' stroke='%23000' stroke-width='3'/%3E%3Crect x='7' y='7' width='18' height='13' fill='none' stroke='%23000' stroke-width='2'/%3E%3Crect x='2' y='34' width='28' height='4' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M16 27h10M7 27h2' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat; }
+.mac-small-computer::before,.mac-small-computer::after { display:none!important; }
+.mac-list-item.selected .mac-small-computer { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 40'%3E%3Crect x='2' y='2' width='28' height='30' rx='3' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Crect x='7' y='7' width='18' height='13' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Crect x='2' y='34' width='28' height='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M16 27h10M7 27h2' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E"); }
+.computer-drawing { border:0!important; width:118px!important; height:136px!important; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 115'%3E%3Cpath d='M10 3h80q6 0 6 6v82H4V9q0-6 6-6z' fill='none' stroke='%23000' stroke-width='4'/%3E%3Crect x='14' y='12' width='72' height='52' fill='none' stroke='%23000' stroke-width='4'/%3E%3Crect x='3' y='95' width='94' height='14' fill='none' stroke='%23000' stroke-width='3'/%3E%3Cpath d='M56 79h28' stroke='%23000' stroke-width='6'/%3E%3Cpath d='M15 79h4' stroke='%23000' stroke-width='4'/%3E%3Cpath d='M74 102h16' stroke='%23000' stroke-width='2' stroke-dasharray='1 2'/%3E%3C/svg%3E") center/contain no-repeat; }
+.computer-drawing::before,.computer-drawing::after { display:none!important; }
+.mac-menu-r { position:absolute; right:30px; top:0; display:flex; gap:26px; align-items:center; font:bold 18px/28px Arial,sans-serif; }
+.mac-menu-r b { display:inline-block; width:22px; height:24px; border:2px solid #111; font:bold 16px/20px Arial; text-align:center; box-sizing:border-box; }
+.mac-menu svg { vertical-align:-2px; }

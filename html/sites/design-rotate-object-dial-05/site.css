@@ -1,0 +1,91 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{--bg:#fafafa;--panel:#ffffff;--fg:#1b2033;--muted:#5d6272;--line:#c9ccd4;--accent:#3f4fbf;
+  font-family:Roboto,"Helvetica Neue",Arial,"Liberation Sans",sans-serif;background:#fafafa;color:#212121;font-size:clamp(13px,1.15vw,19px)}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #1a237e;outline-offset:2px}[hidden]{display:none!important}
+.appbar{position:absolute;top:0;left:0;right:0;height:8vh;min-height:44px;background:#3f4fbf;color:#fff;display:flex;align-items:center;padding:0 1.6vw;box-shadow:0 2px 5px #0003;z-index:3}
+.app-title{font-size:clamp(20px,2.05vw,34px);font-weight:500}
+.app-actions{margin-left:auto;display:flex;gap:2.3vw}.app-action{display:flex;align-items:center;gap:.8vw;background:none;border:0;color:#fff;padding:0;font-size:clamp(14px,1.3vw,22px)}
+.circ-icon{display:inline-grid;place-items:center;border-radius:50%;font-weight:700}
+.help-circle{width:1.9vw;min-width:24px;height:1.9vw;min-height:24px;background:#fff;color:#3f4fbf}
+.layout{position:absolute;top:10vh;bottom:3.5vh;left:1.3vw;right:1.3vw;display:grid;grid-template-columns:15.05% minmax(0,1fr) 15.05%;gap:1.05vw}
+.col{display:flex;flex-direction:column;gap:2.4vh;min-height:0}
+.paper{background:#fff;border:1px solid #e7e9ee;border-radius:4px;box-shadow:0 2px 5px #18294a0c,0 1px 2px #18294a09}
+.card-title{margin:0;padding:1.6vh 1.3vw;font-size:clamp(15px,1.35vw,23px);font-weight:500;color:#1b2033;border-bottom:1px solid #eee}
+.card-text{margin:0;color:#616674;font-size:clamp(14px,1.28vw,22px);line-height:1.4}
+.col-left .card-task{height:53%}.col-left .card-ref{flex:1}
+.col-left .card-title{border-bottom:0}.card-ref .card-title{border-bottom:1px solid #eee}
+.card-ref .card-text{padding:2vh 1.3vw}
+.steps{list-style:none;margin:0;padding:0}
+.step{display:flex;align-items:center;gap:1.1vw;padding:0 1.3vw;height:7.6vh;font-size:clamp(14px,1.28vw,22px);color:#555a66;position:relative}
+.step.current{background:#eef0fb;color:#1b2033}
+.step-dot{width:2.5vw;min-width:26px;height:2.5vw;min-height:26px;border-radius:50%;background:#8b90a0;color:#fff;display:grid;place-items:center;font-size:.95em}
+.step.current .step-dot{background:#2d3ba8}
+.center{padding:3vh 1.8vw 2vh;display:flex;flex-direction:column;gap:2.6vh;min-height:0;min-width:0}
+.instruction{margin:0;background:#e3e7fb;color:#12175e;border-radius:3px;text-align:center;font-size:clamp(22px,3vw,50px);font-weight:700;line-height:1.2;padding:3.2vh 1vw;letter-spacing:-.01em}
+.dial-stage{position:relative;flex:1;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center}
+.card-tool{height:56%;display:flex;flex-direction:column}.tool-tip{padding:1.6vh 1.3vw}.tool-tip .card-text{margin-top:1vh}
+.info-circle{width:1.6vw;min-width:20px;height:1.6vw;min-height:20px;background:#1e88e5;color:#fff;font-size:.9em}
+.card-units .card-text{padding:1.8vh 1.3vw;color:#444}
+.submit-button{margin-top:auto;margin-bottom:6.5vh;height:9vh;min-height:44px;border:0;border-radius:2px;background:#3f4fbf;color:#fff;font-size:clamp(18px,1.8vw,30px);font-weight:500;box-shadow:0 2px 4px #0004}
+.col-right{padding-bottom:0}.card-units{margin-top:0}
+/* dial card restyle */
+.dial-stage .rot-card{border:0;background:transparent;box-shadow:none;padding:0}
+.dial-stage .rot-title{font-size:clamp(18px,1.9vw,32px);font-weight:700;letter-spacing:0;color:#12151f}
+.dial-stage .rot-svg text{font:400 clamp(14px,1.45vw,24px) Roboto,Arial,sans-serif;fill:#1b2033}
+.dial-stage .rot-svg .minor{stroke:#33384a;stroke-width:2}.dial-stage .rot-svg .major{stroke:#1b1f2b;stroke-width:3}
+.dial-stage .rot-readout{min-width:20vw;border:0;border-radius:3px;background:#efefef;padding:1.2vh 1vw;font-size:clamp(22px,2.4vw,40px);font-weight:700;color:#12151f}
+.dial-stage .rot-readout::before{content:"Current time";display:block;font-size:.55em;font-weight:400;color:#555a66}
+.dial-stage .rot-knob > path{display:none}
+.dial-stage .rot-knob > circle:first-child{stroke:#cfcfcf;stroke-width:5;filter:drop-shadow(0 8px 9px #0005)}
+.dial-stage .rot-knob > circle:nth-child(2){stroke:#fff;stroke-width:3;stroke-dasharray:none}
+.dial-stage .rot-knob > circle:last-child{display:none}
+.dial-stage .rot-knob line{stroke:#2b2e38;stroke-width:6}
+.dial-stage [data-role=grip]{r:6px;fill:#2b2e38;stroke:none}
+.dial-stage .rot-muted{color:#616674}
+.tour-bubble{position:absolute;z-index:100;top:11vh;right:2vw;width:28vw;min-width:320px;background:#fff;border-radius:2px;box-shadow:0 8px 24px #0004;padding:2.2vh 1.5vw;color:#424242}
+.tour-bubble h2{margin:0 28px 1.2vh 0;font-size:clamp(18px,1.6vw,26px);font-weight:500;color:#1a237e}.tour-bubble p{margin:0 0 2vh;line-height:1.35}
+.bubble-close{position:absolute;right:.8vw;top:1.6vh;background:none;border:0;padding:0;color:#555;display:grid;place-items:center}
+.tour-actions{display:flex;gap:1vw;justify-content:flex-end}.tour-actions button{border:0;border-radius:2px;height:5.4vh;min-height:36px;padding:0 1.2vw;text-transform:uppercase;font-weight:500;font-size:clamp(13px,1.1vw,18px)}
+.tour-primary{background:#3f4fbf;color:#fff}.tour-dismiss{background:transparent;color:#3f4fbf}
+.overlay-banner{top:8.4vh;width:50vw;right:2vw}.overlay-toast{top:auto;bottom:5vh;width:27vw}.overlay-cookie{top:26vh}.overlay-promo{top:25vh}
+.instruction-toast .instruction{position:relative}.instruction-dismiss{font-size:13px;float:right;border:1px solid #9aa;background:#fff;padding:2px 8px}
+/* Episode instruction and completion controls, in the same restrained paper style. */
+.header-submit{border:0;border-radius:3px;background:#fff;color:#303fae;padding:.7vh 1vw;min-height:34px;font-size:clamp(13px,1.15vw,19px);font-weight:700;box-shadow:0 1px 3px #17235c55;white-space:nowrap}
+.chrome-xtra{border:1px solid #ffffff75;border-radius:3px;background:#ffffff12;color:#fff;padding:.55vh .7vw;font-size:clamp(11px,.9vw,15px);white-space:nowrap}
+.card-task{position:relative}.task-submit{position:absolute;left:1.3vw;right:1.3vw;bottom:1.4vh;height:5.5vh;min-height:34px;border:0;border-radius:3px;background:#3f4fbf;color:#fff;font-weight:700;box-shadow:0 2px 4px #0003}
+.instruction-toast{flex:none;align-self:flex-start;max-width:68%;display:flex;align-items:center;gap:1vw;padding:1.2vh 1vw;border-left:4px solid #3f4fbf;border-radius:3px;background:#f3f5ff;color:#17205f;box-shadow:0 2px 5px #17235c22;line-height:1.35;font-size:clamp(13px,1.15vw,19px)}
+.instruction-toast span{min-width:0}.instruction-toast .instruction-dismiss{float:none;flex:none;border:0;background:transparent;color:#3f4fbf;font-size:22px;line-height:1;padding:0 .25vw}
+.instruction-panel .card-ref .card-text{overflow-wrap:anywhere}
+.submit-button{white-space:nowrap}
+@media(max-width:1179px){.header-submit{padding:.5vh .7vw}.chrome-xtra{display:none}}
+@media(max-height:700px){.step{height:6.6vh}.instruction{padding:1.8vh 1vw}}
+/* Reference proportions and paper detailing. */
+body{background:#f7f8fa;color:#131b38;letter-spacing:-.025em}
+.appbar{background:linear-gradient(#4053c1,#3f4cba);height:8vh;padding-right:2.2vw}
+.app-title{font-weight:700;letter-spacing:.015em}.app-action svg{width:1.85vw;height:1.85vw;min-width:24px;min-height:24px}
+.app-actions{gap:2.4vw}.help-circle{width:1.65vw;height:1.65vw}
+.col{padding-top:.4vh}.card-title{font-weight:600;padding:1.85vh 1.3vw;font-size:clamp(15px,1.35vw,23px)}
+.col-left .card-task{height:52.7%}.card-tool{height:56.6%}
+.card-ref .card-text{padding:2.1vh 1.3vw;line-height:1.36;letter-spacing:-.045em}
+.step{height:7.5vh;gap:1.4vw;color:#5a6379}
+.step.current{color:#080c79;background:#f0f2fc}.step-dot{position:relative;background:linear-gradient(#a0a5b0,#9299a4);font-size:1.05em;z-index:1}
+.step.current .step-dot{background:linear-gradient(#414fd0,#3845ba);box-shadow:inset 0 0 0 1px #3142af}
+.step:not(:last-child)::after{content:"";position:absolute;left:2.55vw;top:5.95vh;height:2vh;width:2px;background:#e1e5ec}
+.center{padding:3vh 1.55vw 2vh;gap:2.6vh}
+.instruction{background:#e8ecff;color:#090a70;border-radius:7px;padding:3.2vh 1vw;letter-spacing:-.02em}
+.tool-tip{padding:1.8vh 1.3vw}.tool-tip .card-text{margin-top:1.1vh;line-height:1.4}
+.submit-button{background:linear-gradient(#414fc2,#3e4bbe);border:1px solid #3346c3;border-radius:4px;font-weight:700;margin-bottom:5.8vh;height:8.5vh}
+.dial-stage .rot-card{left:0!important;top:0!important;letter-spacing:0;transform:translateY(-1.5vh)}
+.dial-stage .rot-col{gap:12px}
+.dial-stage .rot-title{font-size:clamp(20px,1.9vw,32px);color:#111932}
+.dial-stage .rot-svg text{font-size:clamp(16px,1.62vw,28px);fill:#111932}
+.dial-stage .rot-knob .knob-rim{stroke:#c8cbcd;stroke-width:2;filter:drop-shadow(0 20px 18px #0006)}
+.dial-stage .rot-knob .knob-face{stroke:#f8fafb;stroke-width:1.5;stroke-dasharray:none}
+.dial-stage .rot-svg .major{stroke-width:4}
+.dial-stage .rot-knob .knob-flutes line{stroke:#777e86;stroke-width:1.5;opacity:.17}
+.dial-stage .rot-knob .knob-needle{stroke:#303030;stroke-width:7;filter:drop-shadow(1px 0 0 #111)}
+.dial-stage [data-role=grip]{opacity:0}
+.dial-stage .rot-muted{display:none}
+.dial-stage .rot-readout{width:20.5vw;min-width:0;min-height:12.2vh;padding:1.3vh 1vw;background:#f0f1f3;font-size:clamp(28px,2.8vw,47px);border-radius:6px;color:#101733;line-height:1.3}
+.dial-stage .rot-readout::before{content:attr(data-caption);font-size:clamp(16px,1.4vw,24px);margin-bottom:.35vh;color:#60697e}
+@media(max-height:700px){.dial-stage .rot-col{gap:8px}.dial-stage .rot-readout{min-height:11vh}.card-title{padding:1.6vh 1.3vw}.instruction{padding:2.6vh 1vw}}

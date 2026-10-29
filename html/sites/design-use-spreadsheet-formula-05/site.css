@@ -1,0 +1,388 @@
+@import url("../../templates/site/css/design-179c67.css");
+
+.ref-ov-banner {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+
+/* Metro spreadsheet window treatment. */
+body { background:#e8edf2; font-family:"Segoe UI",Arial,sans-serif; }
+.ref-task { height:32px; min-height:32px; padding:0 12px; gap:12px; color:#fff; background:#0878c9; border:0; }
+.ref-brand,.ref-nav,.ref-spacer { display:none !important; }
+.ref-instruction { color:#fff; font-size:14px; font-weight:400; }
+.ref-tools { margin-left:auto; }
+.ref-submit,.ref-xtra { border-radius:0; }
+.ref-body { background:#edf1f5; }
+.ref-stage { display:block; overflow:hidden; background:#f1f4f7; }
+.as-book { inset:0 !important; border-radius:0 !important; font-family:"Segoe UI",Arial,sans-serif !important; }
+.as-book::before { content:"Paste   Cut   Copy   Format Painter     Segoe UI   11   B   I   U\A Wrap Text   Merge & Center   General   $   %   Conditional Formatting   Format as Table   Cell Styles   Insert   Delete   Format   AutoSum   Fill   Clear   Sort & Filter   Find & Select"; white-space:pre; position:absolute; z-index:8; top:0; left:0; right:0; height:105px; padding:10px 20px; color:#27313d; font-size:13px; line-height:34px; background:#e7edf4; border-bottom:1px solid #aebac6; pointer-events:none; }
+.as-book .as-title,.as-book .as-nav,.as-book .as-tools,.as-book .as-context { display:none !important; }
+.as-book .as-fbar { display:flex !important; margin-top:105px; position:relative; z-index:9; }
+.as-book .as-title { height:0 !important; min-height:0 !important; padding:0 !important; border:0 !important; }
+.as-book .as-nav,.as-book .as-tools,.as-book .as-context { height:0 !important; min-height:0 !important; padding:0 !important; border:0 !important; overflow:hidden !important; }
+.as-fbar { height:34px !important; background:#f8fafc; border-bottom:1px solid #aebac6 !important; }
+.as-name { width:118px !important; border:1px solid #c3cbd4 !important; border-radius:0 !important; }
+.as-input { border:1px solid #c3cbd4 !important; border-radius:0 !important; }
+.as-workarea { min-height:0 !important; }
+.as-grid { background:white; }
+.as-activity.metro-inspector { display:block !important; width:24%; min-width:280px; max-width:410px; padding:20px 18px; overflow:auto; border-left:1px solid #cbd3dc; background:#f4f7fa; font-family:"Segoe UI",Arial,sans-serif; }
+.metro-inspector-title { margin:0 0 14px; padding-bottom:12px; border-bottom:1px solid #cbd3dc; color:#0878c9; font-size:25px; font-weight:300; }
+.metro-section-title { margin:14px 0 5px; padding:0 0 5px; border-bottom:1px solid #d5dce4; color:#0878c9; font-size:16px; font-weight:600; }
+.metro-prop-row { min-height:31px; display:flex; align-items:center; gap:8px; color:#38424d; font-size:12px; }
+.metro-prop-row > span { flex:0 0 37%; }
+.metro-prop-field { flex:1; min-width:0; height:26px; padding:4px 6px; border:1px solid #c5ced8; background:white; color:#27313d; overflow:hidden; }
+.as-bottom { height:29px !important; background:#e5eaf0 !important; }
+.as-status { height:25px !important; background:#f5f7f9; }
+.ref-foot { min-height:40px; height:40px; padding:0 30px; background:#172c42; border:0; color:#fff; }
+.ref-foot-text { display:none; }
+.ref-foot::before { content:"▦   Workbook       ▣   Reports       ◷   Charts       ⚙   Settings"; margin-right:auto; color:#fff; font-size:15px; }
+.ref-foot .ref-submit { color:white; background:#0780cc; }
+.ref-note { border-radius:0; }
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: ref-spin .8s linear infinite;
+}
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+/* Final desktop layout overrides legacy Metro rules above. */
+.ref-task { position:absolute;z-index:30;left:0;right:0;top:0;height:68px;min-height:68px;padding:0 12px;color:#f8f1e5;background:linear-gradient(#533c27,#302115);border:1px solid #806348;box-shadow:inset 0 1px #a58a67;font:16px Georgia,serif }
+.ref-task::before { content:"✽  LedgerWorks";position:absolute;left:12px;top:0;height:34px;display:flex;align-items:center;color:#fff7e9;font:19px Georgia,serif }
+.ref-task::after { content:"File        Edit        View        Insert        Format        Tools        Data        Window        Help";position:absolute;left:0;right:0;top:34px;height:33px;padding-left:12px;display:flex;align-items:center;background:linear-gradient(#f7f3eb,#e4ddd0);color:#211a12;font:17px Georgia,serif;border-bottom:2px ridge #a58e6a;box-shadow:0 1px 3px #140d08 }
+.ref-brand,.ref-instruction,.ref-tools { position:relative;z-index:32 }
+.ref-brand { visibility:hidden }
+.ref-tools { margin-left:auto;padding-top:0 }
+.ref-body { position:absolute;inset:68px 0 0!important;min-height:0;background:linear-gradient(110deg,#523922,#2c1d12 24%,#493321 100%);padding:0!important }
+.ref-stage { position:absolute;inset:0;display:block;overflow:hidden;padding:0;background:transparent!important;font-family:Georgia,"Times New Roman",serif }
+.as-book { position:absolute!important;left:23.5%!important;right:12px!important;top:90px!important;bottom:14px!important;inset:90px 12px 14px 23.5%!important;width:auto!important;height:auto!important;box-sizing:border-box!important;border:4px ridge #a88b60!important;border-radius:9px!important;background:#f7f4ed!important;box-shadow:0 3px 12px #140d08!important;font-family:Georgia,"Times New Roman",serif!important }
+.as-book::before { content:"New              Open              Print               Undo                Redo              Format          Sort A-Z          Sort Z-A           AutoSum          Chart             Find";white-space:pre;position:absolute;z-index:8;top:-90px;left:calc(-30.72vw - 4px);right:-12px;height:78px;padding:30px 16px 4px;color:#211a12;font:17px/34px Georgia,serif;background:linear-gradient(#f7f3eb,#e4ddd0);border-bottom:3px ridge #ae9975;box-shadow:0 2px 6px #130b05;pointer-events:none }
+.as-book .as-title { display:flex!important;height:40px!important;min-height:40px!important;padding:0 14px!important;background:linear-gradient(#fffefa,#e8e2d8)!important;border-bottom:1px solid #c4baa8!important;color:#17130f!important;font:bold 20px Georgia,serif!important }
+.as-book .as-nav { display:flex!important;position:absolute!important;left:0;right:0;top:-1px;height:40px!important;min-height:40px!important;transform:translateY(-47px);padding:0 10px!important;background:transparent!important;border:0!important;z-index:9 }
+.as-book .as-tools,.as-book .as-context { display:none!important;height:0!important;min-height:0!important;padding:0!important;overflow:hidden!important }
+.as-book .as-fbar { display:flex!important;position:relative;z-index:9;margin:0!important;height:43px!important;padding:5px 8px!important;background:#f5f2eb!important;border-bottom:1px solid #bdb5a9!important }
+.as-grid { background:#fff!important;font:16px Georgia,"Times New Roman",serif!important }
+.as-grid th,.as-grid td { border-color:#d0d0d0!important }
+.as-grid thead th { background:#e8eee4!important;color:#17130f!important;font-weight:bold!important }
+.as-activity.metro-inspector { display:none!important }
+.ref-stage table { font:16px/1.25 Georgia,"Times New Roman",serif!important }
+.ref-stage th,.ref-stage [role="columnheader"] { background:#e8eee4!important;color:#17130f!important;font-weight:bold!important }
+.ref-stage tr,.ref-stage [role="row"] { height:27px!important;min-height:27px!important }
+.ref-stage td,.ref-stage [role="gridcell"] { padding:2px 6px!important;line-height:22px!important;border-color:#d0d0d0!important }
+.ref-stage input,.ref-stage button { font-family:Georgia,"Times New Roman",serif!important }
+.ref-foot { display:none!important }
+
+.ref-hz { position: fixed; z-index: 1100; color: var(--fg); font-size: 14px; line-height: 1.4; }
+.ref-hz-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.ref-hz-btn {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--fg); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.ref-hz-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-link { border: 0; background: none; color: var(--muted); text-decoration: underline; }
+.ref-hz-x { border: 0; background: none; color: var(--muted); padding: 2px 8px; font-size: 16px; }
+.ref-hz-title { font-weight: 700; font-size: 15px; }
+.ref-hz-text { margin-top: 6px; }
+.ref-hz-from { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.ref-hz-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.ref-hz-field input {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; user-select: text;
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* LedgerWorks: walnut desktop frame and an ivory spreadsheet surface. */
+:root { --bg:#f3f0e8; --panel:#fffefa; --fg:#191714; --muted:#61594c; --line:#c8c1b4; --accent:#2676c7; }
+html,body { width:100%;height:100%;overflow:hidden }
+body { position:relative;background:radial-gradient(ellipse at 48% 40%,#60452d 0%,#3b281a 64%,#24180f 100%);color:#17130f;font:16px/1.2 Georgia,"Times New Roman",serif }
+.ref-task { height:34px;min-height:34px;padding:0 10px;gap:10px;color:#f7f1e8;background:linear-gradient(#513925,#302014);border:1px solid #806044;border-bottom:2px solid #b59a71;box-shadow:inset 0 1px #a48866;font:16px Georgia,serif }
+.ref-brand { font-size:19px;font-weight:normal; }
+.ref-brand::before { content:"✽  ";color:#e7b54d;font-size:20px }
+.ref-instruction { color:#fff3d7;font:14px Georgia,serif;max-width:38%;white-space:normal }
+.ref-spacer { display:none }
+.ref-tools { margin-left:auto;gap:5px }
+.ref-submit,.ref-xtra { border:1px solid #9e8057;border-radius:3px;background:linear-gradient(#f7f0e4,#d8c8aa);color:#241b12;font:14px Georgia,serif;box-shadow:inset 0 1px #fff8 }
+.ref-nav,.ref-foot { display:none !important }
+.ref-body { position:absolute;inset:35px 0 0;background:linear-gradient(110deg,#523922,#2c1d12 24%,#493321 100%);padding:0; }
+.ref-stage { position:absolute;inset:0;display:block;overflow:hidden;padding:0;background:transparent; }
+.ref-stage::before { content:"▸  📘  Monthly Reports\A▸  📘  Personal Finance\A▸  📘  Project Costs\A▾  📗  Q2 Budget\A       ▤  Summary\A       ▤  Departments\A       ▤  Forecast\A▸  📁  Archive";white-space:pre;position:absolute;z-index:10;left:14px;top:10px;bottom:305px;width:340px;padding:34px 12px;color:#211b14;background:linear-gradient(#fffefa,#eee9df);border:3px ridge #b29a73;border-radius:9px;box-shadow:0 2px 8px #100a06;font:18px/1.75 Georgia,serif;pointer-events:none }
+.ref-stage::after { content:"Workbook Statistics\A\A Sheets:                         3\A Total Rows:                  58\A Total Columns:             12\A Formulas:                    18\A Numeric Cells:             276\A Text Cells:                  189\A Blank Cells:                 259";white-space:pre;position:absolute;z-index:10;left:14px;bottom:18px;width:340px;height:230px;padding:18px 16px;color:#211b14;background:linear-gradient(#fffefa,#eee9df);border:3px ridge #b29a73;border-radius:9px;box-shadow:0 2px 8px #100a06;font:17px/1.55 Georgia,serif;pointer-events:none }
+.as-book { position:absolute!important;left:23.5%!important;top:137px!important;right:12px!important;bottom:14px!important;width:auto!important;height:auto!important;inset:137px 12px 14px 23.5%!important;box-sizing:border-box!important;border:4px ridge #a88b60!important;border-radius:9px!important;background:#f7f4ed!important;box-shadow:0 3px 12px #140d08!important;font-family:Georgia,"Times New Roman",serif!important }
+.as-book::before { content:"File       Edit       View       Insert       Format       Tools       Data       Window       Help\A\A   New              Open              Print               Undo                Redo              Format          Sort A-Z          Sort Z-A           AutoSum          Chart             Find";white-space:pre;position:absolute;z-index:8;top:-137px;left:calc(-30.72vw - 4px);right:-12px;height:125px;padding:8px 14px;color:#211a12;font:18px/36px Georgia,serif;background:linear-gradient(#f7f3eb,#e4ddd0);border-top:1px solid #ab9b81;border-bottom:3px ridge #ae9975;box-shadow:0 2px 6px #130b05;pointer-events:none }
+.as-book .as-title { display:flex!important;height:40px!important;min-height:40px!important;padding:0 14px!important;background:linear-gradient(#fffefa,#e8e2d8)!important;border-bottom:1px solid #c4baa8!important;color:#17130f!important;font:bold 20px Georgia,serif!important }
+.as-book .as-title::before { content:"▤  ";color:#128748 }
+.as-book .as-nav { display:flex!important;position:absolute!important;left:0;right:0;top:-1px;height:40px!important;min-height:40px!important;transform:translateY(-47px);padding:0 10px!important;background:transparent!important;border:0!important;z-index:9 }
+.as-book .as-tools,.as-book .as-context { display:none!important;height:0!important;min-height:0!important;padding:0!important;overflow:hidden!important }
+.as-book .as-fbar { display:flex!important;position:relative;z-index:9;margin-top:0!important;height:43px!important;padding:5px 8px!important;background:#f5f2eb!important;border-bottom:1px solid #bdb5a9!important }
+.as-name,.as-input { height:30px!important;border:1px solid #b6b0a6!important;border-radius:2px!important;background:#fff!important;font:17px Georgia,serif!important }
+.as-name { width:128px!important }
+.as-workarea { min-height:0!important;height:calc(100% - 120px)!important;background:#fff!important }
+.as-grid { background:#fff!important;font:16px Georgia,"Times New Roman",serif!important }
+.as-grid th,.as-grid td { border-color:#d0d0d0!important }
+.as-grid thead th { background:#e8eee4!important;color:#17130f!important;font-weight:bold!important }
+.as-activity.metro-inspector { display:none!important }
+.as-bottom { height:30px!important;background:#f1eee7!important;border-top:1px solid #b7afa2!important }
+.as-status { height:35px!important;background:#f7f4ed!important;border-top:1px solid #c4bcae!important;color:#29231b!important;font:15px Georgia,serif!important }
+.ref-panel,.ref-note { font-family:Georgia,"Times New Roman",serif;border:2px ridge #a88b60;border-radius:3px;background:#fffaf0;color:#211a12 }
+.ref-foot { display:none!important;min-height:0;height:0;padding:0 }
+.ref-task {
+  height:36px; min-height:36px; padding:0 14px; gap:0; position:relative;
+  background:linear-gradient(90deg,#0878c9,#1687d3); color:white; border:0;
+  box-shadow:0 1px 2px #6d8597; z-index:5;
+}
+.ref-task::before { content:"▣   Budget Plan.xlsx - Spreadsheet"; position:absolute; left:14px; top:0; height:30px; display:flex; align-items:center; font-size:16px; font-weight:400; }
+.ref-task::after { content:"File      Home      Insert      Page Layout      Formulas      Data      Review      View"; position:absolute; left:0; right:0; top:30px; height:30px; padding-left:28px; display:flex; align-items:center; background:linear-gradient(#f4f7f9,#dce3e9); color:#26313b; font-size:14px; box-shadow:0 1px #b7c1ca; }
+.ref-brand, .ref-nav, .ref-side { display:none!important; }
+.ref-instruction { position:absolute; z-index:2; top:66px; left:12px; right:230px; height:36px; padding:7px 10px; overflow:hidden; color:#24313d; font-weight:400; font-size:14px; background:#fff; border:1px solid #c4cbd1; }
+.ref-spacer { display:block; }
+.ref-tools { position:absolute; z-index:4; right:12px; top:68px; height:32px; }
+.ref-submit { padding:6px 18px; border:1px solid #0968ad; border-radius:0; background:#0878c9; color:#fff; font:14px "Segoe UI",Arial,sans-serif; }
+[data-role="submit"] { position:fixed!important; top:auto!important; right:12px!important; bottom:48px!important; z-index:95; }
+.ref-xtra { padding:5px 12px; border:1px solid #aeb9c3; border-radius:0; background:#f7f9fa; color:#26313b; font-size:13px; }
+.ref-body { min-height:0; background:#fff; padding-bottom:40px; }
+.ref-stage { align-items:stretch!important; justify-content:stretch!important; min-height:0; padding:0; background:#fff; }
+.ref-foot { position:fixed; bottom:40px; left:0; right:0; min-height:24px; height:24px; padding:2px 10px; background:#f1f4f6; border-top:1px solid #b8c1c9; font-size:12px; }
+.ref-foot-text { color:#303a44; }
+.ref-float-dock { position:fixed!important; bottom:46px!important; right:12px!important; height:36px; z-index:90; }
+.ref-float { position:static; box-shadow:none; }
+body::after { content:"▦   Workbook       ▥   Reports       ◔   Charts       ⚙   Settings"; position:fixed; z-index:80; left:0; right:0; bottom:0; height:40px; display:flex; align-items:center; padding-left:24px; gap:34px; background:linear-gradient(90deg,#087953 0 174px,#173047 174px,#1d344b); color:#fff; font-size:15px; font-weight:500; }
+body.ref-has-note .ref-body { padding-bottom:78px; }
+.ref-note { left:14px; bottom:50px; border-radius:0; border:1px solid #aebac4; border-left:4px solid #0878c9; background:#fff; box-shadow:0 2px 6px #62708044; font-weight:400; }
+.ref-note-x { color:#495867; }
+.ref-panel { border-radius:0; border-color:#c3ccd4; box-shadow:none; }
+.ref-ov-cookie, .ref-ov-box, .ref-ov-toast, .ref-ov-chat { border-radius:0; }
+/* Give the worksheet the wide, left anchored canvas of the desktop reference. */
+.ref-stage { overflow:hidden; font-family:"Segoe UI",Arial,sans-serif; }
+.ref-stage aside:first-of-type { display:none!important; }
+.ref-stage table { border-collapse:collapse!important; font:13px/1.2 "Segoe UI",Arial,sans-serif!important; }
+.ref-stage th { background:#0878c9!important; color:#fff!important; font-weight:600!important; border-color:#aeb9c2!important; }
+.ref-stage td { border-color:#d4d9de!important; color:#252c32!important; }
+.ref-stage [role="columnheader"] { background:#0878c9!important; color:#fff!important; font-weight:600!important; }
+.ref-stage tr, .ref-stage [role="row"] { height:16px!important; min-height:16px!important; }
+.ref-stage td, .ref-stage [role="gridcell"] { padding:0 4px!important; line-height:15px!important; }
+.ref-stage [role="row"]:first-of-type { background:#e8edf2!important; color:#35404a!important; }
+.ref-stage [role="row"]:first-child [role="columnheader"] { background:#e8edf2!important; color:#35404a!important; }
+.ref-stage aside:not(:first-of-type) { width:24%!important; flex:0 0 24%!important; }
+.ref-stage [class*="activity"] { width:24%!important; flex:0 0 24%!important; }
+.ref-stage [aria-selected="true"], .ref-stage .selected { outline-color:#0878c9!important; border-color:#0878c9!important; }
+.ref-stage input, .ref-stage button, .ref-stage select { font-family:"Segoe UI",Arial,sans-serif!important; border-radius:0!important; }
+
+/* Last in cascade: restore the LedgerWorks desktop after inherited Metro rules. */
+.ref-task { position:absolute;z-index:30;left:0;right:0;top:0;height:68px;min-height:68px;padding:0 12px;color:#f8f1e5;background:linear-gradient(#533c27,#302115);border:1px solid #806348;box-shadow:inset 0 1px #a58a67;font:16px Georgia,serif }
+.ref-task::before { content:"✽  LedgerWorks";position:absolute;left:12px;top:0;height:34px;display:flex;align-items:center;color:#fff7e9;font:19px Georgia,serif }
+.ref-task::after { content:"File        Edit        View        Insert        Format        Tools        Data        Window        Help";position:absolute;left:0;right:0;top:34px;height:33px;padding-left:12px;display:flex;align-items:center;background:linear-gradient(#f7f3eb,#e4ddd0);color:#211a12;font:17px Georgia,serif;border-bottom:2px ridge #a58e6a;box-shadow:0 1px 3px #140d08 }
+.ref-brand,.ref-nav,.ref-side { display:none!important }
+.ref-instruction { position:absolute;z-index:32;top:0;left:200px;right:230px;max-width:none;height:auto;min-height:34px;padding:6px 10px;border:0;background:transparent;color:#fff3d7;font:14px Georgia,serif }
+.ref-tools { position:absolute;z-index:33;right:12px;top:2px;height:30px;margin:0;padding:0 }
+.ref-tools .ref-submit,.ref-tools .ref-xtra { padding:5px 14px;border:1px solid #9e8057;border-radius:3px;background:linear-gradient(#f7f0e4,#d8c8aa);color:#241b12;font:14px Georgia,serif }
+.ref-body { position:absolute;inset:68px 0 0!important;min-height:0;background:linear-gradient(110deg,#523922,#2c1d12 24%,#493321 100%);padding:0!important }
+.ref-stage { position:absolute;inset:0;display:block;overflow:hidden;padding:0;background:transparent!important;font-family:Georgia,"Times New Roman",serif }
+.ref-stage::before { content:"▸  📘  Monthly Reports\A▸  📘  Personal Finance\A▸  📘  Project Costs\A▾  📗  Q2 Budget\A       ▤  Summary\A       ▤  Departments\A       ▤  Forecast\A▸  📁  Archive";white-space:pre;position:absolute;z-index:10;left:14px;top:90px;bottom:305px;width:340px;padding:34px 12px;color:#211b14;background:linear-gradient(#fffefa,#eee9df);border:3px ridge #b29a73;border-radius:9px;box-shadow:0 2px 8px #100a06;font:18px/1.75 Georgia,serif;pointer-events:none }
+.ref-stage::after { content:"Workbook Statistics\A\A Sheets:                         3\A Total Rows:                  58\A Total Columns:             12\A Formulas:                    18\A Numeric Cells:             276\A Text Cells:                  189\A Blank Cells:                 259";white-space:pre;position:absolute;z-index:10;left:14px;bottom:18px;width:340px;height:230px;padding:18px 16px;color:#211b14;background:linear-gradient(#fffefa,#eee9df);border:3px ridge #b29a73;border-radius:9px;box-shadow:0 2px 8px #100a06;font:17px/1.55 Georgia,serif;pointer-events:none }
+.as-book { position:absolute!important;left:23.5%!important;right:12px!important;top:90px!important;bottom:14px!important;inset:90px 12px 14px 23.5%!important;width:auto!important;height:auto!important;box-sizing:border-box!important;border:4px ridge #a88b60!important;border-radius:9px!important;background:#f7f4ed!important;box-shadow:0 3px 12px #140d08!important;font-family:Georgia,"Times New Roman",serif!important }
+.as-book::before { content:"New              Open              Print               Undo                Redo              Format          Sort A-Z          Sort Z-A           AutoSum          Chart             Find";white-space:pre;position:absolute;z-index:8;top:-90px;left:calc(-30.72vw - 4px);right:-12px;height:78px;padding:30px 16px 4px;color:#211a12;font:17px/34px Georgia,serif;background:linear-gradient(#f7f3eb,#e4ddd0);border-bottom:3px ridge #ae9975;box-shadow:0 2px 6px #130b05;pointer-events:none }
+.as-book .as-title { display:flex!important;height:40px!important;min-height:40px!important;padding:0 14px!important;background:linear-gradient(#fffefa,#e8e2d8)!important;border-bottom:1px solid #c4baa8!important;color:#17130f!important;font:bold 20px Georgia,serif!important }
+.as-book .as-nav { display:flex!important;position:absolute!important;left:0;right:0;top:-1px;height:40px!important;min-height:40px!important;transform:translateY(-47px);padding:0 10px!important;background:transparent!important;border:0!important;z-index:9 }
+.as-book .as-tools,.as-book .as-context { display:none!important;height:0!important;min-height:0!important;padding:0!important;overflow:hidden!important }
+.as-book .as-fbar { display:flex!important;position:relative;z-index:9;margin:0!important;height:43px!important;padding:5px 8px!important;background:#f5f2eb!important;border-bottom:1px solid #bdb5a9!important }
+.as-grid { background:#fff!important;font:16px Georgia,"Times New Roman",serif!important }
+.as-grid th,.as-grid td { border-color:#d0d0d0!important }
+.as-grid thead th,.ref-stage th,.ref-stage [role="columnheader"] { background:#e8eee4!important;color:#17130f!important;font-weight:bold!important }
+.as-activity.metro-inspector { display:none!important }
+.ref-stage table { font:16px/1.25 Georgia,"Times New Roman",serif!important }
+.ref-stage tr,.ref-stage [role="row"] { height:27px!important;min-height:27px!important }
+.ref-stage td,.ref-stage [role="gridcell"] { padding:2px 6px!important;line-height:22px!important;border-color:#d0d0d0!important }
+.ref-stage input,.ref-stage button,.ref-stage select { font-family:Georgia,"Times New Roman",serif!important }
+.ref-foot { display:flex!important;position:fixed!important;z-index:85;left:0;right:0;bottom:0;height:30px!important;min-height:30px!important;padding:0 12px!important;align-items:center;background:linear-gradient(#f8f5ee,#e2dbce)!important;border-top:1px solid #a89b84!important;color:#211a12!important;font:14px Georgia,serif!important }
+body::after { display:none!important }
+[data-role="submit"] { position:fixed!important;top:5px!important;right:12px!important;bottom:auto!important;z-index:100!important;display:inline-flex!important;min-width:54px!important;min-height:26px!important;align-items:center!important;justify-content:center!important }
+.ref-body::before { content:"Workbooks       Templates       Recent       Shared";position:absolute;z-index:20;left:23.5%;right:12px;top:42px;height:39px;display:flex;align-items:center;padding-left:12px;white-space:pre;color:#211a12;background:linear-gradient(#f7f3eb,#ded4c4);border:3px ridge #a88b60;border-radius:6px 6px 0 0;font:17px Georgia,serif;box-shadow:0 2px 5px #140d08 }
+.ref-body::before { word-spacing:14px }
+.ref-foot .ref-submit,.ref-foot .ref-xtra,.ref-foot a { display:inline-flex!important;align-items:center;justify-content:center;min-width:52px;min-height:24px;padding:3px 12px;border:1px solid #9e8057;border-radius:3px;background:linear-gradient(#f7f0e4,#d8c8aa);color:#241b12;font:14px Georgia,serif }
+@media (max-width:1260px) {
+  .ref-stage::before,.ref-stage::after { width:25vw;padding-left:9px;padding-right:8px;font-size:14px; }
+  .ref-stage::before { left:10px;top:78px;bottom:auto;height:190px;line-height:1.55 }
+  .ref-stage::after { left:10px;bottom:44px;height:170px;line-height:1.4 }
+  .as-book { left:34%!important;inset:90px 8px 42px 34%!important }
+  .as-book::before { left:calc(-44vw - 4px);right:-8px }
+  .ref-body::before { left:34%;right:8px }
+}
+/* Refine the furniture scale: toolbar first, workbook tabs immediately above the framed sheet. */
+.ref-task { background:linear-gradient(90deg,#533c27 0%,#302115 82%,#302115 100%); }
+.ref-task { background-image:linear-gradient(90deg,#533c27,#302115),linear-gradient(#e6e1d9,#b9b2a6),linear-gradient(#e6e1d9,#b9b2a6),linear-gradient(#e66553,#b82d22);background-repeat:no-repeat;background-size:100% 100%,38px 26px,38px 26px,52px 26px;background-position:0 0,calc(100% - 92px) 3px,calc(100% - 52px) 3px,calc(100% - 3px) 3px }
+.ref-task::before { content:"✽  LedgerWorks"; }
+.ref-body::after { content:"♧  New             📂  Open             ▣  Print             ↶  Undo             ↷  Redo             🖌  Format             A↓  Sort A-Z           Z↓  Sort Z-A           ∑  AutoSum           ▥  Chart             ⚲  Find";position:absolute;z-index:8;left:0;right:0;top:0;height:75px;display:flex;align-items:flex-end;padding:0 18px 9px;box-sizing:border-box;white-space:pre;overflow:hidden;color:#211a12;background:linear-gradient(#f8f4eb,#e4ddd0);border-top:1px solid #b4a58d;border-bottom:3px ridge #a58e6a;box-shadow:0 2px 5px #140d08;font:16px Georgia,"Times New Roman",serif;pointer-events:none }
+.ref-body::before { top:82px; }
+.as-book { top:130px!important;inset:130px 12px 14px 23.5%!important }
+.as-book::before { top:-130px;left:calc(-30.72vw - 4px);height:75px;padding:0;content:"" }
+.ref-stage::before { width:min(20.4vw,340px); }
+.ref-stage::after { width:min(20.4vw,340px); }
+@media (max-width:1260px) {
+  .ref-stage::before,.ref-stage::after { width:25vw }
+  .ref-body::before { left:34%;top:82px }
+  .as-book { top:130px!important;inset:130px 8px 42px 34%!important }
+  .as-book::before { left:calc(-44vw - 4px);top:-130px;height:75px }
+  .ref-body::after { padding-left:9px;padding-right:6px;font-size:11px }
+}
