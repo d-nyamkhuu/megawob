@@ -48,23 +48,26 @@ each was built from a model-generated design image.
 
 ## Quickstart
 
-Python 3.10+, and Node 22+ for the kit tests and the lint. Chromium comes with Playwright.
-Run these commands in Bash (Linux, macOS or WSL):
+**Requirements:** Python 3.10+, and Node 22+ for the kit tests and the lint. Playwright installs Chromium.
+The commands are for Bash on Linux, macOS or WSL.
 
 ```bash
 git clone https://github.com/d-nyamkhuu/megawob && cd megawob
 python3 -m venv .venv
 source .venv/bin/activate
-./install.sh                                              # dependencies and Chromium
-python -m megawob.catalog                                 # what is in the box: tasks, scenarios, sites
-python -m megawob.check --site base --task set-slider --seeds 3    # the oracle solves every slider widget
-python -m megawob.gallery --serve                         # browse every page at http://localhost:8765
+./install.sh                                                     # dependencies and Chromium
+python -m megawob.catalog                                        # counts of tasks, scenarios and sites
+python -m megawob.check --site base --task set-slider --seeds 3  # the oracle solves every slider widget
+python -m megawob.gallery --serve                                # browse every page at http://localhost:8765
 ```
 
-Keep this environment active for the commands below; in a new terminal, run `source .venv/bin/activate`
-from the checkout. The checker should report zero failures. The gallery keeps running until you press Ctrl+C.
+- The checker should report zero failures.
+- The gallery runs until you press Ctrl+C.
+- The commands below expect this environment to be active. In a new terminal, run `source .venv/bin/activate` from
+  the checkout first.
 
-By hand, in the activated environment, without `install.sh`:
+<details>
+<summary>Install by hand, without <code>install.sh</code></summary>
 
 ```bash
 pip install -e '.[browsergym]'
@@ -72,10 +75,12 @@ pip install -e '.[check]'        # Playwright 1.58 over BrowserGym's 1.44 pin (p
 playwright install chromium
 ```
 
+</details>
+
 ### BrowserGym
 
-Run this from the repository root after the quickstart. It uses the scripted oracle to solve one base-site
-episode through BrowserGym, prints its reward, and closes the browser:
+This example plays one episode through BrowserGym with the scripted oracle, prints the reward and closes the browser.
+Run it from the repository root:
 
 ```bash
 python - <<'PYTHON'
@@ -108,35 +113,45 @@ finally:
 PYTHON
 ```
 
-With the default configuration, the last line is `terminated=True truncated=False reward=1.0`.
-The oracle reads hidden page state; this is an installation check. For your own agent, replace the oracle call
-and conversion with an action string chosen from `obs` (goal, screenshot and/or DOM), and keep the termination
-handling and cleanup. [Configuration examples](docs/configuration.md#for-code) show how to set episode parameters.
+The last line it prints is `terminated=True truncated=False reward=1.0`.
 
-Actions are BrowserGym action strings: MiniWoB's default set plus BrowserGym's `coord` subset
-(`mouse_click`, `mouse_drag_and_drop`, `mouse_down`/`mouse_move`/`mouse_up`). Episodes end on the page's end
-control, on `send_msg_to_user(...)`, or on a task-side ending.
+The oracle reads hidden page state, so this only checks the installation. For your own agent:
+
+- Replace the oracle call and `to_action(...)` with an action string your agent chooses from `obs` (goal, screenshot
+  and/or DOM).
+- Keep the termination check and the `env.close()` cleanup.
+- Set episode parameters as in the [configuration examples](docs/configuration.md#for-code).
+
+**Actions** are BrowserGym action strings: MiniWoB's default set plus BrowserGym's `coord` subset (`mouse_click`,
+`mouse_drag_and_drop`, `mouse_down` / `mouse_move` / `mouse_up`).
+
+**Episodes end** on the page's end control, on `send_msg_to_user(...)`, or on a task-side ending.
 
 ### OpenEnv server
 
+**1. Start the server.**
+
 ```bash
-docker run --rm -p 8000:8000 --shm-size=1g ghcr.io/d-nyamkhuu/megawob    # or a release: ghcr.io/d-nyamkhuu/megawob:0.1.0
+docker run --rm -p 8000:8000 --shm-size=1g ghcr.io/d-nyamkhuu/megawob
 ```
 
-To build the image from a checkout instead: `docker build -f server/Dockerfile -t megawob .` (then `docker run ... megawob`).
-Set randomization parameters and the reward with `-e`, e.g. `-e MEGAWOB_REWARD=shaped -e MEGAWOB_PRESET=small`.
+- A release image: `ghcr.io/d-nyamkhuu/megawob:0.1.0`.
+- To build the image from a checkout: `docker build -f server/Dockerfile -t megawob .`, then use `megawob` as the
+  image name.
+- Set randomization parameters and the reward with `-e`, for example `-e MEGAWOB_REWARD=shaped -e MEGAWOB_PRESET=small`.
 
-In a second terminal, add the pinned OpenEnv client to the quickstart's environment with the `serve` extra. It
-reinstalls the default extras too and leaves Playwright at the version the checker needs:
+**2. Install the client.** In a second terminal, from the checkout:
 
 ```bash
 source .venv/bin/activate
 ./install.sh serve --no-browser
 ```
 
-The client comes from the same OpenEnv commit as the image, pinned in `pyproject.toml` and `server/Dockerfile`.
-The container runs the browser; this client install does not need another Chromium download. Once the server
-is ready, run this connection check:
+- The `serve` extra adds the OpenEnv client, pinned to the same OpenEnv commit as the image.
+- It reinstalls the default extras too and leaves Playwright at the version the checker needs.
+- `--no-browser` skips the Chromium download: the container runs the browser.
+
+**3. Check the connection** once the server is ready:
 
 ```bash
 python - <<'PYTHON'
@@ -155,14 +170,22 @@ asyncio.run(main())
 PYTHON
 ```
 
-Expect a goal and `done=True`. This check ends immediately without solving the task, so binary reward is normally
-0 (1 if the episode started solved). To run an agent, choose actions from `result.observation` and call `step()`
-until `result.done`. The async context manager closes the connection. In a notebook with an event loop already
-running, use `await main()` instead of `asyncio.run(main())`.
+It prints a goal, then `done=True`. The check ends the episode without solving it, so the binary reward is normally
+`0` (`1` if the episode started solved).
 
-The image also serves the original MiniWoB++ tasks (`click-button`, ...). Screenshots come back encoded in
-`observation.metadata["megawob_screenshot"]`; decode them with `megawob.client.screenshot(observation)`.
-`python server/smoke_client.py http://localhost:8000` checks every task against a running server.
+To run an agent, choose actions from `result.observation` and call `step()` until `result.done`. In a notebook,
+where an event loop is already running, use `await main()` instead of `asyncio.run(main())`.
+
+**Also on the server:**
+
+- **MiniWoB++ tasks:** the image also serves the original tasks (`click-button`, ...).
+- **Screenshots** come back encoded in `observation.metadata["megawob_screenshot"]`. Decode one with
+  `megawob.client.screenshot(observation)`.
+- **Smoke test:** check every task against a running server with
+
+  ```bash
+  python server/smoke_client.py http://localhost:8000
+  ```
 
 ### Look at the pages
 
@@ -170,27 +193,33 @@ The image also serves the original MiniWoB++ tasks (`click-button`, ...). Screen
 python -m megawob.gallery --serve        # every task x scenario x site, with parameter pickers, on :8765
 ```
 
-The front page groups the tasks by category, one tile each, with a thumbnail, a one-line summary and its scenarios;
-search by task, scenario, MiniWoB++ name, instruction words or site name. Open a tile or a scenario (or press `/` in
-the player to jump to another), pick a site / widget and a seed, and play the episode yourself. The page sits in the middle, with everything else floating around it:
+The front page shows one tile per task, grouped by category, with a thumbnail, a one-line summary and its scenarios.
+Search by task, scenario, MiniWoB++ name, instruction words or site name.
+
+Open a tile or a scenario, pick a site, widget and seed, and play the episode yourself. Press `/` in the player to
+jump to another task. The page sits in the middle, with everything else around it:
 
 - **Left:** a tool rail. Play or Step the oracle from wherever you left the page, show its next action, and set the
-  speed, viewport and clock. Parameters (`K`) opens a search over the randomization parameters, each with a
-  one-line description.
+  speed, viewport and clock. Parameters (`K`) searches the randomization parameters, each with a one-line description.
 - **Right:** the score card, and the last actions with what each did to progress (click one for its reward).
 - **Bottom:** a message box for the agent's finish message.
 
 ![The gallery viewer on an invoice form after the oracle's first four actions: the tool rail on the left with the Play tooltip, the page with the oracle's next action marked, and the score card and last four actions with their progress changes on the right](docs/media/gallery-viewer.webp)
 
-Or open `html/play.html?task=set-slider&site=base&seed=3` directly in a browser (`&debug=1` shows the score,
-`&scenario=` picks a scenario).
+Without the gallery, open a page directly in a browser: `html/play.html?task=set-slider&site=base&seed=3`.
+Add `&debug=1` to show the score, or `&scenario=<name>` to pick a scenario.
 
 ## Results
 
 Every widget's scripted oracle passes the checker at all five training viewports (`python -m megawob.check`), so every
-episode is solvable. As a first LLM baseline, `gpt-6-luna` (a small, fast model) played whole episodes from the reset
-on one held-out design per task (designs it was never tuned on): screenshot plus goal, up to 30 actions, three seeds
-each. The oracle column is the oracle's own run of the same episodes, without the action budget.
+episode is solvable.
+
+As a first LLM baseline, `gpt-6-luna` (a small, fast model) played whole episodes on one held-out design per task,
+designs it was never tuned on:
+
+- **Input:** a screenshot and the goal.
+- **Budget:** up to 30 actions per episode, three seeds per task.
+- **Oracle column:** the oracle's own run of the same episodes, without the action budget.
 
 ![Success on held-out designs by task group: gpt-6-luna 50% on precise mouse control, 75% on forms, 83% on clicking and reading, 70% on apps, 42% on safety tasks and 67% overall; the scripted oracle 100% in every group](docs/media/results-heldout.svg)
 
@@ -208,20 +237,24 @@ each. The oracle column is the oracle's own run of the same episodes, without th
 
 </details>
 
-The sample is small: three episodes per task, and a task moves by a seed or two between runs. Read it as a smoke
-test of difficulty, not a leaderboard. A model falls short on the safety tasks, the precise-pointer tasks (sliders to
-a value, crops, colour matching) and the long app workflows. Per-task numbers are in
-`docs/results/baseline-heldout.json`.
+The sample is small (three episodes per task, and a task moves by a seed or two between runs), so read it as a smoke
+test of difficulty, not a leaderboard. The model falls short on:
 
-Benchmark any vision model behind an OpenAI-compatible endpoint (OpenAI, vLLM, SGLang, Ollama, OpenRouter, ...) the
-same way with `baselines/benchmark.py`:
+- the safety tasks;
+- the precise-pointer tasks (sliders to a value, crops, colour matching);
+- the long app workflows.
+
+Per-task numbers are in [`docs/results/baseline-heldout.json`](docs/results/baseline-heldout.json).
+
+To benchmark any vision model behind an OpenAI-compatible endpoint (OpenAI, vLLM, SGLang, Ollama, OpenRouter, ...),
+use `baselines/benchmark.py`:
 
 ```bash
 python baselines/benchmark.py --model gpt-6-luna                                       # OpenAI, Responses API
 python baselines/benchmark.py --api chat --base-url http://localhost:8000/v1 --model <model>   # Chat Completions
 ```
 
-Setup, cost and output are in `baselines/README.md`.
+Setup, cost and output are in [`baselines/README.md`](baselines/README.md).
 
 ## Tasks
 
@@ -244,7 +277,7 @@ instructions. A task name can take a suffix ([glossary](docs/glossary.md#task-na
 <details>
 <summary>Environment variables: reward, preset, interface, clock, randomization parameters</summary>
 
-Set with environment variables (or per env: `gym.make(name, task_kwargs={"reward": "shaped"})`):
+Set these as environment variables, or per env with `gym.make(name, task_kwargs={"reward": "shaped"})`:
 
 | Variable | Values |
 |---|---|
@@ -254,8 +287,9 @@ Set with environment variables (or per env: `gym.make(name, task_kwargs={"reward
 | `MEGAWOB_CLOCK` | `step` (default: each action is `MEGAWOB_STEP_MS` of task time, so model latency never matters) \| `action` \| `real` |
 | `MEGAWOB_INSTRUCTION_DISPLAY`, `MEGAWOB_START_STATE`, `MEGAWOB_POPUPS`, `MEGAWOB_DIFFICULTY`, ... | force or reweight one randomization parameter, e.g. `MEGAWOB_START_STATE=off:.6,partial:.4` |
 
-Every variable is listed in [`docs/configuration.md`](docs/configuration.md); [`docs/randomization.md`](docs/randomization.md)
-shows what each randomization parameter does to the page, with screenshots.
+- [`docs/configuration.md`](docs/configuration.md) lists every variable.
+- [`docs/randomization.md`](docs/randomization.md) shows what each randomization parameter does to the page, with
+  screenshots.
 
 </details>
 
@@ -271,8 +305,10 @@ A page is three layers, each in its own files:
   screen.
 
 The shared **kit** (`html/kit/`) runs the episode: seeded randomness, scoring, the oracle, randomization parameters,
-content banks and headless UI primitives. Pages are plain JS and CSS with no build step, and run over `file://`.
-[docs/architecture.md](docs/architecture.md) explains the design.
+content banks and headless UI primitives.
+
+Pages are plain JS and CSS with no build step, and run over `file://`. [docs/architecture.md](docs/architecture.md)
+explains the design.
 
 ## Documentation
 
@@ -307,25 +343,27 @@ python -m megawob.lint --no-ruff                  # static contract lint of ever
 python -m megawob.check --site base --viewports 1024x640 --seeds 1   # the oracle on every base widget
 ```
 
-CI runs these on every push. [CONTRIBUTING.md](CONTRIBUTING.md) says what a pull request needs, and
+CI runs these on every push. [CONTRIBUTING.md](CONTRIBUTING.md) says what a pull request needs;
 [docs/checks.md](docs/checks.md) lists every other check.
 
 ## Citation
 
-If you use MegaWoB, please cite it with [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button reads
-it). Changes are listed in [`CHANGELOG.md`](CHANGELOG.md), contributions are described in
-[`CONTRIBUTING.md`](CONTRIBUTING.md).
+If you use MegaWoB, please cite it with [`CITATION.cff`](CITATION.cff); GitHub's "Cite this repository" button reads
+it.
+
+Changes are listed in [`CHANGELOG.md`](CHANGELOG.md), and how to contribute is in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Assets and licenses
 
-The code is MIT ([`LICENSE`](LICENSE)). The images under `html/sites/*/assets/` were generated with image models
-for this project and are released under the same MIT licence as the code. The
-bundled fonts, Lato and Oswald, are under the SIL Open Font License 1.1 and come with their licence files
-(`lato-license.txt`, `Oswald-OFL.txt`) in the `assets/` folders that use them.
+- **Code:** MIT ([`LICENSE`](LICENSE)).
+- **Images** under `html/sites/*/assets/`: generated with image models for this project, and released under the same
+  MIT licence.
+- **Fonts:** Lato and Oswald, under the SIL Open Font License 1.1. Their licence files (`lato-license.txt`,
+  `Oswald-OFL.txt`) are in the `assets/` folders that use them.
+- **Libraries:** fifteen, vendored with their licence files in `html/sites/base/vendor/` and loaded only inside the
+  browser page. All are MIT except vanilla-picker (ISC) and @hello-pangea/dnd (Apache-2.0):
+  noUiSlider 15.8.1, vanilla-picker 2.12.3, Cropper.js 1.6.2, SortableJS 1.15.6, jQuery 3.7.1, jQuery UI 1.13.3,
+  dragula 3.7.3, interact.js 1.10.27, GridStack 10.3.1, AG Grid Community 32.0.0, React 18.3.1, @hello-pangea/dnd
+  18.0.1, dnd kit 6.3.1, rc-slider 11.1.9 and MUI 5.18.0.
 
-Fifteen third-party libraries are vendored, with their licence files, in `html/sites/base/vendor/` and loaded
-only inside the browser page: noUiSlider 15.8.1, vanilla-picker 2.12.3, Cropper.js 1.6.2, SortableJS 1.15.6,
-jQuery 3.7.1, jQuery UI 1.13.3, dragula 3.7.3, interact.js 1.10.27, GridStack 10.3.1, AG Grid Community 32.0.0,
-React 18.3.1, @hello-pangea/dnd 18.0.1, dnd kit 6.3.1, rc-slider 11.1.9 and MUI 5.18.0. All are MIT except
-vanilla-picker (ISC) and @hello-pangea/dnd (Apache-2.0). [`THIRD_PARTY.md`](THIRD_PARTY.md) has the full table with
-copyright holders and sources.
+[`THIRD_PARTY.md`](THIRD_PARTY.md) has the full table, with copyright holders and sources.

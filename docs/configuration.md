@@ -104,8 +104,11 @@ With `MEGAWOB_EFFICIENCY=w` (at most 1), a successful episode's reward is multip
 
 ### BrowserGym (Python)
 
-Pass task settings through `gym.make(..., task_kwargs=...)`. Use `knobs` for randomization parameters, with the
-names in the Param column; `reward` and `scenario` are separate task kwargs:
+Pass task settings through `gym.make(..., task_kwargs=...)`:
+
+- `knobs`: randomization parameters, under the names in the Param column;
+- `reward`: the reward mode;
+- `scenario`: one scenario of the task.
 
 ```python
 import gymnasium as gym
@@ -123,23 +126,24 @@ finally:
     env.close()
 ```
 
-These task kwargs apply to every reset of this env; to change them, create another env.
-Do not pass page parameters such as `popups` directly to Python `env.reset()`.
+- Task kwargs apply to every reset of this env. To change them, create another env.
+- Do not pass page parameters such as `popups` to Python `env.reset()`.
+- An explicit `task_kwargs["reward"]` overrides the configured reward.
+- DOM-only mode forces atomic drags, even if `dragSteps` asks for split drags.
 
-For randomization parameters, the order from highest to lowest priority is:
+**Priority.** A randomization parameter comes from the first of these that sets it:
 
-1. Explicit `task_kwargs["knobs"]`.
-2. The task name's eval perturbation.
-3. Environment variable.
-4. Preset.
-5. Default.
+1. `task_kwargs["knobs"]`;
+2. the task name's eval perturbation (`set-slider.eval-popups`);
+3. the environment variable;
+4. the preset;
+5. the default.
 
-An explicit `task_kwargs["reward"]` overrides the configured reward.
-DOM-only mode forces atomic drags even if `dragSteps` requests split drags.
+**Environment variables** are read once, on the first `catalog.config()` call, and cached. Set them before you import
+`megawob.tasks`.
 
-`catalog.config()` reads the process environment on first use and caches it; set environment variables before
-importing `megawob.tasks`. For an independent configuration, pass `task_kwargs["config"]` built with
-`catalog.Config.from_env({...})`. An explicit mapping replaces the process environment rather than merging it:
+**An independent configuration:** pass `task_kwargs["config"]`, built with `catalog.Config.from_env({...})`. The
+mapping you give replaces the process environment; it is not merged with it:
 
 ```python
 from megawob import catalog
@@ -158,11 +162,18 @@ docker run --rm -p 8000:8000 --shm-size=1g \
   ghcr.io/d-nyamkhuu/megawob
 ```
 
-Then the client selects the task and seed with `await env.reset(task_name="set-slider.base", seed=0)`.
-The pinned client does not expose MegaWoB's `knobs` or `config` task kwargs; setting environment variables in the
-client process does not change a remote server. Restart the container with different variables to change these
-settings. A task name such as `set-slider.eval-popups` overrides the corresponding configured parameter.
-See the [runnable client example](../README.md#openenv-server) for installation and connection setup.
+The client then picks the task and seed:
+
+```python
+result = await env.reset(task_name="set-slider.base", seed=0)
+```
+
+- The pinned client has no `knobs` or `config` task kwargs.
+- Environment variables set in the client process do not reach the server. To change a setting, restart the
+  container with other variables.
+- An eval-perturbation task name such as `set-slider.eval-popups` overrides the matching server setting.
+
+The [README](../README.md#openenv-server) has the installation and a runnable connection check.
 
 ### Page API (JavaScript)
 
@@ -172,13 +183,16 @@ On an already loaded `html/play.html` page, run this in the browser's developer 
 window.__env.reset(0, undefined, {popups: 'cookie', startState: 'off'});
 ```
 
-The arguments are seed, optional scenario, and page parameters. This resets the current task and widget; it does
-not select a different site. Explicit reset options override the URL parameters; omitted options fall back to the
-URL, not the previous reset. To open a page with those settings instead, use a URL such as:
+- **Arguments:** the seed, an optional scenario, and page parameters.
+- **Scope:** it resets the current task and widget; it cannot switch to another site.
+- **Precedence:** options you pass override the URL parameters. Options you leave out fall back to the URL, not to
+  the previous reset.
+
+To open a page with these settings instead, put them in the URL:
 
 ```text
 html/play.html?task=set-slider&site=base&seed=0&popups=cookie&startState=off
 ```
 
-The page API controls the episode inside the browser. The Python harness chooses the returned reward mode;
-`MEGAWOB_*` process variables are not read by a page opened directly in a browser.
+A page opened directly in a browser reads no `MEGAWOB_*` variables, and the reward mode is chosen by the Python
+harness, not the page.
