@@ -199,18 +199,10 @@ The instruction never warns about the hazard. All names, domains and organisatio
 
 ## Diversity
 
-A design review of the first version found shortcuts that every page shared:
+A policy learns a shortcut instead of the skill when every page shares it, such as an instruction always printed
+top-left or a Submit button always top-right. MegaWoB varies each one:
 
-- The instruction was always printed top-left, and a blue Submit button was always top-right.
-- Tolerances were printed in every goal, and there were few instruction templates.
-- Pages used lorem ipsum.
-- Starts were always clearly off target, and wrong clicks were always final.
-- There was no page scroll and only one viewport.
-- The oracle never scrolled, double-clicked or right-clicked.
-
-Each one now varies:
-
-| Shortcut | What varies now |
+| Shortcut | What varies |
 |---|---|
 | fixed frame | where the instruction shows, the end control's place, label and language, decoys, filler, finish by message |
 | no scroll | `scrollable` widgets and scrolling panes; the oracle wheels targets into view |
@@ -218,7 +210,7 @@ Each one now varies:
 | one input route | double, triple and right clicks, modifier clicks, held presses, wheel; undeclared input is rejected |
 | one start | start states `off`, `partial`, `wrong`, `solved`, and `scene` for evaluation; recoverable wrong choices |
 | clean pages | popups at a seeded step, and a design's own always-on obstruction (`initialOverlay`) |
-| one viewport | five training viewports and a device scale factor (CSS zoom was rejected: Chromium 125 hit-tests it wrongly) |
+| one viewport | five training viewports and a device scale factor (not CSS zoom: Chromium 125 hit-tests it wrongly) |
 | lorem ipsum | large original content banks with a held-out split; frame words and formats in 10 languages |
 | single goals | composite tasks (`uses`) and multi-screen flows |
 
