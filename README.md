@@ -80,10 +80,9 @@ playwright install chromium
 ### BrowserGym
 
 This example plays one episode through BrowserGym with the scripted oracle, prints the reward and closes the browser.
-Run it from the repository root:
+Run it from the repository root, since it imports `server.smoke_gym`:
 
-```bash
-python - <<'PYTHON'
+```python
 import gymnasium as gym
 import megawob.tasks  # registers browsergym/miniwob.<task>
 from server.smoke_gym import scaled, to_action  # oracle -> BrowserGym action strings
@@ -110,7 +109,6 @@ try:
     assert terminated and not truncated and total_reward == 1.0
 finally:
     env.close()
-PYTHON
 ```
 
 The last line it prints is `terminated=True truncated=False reward=1.0`.
@@ -153,8 +151,7 @@ source .venv/bin/activate
 
 **3. Check the connection** once the server is ready:
 
-```bash
-python - <<'PYTHON'
+```python
 import asyncio
 from browsergym_env import BrowserGymAction, BrowserGymEnv
 
@@ -167,7 +164,6 @@ async def main():
         assert result.done
 
 asyncio.run(main())
-PYTHON
 ```
 
 It prints a goal, then `done=True`. The check ends the episode without solving it, so the binary reward is normally
