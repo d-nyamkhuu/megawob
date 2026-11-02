@@ -1,0 +1,153 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.orgz{--bg:#5a3a24;--panel:#f7f0df;--fg:#2c1d10;--muted:#6a5a48;--line:#cdbd9c;--accent:#7a4b26;background:#4a2f1d;color:var(--fg);font:16px Georgia,'Times New Roman',serif}
+.o-shell{display:grid;grid-template-columns:76.8% 23.2%;height:100vh}
+.o-left{display:flex;flex-direction:column;min-width:0;min-height:0;background:linear-gradient(#5b3a25,#4a2f1d);border-right:10px solid #5a3a22;box-shadow:inset 0 0 40px #0006}
+.o-top{flex:none;height:22.5%;position:relative;padding:1.8% 0 0 1.6%}
+.o-pin{position:absolute;left:3.6%;top:12%;width:3%;z-index:2}
+.o-pin svg{width:100%;display:block}
+.o-taskcard{position:absolute;left:1.6%;top:1.9%;width:48.2%;bottom:1.6%;padding:.5% 1% 1% 6.5%;background:linear-gradient(#f6ecd4,#efe3c8);border-radius:4px;box-shadow:0 3px 8px #0008,inset 0 0 0 1px #d6c7a2;display:flex;flex-direction:column;min-height:0}
+.o-taskcard h2{margin:0;font:400 clamp(20px,2.6vw,36px) Georgia,serif;line-height:1.15;color:#2a1a0c}
+.instruction{margin:.5% 0 0;padding:1.2% 2%;flex:1;font:clamp(15px,1.7vw,25px) Georgia,serif;line-height:1.35;background:linear-gradient(#f8e7b6,#f2dfa6);border:1px solid #dcc78a;border-radius:3px;color:#2a1a0c;overflow:hidden;display:flex;align-items:center}
+.instruction[hidden]{display:none}
+.instruction-toast{position:fixed;z-index:25;top:10px;left:20%;max-width:60%;box-shadow:0 8px 24px #0003}
+.o-book{flex:1;min-height:0;position:relative;margin:0 1.3% 0 .7%;border:8px solid #6b4326;border-bottom:0;border-radius:16px 16px 0 0;background:#3b2616;display:flex;box-shadow:inset 0 0 0 2px #a4733f,0 0 0 2px #2a1a0e}
+.o-rings{flex:none;width:2.6%;display:flex;flex-direction:column;justify-content:space-around;padding:3% 0}
+.o-rings i{display:block;height:9px;background:linear-gradient(#a58058,#5a3b20);border-radius:3px;margin-left:-5px;box-shadow:0 1px 2px #000a}
+.o-page{flex:1;min-width:0;display:flex;flex-direction:column;background:#f4ecd8;border-radius:6px 6px 0 0;box-shadow:inset 0 0 0 1px #d8cba8;overflow:hidden}
+.o-bar{flex:none;height:9.9vh;min-height:62px;display:flex;align-items:center;gap:.9vw;padding:0 1.2vw 0 1.4vw;background:linear-gradient(#f9f3e3,#eadfc4);border-bottom:2px solid #cbbb97}
+.o-logo{width:clamp(34px,3.9vw,56px);flex:none}.o-logo svg{width:100%;display:block}
+.o-name{font:700 clamp(20px,2.3vw,34px) Georgia,serif;color:#3a2a1a;margin-right:auto}
+.o-spacer{display:none}
+.o-tool{display:flex;align-items:center;gap:.6vw;height:62%;padding:0 1.3vw;border:1px solid #bcae8c;border-radius:4px;background:linear-gradient(#fbf7ea,#ece3cb);box-shadow:inset 0 1px 0 #fff,0 1px 2px #0002;font-size:clamp(14px,1.5vw,22px)}
+.o-tool svg{width:1.6em;height:1.6em}.o-tool em{font-style:normal}
+.o-body{flex:1;display:flex;min-height:0}
+.o-side{flex:none;width:15.6%;padding:1.2% .8% 0;border-right:1px solid #cdbe9c;background:#efe6cf;display:flex;flex-direction:column;gap:.5vh}
+.o-side div{display:flex;align-items:center;gap:.9vw;height:7vh;min-height:36px;padding:0 1vw;font-size:clamp(15px,1.55vw,23px);border-radius:3px}
+.o-side div.on{background:#ecd5a0}
+.o-side svg{width:1.7em;height:1.7em;flex:none}
+.o-paper{flex:1;min-width:0;margin:1.6% 1.4% 1.6% 1.2%;padding:1.5% 2.2%;background:linear-gradient(#f9f3e3,#f1e8d0);border:1px solid #d3c5a2;border-radius:4px;box-shadow:inset 0 0 20px #d9cba622;overflow:hidden;position:relative}
+.o-paper h1{margin:0;font:700 clamp(24px,2.7vw,40px) Georgia,serif}
+.o-date{font-size:clamp(13px,1.3vw,19px);color:#8a7a62;border-bottom:1px solid #d6c9a8;padding-bottom:.6%;margin-bottom:1%}
+.o-text{font-size:clamp(15px,1.55vw,23px);line-height:1.55;margin:1.5% 0;max-width:60%}
+.stage{position:relative;height:26vh;min-height:150px}
+.contact-list{display:none!important}
+.o-right{background:#f1ecdf;padding:2.4% 1.6%;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.o-right h3{margin:0 0 5% 0;font:700 clamp(18px,1.9vw,27px) Georgia,serif}
+.o-step{display:flex;align-items:center;gap:6%;margin-bottom:5%;font-size:clamp(15px,1.5vw,22px);color:#4d3f30}
+.o-step i{flex:none;width:2.4vw;height:2.4vw;min-width:22px;min-height:22px;border:3px solid #cfc9bf;border-radius:50%;background:#f8f6f0}
+.o-step i.cur{border-color:#5b8fd8;background:#bcd0f4}
+.o-right hr{width:100%;border:0;border-top:1px solid #d6cfbf;margin:5% 0 7%}
+.o-right p{font-size:clamp(15px,1.5vw,22px);line-height:1.5;color:#4d3f30;margin:0 0 7%}
+.submit{width:100%;height:clamp(44px,8.2vh,76px);font:700 clamp(20px,2vw,29px) Georgia,serif;color:#fff;background:linear-gradient(#2f7fe0,#0f4eaa);border:1px solid #0a3c88;border-radius:5px;box-shadow:0 2px 4px #0005,inset 0 1px 0 #7fb2f5;cursor:pointer}
+.perturb{position:fixed;z-index:90;padding:22px;background:#f7f0df;border:2px solid var(--line);box-shadow:0 8px 30px #0004;min-width:260px;max-width:90vw;color:var(--fg)}
+.perturb button{padding:8px 22px;font:16px Georgia;cursor:pointer}
+.perturb.cookie{bottom:0;left:0;right:0}.perturb.toast{top:24px;right:24px}.perturb.chat{bottom:20px;right:20px;width:320px}.perturb.promo{top:30%;left:30%;width:40%}.perturb.banner{top:0;left:0;right:0}
+/* widget widget in the paper */
+.orgz .uc-page{inset:0!important;width:100%!important;border:0;background:transparent;box-shadow:none;overflow:visible}
+.orgz .uc-content{height:100%;padding:0}
+.orgz .uc-btn{font:clamp(15px,1.5vw,22px) Georgia,serif;padding:0 1.4vw;height:clamp(36px,6vh,56px);color:#fff;background:linear-gradient(#7d5232,#5c3a20);border:1px solid #3d2410;border-radius:4px;box-shadow:inset 0 1px 0 #a67d57,0 1px 3px #0004}
+.orgz .uc-mpanel{background:#f8f4ea;border:1px solid #d8cfb8;border-radius:4px;box-shadow:0 4px 12px #0003;min-width:clamp(180px,17vw,250px)}
+.orgz .uc-mi{height:clamp(30px,5.4vh,44px);font:clamp(14px,1.35vw,20px) Georgia,serif;color:#2c1d10}
+.orgz .uc-mi svg{color:#2c1d10;width:1.3em;height:1.3em}
+.orgz .uc-mi[data-active],.orgz .uc-mi[data-open]{background:#ebe7de}
+.orgz .uc-mpanel.root-static{position:absolute;left:0;top:0;z-index:6;display:block;box-shadow:0 4px 12px #0003}
+.orgz .uc-menuwrap{display:block}
+.o-left{background:linear-gradient(#6a4529,#573720 70%,#4a2f1d);box-shadow:inset 0 0 50px #0007}
+.o-left:before{content:'';position:absolute;left:5px;top:4px;bottom:4px;width:0;border-left:2px dashed #b08a5c88}
+.o-taskcard{left:1.7%;width:62.5%;top:2.2%;bottom:1.2%;padding:.4% 1.2% 1.2% 7.4%;background:linear-gradient(90deg,#efe3c6 0,#efe3c6 10.5%,#f6ecd4 10.5%)}
+.o-taskcard h2{font-size:clamp(22px,2.2vw,38px)}
+.instruction{font-size:clamp(16px,1.6vw,27px);margin-top:.8%;padding:1% 2.4%;box-shadow:inset 0 0 6px #c9ab5c55}
+.o-pin{left:3.2%;top:15%;width:2.6%;transform:rotate(25deg)}
+.o-book{border:10px solid #7a502b;border-radius:18px 18px 0 0;background:#5a3820;outline:2px dashed #c9a06a99;outline-offset:-6px;margin-left:.5%}
+.o-rings{width:3.1%}
+.o-rings i{height:12px;width:150%;margin-left:-6px;position:relative;z-index:3;background:linear-gradient(#b99467,#6b4624)}
+.o-name{font-size:clamp(22px,2.6vw,38px)}
+.o-bar{background:linear-gradient(#fbf6e8,#ebe0c6)}
+.o-right{padding:3.6% 1.9% 2%}
+.o-right h3{margin-bottom:7%}
+.o-step{margin-bottom:7.5%}
+.o-right hr{margin:8% 0 10%}
+.o-right p{margin-bottom:9%}
+.o-text{max-width:62%}
+.stage{height:7vh;min-height:48px}
+.o-text{margin-left:clamp(200px,20vw,300px);max-width:70%}
+.o-right p,.o-step{font-size:clamp(16px,1.6vw,24px)}
+.o-step i{width:2.5vw;height:2.5vw}
+.o-right h3{font-size:clamp(20px,2.1vw,30px)}
+.orgz .menu-xtras{color:#4a3a2a;font-size:clamp(14px,1.35vw,20px)}
+.orgz .menu-xtras div{height:clamp(30px,5.4vh,44px);display:flex;align-items:center;padding:0 10px}
+/* Episode frame stays on the same paper and leather surfaces. */
+.o-taskcard[hidden],.o-pin[hidden]{display:none}
+.o-taskcard.o-notice{left:auto;right:2%;width:62.5%;top:7%;bottom:6%;padding:.6% 1.2%;border-left:5px solid #a8742c}
+.o-notice h2{font-size:clamp(18px,1.7vw,28px)}
+.o-right{position:relative}
+.o-ticket{flex:none;padding:10px;margin:0 0 16px;background:linear-gradient(#f8edcf,#f1e1b8);border:1px solid #d2bd8c;border-radius:4px;box-shadow:0 2px 4px #0002}
+.o-ticket h3{font-size:clamp(18px,1.6vw,24px);margin-bottom:8px}
+.o-ticket .instruction{display:block;font-size:clamp(14px,1.2vw,19px);line-height:1.35;margin:0;padding:0;background:none;border:0;box-shadow:none;overflow:visible;overflow-wrap:anywhere}
+.o-answer{flex:none}
+.o-endfooter{margin-top:auto;padding-top:12px;border-top:1px solid #d6cfbf}
+.o-headerend>h3:first-child{padding-right:45px;min-height:46px}
+.submit.o-endicon{position:absolute;right:8%;top:3%;width:38px;height:38px;font-size:24px}
+.o-xtra{display:block;margin:12px 0 0 auto;padding:7px 16px;font:inherit;color:#4d3f30;border:1px solid #bcae8c;border-radius:4px;background:linear-gradient(#fbf7ea,#ece3cb);box-shadow:inset 0 1px 0 #fff,0 1px 2px #0002;cursor:pointer}
+@media(max-height:700px){.o-ticket{padding:8px;margin-bottom:10px}.o-right:has(.o-ticket) .o-step{margin-bottom:5%}.o-right:has(.o-ticket) hr{margin:4% 0 6%}.o-right:has(.o-ticket) .o-answer p{font-size:14px;margin-bottom:8px}.o-right:has(.o-ticket) .o-answer h3{font-size:18px;margin-bottom:8px}}
+/* Organizer proportions, paper stock and stitched leather binding. */
+.o-shell{grid-template-columns:77.9% 22.1%}
+.o-left{position:relative;background:#61412b url('assets/leather.svg');border-right:13px solid #533821;box-shadow:inset 0 0 22px #1e0e08b0}
+.o-left:before{left:10px;top:0;bottom:0;border-left:2px dashed #d1a66b;filter:drop-shadow(1px 1px 1px #21160e)}
+.o-left:after{content:'';position:absolute;right:-8px;top:0;bottom:0;border-left:2px dashed #b08a5c;box-shadow:-4px 0 3px #1b130b;pointer-events:none}
+.o-taskcard{left:2.1%;width:62.8%;top:1.9vh;bottom:1.4vh;padding:.7% 2.3% 1.3% 7.4%;border:1px solid #ebdfc5;border-radius:7px;background:linear-gradient(90deg,#d8be7b40 0 10.2%,transparent 10.4%),url('assets/paper.svg');box-shadow:0 3px 8px #0009,inset 0 0 18px #d9b87735}
+.o-taskcard:before{content:'';position:absolute;left:10.3%;top:0;bottom:0;border-left:1px solid #d4c39d}
+.o-taskcard h2{font-size:clamp(25px,2.4vw,40px);font-weight:700;line-height:1.2;margin-bottom:5px}
+.instruction{font-size:clamp(18px,1.8vw,30px);line-height:1.27;margin:0;padding:1.2% 2.8%;border-radius:7px;background:linear-gradient(#f4dfaa9c,#f1dca594);border-color:#dfc48b;box-shadow:inset 0 0 12px #e6ce9840;overflow-wrap:anywhere}
+.o-pin{left:3.9%;top:18%;width:2.7%;filter:drop-shadow(2px 3px 1px #6c5a4480);transform:rotate(-22deg)}
+.o-top:has(.o-taskcard:not([hidden]):not(.o-notice)):before{content:'';position:absolute;left:2.8%;top:1.15vh;width:9%;height:12px;background:linear-gradient(100deg,#e5d1a2,#f5e9ce 55%,#c8b48b);transform:rotate(4deg);border-radius:5px 5px 0 0;box-shadow:0 1px 2px #1e140c99}
+.o-book{margin:0 .8% .7% .6%;border:10px solid #604129;border-radius:20px 20px 12px 12px;background:#674a30 url('assets/leather.svg');outline:2px dashed #d2a66d;outline-offset:-8px;box-shadow:0 0 0 2px #322414,inset 0 0 0 2px #b38e61,0 -4px 4px #d0b99580;padding:10px 4px 4px 0}
+.o-rings{position:absolute;left:-.4vw;top:3%;bottom:2%;width:2.3vw;padding:0;z-index:10;justify-content:space-around}
+.o-rings i{width:100%;height:14px;margin:0;border:1px solid #3a2919;border-radius:5px;background:linear-gradient(#3b3023 0%,#a48c68 24%,#665039 45%,#493522 80%,#21190f 100%);box-shadow:0 2px 2px #21180cb0,inset 1px 0 2px #c8af85}
+.o-page{position:relative;margin-left:1.6vw;border:2px solid #bfb6a0;border-radius:12px;background:url('assets/paper.svg');overflow:visible;box-shadow:0 2px 4px #191108,inset 0 0 0 2px #f7f3e7}
+.o-bar{height:9.9vh;min-height:62px;padding:0 2.2%;gap:1.8%;border-radius:10px 10px 0 0;background:linear-gradient(#fff6, #c7bba32e),url('assets/paper.svg');border-bottom:2px solid #c5bba4;box-shadow:0 2px 3px #95876c55;position:relative;z-index:5}
+.o-logo{width:6.2%;filter:drop-shadow(0 2px 1px #68583b70)}
+.o-name{flex:1;white-space:nowrap;min-width:0;font-size:clamp(21px,2.15vw,36px);margin:0}
+.o-tool{flex:none;width:15%;padding:0 1.1%;height:62%;justify-content:center;font-size:clamp(15px,1.5vw,25px);border-radius:7px;background:linear-gradient(#fff9,#d0c8b440);border-color:#b7a990;box-shadow:inset 0 1px #fff,0 1px 2px #7c6b4c55;white-space:nowrap;gap:8%}
+.o-tool:last-child{width:16%}
+.o-tool svg{width:1.4em;height:1.4em;flex:none}
+.o-side{width:20.6%;padding:2.3% 1%;gap:.4vh;background:linear-gradient(#eee7d56b,#e2d5ba40),url('assets/paper.svg');border-right:2px solid #c9bca4;border-radius:0 0 0 10px}
+.o-side div{height:7vh;min-height:36px;padding:0 8%;gap:10%;font-size:clamp(16px,1.55vw,26px);white-space:nowrap}
+.o-side div.on{background:linear-gradient(110deg,#ecdba9b0,#e3cb9790);border:1px solid #d6b980;border-radius:6px}
+.o-side svg{width:1.4em;height:1.4em}
+.o-paper{margin:2.4% 1.6% 1.6% 1.4%;padding:1.2% 2.3%;background:linear-gradient(#fff3,#eee4cc33),url('assets/paper.svg');border-color:#e0d3b6;border-radius:6px;box-shadow:inset 0 0 18px #d4bc8b1c;overflow:visible}
+.o-paper h1{font-size:clamp(28px,2.5vw,42px);line-height:1.3;margin:0;width:max-content;max-width:100%}
+.o-date{font-size:clamp(15px,1.3vw,22px);line-height:1.6;padding-bottom:0;margin:5px 0 0;color:#958f82;border-color:#d2c9b4}
+.stage{position:absolute;inset:0;height:auto;min-height:0;pointer-events:none;z-index:6}
+.orgz .uc-page,.orgz .uc-content{pointer-events:none}
+.orgz .uc-toast{pointer-events:auto}
+.o-text{margin:5.8vh 1.3% 0;max-width:73%;font-size:clamp(17px,1.55vw,26px);line-height:1.3;color:#28251e}
+.o-text+.o-text{margin-top:4.7vh;max-width:95%}
+.o-right{padding:3.3vh 8.8% 2%;background:linear-gradient(90deg,#bfa67a18,#fff2),url('assets/paper.svg');box-shadow:inset 2px 0 5px #9e8c7166}
+.o-right h3{font-size:clamp(20px,1.75vw,29px);margin:0 0 1.8vh;line-height:1.2}
+.o-step{font-size:clamp(17px,1.5vw,25px);line-height:1.25;margin:0 0 1.8vh;gap:9%;min-height:5.5vh;color:#494949}
+.o-step i{width:2.5vw;height:2.5vw;border:4px solid #b4b0a7;background:linear-gradient(#fff9,#fff2);box-shadow:inset 1px 1px #fff,1px 1px #fff}
+.o-step i.cur{border-color:#0861bf;background:linear-gradient(#daeafa,#a3c9ef)}
+.o-right hr{margin:1.4vh 0 3.4vh;border-top:2px solid #cdc5b6}
+.o-right p{font-size:clamp(17px,1.5vw,25px);line-height:1.3;margin:0 0 3.4vh;color:#494949}
+.submit{font-size:clamp(22px,1.9vw,32px);height:8.2vh;border-radius:7px;background:linear-gradient(#5598d8,#0a63b9 55%,#0453a6);border-color:#175c9f;box-shadow:inset 0 1px 2px #b2d9f3,0 2px 3px #52473355;text-shadow:0 1px 1px #204666}
+.o-menureserve{flex:none;width:16%;height:62%}
+.orgz .o-menutool{position:absolute;pointer-events:auto;z-index:12}
+.orgz .o-menutool>.uc-btn{width:100%;height:100%;padding:0 12%;display:flex;align-items:center;justify-content:space-between;gap:9%;font-size:clamp(16px,1.5vw,25px);font-weight:700;background:linear-gradient(#95734e,#745335 65%,#604326);border:1px solid #624629;border-radius:8px;box-shadow:inset 0 1px 2px #ddc8a1,0 2px 2px #816b4e66}
+.o-menutool>.uc-btn svg{width:1.3em;height:1.3em;flex:none}
+.o-caret{font-size:.8em}
+.orgz .o-menutool>.uc-mpanel{top:calc(100% + 2px);left:0;position:absolute;min-width:clamp(190px,17.4vw,291px);padding:6px 0;box-shadow:0 9px 14px #46392260;border-radius:8px;border-color:#d6d0c5;background:linear-gradient(#fff9,#e9e3d638),url('assets/paper.svg')}
+.orgz .uc-mpanel{min-width:clamp(175px,16vw,268px);padding:5px 0;background:linear-gradient(#fff9,#e9e3d638),url('assets/paper.svg');border-color:#d6d0c5;border-radius:7px;pointer-events:auto}
+.orgz .uc-mi{font-size:clamp(17px,1.5vw,25px);height:clamp(33px,5.9vh,56px);padding:0 10%;gap:7%;border-radius:5px}
+.orgz .uc-mi svg{width:1.4em;height:1.4em}
+.orgz .menu-xtras{font-size:clamp(15px,1.3vw,22px);color:#63584b}
+.orgz .menu-xtras div{height:clamp(29px,4.2vh,40px);padding:0 10%}
+.orgz .uc-mi[data-active],.orgz .uc-mi[data-open]{background:linear-gradient(#dddcd7,#e9e8e3)}
+.orgz .uc-mpanel.root-static{display:block}
+.o-taskcard.o-notice:before{display:none}
+.o-right:has(.o-ticket) .o-step{font-size:clamp(15px,1.25vw,21px);min-height:4vh;margin-bottom:1.5vh}
+.o-right:has(.o-ticket) hr{margin:1vh 0 2vh}
+.o-right:has(.o-ticket) .o-answer p{font-size:clamp(15px,1.3vw,22px);margin-bottom:2vh}
+.o-right:has(.o-ticket) .o-answer h3{margin-bottom:1.5vh}
+@media(max-width:1100px){.o-bar{gap:1.3%;padding:0 1.8%}.o-name{font-size:21px}.o-tool{font-size:14px}.o-side div{font-size:16px;padding:0 6%;gap:8%}.orgz .o-menutool>.uc-btn{padding:0 9%;font-size:16px}.o-right{padding-left:8%;padding-right:8%}.o-step{gap:7%;font-size:16px}.o-right p{font-size:16px}.o-right h3{font-size:20px}.o-taskcard{width:75%}.instruction{font-size:18px}}

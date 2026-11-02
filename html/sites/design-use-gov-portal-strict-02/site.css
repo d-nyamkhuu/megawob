@@ -1,0 +1,664 @@
+:root {
+  --bg: #f4f5f7;
+  --panel: #fff;
+  --fg: #1d2330;
+  --muted: #6b7280;
+  --line: #d5d9e0;
+  --accent: #2f6fed;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.ref-task {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding: 12px 28px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.ref-task:has(.ref-instruction) { min-height:132px; height:132px; }
+.ref-task:has(.ref-instruction) > .ref-instruction { bottom:8px; left:30px; right:250px; }
+
+.ref-instruction {
+  flex: 1;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.ref-submit {
+  flex: none;
+  padding: 9px 22px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ref-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+.ref-body.ref-panel-right { flex-direction: row-reverse; }
+
+.ref-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  min-width: 0;
+}
+
+.ref-brand { flex: none; font-weight: 750; font-size: 17px; letter-spacing: .01em; }
+.ref-spacer { flex: 1; }
+.ref-nav { display: flex; gap: 14px; flex: none; }
+.ref-navlink, .ref-sidelink { color: var(--muted); text-decoration: none; cursor: pointer; font-size: 14px; }
+.ref-navlink:hover, .ref-sidelink:hover { color: var(--fg); }
+.ref-tools { display: flex; align-items: center; gap: 8px; flex: none; }
+.ref-xtra {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.ref-icon { width: 40px; height: 38px; padding: 0; font-size: 18px; border-radius: 50%; }
+.ref-float-dock { position: relative; flex: none; height: 60px; }
+.ref-float { position: absolute; right: 22px; bottom: 10px; z-index: 50; box-shadow: 0 6px 20px rgba(0,0,0,.22); }
+.ref-endlink { color: var(--accent); font-weight: 650; text-decoration: none; cursor: pointer; }
+.ref-endlink:hover { text-decoration: underline; }
+
+.ref-side {
+  flex: none;
+  width: 168px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+}
+.ref-panel {
+  flex: none;
+  width: 250px;
+  margin: 16px;
+  padding: 16px 18px;
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+.ref-panel-title { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 8px; }
+.ref-panel-text { font-size: 16px; font-weight: 600; line-height: 1.45; }
+.ref-instruction, .ref-panel-text, .ref-note-text { min-width: 0; overflow-wrap: anywhere; }
+
+body.ref-has-note .ref-body { padding-bottom: 78px; }
+.ref-note {
+  position: fixed;
+  left: 20px;
+  bottom: 14px;
+  z-index: 40;
+  max-width: min(640px, calc(100vw - 40px));
+  min-height: 56px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px 12px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  font-weight: 600;
+}
+.ref-note-x { border: 0; background: none; color: var(--muted); font-size: 18px; cursor: pointer; line-height: 1; }
+
+.ref-foot {
+  flex: none;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 28px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Scrollable pages: the stage grows with its content and the header sticks to the top. */
+html.env-scroll .ref-task { position: sticky; top: 0; z-index: 30; }
+html.env-scroll .ref-body, html.env-scroll .ref-stage { flex: none; min-height: calc(100vh - 64px); }
+
+/* Perturbation overlays. */
+.ref-ov { position: fixed; z-index: 1000; color: var(--fg); font-size: 14px; }
+.ref-ov-text { line-height: 1.4; }
+.ref-ov-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.ref-ov-row .ref-ov-btn { white-space: nowrap; } /* localized labels (lang knob) are longer */
+.ref-ov-btn {
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+.ref-ov-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-ov-cookie {
+  left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; gap: 20px;
+  padding: 16px 28px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 24px rgba(0,0,0,.14);
+}
+.ref-ov-cookie .ref-ov-text { flex: 1; }
+.ref-ov-toast, .ref-ov-chat {
+  display: flex; align-items: flex-start; gap: 10px;
+  max-width: 340px;
+  padding: 12px 12px 12px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+}
+.ref-ov-toast { top: 76px; right: 20px; }
+.ref-ov-chat { bottom: 20px; right: 20px; border-radius: 16px 16px 4px 16px; }
+.ref-ov-toast .ref-ov-btn, .ref-ov-chat .ref-ov-btn { border: 0; padding: 0 4px; font-size: 18px; color: var(--muted); background: none; }
+.ref-ov-promo { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-ov-box {
+  width: min(420px, calc(100vw - 40px));
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 26px 26px 20px;
+  background: var(--panel);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  font-size: 16px;
+}
+.ref-ov-banner {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: ref-spin .8s linear infinite;
+}
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+.ref-hz { position: fixed; z-index: 1100; color: var(--fg); font-size: 14px; line-height: 1.4; }
+.ref-hz-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.ref-hz-btn {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--fg); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.ref-hz-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-link { border: 0; background: none; color: var(--muted); text-decoration: underline; }
+.ref-hz-x { border: 0; background: none; color: var(--muted); padding: 2px 8px; font-size: 16px; }
+.ref-hz-title { font-weight: 700; font-size: 15px; }
+.ref-hz-text { margin-top: 6px; }
+.ref-hz-from { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.ref-hz-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.ref-hz-field input {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; user-select: text;
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+
+/* Rivermere Civic Support · Fluent desktop shell */
+:root { --bg:#f5f6f8; --panel:#fff; --fg:#17243a; --muted:#52637d; --line:#d6dde6; --accent:#0878d1; }
+html, body { width:100%; height:100%; overflow:hidden; background:#f7f8fa; }
+body { color:#17243a; font:16px/1.4 "Segoe UI", Arial, sans-serif; }
+.gov-windowbar { height:36px; flex:none; display:flex; align-items:center; gap:10px; padding:0 12px 0 16px; color:#17243a; background:linear-gradient(110deg,#dce8f3,#f1f4f7 55%,#e5edf5); border-bottom:1px solid #d6dfe8; font-size:14px; }
+.gov-window-mark { color:#174b7b; font-size:19px; }
+.gov-window-controls { margin-left:auto; height:100%; display:flex; align-items:center; gap:30px; padding-right:10px; color:#26364a; font-size:18px; }
+.ref-task { min-height:78px; height:auto; padding:12px 30px; gap:18px; color:#152744; background:#fbfcfd; border-bottom:0; box-shadow:0 1px 4px #1f38500a; }
+.ref-brand { color:#152744; font-size:0; white-space:nowrap; }
+.ref-brand::before { content:'♛'; display:inline-block; margin-right:18px; color:#183b60; font-size:38px; vertical-align:middle; }
+.ref-brand::after { content:'Rivermere City Council'; display:inline-block; font-size:19px; font-weight:650; vertical-align:middle; }
+.ref-brand { position:relative; }
+.ref-brand:after { text-shadow:0 24px 0 #52637d; }
+.ref-instruction { font-size:14px; line-height:1.35; font-weight:500; color:#263b58; max-width:580px; }
+.ref-spacer { flex:1; }
+.ref-nav, .ref-side { display:none !important; }
+.ref-tools { margin-left:auto; gap:8px; }
+.ref-submit { padding:9px 20px; border-radius:4px; color:#fff; background:#0878d1 !important; font-size:15px; font-weight:600; box-shadow:0 1px 2px #17243a22; }
+.ref-xtra { border-color:#cbd5e1; border-radius:4px; background:#fff; color:#263b58; }
+.ref-body { flex:1; min-height:0; padding:0; gap:0; align-items:stretch; background:#f8f9fb; }
+.ref-panel { position:absolute; z-index:15; left:30px; top:118px; width:min(340px,30vw); max-height:140px; overflow:auto; margin:0; padding:12px 16px; border:1px solid #d6e0ea; border-radius:7px; background:#fff; box-shadow:0 2px 8px #21374b12; }
+.ref-panel-title { font-size:13px; text-transform:none; letter-spacing:0; color:#1b3859; font-weight:650; }
+.ref-panel-text { font-size:14px; font-weight:450; }
+.ref-stage { flex:0 0 64.2%; width:64.2%; height:100%; min-height:0; padding:0 22px 12px 30px; display:block; overflow:auto; background:#f8f9fb; }
+.gov-records { flex:1 1 auto; min-width:0; margin:0; padding:18px 18px 12px 12px; border-left:1px solid #e0e5eb; background:#f3f5f8; overflow:hidden; }
+.gov-records-head { height:54px; display:flex; align-items:center; gap:16px; color:#182943; font-size:22px; }
+.gov-records-icon { font-size:27px; color:#163d67; }
+.gov-search { margin-left:auto; width:42%; padding:8px 12px; border:1px solid #d3dbe5; border-radius:5px; background:#fff; color:#687a91; font-size:14px; }
+.gov-record-tabs { height:46px; display:flex; align-items:stretch; gap:0; border-bottom:1px solid #d1d9e3; color:#40536e; font-size:14px; }
+.gov-record-tabs span { min-width:94px; padding:12px 16px 8px; text-align:center; }
+.gov-record-tabs .active { color:#075eb4; border-bottom:3px solid #0878d1; font-weight:600; }
+.gov-record-table { margin-top:18px; border:1px solid #e0e6ed; border-radius:5px; overflow:hidden; background:#fff; }
+.gov-record-row { min-height:52px; display:grid; grid-template-columns:42px 1fr 1.65fr .9fr; align-items:center; border-bottom:1px solid #e0e6ed; color:#1d2b40; font-size:14px; }
+.gov-record-row:last-child { border-bottom:0; }
+.gov-record-row > span { padding:0 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.gov-record-labels { min-height:40px; background:#e7edf4; color:#1a2b43; font-weight:650; }
+.gov-file-icon { color:#315577; font-size:19px; }
+.gov-dock { height:54px; flex:none; display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid #d9e0e8; background:#fff; }
+.gov-dock-item { display:flex; align-items:center; justify-content:center; gap:12px; color:#50627c; font-size:14px; }
+.gov-dock-item.selected { color:#0878d1; background:#e2f1fd; }
+.gov-dock-icon { font-size:23px; line-height:1; color:inherit; }
+.ref-foot, .ref-float-dock { display:none !important; }
+.ref-stage * { font-family:"Segoe UI", Arial, sans-serif !important; }
+.ref-stage { font-size:15px; }
+.ref-stage p, .ref-stage label, .ref-stage li, .ref-stage small, .ref-stage span, .ref-stage a, .ref-stage button, .ref-stage input, .ref-stage textarea { font-size:14px !important; line-height:1.4 !important; }
+.ref-stage h1, .ref-stage h2, .ref-stage h3 { color:#152744 !important; letter-spacing:-.02em !important; }
+.ref-stage h1 { font-size:25px !important; line-height:1.15 !important; font-weight:650 !important; }
+.ref-stage h2 { font-size:19px !important; line-height:1.2 !important; font-weight:650 !important; }
+.ref-stage h3 { font-size:16px !important; font-weight:600 !important; }
+.ref-stage input, .ref-stage textarea { min-height:34px; border:1px solid #c6d0dc !important; border-radius:4px !important; box-shadow:inset 0 1px 2px #17243a0c !important; }
+.ref-stage button { border-radius:4px !important; }
+.ref-stage > * > :first-child { background:#eaf3fb !important; color:#173556 !important; border-bottom:1px solid #dbe8f4 !important; }
+.ref-hz-dialog { font-family:"Segoe UI", Arial, sans-serif; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+.ref-note { left:30px; bottom:68px; max-width:min(620px,60vw); border-radius:6px; font-size:14px; }
+.ref-ov-toast { top:124px; right:22px; }
+.ref-ov-chat { bottom:68px; right:22px; }
+.ref-ov-banner { top:114px; }
+@media(max-width:1259px) {
+ .ref-brand::before { font-size:30px; margin-right:10px; }
+ .ref-brand::after { font-size:16px; }
+ .ref-task { min-height:64px; padding:8px 18px; }
+ .ref-stage { flex-basis:62%; width:62%; padding:0 12px 8px 18px; }
+ .gov-records { padding:10px 10px 8px 8px; }
+ .gov-records-head { height:42px; font-size:18px; gap:9px; }
+ .gov-search { font-size:12px; padding:6px; }
+ .gov-record-tabs span { min-width:0; padding:12px 8px 7px; font-size:12px; }
+ .gov-record-row { grid-template-columns:28px 1fr 1.3fr .8fr; font-size:12px; min-height:43px; }
+ .gov-record-row > span { padding:0 5px; }
+}
+@media(max-height:700px) {
+ .gov-windowbar { height:30px; }
+ .ref-task { min-height:56px; }
+ .gov-dock { height:46px; }
+ .gov-record-row { min-height:38px; }
+ .gov-record-table { margin-top:10px; }
+}
+
+/* Final shell overrides take precedence over the inherited strict-01 widget. */
+.ref-task { background:#fbfcfd !important; color:#152744 !important; border-bottom:1px solid #e1e6ec !important; box-shadow:none !important; }
+.ref-task .ref-submit { color:#fff !important; background:#0878d1 !important; border:0 !important; min-width:92px; min-height:38px; }
+.ref-task .ref-xtra { color:#31445d !important; background:#fff !important; border:1px solid #cbd5e1 !important; }
+.ref-body, .ref-body.ref-panel-right { flex-direction:row !important; }
+.ref-stage { flex:0 0 64.2% !important; width:64.2% !important; }
+.gov-records { flex:1 1 auto !important; }
+.ref-stage > * > :first-child { background:#eaf3fb !important; color:#173556 !important; border-bottom:1px solid #dbe8f4 !important; }
+.gov-dock { position:relative; z-index:20; }
+.ref-foot { display:flex !important; position:fixed !important; right:0; bottom:54px; z-index:55; min-height:46px; width:auto; max-width:55vw; padding:4px 16px; }
+.ref-foot-text { display:none; }
+.ref-foot .ref-tools { min-width:120px; min-height:38px; justify-content:flex-end; }
+.ref-foot > .ref-tools { position:fixed; right:20px; bottom:62px; z-index:75; display:flex !important; width:max-content; min-height:40px; }
+.ref-task { position:relative; }
+.ref-task > .ref-tools { position:absolute; right:28px; top:18px; z-index:12; }
+.ref-task > .ref-instruction { position:absolute; left:30px; right:270px; bottom:8px; max-height:34px; overflow:hidden; }
+.ref-task > .ref-spacer { display:none; }
+.ref-foot { display:flex !important; position:fixed !important; right:0; bottom:54px; z-index:55; min-height:46px; width:auto; max-width:55vw; padding:4px 16px; }
+.ref-foot .ref-tools { min-width:120px; min-height:38px; justify-content:flex-end; }
+.ref-foot > .ref-tools { position:fixed; right:20px; bottom:62px; z-index:75; display:flex !important; width:max-content; min-height:40px; }
+.ref-foot .ref-submit, .ref-task .ref-submit, .ref-float-dock .ref-submit { min-width:84px; min-height:36px; display:inline-flex !important; align-items:center; justify-content:center; }
+.ref-foot-text { display:none; }
+.ref-brand:after { text-shadow:none !important; }
+.ref-float-dock { display:block !important; position:fixed !important; right:18px; bottom:62px; height:auto !important; z-index:60; }
+.ref-float-dock .ref-float { position:static; box-shadow:0 2px 7px #15274430; }
+.ref-foot { display:flex !important; position:fixed; right:0; bottom:54px; z-index:55; min-height:46px; width:auto; max-width:55vw; padding:4px 16px; }
+.ref-foot-text { display:none; }
+.ref-brand { color:#172e4a !important; }
+.ref-panel { left:auto !important; right:20px !important; top:470px !important; width:min(360px,30vw) !important; }
+.ref-note { left:auto !important; right:18px !important; bottom:68px !important; max-width:min(360px,30vw) !important; }
+.ref-submit { background:#0878d1 !important; color:#fff !important; border-radius:4px !important; font-weight:600 !important; }
+
+/* Rivermer Council / high-contrast civic application design. */
+:root {
+  --bg: #f7f7f5;
+  --panel: #fff;
+  --fg: #111820;
+  --muted: #505b68;
+  --line: #d9dde0;
+  --accent: #b6f000;
+}
+html, body { background: #f7f7f5; }
+body { color: #111820; font: 16px/1.45 "Arial Narrow", "Roboto Condensed", "Segoe UI", Arial, sans-serif; }
+.ref-task {
+  height: auto; min-height: 60px; padding: 8px 38px; gap: 26px;
+  background: #20272b; color: #f7f8f8; border: 0;
+  box-shadow: 0 2px 0 rgba(0,0,0,.16);
+}
+.ref-brand { color: #fff; font-size: 23px; font-weight: 750; white-space: nowrap; }
+.ref-brand { font-size: 0; }
+.ref-brand::after { content: 'Rivermere Council'; font-size: 23px; }
+.ref-brand::before { content: '♛'; display: inline-block; margin-right: 14px; font-size: 32px; line-height: 1; vertical-align: -3px; }
+.ref-nav { align-self: stretch; gap: 0; flex: 1; justify-content: space-evenly; }
+.ref-navlink { align-self: stretch; display: flex; align-items: center; padding: 0 16px; color: #f4f5f5; font-size: 16px; }
+.ref-navlink:nth-child(2) { color: #c6ff00; border-bottom: 6px solid #c6ff00; padding-top: 6px; }
+.ref-instruction { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.3; }
+.ref-spacer { flex: .15; }
+.ref-tools { gap: 10px; }
+.ref-submit { padding: 10px 22px; border-radius: 2px; background: #b7ef00 !important; color: #111820 !important; font-weight: 700; }
+.ref-xtra { border-radius: 2px; color: #fff; border-color: #596166; }
+.ref-body { min-height: 0; padding: 20px 28px 26px; gap: 28px; align-items: stretch; }
+.ref-stage { min-height: 0; align-items: center !important; justify-content: center !important; }
+.ref-panel { border-radius: 3px; box-shadow: 0 2px 12px rgba(18,28,33,.06); }
+.ref-panel-title { color: #657078; }
+.ref-panel-text { font-size: 15px; }
+.ref-foot { background: #fff; border-color: #dfe2e3; }
+
+/* The use-gov-portal template supplies the working form. Keep its structure and anchors,
+   while giving its controls the squared, spacious treatment of the reference. */
+.ref-stage * { font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", Arial, sans-serif; }
+.ref-stage { font-size: 15px; }
+.ref-stage p, .ref-stage label, .ref-stage li, .ref-stage small, .ref-stage span,
+.ref-stage a, .ref-stage button, .ref-stage input, .ref-stage textarea {
+  font-size: 14px !important; line-height: 1.4 !important;
+}
+.ref-stage button { background-color: #fff !important; border-color: #cbd1d5 !important; color: #17202a !important; }
+.ref-stage a { color: #33404c !important; background: transparent !important; }
+.ref-stage [role=tab][aria-selected=true], .ref-stage [aria-current=true] {
+  color: #111820 !important; border-color: #b7ef00 !important;
+}
+.ref-stage > * > :first-child {
+  background-color: #20272b !important; color: #fff !important;
+  border-bottom-color: #b7ef00 !important;
+}
+.ref-stage h1 { font-size: clamp(30px, 2.6vw, 44px) !important; }
+.ref-stage h2 { font-size: clamp(20px, 1.65vw, 27px) !important; }
+.ref-stage h3 { font-size: clamp(17px, 1.3vw, 21px) !important; }
+.ref-stage h1, .ref-stage h2, .ref-stage h3 { color: #101519; letter-spacing: -.035em; }
+.ref-stage h1 { font-size: clamp(27px, 2.8vw, 46px) !important; line-height: 1.08; font-weight: 800; }
+.ref-stage h2 { font-size: clamp(19px, 1.55vw, 26px) !important; line-height: 1.2; font-weight: 750; }
+.ref-stage input, .ref-stage textarea {
+  border: 1.5px solid #69737a !important; border-radius: 3px !important;
+  background: #fff !important; color: #17202a !important; box-shadow: none !important;
+  min-height: 40px; font-size: 16px !important;
+}
+.ref-stage button { border-radius: 3px !important; }
+.ref-stage [type=radio], .ref-stage [type=checkbox] { accent-color: #1685ef; }
+.ref-note { border-radius: 3px; border-left-color: #b7ef00; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Reference palette wins over the cloned strict-01 overrides above. */
+.ref-task { background:#fbfcfd !important; color:#172e4a !important; }
+.ref-brand { color:#172e4a !important; }
+.ref-instruction { color:#263b58 !important; font-size:14px !important; font-weight:500 !important; }
+.ref-submit { background:#0878d1 !important; color:#fff !important; border-radius:4px !important; font-weight:600 !important; }
+.ref-submit.ref-icon { background:#0878d1 !important; color:#fff !important; }
+.ref-stage [role=tab][aria-selected=true], .ref-stage [aria-current=true] { border-color:#0878d1 !important; }
+.ref-stage > * > :first-child { background:#eaf3fb !important; color:#173556 !important; border-bottom-color:#dbe8f4 !important; }
+.ref-note { border-left-color:#0878d1 !important; color:#1b2d45 !important; }
+.ref-note-text { color:#1b2d45 !important; }
+
+/* Fluent 2021 council workspace. */
+:root { --bg:#f5f7fa; --panel:#fff; --fg:#17263e; --muted:#52647d; --line:#d7e0e9; --accent:#0878d1; }
+body { background:#f7f9fb; color:#17263e; font-family:"Segoe UI", Arial, sans-serif; }
+.gov-windowbar {
+  height:36px; padding:0 16px; gap:9px; color:#17263e;
+  background:linear-gradient(105deg,#dce7f1 0%,#f3f6f9 58%,#e4edf5 100%);
+  border-bottom:1px solid #d3dce5; font:14px/1 "Segoe UI",Arial,sans-serif;
+}
+.gov-window-mark { color:#174b7b; font-size:20px; }
+.gov-window-controls { gap:30px; }
+.ref-task {
+  min-height:78px; height:78px; padding:10px 30px; gap:0; flex-wrap:wrap;
+  align-content:center; background:rgba(255,255,255,.92) !important;
+  border-bottom:0 !important; box-shadow:0 1px 5px rgba(25,53,82,.06) !important;
+}
+.ref-brand { flex:0 0 auto; width:100%; height:36px; color:#152744 !important; font-size:0; line-height:36px; }
+.ref-brand::before { content:'♛'; display:inline-block; margin:0 20px 0 18px; color:#173b60; font-size:39px; vertical-align:middle; }
+.ref-brand::after { content:'Rivermere City Council'; display:inline-block; color:#152744; font-size:19px; font-weight:650; vertical-align:middle; text-shadow:none !important; }
+.gov-tagline { margin:-2px 0 0 68px; color:#3f536e; font-size:13px; line-height:17px; }
+.ref-instruction { color:#263b58 !important; font-size:14px !important; font-weight:500 !important; }
+.ref-tools { gap:8px; }
+.ref-submit { min-height:38px; padding:8px 19px; border-radius:4px !important; background:#0878d1 !important; color:#fff !important; font-weight:600 !important; }
+.ref-xtra { border:1px solid #cbd5e1 !important; border-radius:4px !important; background:#fff !important; color:#31445d !important; }
+.ref-body { background:#f8f9fb; }
+.ref-stage {
+  display:block !important; flex:0 0 64.2% !important; width:64.2% !important; padding:12px 22px 14px 30px;
+  overflow:auto; background:#fff;
+}
+.gov-records { flex:1 1 auto; padding:18px 18px 12px 12px; border-left:1px solid #e0e5eb; background:#f3f5f8; }
+.gov-records-head { height:54px; color:#182943; font-size:22px; }
+.gov-search { border-radius:5px; }
+.gov-record-tabs { border-bottom-color:#d1d9e3; }
+.gov-record-tabs .active { color:#075eb4; border-bottom-color:#0878d1; }
+.gov-record-table { border:1px solid #e0e6ed; border-radius:5px; }
+.gov-record-row { min-height:52px; grid-template-columns:42px 1fr 1.65fr .9fr; border-bottom-color:#e0e6ed; font-size:14px; }
+.gov-record-labels { min-height:40px; background:#e2e9f0; }
+.gov-dock { position:relative; z-index:20; height:54px; grid-template-columns:repeat(5,1fr); background:#fff; border-top:1px solid #d9e0e8; }
+.gov-dock-item { color:#50627c; font-size:14px; }
+.gov-dock-item.selected { color:#0878d1; background:#e2f1fd; }
+.gov-dock-icon { font-size:23px; }
+.ref-stage > * { width:100%; max-width:none; border-radius:5px; }
+.ref-stage h1, .ref-stage h2, .ref-stage h3 { color:#152744 !important; letter-spacing:-.02em !important; }
+.ref-stage h1 { font-size:25px !important; line-height:1.15 !important; font-weight:650 !important; }
+.ref-stage h2 { font-size:19px !important; line-height:1.2 !important; font-weight:650 !important; }
+.ref-stage h3 { font-size:16px !important; font-weight:600 !important; }
+.ref-stage input, .ref-stage textarea { min-height:34px; border:1px solid #c6d0dc !important; border-radius:4px !important; box-shadow:inset 0 1px 2px rgba(23,36,58,.05) !important; }
+.ref-stage button { border-radius:4px !important; }
+.ref-stage [type=radio], .ref-stage [type=checkbox] { accent-color:#0878d1; }
+.ref-stage > * > :first-child { background:#eaf3fb !important; color:#173556 !important; border-bottom:1px solid #dbe8f4 !important; }
+.ref-foot { display:flex !important; position:fixed !important; left:auto; right:0; bottom:54px; z-index:55; min-height:46px; width:auto; max-width:55vw; padding:4px 16px; }
+.ref-foot-text { display:none; }
+.ref-foot > .ref-tools { position:fixed; right:20px; bottom:62px; z-index:75; display:flex !important; width:max-content; min-height:40px; }
+.ref-float-dock { display:block !important; position:fixed !important; right:18px; bottom:62px; height:auto !important; z-index:60; }
+.ref-float-dock .ref-float { position:static; box-shadow:0 2px 7px rgba(21,39,68,.19); }
+.ref-foot .ref-submit { position:fixed !important; right:24px; bottom:62px; z-index:70; }
+.ref-float-dock .ref-submit { position:fixed !important; right:24px; bottom:62px; z-index:70; }
+.ref-note { left:auto !important; right:18px !important; bottom:68px !important; max-width:min(360px,30vw) !important; border-radius:6px; border-left-color:#0878d1 !important; }
+.ref-ov-toast { top:124px; right:22px; }
+.ref-ov-chat { bottom:68px; right:22px; }
+.ref-ov-banner { top:114px; }
+@media(max-width:1259px) {
+  .ref-task { min-height:64px; height:auto; padding:6px 18px; }
+  .ref-task > .ref-tools { top:12px; right:18px; }
+  .ref-task > .ref-instruction { left:18px; right:200px; bottom:4px; }
+  .ref-brand { height:30px; line-height:30px; }
+  .ref-brand::before { font-size:30px; margin:0 10px 0 8px; }
+  .ref-brand::after { font-size:16px; }
+  .gov-tagline { margin-left:48px; font-size:11px; }
+  .ref-stage { flex-basis:62% !important; width:62% !important; padding:8px 12px 8px 18px; }
+  .gov-records { padding:10px 10px 8px 8px; }
+  .gov-records-head { height:42px; font-size:18px; gap:9px; }
+  .gov-search { font-size:12px; padding:6px; }
+  .gov-record-tabs span { min-width:0; padding:12px 8px 7px; font-size:12px; }
+  .gov-record-row { grid-template-columns:28px 1fr 1.3fr .8fr; font-size:12px; min-height:43px; }
+  .gov-record-row > span { padding:0 5px; }
+}
+@media(max-height:700px) {
+  .gov-windowbar { height:30px; }
+  .ref-task { min-height:56px; height:auto; }
+  .gov-dock { height:46px; }
+  .gov-record-row { min-height:38px; }
+}

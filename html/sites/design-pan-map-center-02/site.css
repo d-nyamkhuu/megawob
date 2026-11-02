@@ -1,0 +1,417 @@
+@import url("../../templates/site/css/design-67677e.css");
+
+
+/* Amiga Workbench window and city-map directory treatment. */
+:root {
+  --bg: #b9b9b9;
+  --panel: #d2d2d2;
+  --fg: #11182a;
+  --muted: #37445f;
+  --line: #656565;
+  --accent: #ff8a00;
+}
+body { background:#b9b9b9; color:#101728; font:15px/1.25 "Courier New",monospace; padding:4px; }
+.ref-task { min-height:42px; padding:3px 7px; gap:10px; flex-wrap:wrap; background:#0646b5; color:#fff; border:2px outset #ddd; border-bottom:0; }
+.ref-brand { color:white; font:bold 22px/1 "Courier New",monospace; letter-spacing:.02em; }
+.ref-nav { order:3; width:100%; gap:2px; height:56px; margin:0 -7px -3px; padding:2px 4px; background:#c4c4c4; border-top:2px solid #f5f5f5; }
+.ref-navlink { min-width:164px; display:flex; align-items:center; padding:0 18px; border:2px outset #eee; color:#101728; font:bold 17px "Courier New",monospace; background:#c6c6c6; }
+.ref-navlink:first-child { background:#ff9000; }
+.ref-instruction { max-width:650px; font:bold 14px/1.25 "Courier New",monospace; }
+.ref-spacer { flex:1; }
+.ref-tools { gap:3px; }
+.ref-submit,.ref-xtra { border:2px outset #eee; border-radius:0; padding:5px 10px; background:#c6c6c6; color:#111; font:bold 13px "Courier New",monospace; box-shadow:none; }
+.ref-submit { background:#ff9000; color:#111; }
+.ref-icon { width:32px; height:30px; }
+.ref-body { border:3px ridge #eee; padding:5px; background:#b9b9b9; }
+.ref-stage { min-width:0; min-height:0; align-items:stretch!important; justify-content:stretch!important; }
+.ref-side { display:none; }
+.ref-panel { background:#d2d2d2; border:2px ridge #eee; border-radius:0; margin:0 6px 0 0; padding:0; width:360px; }
+.ref-foot { min-height:26px; padding:2px 8px; border:2px ridge #eee; background:#c4c4c4; color:#111; font:bold 12px "Courier New",monospace; }
+.ref-float-dock { height:30px; }
+
+/* Compact application shell: preserve the map widget's own event handlers. */
+.mp-product{border:2px ridge #f1f1f1!important;border-radius:0!important;box-shadow:none!important;background:#c5c5c5!important;font:14px/1.2 "Courier New",monospace!important}
+
+
+.mpp-panel{border:2px ridge #eee!important;background:#d0d0d0!important}
+.mpp-panel .mpe-heading{padding:4px 8px;color:#fff;background:#0646b5;font:bold 17px "Courier New",monospace;border:2px outset #eee}
+
+.mpp-panel .mpe-section{padding:0!important;border-bottom:2px ridge #eee!important}
+.mpp-panel .mpe-list{background:#ddd}
+.mpp-panel .mpe-item{padding:2px 7px!important;gap:6px!important;align-items:center!important;border-bottom:1px solid #aaa!important}
+.mpp-panel .mpe-item button { line-height:1.1; }
+.mpp-panel .mpe-name{font:bold 15px/1.15 "Courier New",monospace!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.mpp-panel .mpe-badge{display:grid!important;color:#0646b5!important;border:0!important;background:transparent!important}
+.mpp-panel .mpe-badge svg { width:18px; height:18px; stroke-width:2.8; }
+.mpp-controls{gap:0!important;flex-direction:column;padding:0!important;border-bottom:2px ridge #eee!important}
+.mpp-controls button { width:100%; text-align:left; border:0!important; border-radius:0!important; border-bottom:1px solid #aaa!important; padding:3px 8px!important; background:#ddd!important; font:bold 15px "Courier New",monospace!important; }
+.mpp-controls button.active{background:#ff9000!important;color:#111!important}
+.mpp-main{border:2px ridge #eee}
+.mp-product .mp-card{border:0!important;background:#c5c5c5!important}
+.mp-product .mp-head{background:#0646b5;color:#fff;border:2px outset #eee!important}
+.mp-product .mp-title{color:#fff!important;font:bold 17px "Courier New",monospace!important}
+
+.mp-product .mp-port{border:2px inset #eee}
+.mp-product .mp-port{--mp-land:#c9c8bd!important;--mp-water:#4d9dd2!important;--mp-park:#8dbb70!important;--mp-street:#eeeae0!important;--mp-road:#ffd34f!important;--mp-casing:#b59b68!important;--mp-halo:#f6f3e9!important}
+.mp-product .mp-zoom{border-radius:0!important;border:2px outset #eee!important;background:#c5c5c5!important;padding:2px!important;gap:1px!important}
+
+.mp-product .mp-zoom .mp-zbtn{border-radius:0!important;border:2px outset #eee!important;background:#c5c5c5!important;font:bold 25px/1 "Courier New",monospace!important}
+.mp-product .mp-info{border-radius:0!important}
+.mpp-foot{background:#c5c5c5!important;color:#111!important;font:bold 11px "Courier New",monospace!important}
+
+@media (max-width: 760px) {
+  
+  .ref-navlink { min-width:0; flex:1; padding:0 5px; }
+  .ref-body { padding:3px; }
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ""; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+/* Directory panes and classic Workbench gadgets. */
+
+.map-category-list{overflow:auto;background:#dedede;border-top:1px solid #fff;border-bottom:2px ridge #eee;scrollbar-width:thin;scrollbar-color:#888 #c5c5c5}
+.map-category{display:flex;align-items:center;gap:7px;padding:1px 7px;border-bottom:1px solid #aaa;color:#111827;font:bold 14px/1 "Courier New",monospace}
+.map-category.selected{background:#f28a12}
+.map-category-icon{color:#0646b5;font-size:16px;text-align:center}
+.map-category-label{white-space:nowrap}
+.map-category-count{text-align:right;font-weight:normal}
+.mpp-controls{display:flex!important;flex-direction:row!important;padding:3px 5px!important;gap:4px!important}
+.mpp-controls button { flex:1; min-width:0; padding:3px 4px!important; font-size:11px!important; text-align:center!important; border:2px outset #eee!important; }
+
+.map-status{padding:0 7px;border-top:2px ridge #eee;background:#c7c9cb;color:#101828;font:13px/1.45 "Courier New",monospace}
+.map-status-title{padding:3px 7px;color:#fff;background:#0646b5;font:bold 15px/1.2 "Courier New",monospace}
+.map-status-row{display:flex;justify-content:space-between;gap:6px;white-space:nowrap}
+.map-status-row b { font-weight:normal; font-variant-numeric:tabular-nums; }
+.ref-navlink { gap:10px; }
+.ref-navlink::before { content:"▤"; display:inline-block; width:28px; text-align:center; font-size:22px; line-height:1; }
+.ref-navlink:nth-child(2)::before { content:"▦"; }
+.ref-navlink:nth-child(3)::before { content:"⌁"; }
+.ref-navlink:nth-child(4)::before { content:"▧"; }
+.ref-task > .ref-tools::before {
+  content:"▁  □  ×"; display:flex; align-items:center; justify-content:center; width:88px; height:27px;
+  margin-right:3px; border:2px outset #eee; background:#c7c9cb; color:#111827;
+  font:bold 15px/1 "Courier New",monospace; letter-spacing:2px; text-shadow:1px 1px #fff;
+}
+.ref-task > .ref-tools { right:105px!important; }
+.ref-task > .ref-tools::before { display:none; }
+.ref-task::after {
+  content:"▁  □  ×"; position:absolute; z-index:2; top:4px; right:7px; width:82px; height:27px;
+  display:flex; align-items:center; justify-content:center; border:2px outset #eee;
+  background:#c7c9cb; color:#111827; font:bold 15px/1 "Courier New",monospace; letter-spacing:2px;
+  text-shadow:1px 1px #fff;
+}
+@media (max-width: 760px) {
+  .ref-task > .ref-tools { right:95px!important; }
+  .ref-task::after { width:76px; }
+}
+@media (max-height: 680px) {
+  
+  
+}
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ""; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* City Explorer: Amiga Workbench window and planar controls. */
+:root {
+  --bg: #aeb1b4 !important;
+  --panel: #c7c9cb !important;
+  --fg: #111827 !important;
+  --muted: #424650 !important;
+  --line: #50545a !important;
+  --accent: #f28a12 !important;
+  font-family: "Courier New", monospace;
+}
+body {
+  position: relative;
+  padding: 4px;
+  gap: 0;
+  background: #aeb1b4;
+  color: #101828;
+  font: 16px/1.2 "Courier New", monospace;
+  overflow: hidden;
+}
+.ref-task {
+  min-height: 42px;
+  height: 102px;
+  min-height: 102px;
+  position: relative;
+  align-items: flex-start;
+  padding: 7px 8px;
+  gap: 10px;
+  border: 2px outset #eef0f2;
+  background: linear-gradient(#1556c4 0 41%, #0640a6 41% 43%, #b8bbbe 43% 100%);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px #0a2f79;
+}
+.ref-brand {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  color: #fff;
+  font: bold 21px/1 "Courier New", monospace;
+  letter-spacing: .02em;
+  text-shadow: 1px 1px #142b5d;
+}
+.ref-brand::before {
+  content: "";
+  display: inline-block;
+  width: 23px; height: 23px; margin: 0 9px 0 2px;
+  vertical-align: -5px;
+  border: 2px solid #eef4f7;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 36%, #8bd67a 0 12%, transparent 13%),
+              radial-gradient(ellipse at 63% 67%, #49af5a 0 20%, transparent 21%),
+              linear-gradient(135deg, #43c7e5, #073e9c 70%);
+  box-shadow: 1px 1px #162c55;
+}
+.ref-nav {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 58px;
+  gap: 0;
+  align-self: stretch;
+  background: #b8bbbe;
+  border-top: 2px solid #55595e;
+}
+.ref-navlink {
+  display: flex;
+  align-items: center;
+  min-width: 130px;
+  padding: 0 22px;
+  border: 2px outset #eee;
+  background: #c4c6c8;
+  color: #101828;
+  font: bold 16px "Courier New", monospace;
+  text-decoration: none;
+}
+.ref-navlink:first-child { background: #f28a12; }
+.ref-instruction {
+  position: absolute;
+  left: 250px;
+  right: 275px;
+  top: 4px;
+  height: 34px;
+  overflow: auto;
+  padding: 5px 9px;
+  border: 2px inset #ddd;
+  background: #d4d5d6;
+  color: #111827;
+  font: bold 14px/1.2 "Courier New", monospace;
+}
+.ref-spacer { min-width: 0; }
+.ref-tools { gap: 5px; }
+.ref-task > .ref-tools { position: absolute; right: 7px; top: 4px; }
+.ref-submit, .ref-xtra {
+  border: 2px outset #f4f4f4;
+  border-radius: 0;
+  background: #c7c9cb;
+  color: #111827;
+  padding: 5px 12px;
+  font: bold 14px "Courier New", monospace;
+  box-shadow: inset 1px 1px #fff;
+}
+.ref-submit { background: #f28a12; }
+.ref-icon { width: 32px; height: 30px; }
+.ref-body {
+  min-height: 0;
+  margin-top: 3px;
+  border: 2px outset #f3f3f3;
+  background: #aeb1b4;
+  overflow: hidden;
+}
+.ref-stage {
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  padding: 3px;
+  min-width: 0;
+  min-height: 0;
+  background: #aeb1b4;
+}
+.ref-stage > * {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  flex: 1 1 auto !important;
+}
+.ref-stage * { max-width: none !important; }
+.ref-stage canvas { width: 100% !important; height: 100% !important; }
+.ref-side {
+  width: 180px;
+  background: #c7c9cb;
+  border-right: 2px inset #eee;
+  font: 14px "Courier New", monospace;
+}
+.ref-panel {
+  border: 2px groove #eee;
+  border-radius: 0;
+  background: #d0d1d2;
+  font-family: "Courier New", monospace;
+}
+.ref-foot {
+  min-height: 30px;
+  padding: 3px 8px;
+  border: 2px outset #eee;
+  background: #c3c5c7;
+  color: #111827;
+  font: 12px "Courier New", monospace;
+}
+.ref-endlink { color: #073e9c; }
+.ref-note {
+  left: 14px; bottom: 42px; max-width: min(620px, calc(100vw - 28px));
+  border: 2px outset #eee; border-left: 6px solid #f28a12; border-radius: 0;
+  background: #d0d1d2; box-shadow: 2px 3px 0 #555;
+  font: bold 14px/1.25 "Courier New", monospace;
+}
+.ref-note-x { color: #111827; }
+.ref-float-dock { height: 0; }
+.ref-float { right: 8px; bottom: 8px; }
+html.env-scroll .ref-task { position: relative; }
+
+/* The task's map window grows with the available stage; retain its own panes and controls. */
+.ref-stage > * > * { box-sizing: border-box; }
+.ref-stage button, .ref-stage [role="button"] {
+  border-radius: 0 !important;
+  font-family: "Courier New", monospace !important;
+}
+
+/* Overlay frame uses the same square, raised Workbench gadgets. */
+.ref-ov, .ref-fault, .ref-notice, .ref-hz { font-family: "Courier New", monospace; }
+.ref-ov, .ref-fault, .ref-notice, .ref-hz-window, .ref-hz-ad, .ref-ov-box {
+  border-radius: 0 !important;
+}
+.ref-ov-btn, .ref-fault-x, .ref-hz-btn {
+  border-radius: 0 !important;
+  border: 2px outset #eee !important;
+  background: #c7c9cb !important;
+  color: #111827 !important;
+  font-family: "Courier New", monospace !important;
+}
+.ref-ov-primary, .ref-hz-primary { background: #f28a12 !important; }
+
+.ref-task > .ref-tools { right:105px!important; }
+.ref-task > .ref-tools::before { display:none; }
+.ref-task::after {
+  content:"▁  □  ×"; position:absolute; z-index:2; top:4px; right:7px; width:82px; height:27px;
+  display:flex; align-items:center; justify-content:center; border:2px outset #eee;
+  background:#c7c9cb; color:#111827; font:bold 15px/1 "Courier New",monospace; letter-spacing:2px;
+  text-shadow:1px 1px #fff;
+}
+@media (max-width: 760px) {
+  .ref-task > .ref-tools { right:95px!important; }
+  .ref-task::after { width:76px; }
+}

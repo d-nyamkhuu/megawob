@@ -1,0 +1,82 @@
+name: Docker
+
+# Builds the OpenEnv server image (server/Dockerfile) and publishes it to the GitHub Container Registry as
+# ghcr.io/d-nyamkhuu/megawob: `latest` from main, `X.Y.Z` and `X.Y` from release tags (vX.Y.Z). The image is checked
+# before it is pushed: the server must start and answer /health. The jobs skip while the repository is private
+# (private packages count against the account's storage quota); once it is public, run this workflow by hand for the
+# current release, and set the package's visibility to public in its settings (Packages > megawob > Package settings).
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths:
+      - "html/**"
+      - "megawob/**"
+      - "server/**"
+      - "pyproject.toml"
+      - ".dockerignore"
+      - ".github/workflows/docker.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  image:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.title=MegaWoB
+            org.opencontainers.image.description=OpenEnv BrowserGym server with every MegaWoB task and the original MiniWoB++ tasks
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: server/Dockerfile
+          load: true
+          tags: megawob:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Check that the server starts
+        run: |
+          docker run -d --name megawob -p 8000:8000 --shm-size=1g megawob:test
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:8000/health; then echo; docker rm -f megawob; exit 0; fi
+            sleep 2
+          done
+          docker logs megawob
+          exit 1
+      - name: Push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: server/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha

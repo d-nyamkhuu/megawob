@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "megawob"
+version = "0.1.0"
+description = "Seeded web tasks for computer-use agents (precise mouse control, forms, apps) on many page designs, as drop-in MiniWoB++ tasks for BrowserGym and OpenEnv"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY.md"]
+requires-python = ">=3.10"
+authors = [{name = "Nyamkhuu Demberelsuren"}]
+keywords = ["computer-use agents", "reinforcement learning", "BrowserGym", "MiniWoB++", "OpenEnv", "web agents"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: JavaScript",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/d-nyamkhuu/megawob"
+Repository = "https://github.com/d-nyamkhuu/megawob"
+Issues = "https://github.com/d-nyamkhuu/megawob/issues"
+Changelog = "https://github.com/d-nyamkhuu/megawob/blob/main/CHANGELOG.md"
+
+# megawob.catalog and the tools that only read pages need nothing beyond the standard library. Extras:
+#   browsergym  the BrowserGym tasks (import megawob.tasks); numpy and pillow are what megawob.screen imports
+#   serve       the OpenEnv server (megawob.serve) on top of browsergym. PyPI's `openenv` (0.10.0) and `openenv-core`
+#               do not ship OpenEnv's browsergym_env (the server app and client models serve.py imports), so it comes
+#               from the OpenEnv commit pinned in server/Dockerfile: a git URL dependency, fine for an install from a
+#               checkout (this package is too big for PyPI anyway). That package pins playwright 1.44, see below.
+#   check       checker, lint, golden, describe, gallery: Playwright with the Chromium the pages are checked in
+#   baselines   the held-out benchmark and the step probe (baselines/)
+#   sitegen     tools/sitegen: Codex agents that draw design images and build design-* sites
+#   dev         tests and lint
+# browsergym-core (and the OpenEnv browsergym_env) pin playwright==1.44, which clashes with check's 1.58 pin (Chromium
+# 125 deadlocks now and then): pip cannot resolve both in one command. Run ./install.sh, which installs in two steps
+# (`pip install -e '.[browsergym]'`, then `pip install -e '.[check]'`, pip warns about the clash and keeps 1.58) or
+# uses uv, which takes the override below (`uv pip install -e '.[serve,check]'` is one command).
+[project.optional-dependencies]
+browsergym = ["browsergym-core==0.14.3", "browsergym-miniwob==0.14.3", "gymnasium>=0.29", "numpy", "pillow"]
+serve = [
+    "megawob[browsergym]",
+    "openenv-browsergym_env @ git+https://github.com/meta-pytorch/OpenEnv.git@8d3455ab91d28b46349b8bf01fc243d339cda260#subdirectory=envs/browsergym_env",
+    "openenv>=0.2.3",
+    "fastapi",
+    "uvicorn",
+]
+check = ["playwright==1.58.0", "pillow"]
+baselines = ["megawob[check]", "openai"]
+sitegen = ["megawob[check]", "openai-codex>=0.163", "mcp>=2.3,<3", "jsonschema"]
+dev = ["pytest>=8", "ruff==0.17.2", "numpy", "pillow"]
+
+# Console scripts for the command-line tools (each is also `python -m megawob.<name>`).
+[project.scripts]
+megawob-check = "megawob.check:main"
+megawob-lint = "megawob.lint:main"
+megawob-golden = "megawob.golden:main"
+megawob-catalog = "megawob.catalog:main"
+megawob-describe = "megawob.describe:main"
+megawob-scenarios = "megawob.scenarios:main"
+megawob-manifests = "megawob.manifests:main"
+megawob-audit = "megawob.audit:main"
+megawob-hackcheck = "megawob.hackcheck:main"
+megawob-precision = "megawob.precision:main"
+megawob-gallery = "megawob.gallery:main"
+
+# uv only: the playwright (and the greenlet it needs) of `check` over the 1.44 pin of browsergym-core and browsergym_env (pip has no override).
+[tool.uv]
+override-dependencies = ["playwright==1.58.0", "greenlet>=3.1.1,<4"]
+
+[tool.setuptools]
+packages = ["megawob"]
+# The pages (html/) are not package data (they live at the repository root): setup.py copies them into a built
+# wheel as megawob/html, and MANIFEST.in puts them in the sdist. megawob.catalog reads $MEGAWOB_HTML, else
+# megawob/html (a wheel), else html/ next to the package (a checkout or an editable install).
+
+[tool.setuptools.package-data]
+# Node recorder used by megawob.manifests and megawob.lint in installed distributions; the gallery's input layer.
+megawob = ["*.mjs", "*.js", "py.typed"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["html"]
+
+[tool.ruff.lint]
+# Pyflakes plus the pycodestyle errors (what older Ruff selected by default; newer releases select more). No mass
+# reformat: the dense probe scripts keep their style.
+select = ["E4", "E7", "E9", "F"]
+per-file-ignores = { "megawob/hackcheck.py" = ["E702", "E741"] }

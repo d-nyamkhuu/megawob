@@ -1,0 +1,358 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* 1988 Macintosh dispatch planner */
+:root {
+  --bg: #fff !important; --panel: #fff !important; --fg: #090909 !important;
+  --muted: #222 !important; --line: #111 !important; --accent: #111 !important;
+  font-family: "Chicago", "Geneva", "Arial", sans-serif;
+}
+body {
+  position: relative; overflow: hidden; color: #080808; background: #fff;
+  font: 16px/1.25 "Chicago", "Geneva", Arial, sans-serif;
+  border: 2px solid #111; outline: 3px double #111; outline-offset: -7px;
+  padding-top: 40px;
+}
+/* Detached Mac menu bar and framed application title strip. */
+body::before {
+  content: "●     File     Edit     View     Dispatch     Tools     Window     Help";
+  position: absolute; z-index: 20; top: 0; left: 0; right: 0; height: 34px;
+  padding: 4px 22px; background: #fff; border-bottom: 2px solid #111;
+  color: #050505; font-size: 17px; font-weight: 700; letter-spacing: .02em;
+  white-space: pre;
+}
+.ref-task {
+  order: 0; z-index: 5; position: relative; min-height: 44px; height: auto;
+  padding: 3px 16px; gap: 12px; justify-content: flex-end;
+  background: #fff; border: 2px solid #111; border-top: 0; box-shadow: none;
+}
+.ref-task::before {
+  content: "Delivery Planner"; position: absolute; top: -31px; left: 4px; right: 4px;
+  height: 27px; text-align: center; padding-top: 2px; border: 2px solid #111;
+  background: repeating-linear-gradient(135deg,#fff 0 2px,#bbb 2px 3px);
+  color: #080808; font-weight: 700; font-size: 17px;
+}
+.ref-brand, .ref-nav, .ref-spacer { display: none; }
+.ref-instruction { color: #111; font: 14px/1.25 "Chicago", Geneva, Arial, sans-serif; font-weight: 500; }
+.ref-body { order: 1; min-height: 0; padding: 0 8px 8px; gap: 8px; background: #fff; }
+.ref-stage {
+  overflow: hidden; border: 2px solid #111; border-radius: 0; background: #fff;
+  box-shadow: none; margin: 0; min-width: 0;
+}
+.ref-submit, .ref-xtra, .ref-ov-btn {
+  color: #111; background: #fff; border: 2px solid #111; border-radius: 0;
+  box-shadow: 1px 1px 0 #111; font: 14px/1.15 "Chicago", Geneva, Arial, sans-serif;
+}
+.ref-submit { padding: 5px 14px; font-weight: 700; }
+.ref-xtra { padding: 4px 10px; }
+.ref-icon { border-radius: 0; width: 30px; height: 28px; }
+.ref-foot { order: 2; min-height: 34px; padding: 3px 12px; background: #fff; color: #111; border-top: 2px solid #111; }
+.ref-foot-text { display: none; }
+.ref-side { background: #fff; border-color: #111; }
+.ref-panel { border: 2px solid #111; border-radius: 0; box-shadow: none; background: #fff; }
+.ref-panel-title { color: #111; }
+.ref-note { bottom: 42px; left: 16px; border: 2px solid #111; border-radius: 0; box-shadow: 2px 2px #111; background: #fff; }
+.ref-note-x { color: #111; }
+.ref-has-note .ref-body { padding-bottom: 78px; }
+.ref-ov { font-family: "Chicago", Geneva, Arial, sans-serif; }
+.ref-ov-cookie { background: #fff; border-top: 2px solid #111; box-shadow: none; }
+.ref-ov-toast, .ref-ov-chat, .ref-ov-box { border: 2px solid #111; border-radius: 0; box-shadow: 2px 2px #111; background: #fff; }
+.ref-ov-banner { background: #fff; border: 2px solid #111; color: #111; }
+.ref-fault, .ref-hz, .ref-notice { border-radius: 0; box-shadow: 2px 2px #111; font-family: "Chicago", Geneva, Arial, sans-serif; }
+.ref-fault { background: #fff; color: #111; border: 2px solid #111; }
+.ref-shift { background: #fff; color: #111; border-bottom: 2px solid #111; }
+.ref-busy-box { border: 2px solid #111; border-radius: 0; box-shadow: 2px 2px #111; }
+.ref-stage * { font-family: "Chicago", Geneva, Arial, sans-serif !important; border-radius: 0 !important; box-shadow: none !important; }
+.ref-stage { color: #080808; }
+.ref-stage * { border-color: #111 !important; }
+.ref-stage button, .ref-stage [role="button"] { color: #111 !important; background-color: #fff !important; }
+.ref-stage a { color: #111 !important; }
+.ref-stage [class*="sidebar"], .ref-stage [class*="Sidebar"] { background: #fff !important; }
+html.env-scroll .ref-body, html.env-scroll .ref-stage { min-height: calc(100vh - 95px); }
+
+/* Dispatch planner: dense classic Mac window, with the assignment board as the primary surface. */
+html, body { background:#fff !important; color:#080808 !important; }
+body {
+  padding: 76px 8px 8px;
+  border: 2px solid #111;
+  outline: 3px double #111;
+  outline-offset: -7px;
+  font: 16px/1.25 "Chicago", "Geneva", "Arial", sans-serif;
+}
+body::before {
+  content:"●     File     Edit     View     Dispatch     Tools     Window     Help";
+  height:38px; padding:5px 24px; border-bottom:2px solid #111;
+  background:#fff; font-size:17px; letter-spacing:0; white-space:pre;
+}
+.ref-task {
+  order:0; min-height:36px; height:auto; padding:3px 12px; gap:8px;
+  background:#fff; border:2px solid #111; border-top:0;
+}
+.ref-task::before {
+  content:"Delivery Planner"; position:absolute; top:-34px; left:4px; right:4px;
+  height:30px; padding-top:4px; text-align:center; font-size:17px; font-weight:bold;
+  border:2px solid #111; background:repeating-linear-gradient(0deg,#fff 0 2px,#c5c5c5 2px 3px);
+}
+.ref-task::after {
+  content:"□  ━"; position:absolute; top:-31px; right:14px; height:24px; padding:1px 8px;
+  background:#fff; font:15px/20px Arial,sans-serif; letter-spacing:8px;
+}
+.ref-brand,.ref-nav,.ref-spacer { display:none; }
+.ref-instruction { font:13px/1.2 "Chicago",Geneva,Arial,sans-serif; font-weight:400; }
+.ref-body { order:1; min-height:0; padding:0 5px 5px; gap:6px; background:#fff; }
+.ref-stage {
+  flex:1 1 auto; min-width:0; min-height:0; overflow:hidden; margin:0;
+  align-items:stretch !important; justify-content:stretch !important;
+  border:2px solid #111; background:#fff;
+}
+.ref-stage > * { max-width:100% !important; }
+.ref-submit,.ref-xtra,.ref-ov-btn {
+  padding:4px 11px; border:2px solid #111; border-radius:0; color:#111; background:#fff;
+  box-shadow:1px 1px 0 #111; font:14px/1.15 "Chicago",Geneva,Arial,sans-serif;
+}
+.ref-submit { font-weight:bold; }
+.ref-icon { width:29px; height:27px; }
+.ref-side { display:none; }
+.ref-panel { width:210px; margin:5px; padding:8px; border:2px solid #111; background:#fff; }
+.ref-panel-title { margin-bottom:5px; color:#111; }
+.ref-panel-text { font-size:14px; }
+.ref-foot { order:2; min-height:30px; padding:2px 10px; border-top:2px solid #111; background:#fff; color:#111; }
+.ref-foot-text { display:none; }
+.ref-note { left:12px; bottom:35px; border:2px solid #111; border-radius:0; background:#fff; box-shadow:2px 2px #111; }
+.ref-note-x { color:#111; }
+.ref-has-note .ref-body { padding-bottom:64px; }
+
+/* Remove inherited web-dashboard furniture while retaining task controls and the board's tabs. */
+.ref-stage [class*="sidebar"], .ref-stage [class*="Sidebar"],
+.ref-stage [class*="shipment-detail"], .ref-stage [class*="ShipmentDetail"],
+.ref-stage [class*="delivery-detail"], .ref-stage [class*="DeliveryDetail"],
+.ref-stage [class*="inspector"], .ref-stage [class*="Inspector"] { display:none !important; }
+.ref-stage [class*="toolbar"], .ref-stage [class*="Toolbar"] { box-shadow:none !important; }
+.ref-stage * { font-family:"Chicago","Geneva",Arial,sans-serif !important; border-color:#111 !important; border-radius:0 !important; box-shadow:none !important; }
+.ref-stage { color:#080808; }
+.ref-stage button,.ref-stage [role="button"] { color:#111 !important; background:#fff !important; }
+.ref-stage a { color:#111 !important; }
+.ref-stage [class*="card"],.ref-stage [class*="Card"] { border:2px solid #111 !important; background:#fff !important; }
+.ref-stage [class*="column"],.ref-stage [class*="Column"],.ref-stage [class*="day"],.ref-stage [class*="Day"] { background:#fff !important; }
+.ref-stage aside,.ref-stage nav,.ref-stage [role="navigation"] { display:none !important; }
+.ref-stage [class*="detail"],.ref-stage [class*="Detail"],
+.ref-stage [class*="inspector"],.ref-stage [class*="Inspector"] { display:none !important; }
+.ref-stage header { display:none !important; }
+.ref-stage [class*="app-header"],.ref-stage [class*="AppHeader"],
+.ref-stage [class*="toolbar-row"],.ref-stage [class*="ToolbarRow"],
+.ref-stage [class*="breadcrumb"],.ref-stage [class*="Breadcrumb"] { display:none !important; }
+.ref-stage { font-size:14px !important; }
+.ref-stage [class*="card"],.ref-stage [class*="Card"] { font-size:14px !important; line-height:1.25 !important; padding:4px !important; min-height:58px; }
+.ref-stage [class*="card"] > *, .ref-stage [class*="Card"] > * { min-height:0; }
+.ref-stage [class*="column"],.ref-stage [class*="Column"] { min-width:0 !important; }
+.ref-ov { font-family:"Chicago",Geneva,Arial,sans-serif; }
+.ref-ov-cookie { background:#fff; border-top:2px solid #111; box-shadow:none; }
+.ref-ov-toast,.ref-ov-chat,.ref-ov-box { border:2px solid #111; border-radius:0; box-shadow:2px 2px #111; background:#fff; }
+.ref-ov-banner { background:#fff; border:2px solid #111; color:#111; }
+.ref-fault,.ref-hz,.ref-notice { border-radius:0; box-shadow:2px 2px #111; font-family:"Chicago",Geneva,Arial,sans-serif; }
+.ref-fault { background:#fff; color:#111; border:2px solid #111; }
+.ref-shift { background:#fff; color:#111; border-bottom:2px solid #111; }
+.ref-busy-box { border:2px solid #111; border-radius:0; box-shadow:2px 2px #111; }
+
+/* Macintosh planner: one window, five weekday columns and compact record panels. */
+body { padding:86px 12px 12px; border:0; outline:5px double #111; outline-offset:-8px; }
+body::before { content:"          File     Edit     View     Dispatch     Tools     Window     Help"; height:43px; padding:3px 24px; font:bold 25px/34px Arial,sans-serif; border-bottom:5px double #111; }
+.mac-apple { position:absolute; top:5px; left:37px; z-index:22; }
+.mac-window-close { position:absolute; top:-35px; left:4px; width:30px; height:30px; border:2px solid #111; text-align:center; font:bold 26px/26px monospace; }
+.ref-task { border:0; min-height:0; padding:0; gap:12px; }
+.ref-task.mac-has-instruction,.ref-task.mac-has-tools { padding:3px 10px 5px; min-height:30px; }
+.ref-task.mac-has-tools:not(.mac-has-instruction) { padding:0; min-height:0; }
+.ref-task:not(.mac-has-instruction) .ref-tools { position:absolute; top:-34px; right:90px; height:30px; z-index:6; background:white; }
+.ref-task::before { content:""; top:-35px; left:40px; right:78px; height:30px; padding:0; background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/3px 3px; }
+.mac-window-title { position:absolute; z-index:2; top:-34px; left:50%; transform:translateX(-50%); background:white; padding:0 5px; font:bold 23px/27px Arial,sans-serif; white-space:nowrap; }
+.ref-task::after { content:"▣  ▤"; right:0; top:-35px; padding:0 4px; height:30px; border:2px solid #111; font:25px/26px monospace; letter-spacing:0; }
+.ref-body { padding:0; gap:8px; }
+.ref-stage { border:0; }
+.ref-instruction { font:18px/1.25 "Arial Narrow","Liberation Sans Narrow",Arial,sans-serif; }
+.ref-panel { width:230px; margin:5px 0; }
+.ref-foot { min-height:36px; border:0; padding:4px 9px 0; }
+.ref-float-dock { height:40px; order:3; }
+.ref-float { bottom:3px; right:10px; }
+.ref-stage * { font-family:"Arial Narrow","Liberation Sans Narrow",Arial,sans-serif !important; }
+.ref-stage .ad-app { inset:0; border:0; font-size:21px; line-height:1.2; }
+.mac-hidden,.ad-footer,.ad-toolbar,.ad-rail { display:none !important; }
+.ad-shell,.ad-work { min-height:0; flex:1; }
+.mac-tabs { position:relative; display:flex; align-items:flex-end; flex:none; height:61px; padding:0 0 0 18px; gap:0; }
+.ref-stage .mac-tab { border:2px solid #111; border-bottom:0; height:40px; min-width:123px; padding:5px 22px; font-size:20px; background:repeating-conic-gradient(#ccc 0 25%,white 0 50%) 0 0/3px 3px !important; border-radius:6px 6px 0 0 !important; }
+.ref-stage .mac-tab.active { height:43px; font-weight:700; background:white !important; position:relative; z-index:2; outline:3px double #111; outline-offset:2px; }
+.mac-dispatch-ref { margin-left:auto; align-self:center; margin-top:6px; padding-left:14px; font:21px/1.2 "Arial Narrow",monospace; white-space:nowrap; }
+.ad-workspace { gap:8px; }
+.ad-main { border:2px solid #111; padding:29px 8px 10px 12px; border-radius:3px !important; }
+.ad-lanes.mac-board { padding:0; gap:0; grid-template-columns:repeat(5,minmax(0,1fr)); border:2px solid #111; background:#fff; }
+.mac-board .ad-lane { border:0; border-right:1px solid #111; background:#fff; }
+.mac-board .ad-lane:last-child { border-right:0; }
+.mac-board .ad-lane-head { height:109px; padding:9px 17px 12px; border:0; background:white; text-align:center; }
+.mac-board .ad-lane-head strong { display:block; font-size:23px; line-height:27px; font-weight:700; }
+.mac-board .ad-lane-head .ad-load { font-size:21px; margin:7px 0 8px; line-height:23px; white-space:nowrap; }
+.mac-board .ad-bar { margin:0; height:24px; border:2px solid #111; background:#fff; }
+.mac-board .ad-lane .ad-bar .ad-fill { background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/3px 3px; }
+.mac-board .ad-pane { padding:7px; }
+.ad-empty { display:none !important; }
+.ref-stage .ad-card { height:var(--mac-card-height); min-height:var(--mac-card-height); padding:9px 10px 8px 62px !important; margin-bottom:var(--mac-card-gap); border:2px solid #111 !important; position:relative; background:#fff !important; }
+.ref-stage .ad-card .ad-id { display:block; font-size:23px; font-weight:700; line-height:25px; }
+.ref-stage .ad-card .ad-customer { font-size:21px; line-height:24px; font-weight:400; margin:3px 0 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ref-stage .ad-card .ad-weight { position:absolute; right:10px; bottom:6px; font-size:22px; line-height:24px; font-weight:400; }
+.mac-truck { position:absolute; top:21px; left:8px; }
+.mac-truck svg { stroke-width:2; stroke-linejoin:miter; stroke-linecap:square; }
+.mac-grip { position:absolute; right:8px; top:5px; font:bold 29px/20px monospace !important; }
+.mac-summary-rail { flex:0 0 24%; min-width:0; display:flex; flex-direction:column; gap:7px; padding-bottom:8px; }
+.mac-with-note .mac-summary-rail { margin-top:-61px; }
+.mac-with-note .mac-tabs { padding-right:24%; }
+.mac-with-note .mac-dispatch-ref { font-size:18px; }
+.mac-with-note .mac-pool { width:125px; margin-left:14px; }
+.mac-with-note .mac-pool .ad-lane-head strong,.mac-with-note .mac-pool .ad-lane-head .ad-load { font-size:18px; }
+.ref-stage .mac-rail-note { display:block !important; position:relative; inset:auto; transform:none; width:100%; max-width:none; min-height:0; margin:0; padding:13px 30px 13px 16px; flex:none; align-self:stretch; border:2px solid #111; font:19px/1.2 "Arial Narrow","Liberation Sans Narrow",Arial,sans-serif; }
+.mac-rail-note .ref-note-x { position:absolute; top:6px; right:7px; }
+.mac-rail-note .ref-panel-title { display:none; }
+.mac-rail-note .ref-panel-text { font-size:19px; font-weight:600; line-height:1.2; }
+.mac-with-note .mac-summary-rail > .mac-panel:not(.mac-deliveries):not(:last-child) { flex:none; height:220px; }
+.mac-with-note .mac-summary-rail > .mac-panel:last-child { height:165px; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+.mac-panel { border:2px solid #111; border-radius:3px !important; min-height:0; overflow:hidden; background:white; }
+.mac-summary-rail > .mac-panel:first-child { flex:none; height:246px; }
+.mac-panel-heading { height:44px; display:flex; align-items:center; gap:15px; padding:5px 14px; border-bottom:1px solid #111; font-size:24px; }
+.mac-panel-heading strong { font-weight:700; }
+.mac-summary-row { display:flex; justify-content:space-between; gap:8px; padding:4px 22px 4px 16px; font-size:22px; line-height:24px; }
+.mac-summary-row:first-of-type { margin-top:7px; }
+.mac-summary-row:last-child { padding-bottom:19px; }
+.mac-summary-divider { margin:8px 15px 5px; padding:11px 6px 0 1px; border-top:1px dashed #111; }
+.mac-deliveries { flex:1; position:relative; display:flex; flex-direction:column; min-height:0; }
+.mac-table-pane { min-height:0; overflow:auto; flex:1; padding-right:27px; scrollbar-width:none; }
+.mac-table { width:100%; border-collapse:collapse; table-layout:fixed; font-size:21px; line-height:26px; }
+.mac-table th { background:repeating-conic-gradient(#bbb 0 25%,white 0 50%) 0 0/3px 3px; border:1px solid #111; text-align:left; padding:1px 11px; font-weight:400; }
+.mac-table td { padding:0 12px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.mac-deliveries .mac-table th:first-child { width:18%; }
+.mac-deliveries .mac-table th:last-child { width:25%; }
+.mac-table td:last-child { text-align:center; }
+.mac-scroll-rail { position:absolute; right:0; top:44px; bottom:0; width:28px; border-left:2px solid #111; display:flex; flex-direction:column; justify-content:space-between; }
+.mac-scroll-rail span { border-bottom:2px solid #111; font:bold 32px/27px monospace !important; text-align:center; height:29px; }
+.mac-scroll-rail span:last-child { border-top:2px solid #111; border-bottom:0; }
+.mac-summary-rail > .mac-panel:last-child { flex:none; height:189px; padding-bottom:12px; }
+.mac-pool { position:relative; margin-left:35px; align-self:center; width:160px; flex:none; border:0; overflow:visible; }
+.mac-pool .ad-lane-head { padding:0; height:35px; display:flex; align-items:center; gap:12px; border:0; background:white; }
+.mac-tabs .mac-pool .ad-lane-head strong { display:block; font-size:21px; font-weight:400; }
+.mac-pool .ad-lane-head strong::after { content:':'; }
+.mac-tabs .mac-pool .ad-lane-head .ad-load { margin:0; font-size:21px; }
+.mac-pool .ad-bar,.mac-pool .ad-pane { display:none; }
+.mac-pool:not(.mac-pool-populated) .ad-pane { display:block; position:absolute; inset:0; padding:0; opacity:0; pointer-events:none; }
+.mac-pool-populated .ad-pane { display:block; position:absolute; right:0; top:35px; width:260px; max-height:350px; padding:7px; border:2px solid #111; background:#fff; z-index:12; }
+.ref-ov { font-family:"Arial Narrow","Liberation Sans Narrow",Arial,sans-serif; font-size:18px; }
+.ref-ov-cookie { left:14px; right:auto; bottom:52px; width:calc(76% - 28px); border:2px solid #111; padding:15px 20px; box-shadow:2px 2px #111; font-size:20px; }
+.ref-ov-chat { right:16px; bottom:60px; display:flex; flex-direction:column; gap:18px; width:460px; max-width:calc(100% - 32px); min-height:250px; padding:18px 22px; font-size:21px; }
+.ref-ov-chat .ref-ov-row { position:absolute; top:15px; right:15px; }
+.ref-ov-promo { inset:120px 12px 65px; background:transparent; pointer-events:none; }
+.ref-ov-box { width:min(680px,calc(100vw - 48px)); min-height:350px; border:3px double #111; padding:34px 48px; font-size:22px; pointer-events:auto; }
+.mac-overlay-heading { font-size:28px; line-height:36px; font-weight:700; }
+.mac-overlay-input { font:20px/28px "Arial Narrow","Liberation Sans Narrow",Arial,sans-serif; width:100%; height:50px; padding:8px 12px; border:2px solid #111; background:#fff; color:#111; border-radius:0; }
+.ref-ov-box .ref-ov-row { margin-top:auto; }
+.ref-ov-banner { position:fixed; top:46px; left:10px; right:10px; z-index:1060; min-height:42px; padding:7px 14px; }
+@media(max-width:1400px) {
+  body { padding:65px 9px 9px; }
+  body::before { content:"       File     Edit     View     Dispatch     Tools     Window     Help"; height:30px; font-size:19px; line-height:23px; padding:2px 20px; }
+  .mac-apple { left:25px; top:3px; width:19px; height:21px; }
+  .mac-window-close { top:-29px; height:25px; width:27px; font-size:21px; line-height:22px; }
+  .ref-task::before,.ref-task::after { top:-29px; height:25px; font-size:19px; line-height:22px; }
+  .mac-window-title { top:-28px; font-size:18px; line-height:22px; }
+  .ref-task:not(.mac-has-instruction) .ref-tools { top:-29px; height:25px; }
+  .mac-tabs { height:45px; padding-left:10px; }
+  .ref-stage .mac-tab { height:30px; min-width:71px; padding:3px 12px; font-size:16px; }
+  .ref-stage .mac-tab.active { height:33px; }
+  .mac-dispatch-ref { font-size:15px; padding-left:5px; }
+  .mac-pool { width:105px; margin-left:14px; }
+  .mac-pool .ad-lane-head { gap:5px; }
+  .mac-tabs .mac-pool .ad-lane-head strong,.mac-tabs .mac-pool .ad-lane-head .ad-load { font-size:15px; }
+  .ad-main { padding:18px 5px 7px 7px; }
+  .mac-board .ad-lane-head { padding:7px 9px; height:83px; }
+  .mac-board .ad-lane-head strong { font-size:18px; line-height:21px; }
+  .mac-board .ad-lane-head .ad-load { font-size:16px; line-height:18px; margin:5px 0; }
+  .mac-board .ad-bar { height:18px; }
+  .mac-board .ad-pane { padding:5px 4px; }
+  .ref-stage .ad-card { padding:5px 5px 5px 32px !important; }
+  .mac-truck { left:4px; top:21px; }
+  .mac-truck svg { width:25px; height:25px; }
+  .ref-stage .ad-card .ad-id { font-size:18px; line-height:20px; }
+  .ref-stage .ad-card .ad-customer { font-size:16px; line-height:18px; margin-top:1px; }
+  .ref-stage .ad-card .ad-weight { font-size:17px; line-height:18px; bottom:4px; }
+  .mac-grip { right:3px; font-size:22px !important; }
+  .mac-panel-heading { height:33px; padding:4px 8px; gap:8px; font-size:19px; }
+  .mac-panel-heading svg { width:22px; height:22px; }
+  .mac-summary-row { font-size:17px; line-height:19px; padding:3px 10px; }
+  .mac-summary-divider { margin:5px 8px 3px; padding-top:7px; }
+  .mac-summary-row:last-child { padding-bottom:9px; }
+  .mac-table { font-size:16px; line-height:21px; }
+  .mac-table td,.mac-table th { padding:1px 6px; }
+  .mac-scroll-rail { top:33px; width:20px; }
+  .mac-scroll-rail span { font-size:24px !important; }
+  .mac-table-pane { padding-right:19px; }
+  .mac-summary-rail > .mac-panel:first-child { height:178px; }
+  .mac-summary-rail > .mac-panel:last-child { height:135px; padding-bottom:6px; }
+}

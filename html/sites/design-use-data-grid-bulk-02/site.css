@@ -1,0 +1,229 @@
+@import url("../../templates/site/css/design-67677e.css");
+
+
+/* RISC OS inventory window: pebble-grey frame and a compact grid with a
+   persistent summary pane. */
+:root {
+  --bg: #c9c9c9;
+  --panel: #e7e7e7;
+  --fg: #171717;
+  --muted: #5b5b5b;
+  --line: #9e9e9e;
+  --accent: #347fc2;
+}
+body { gap: 0; padding: 3px; background: #bcbcbc; color: #111; font: 14px/1.3 "Courier New", monospace; }
+.ref-task { min-height: 34px; height: 34px; gap: 8px; padding: 2px 10px; border: 1px solid #777;
+  background: linear-gradient(#e5e5e5,#bdbdbd); }
+.ref-brand { font: bold 15px/1 "Courier New", monospace; color: #111; }
+.ref-instruction { font: 12px/1.2 "Courier New", monospace; }
+.ref-spacer { display:none; }
+.ref-task::after { content:"_  □  ×"; order: 9; margin-left:auto; font: bold 16px/1 Arial,sans-serif; color:#111; }
+.ref-nav { display:none; }
+.ref-tools { gap: 5px; }
+.ref-task .ref-tools { margin-left:auto; }
+.ref-submit, .ref-xtra { border: 1px solid #777; border-radius: 0; padding: 4px 10px; background: #d7d7d7; color:#111; box-shadow: inset 1px 1px #fff, inset -1px -1px #999; font: 12px "Courier New",monospace; }
+.ref-body { position:relative; display:block; overflow:hidden; border:1px solid #858585; background:#d1d1d1; }
+.ref-stage { position:absolute; inset:0; display:block; overflow:hidden; }
+.to-workspace { inset: 0; border:0; border-radius:0; background:#d1d1d1; font:14px/1.3 "Courier New",monospace; }
+.to-appbar { height:0; display:none; }
+.to-nav { position:absolute; left:0; right:0; top:0; bottom:auto; width:auto !important; height:58px; padding:4px 22px;
+  display:flex; align-items:stretch; gap:12px; overflow:hidden; border:0; border-bottom:3px solid #888; background:#d8d8d8; }
+.to-nav small, .to-nav .to-project { display:none !important; }
+.to-nav button { width:auto; min-width:130px; height:50px; padding:0 12px; justify-content:flex-start; gap:12px; border:1px solid transparent; border-radius:0; color:#222; font:15px "Courier New",monospace; }
+.to-nav button.active { border:1px solid #777; background:#b9d4ec; color:#111; box-shadow:inset 1px 1px #fff; }
+.to-nav .nav-label { display:block !important; }
+.to-nav .to-icon { width:30px; height:30px; color:#222; }
+.to-nav .nav-count { display:none; }
+.to-context { position:absolute; top:68px; right:10px; bottom:10px; width:25%; padding:0; border:1px solid #888; background:#eee; font:14px/1.35 "Courier New",monospace; }
+.to-context h4 { margin:0; padding:7px 9px; color:#111; background:linear-gradient(#e2e2e2,#c5c5c5); border-bottom:1px solid #888; font: bold 14px "Courier New",monospace; text-transform:none; letter-spacing:0; }
+.to-context strong, .to-context p, .to-context .to-feed { display:none; }
+.to-context::after { content:"Total products                 8\\A Active                         8\\A Archived                       0\\A\\A By Category (active)\\A\\A Apparel                        2\\A Home                           3\\A Office                         2\\A Outdoor                        1";
+  white-space:pre; display:block; padding:12px; color:#111; font:14px/1.9 "Courier New",monospace; }
+.to-card { left:10px !important; right:calc(25% + 22px) !important; top:68px !important; bottom:10px !important;
+  overflow:hidden; border:1px solid #888; background:#eee; font-size:14px; }
+.to-head { display:none; }
+.to-tabs { display:none; }
+.to-tools { height:76px; padding:8px; display:flex; flex-wrap:wrap; align-content:center; gap:6px; border-bottom:1px solid #888; background:#d1d1d1; }
+.to-search { order:5; width:34%; height:34px; border:1px solid #888; border-radius:0; background:#fff; }
+.to-search input { font:14px "Courier New",monospace; }
+.to-tools .to-selinfo { font:14px "Courier New",monospace; }
+.to-tools > .to-link, .to-tools > .sp, .to-tools > div:empty { display:none; }
+.to-tools .to-btn { height:38px; padding:0 12px; border:1px solid #888; border-radius:0; background:#d7d7d7; box-shadow:inset 1px 1px #fff,inset -1px -1px #999; font:14px "Courier New",monospace; color:#111; }
+.to-tools .to-btn.danger { color:#111; }
+.to-grid { overflow:auto; }
+.to-hrow { background:#c6c6c6; }
+.to-h { padding:0 8px; font:14px "Courier New",monospace; color:#111; }
+.to-card.upper .to-h { text-transform:none; font:14px "Courier New",monospace; letter-spacing:0; }
+.to-cb { width:48px; }
+.to-cb input { width:20px; height:20px; }
+.to-row { background:#fff; }
+.to-c { padding:0 10px; border-right:1px solid #ccc; font:14px "Courier New",monospace; }
+.to-c.mono span { font:14px "Courier New",monospace; color:#111; }
+.to-card.lines .to-c, .to-card.lines .to-h { border-left:1px solid #aaa; }
+.to-foot { height:58px; padding:0 10px; background:#d1d1d1; border-top:1px solid #888; }
+.to-foot .info { font:13px "Courier New",monospace; color:#222; }
+.to-stream, .to-facts { display:none; }
+.to-pg { border:1px solid #999; border-radius:0; background:#ddd; font:13px "Courier New",monospace; }
+.to-pg.cur { color:#111; border-color:#777; }
+.to-pop, .to-dialog { border-radius:0; font-family:"Courier New",monospace; }
+.ref-foot { min-height:34px; padding:3px 10px; background:#d0d0d0; border-top:1px solid #888; font:12px "Courier New",monospace; }
+.ref-note { border-radius:0; font:13px "Courier New",monospace; }
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* 1989 RISC OS utility: pebble-grey window furniture and compact system lettering. */
+:root { --bg:#bdbdbd!important; --panel:#d3d3d3!important; --fg:#111!important; --muted:#505050!important; --line:#898989!important; --accent:#b7d6f1!important; }
+html, body { background:#bcbcbc!important; color:#111!important; font:16px/1.25 "Courier New",monospace!important; }
+body { padding:4px; gap:0; }
+.ref-task { min-height:42px; padding:3px 10px; gap:10px; background:linear-gradient(#d7d7d7,#bcbcbc); border:2px outset #eee; }
+.ref-brand { position:relative; min-width:220px; color:transparent; font:0/1 "Courier New",monospace; }
+.ref-brand::before { content:"Inventory Manager"; color:#111; font:bold 18px/1.2 "Courier New",monospace; }
+.ref-brand::after { content:"  ▬  □  ■"; position:absolute; right:4px; top:0; color:#111; font:14px/1.2 Arial,sans-serif; }
+.ref-nav,.ref-side { display:none!important; }
+.ref-instruction { font:15px/1.25 "Courier New",monospace; font-weight:400; }
+.ref-submit,.ref-xtra { border:2px outset #eee; border-radius:0; padding:5px 14px; background:#d0d0d0; color:#111; box-shadow:none; font:15px "Courier New",monospace; }
+.ref-endlink { color:#111; font-weight:400; }
+.ref-body { min-height:0; margin-top:2px; background:#c4c4c4; border:2px inset #eee; }
+.ref-stage { padding:0; min-width:0; background:#c4c4c4; }
+.ref-foot { min-height:42px; padding:4px 12px; background:#c8c8c8; border:2px outset #eee; color:#222; font:13px "Courier New",monospace; }
+.ref-panel { width:min(250px,27vw); margin:6px; padding:10px; border:2px outset #eee; border-radius:0; background:#d0d0d0; box-shadow:none; }
+.ref-panel-title { font:bold 14px "Courier New",monospace; text-transform:none; letter-spacing:0; color:#111; }
+.ref-panel-text { font:14px/1.35 "Courier New",monospace; }
+.ref-note { border:2px outset #eee; border-left:2px outset #eee; border-radius:0; background:#d1d1d1; color:#111; font:14px "Courier New",monospace; box-shadow:2px 2px #777; }
+.ref-ov-btn,.ref-hz-btn { border:2px outset #eee; border-radius:0; background:#d0d0d0; color:#111; font:14px "Courier New",monospace; }
+.ref-ov-primary,.ref-hz-primary { background:#c7dff3; border-color:#eee; color:#111; }
+.ref-ov-cookie,.ref-ov-banner { background:#c9c9c9; color:#111; border-color:#777; box-shadow:none; }
+.ref-ov-toast,.ref-ov-chat,.ref-ov-box { border:2px outset #eee; border-radius:0; background:#d1d1d1; color:#111; box-shadow:2px 2px #777; }
+/* Table controls in the shared widget use the same raised and inset RISC OS gadgets. */
+.ref-stage, .ref-stage * { font-family:"Courier New",monospace!important; }
+.ref-stage button { border-radius:0!important; box-shadow:none!important; }
+.ref-stage input, .ref-stage select { border-radius:0!important; background:#fff!important; border:2px inset #ddd!important; color:#111!important; }
+.ref-stage table { border-collapse:collapse!important; }
+.ref-stage th { background:#c9c9c9!important; color:#111!important; }
+.ref-stage td,.ref-stage th { border-color:#aaa!important; }
+.ref-stage [class*="panel"], .ref-stage [class*="summary"] { border-radius:0!important; box-shadow:none!important; }
+/* The generated grid widget has its own application header and navigation. Recast these as
+   the compact iconbar and data area of a single-window desktop utility. */
+.ref-stage { align-items:stretch!important; justify-content:stretch!important; }
+.ref-stage [class*="workspace"], .ref-stage [class*="app-shell"] { background:#c4c4c4!important; }
+.ref-stage [class*="sidebar"], .ref-stage aside { background:#c8c8c8!important; border-color:#888!important; }
+.ref-stage [class*="toolbar"], .ref-stage [class*="nav"], .ref-stage [class*="header"] { background:linear-gradient(#d6d6d6,#bcbcbc)!important; color:#111!important; border-color:#888!important; }
+.ref-stage [class*="card"], .ref-stage [class*="panel"], .ref-stage [class*="summary"] { background:#d0d0d0!important; border:2px outset #eee!important; }
+.ref-stage [class*="row"] { background:#fff!important; }
+.ref-stage button { background:#d0d0d0!important; color:#111!important; border:2px outset #eee!important; }
+.ref-stage nav { display:flex!important; }

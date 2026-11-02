@@ -1,0 +1,281 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* 2017 civic-service logistics planner: navy title bar, framed weekly sub-window, details inspector. */
+:root {
+  --navy: #103c69;
+  --ink: #092653;
+  --muted: #526b86;
+  --line: #c8d7e5;
+  --bg: #e9f0f6;
+  --blue: #2385ec;
+  --green: #23a543;
+  --panel: #fff !important;
+  --fg: #092653 !important;
+  --accent: #2385ec !important;
+}
+body {
+  position: relative;
+  margin: 0;
+  padding: 0 !important;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: Arial, "Segoe UI", Helvetica, sans-serif;
+  overflow: hidden;
+}
+body::before {
+  content: "Logistics Planning";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 90;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background: var(--navy);
+  color: #fff;
+  font-size: 23px;
+  font-weight: 700;
+}
+html { background: var(--bg); }
+.ref-body { background: transparent; }
+body > [hidden] { display: none !important; }
+.ref-brand, .ref-nav, .ref-spacer { display: none; }
+.ref-body, body.ref-has-note .ref-body { padding: 0; gap: 0; }
+.ref-side { display: none; }
+.ref-stage { border-radius: 0; background: transparent; box-shadow: none; overflow: hidden; }
+.ref-task { display: contents; min-height: 0; padding: 0; border: 0; box-shadow: none; background: transparent; }
+.ref-task > .ref-tools { margin-left: auto; align-self: center; display: flex; gap: 8px; align-items: center; }
+.ref-submit {
+  border: 2px solid #fff; border-radius: 4px; padding: 6px 16px;
+  background: #fff; color: var(--navy); font: inherit; font-size: 16px; font-weight: 700; cursor: pointer;
+}
+.ref-xtra { border: 1px solid #5a7fa6; border-radius: 4px; padding: 6px 12px; background: #1d4f85; color: #fff; font: inherit; font-size: 14px; }
+.ref-instruction { flex: 0 0 100%; order: 5; margin: 0; font-size: 14px; line-height: 1.4; font-weight: 400; color: #e7eef6; }
+.ref-foot {
+  position: absolute; z-index: 70; right: 14px; bottom: 10px;
+  min-height: 0; padding: 6px 8px; background: #fff; border: 1px solid var(--line); border-radius: 4px;
+}
+.ref-foot .ref-tools { justify-content: flex-end; }
+.ref-foot-text { display: none; }
+.ref-note { position: static; margin-top: 12px; max-width: 100%; flex: none; min-height: 0; font-size: 14px; font-weight: 400; border-radius: 4px; box-shadow: none; }
+.ref-panel {
+  position: absolute; right: 6px; top: 52px; bottom: 17px; width: 300px; box-sizing: border-box;
+  margin: 0; padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fff; box-shadow: none;
+}
+.ref-panel-title { font-size: 18px; color: var(--ink); text-transform: none; letter-spacing: 0; font-weight: 700; }
+.ref-panel-text { font-size: 15px; font-weight: 400; }
+
+/* Hide the bottom app dock and the search/filter bar: the reference is a single-purpose tool. */
+.dispatch-dock { display: none !important; }
+.delivery-search, .ad-filters, .ad-toolbar { display: none !important; }
+/* The Unassigned tab is the drop point for returning a card to the list, so the tabs stay as a form-style filter strip. */
+.delivery-tabs { display: flex; flex: none; height: 34px; margin-top: 8px; box-sizing: border-box; background: #fff; border: 2px solid var(--navy); }
+.delivery-tabs button {
+  flex: 1; min-width: 0; padding: 0; border: 0; border-right: 1px solid var(--line); background: #fff; color: var(--navy);
+  font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.delivery-tabs button:first-child { flex: .6; }
+.delivery-tabs button:last-child { border-right: 0; }
+.delivery-tabs button.active { background: var(--navy); color: #fff; }
+
+.dispatch-app {
+  position: absolute; top: 45px; left: 0; right: 0; bottom: 0; overflow: hidden;
+  font: 15px/1.3 Arial, "Segoe UI", Helvetica, sans-serif; color: var(--ink);
+}
+.dispatch-app [hidden] { display: none !important; }
+.dispatch-app svg { flex: none; vertical-align: middle; }
+.ad-shell { position: absolute; inset: 0; display: flex; align-items: stretch; padding: 7px 6px 17px 7px; box-sizing: border-box; min-width: 0; }
+
+/* Deliveries list on the left. */
+.ad-rail { flex: 0 0 293px; margin-right: 33px; padding: 0; display: flex; flex-direction: column; min-width: 0; min-height: 0; background: transparent; border: 0; }
+.delivery-title {
+  flex: none; margin: 0; height: 46px; line-height: 46px; padding: 0 12px; box-sizing: border-box;
+  background: #f5f8fb; border: 1px solid var(--line); font-size: 22px; font-weight: 700; color: var(--ink);
+}
+.delivery-index { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 8px; padding: 8px 0 0; scrollbar-width: thin; }
+.delivery-record {
+  position: relative; display: flex; align-items: center; gap: 10px; min-height: 74px; margin: 0; box-sizing: border-box;
+  padding: 8px 10px 8px 8px; background: #fff; border: 1px solid var(--line); border-radius: 4px; cursor: grab; touch-action: none;
+}
+.ad-rail.over { outline: 3px solid var(--blue); outline-offset: -3px; }
+.job-dot {
+  display: flex; flex: none; align-items: center; justify-content: center; box-sizing: border-box;
+  width: 46px; height: 46px; margin: 0; border-radius: 4px; background: var(--job-color); color: #fff;
+  font-style: normal; font-size: 19px; font-weight: 700; letter-spacing: -.3px;
+}
+.record-copy { min-width: 0; flex: 1; }
+.record-title { display: flex; align-items: baseline; gap: 0; font-size: 15px; line-height: 1.3; white-space: nowrap; }
+.record-title b { display: none; }
+.record-title span { overflow: hidden; text-overflow: ellipsis; font-weight: 700; color: var(--ink); }
+.record-address { color: var(--muted); font-size: 13px; line-height: 1.35; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.record-weight { flex: none; font-size: 15px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+/* Framed weekly sub-window. */
+.ad-work {
+  flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; flex-direction: column; margin: 10px 13px 0 0;
+  background: #fff; border: 2px solid #d4e0ec; border-radius: 3px; box-shadow: 0 0 0 1px #aebfd3, 0 2px 8px rgba(16,60,105,.12); overflow: hidden;
+}
+.ad-workspace, .ad-main { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.plan-header {
+  flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; box-sizing: border-box;
+  min-height: 48px; padding: 4px 12px 4px 18px; background: var(--navy); color: #fff;
+}
+.plan-title { display: flex; align-items: baseline; gap: 16px; margin-right: auto; min-width: 0; }
+.plan-title h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; color: #fff; }
+.plan-reference { display: flex; align-items: baseline; gap: 8px; font-size: 14px; color: #c8d7e5; }
+.plan-reference b { font-size: 15px; color: #fff; }
+.plan-counts { display: none; }
+.unassigned-count { display: none; }
+.ad-banner, .ref-ov-banner { position: static; flex: none; margin: 0 12px 10px; min-height: 48px; padding: 9px 16px; border: 1px solid #c6dfff; border-radius: 4px; background: #e1efff; color: var(--ink); }
+.ad-lanes { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 8px; padding: 10px 12px 12px; background: #fff; }
+.ad-lane { flex: 1 1 0; display: flex; min-height: 0; min-width: 0; background: #e9f0f7; border: 1px solid #d3dfeb; border-radius: 0; overflow: hidden; }
+.ad-lane.over { outline: 3px solid var(--blue); outline-offset: -3px; }
+
+/* Day label column: weekday, load limit, bar and assigned total. */
+.ad-lane-head {
+  width: 22%; flex: none; display: flex; flex-direction: column; justify-content: flex-start; box-sizing: border-box;
+  padding: 12px 12px 8px; background: #e3ebf4; border-right: 1px solid var(--line);
+}
+.ad-lane-head strong { display: block; order: 0; font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--navy); margin-bottom: 2px; }
+.capacity-line { order: 1; display: flex; align-items: baseline; gap: 4px; font-size: 15px; color: var(--muted); margin-bottom: 6px; }
+.capacity-line > :first-child { display: none; }
+.capacity-line > :last-child { font-size: 15px; color: var(--muted); font-weight: 400; }
+.capacity-line > :last-child::after { content: " limit"; }
+.ad-bar { order: 2; height: 10px; flex: none; margin: 0 0 6px; background: #d5dee9; border-radius: 0; overflow: hidden; }
+.ad-fill { height: 100%; background: var(--green); }
+.ad-load { order: 3; display: flex; align-items: baseline; gap: 4px; font-size: 18px; color: var(--ink); }
+.ad-load > span { display: none; }
+.ad-load b { color: var(--ink); font-size: 18px; font-weight: 700; }
+.ad-lane.bad .ad-load b { color: #c0392b; }
+.ad-lane.bad .ad-fill { background: #d9534f; }
+.capacity-percent { display: none; }
+
+/* Cards in the day lanes. */
+.ad-pane {
+  position: relative; flex: 1; min-width: 0; min-height: 0; height: 100%; max-height: 100%; box-sizing: border-box;
+  overflow: auto; scrollbar-width: thin; display: flex; flex-direction: column;
+  gap: 10px; padding: 6px 14px;
+}
+/* The task's scroll model assumes one card per row at a 78px pitch (68px card + 10px gap) and a pane that can scroll past the last card. */
+.ad-pane::after { content: ""; display: block; flex: none; height: 170px; }
+.ad-card {
+  display: grid; position: relative; flex: none; min-width: 0; height: 68px; box-sizing: border-box;
+  grid-template-columns: 46px minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 12px; align-items: center;
+  padding: 6px 10px; border: 1px solid #b9c9da; border-radius: 3px; background: #fff; box-shadow: none;
+  cursor: grab; overflow: hidden; touch-action: none;
+}
+.ad-card.dragging, .delivery-record.dragging { opacity: .28; }
+.ad-card .job-dot { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+.job-copy { grid-column: 2; grid-row: 1; min-width: 0; }
+.job-title { display: block; min-width: 0; line-height: 1.3; white-space: nowrap; }
+.ad-id { display: none; }
+.ad-card, .ad-empty { width: 100%; max-width: 330px; }
+.plan-reference { display: none; }
+.delivery-search { display: none; }
+.inspector-map svg { display: block; width: 100%; height: 100%; }
+.inspector-map { overflow: hidden; background: #eef0ec; }
+.record-title { font-size: 16px; }
+.record-address { font-size: 14px; }
+.record-weight { font-size: 16px; }
+.job-title, .ad-card-note, .ad-weight { line-height: 1.2; }
+.ad-customer { font-size: 15px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+.ad-card-note { color: var(--muted); margin-top: 1px; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ad-weight { grid-column: 2; grid-row: 2; justify-self: start; font-size: 15px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.job-menu { grid-column: 3; grid-row: 1 / 3; align-self: center; color: var(--muted); font-size: 22px; font-weight: 700; line-height: 1; padding: 0 2px; }
+.ad-state { display: none; }
+.ad-card.invalid { border-color: #d9534f; }
+.ad-empty { flex: none; box-sizing: border-box; height: 68px; display: flex; justify-content: center; align-items: center; border: 2px dashed #aab7c9; border-radius: 3px; color: var(--muted); font-size: 14px; }
+.ad-ghost { position: fixed; z-index: 4000; pointer-events: none; margin: 0; box-shadow: 0 8px 20px #0003; }
+
+/* Unassigned pool sits in the deliveries list column. */
+.delivery-pool { flex: none; flex-direction: column; min-height: 130px; max-height: 35%; margin-top: 8px; background: #fff; border: 1px solid var(--line); }
+.delivery-pool .ad-lane-head { width: 100%; padding: 8px 12px; }
+.delivery-pool .ad-lane-head strong { font-size: 16px; }
+.delivery-pool .capacity-line, .delivery-pool .ad-load, .delivery-pool .ad-bar { display: none; }
+.delivery-pool .ad-pane { display: flex; flex-direction: column; }
+.delivery-pool .ad-card { flex: none; width: 100%; }
+
+/* Delivery details inspector on the right. */
+.delivery-inspector {
+  flex: 0 0 317px; min-width: 0; min-height: 0; display: flex; flex-direction: column; box-sizing: border-box;
+  background: #fff; border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+}
+.delivery-inspector h3 {
+  flex: none; margin: 0; height: 46px; line-height: 46px; padding: 0 14px; box-sizing: border-box;
+  background: #f5f8fb; border-bottom: 1px solid var(--line); font-size: 20px; font-weight: 700; color: var(--ink);
+}
+.inspector-body { padding: 14px 16px; }
+.inspector-who { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.inspector-who .job-dot { --job-color: #2385ec; width: 52px; height: 52px; font-size: 21px; }
+.inspector-who strong { font-size: 20px; line-height: 1.2; color: var(--ink); }
+.inspector-facts { display: grid; grid-template-columns: 110px minmax(0, 1fr); row-gap: 12px; margin: 0; padding-top: 14px; border-top: 1px solid var(--line); }
+.inspector-facts dt { color: var(--ink); font-size: 17px; }
+.inspector-facts dd { margin: 0; font-size: 17px; color: var(--ink); }
+.inspector-who strong { font-size: 24px; }
+.inspector-map {
+  flex: none; height: 190px; min-height: 120px; margin: 14px 16px 16px; border: 1px solid var(--line); border-radius: 3px;
+  background: linear-gradient(160deg, #eef1ee 0 40%, #e0e8e0 40% 44%, #f5f5f2 44% 70%, #d9e6f4 70% 74%, #f5f5f2 74%);
+}
+
+/* Mid-episode notice card: sits over the details inspector so it never covers the end control or a drag target. */
+.ref-notice {
+  position: fixed; z-index: 1060; right: 12px; top: 150px; box-sizing: border-box;
+  display: flex; align-items: flex-start; gap: 10px; width: 300px; padding: 10px 10px 10px 12px;
+  border: 2px solid var(--navy); border-radius: 3px; background: #fff; box-shadow: 0 6px 18px rgba(16,60,105,.25);
+}
+.ref-notice-avatar { flex: none; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: #fff; font-weight: 700; }
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+@media (max-width: 1280px) { .ref-notice { width: 216px; right: 8px; } }
+
+/* Overlays keep their own look; only the palette is aligned with this design. */
+.ref-ov-cookie { left: 16%; right: 24px; bottom: 72px; gap: 18px; padding: 16px 20px; min-height: 82px; border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 4px 18px #1d355525; background: rgba(255,255,255,.97); }
+.cookie-symbol, .banner-symbol { flex: none; width: 28px; height: 28px; }
+.cookie-symbol svg, .banner-symbol svg { display: block; width: 100%; height: 100%; }
+.ref-ov-chat { bottom: 72px; right: 24px; width: min(430px,35vw); max-width: none; min-height: 310px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; border-radius: 6px; }
+.chat-title { font-size: 19px; padding-right: 24px; }
+.ref-ov-chat .ref-ov-text { width: 100%; padding: 15px; background: #f5f7fa; border-radius: 4px; min-height: 90px; }
+.ref-ov-chat .ref-ov-row { position: absolute; right: 12px; top: 12px; }
+.overlay-input { width: 100%; height: 42px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--muted); font: inherit; user-select: text; }
+.overlay-input-row { display: flex; width: 100%; gap: 8px; }
+.chat-send { flex: none; width: 42px; border: 0; border-radius: 4px; color: #fff; background: #adc2de; font-size: 25px; cursor: pointer; }
+.ref-ov-promo { pointer-events: none; background: #23345155; }
+.ref-ov-box { position: relative; pointer-events: auto; display: grid; grid-template-columns: 170px minmax(0,1fr); column-gap: 34px; row-gap: 18px; width: min(780px,75vw); padding: 58px 42px 46px; border-radius: 6px; box-shadow: 0 18px 55px #20314840; }
+.newsletter-art { grid-row: 1 / 5; align-self: center; }
+.newsletter-art svg { width: 100%; }
+.newsletter-title { margin: 0; font-size: 29px; letter-spacing: -.6px; }
+.ref-ov-box .ref-ov-text, .ref-ov-box .overlay-input-row, .ref-ov-box .ref-ov-row { grid-column: 2; }
+.ref-ov-box .ref-ov-text { color: var(--muted); min-height: 55px; }
+.promo-close { position: absolute; right: 20px; top: 16px; border: 0; padding: 0; background: transparent; color: var(--muted); font-size: 27px; line-height: 1; cursor: pointer; }
+@media (max-width: 1100px) {
+  .ref-ov-box { width: min(640px,82vw); grid-template-columns: 125px minmax(0,1fr); padding: 32px; gap: 20px; }
+  .newsletter-title { font-size: 24px; }
+  .ref-ov-cookie { left: 24px; right: 24px; padding: 12px 16px; gap: 12px; }
+  .ref-ov-cookie .ref-ov-text { font-size: 13px; }
+}
+/* Narrow or short viewports: tighter rail and inspector, smaller day headings and cards. */
+@media (max-width: 1280px), (max-height: 720px) {
+  .ad-rail { flex-basis: 232px; margin-right: 14px; }
+  .delivery-inspector { flex-basis: 232px; }
+  .delivery-record { min-height: 62px; }
+  .job-dot { width: 38px; height: 38px; font-size: 16px; }
+  .ad-lane-head { width: 27%; padding: 6px 8px; }
+  .ad-lane-head strong { font-size: 18px; }
+  .capacity-line, .ad-load { font-size: 13px; }
+  .ad-load b { font-size: 15px; }
+  .ad-pane { padding: 6px 8px; }
+  .ad-card { padding: 5px 8px; grid-template-columns: 36px minmax(0, 1fr) auto; column-gap: 8px; }
+  .ad-card .job-dot { width: 36px; height: 36px; font-size: 14px; }
+  .job-menu { font-size: 18px; padding: 0; }
+  .plan-reference { font-size: 12px; }
+  .ref-submit, .ref-xtra { padding: 4px 8px; font-size: 12px; }
+  .ad-customer { font-size: 13px; }
+  .ad-card-note, .ad-weight { font-size: 12px; }
+  .plan-title h1 { font-size: 19px; }
+  .plan-title { flex-wrap: wrap; gap: 4px 12px; }
+  .ref-task > .ref-tools { gap: 6px; }
+}

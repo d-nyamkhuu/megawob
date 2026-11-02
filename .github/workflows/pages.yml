@@ -1,0 +1,70 @@
+name: Pages
+
+# Publishes the gallery (python -m megawob.gallery) to GitHub Pages: every task x scenario x site, playable in the
+# browser with the action log and the oracle. The pages need no build step; only gallery.html and its card
+# screenshots are generated here. The jobs skip while the repository is private (a Pages site is public even then).
+# To publish: make the repository public, set Settings > Pages > Source to "GitHub Actions", run this workflow; the
+# site is then https://d-nyamkhuu.github.io/megawob/ and every push that changes the pages redeploys it.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "html/**"
+      - "megawob/gallery.py"
+      - "megawob/gallery_input.js"
+      - "megawob/catalog.py"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    if: ${{ !github.event.repository.private }}
+    # Playwright 1.58 installs no Chromium on ubuntu-latest (26.04); keep the last image it supports.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e '.[check]'
+      - run: playwright install --with-deps chromium
+      # The era fonts of server/Dockerfile, so the card screenshots render as in the checker.
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-liberation fonts-dejavu-core fonts-urw-base35 \
+            fonts-comic-neue fonts-noto-color-emoji fonts-unifont fonts-wqy-microhei
+      - run: python -m megawob.gallery
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp -r html/. _site/
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><title>MegaWoB gallery</title>' \
+            '<meta http-equiv="refresh" content="0; url=gallery.html"><a href="gallery.html">MegaWoB gallery</a>' \
+            > _site/index.html
+          touch _site/.nojekyll
+          du -sh _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

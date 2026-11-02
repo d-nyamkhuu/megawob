@@ -1,0 +1,388 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Zephyr Streaming: Aqua desktop window and account inspector. */
+:root {
+  --bg: #eaf1fa;
+  --panel: #f8fbff;
+  --fg: #142b55;
+  --muted: #50688f;
+  --line: #b7cce8;
+  --accent: #1689ed;
+}
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  position: relative;
+  border: 6px solid #7e9dbb;
+  border-radius: 15px 15px 10px 10px;
+  background: #edf4fc;
+  color: #172d59;
+  font: 18px/1.38 "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+  box-shadow: inset 0 0 0 1px #fff;
+}
+.ref-task {
+  position: relative;
+  flex: none;
+  height: 38px;
+  min-height: 38px;
+  justify-content: center;
+  gap: 0;
+  padding: 0 14px;
+  overflow: visible;
+  border: 1px solid #a9b8c9;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(#f9fbfd, #d7dfe8 52%, #c3ceda);
+  box-shadow: inset 0 1px #fff, 0 1px 3px #7f99b4;
+}
+.ref-task::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 8px;
+  width: 56px;
+  height: 21px;
+  background: radial-gradient(circle at 10px 10px, #f04d48 0 8px, #9e1618 9px, transparent 11px),
+    radial-gradient(circle at 31px 10px, #ffca4a 0 8px, #b77b17 9px, transparent 11px),
+    radial-gradient(circle at 52px 10px, #67c34f 0 8px, #337d25 9px, transparent 11px);
+}
+.ref-brand, .ref-nav { display: none; }
+.ref-task::after {
+  content: "Zephyr Streaming – Data & Privacy";
+  position: absolute;
+  left: 80px; right: 80px; top: 4px;
+  z-index: 1;
+  color: #1c2633;
+  text-align: center;
+  font: 19px/27px Arial, sans-serif;
+  text-shadow: 0 1px #fff;
+  pointer-events: none;
+}
+.ref-task .ref-tools { position: absolute; right: 10px; top: 2px; z-index: 3; }
+.ref-instruction {
+  position: absolute;
+  top: 42px; left: 28%; right: 12px;
+  z-index: 8;
+  padding: 8px 12px;
+  border: 1px solid #98b8df;
+  border-radius: 5px;
+  background: linear-gradient(#fff, #e2edfb);
+  color: #244b86;
+  font-size: 16px;
+  font-weight: 500;
+}
+.ref-spacer { display: none; }
+.ref-body { flex: 1; min-height: 0; background: #f3f8ff; }
+.ref-body.ref-panel-right { flex-direction: row; }
+.zephyr-inspector {
+  flex: 0 0 27%;
+  min-width: 255px;
+  max-width: 32%;
+  padding: 29px 28px 20px;
+  border-right: 2px solid #b7cce4;
+  background: repeating-linear-gradient(90deg, #f2f7fd 0 3px, #edf4fc 3px 6px);
+  color: #172d59;
+  overflow: hidden;
+}
+.zephyr-logo {
+  padding: 4px 0 0 24px;
+  color: #153368;
+  font-size: clamp(27px, 2.5vw, 45px);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -1.8px;
+  line-height: 1.2;
+}
+.zephyr-logo::first-letter { color: #1689ed; font-size: 1.2em; }
+.zephyr-tagline {
+  padding: 0 0 22px 118px;
+  color: #36598e;
+  font-size: 12px;
+  letter-spacing: 5px;
+}
+.zephyr-info { padding: 12px 10px 19px; border-top: 1px solid #adc4df; }
+.zephyr-info h2 { margin: 0 0 12px; color: #1456af; font-size: 20px; font-weight: 700; }
+.zephyr-property { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; color: #52688d; }
+.zephyr-property strong { color: #111d3d; font-weight: 500; text-align: right; }
+.zephyr-privacy { margin-top: 3px; }
+.zephyr-reassurance {
+  display: flex; gap: 15px; align-items: flex-start;
+  margin-top: 4px; padding: 25px 8px 0;
+  border-top: 1px solid #adc4df;
+  color: #536a91;
+}
+.zephyr-reassurance p { margin: 0; }
+.zephyr-lock { flex: none; color: #617995; font-size: 66px; line-height: 1; text-shadow: 0 2px 2px #fff; }
+.ref-stage {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 18px 16px 14px;
+  justify-content: flex-start;
+  align-items: stretch;
+  background: repeating-linear-gradient(90deg, #f7fbff 0 3px, #f1f7fd 3px 6px);
+}
+.ref-stage::after { display: none; }
+.sp-btn, .sp-in {
+  accent-color: #1689ed;
+  font-family: inherit;
+}
+.ref-submit {
+  padding: 7px 17px;
+  border: 1px solid #1476ce;
+  border-radius: 5px;
+  background: linear-gradient(#64c5ff, #1387e4 48%, #0874cf);
+  box-shadow: inset 0 1px rgba(255,255,255,.85), 0 1px 2px #6f8398;
+  color: white;
+  font-weight: 700;
+}
+.ref-xtra { border: 1px solid #9aabbc; border-radius: 5px; background: linear-gradient(#fff, #dce6f1); color: #173b6e; }
+.ref-foot { min-height: 42px; padding: 4px 18px; border-top: 1px solid #adc4df; background: linear-gradient(#edf5fd, #dbe8f7); color: #52688d; }
+.ref-panel { background: #e8f0fb; border-color: #abc3e2; }
+.ref-note { border-color: #9db9da; border-left-color: #1689ed; border-radius: 8px; background: #f5f9ff; color: #163968; }
+.ref-endlink { color: #075db1; }
+@media (max-width: 900px) {
+  .zephyr-inspector { flex-basis: 29%; min-width: 220px; padding: 20px 14px 12px; }
+  .zephyr-property { font-size: 13px; }
+  .zephyr-logo { padding-left: 2px; }
+  .zephyr-tagline { padding-left: 66px; letter-spacing: 3px; }
+  .zephyr-lock { font-size: 44px; }
+  .ref-stage { padding: 10px; }
+}
+
+/* Umbra Storage: Memphis inspired account workspace. */
+:root {
+  --bg: #fffaf0;
+  --panel: #fffdf8;
+  --fg: #11194f;
+  --muted: #4c5b91;
+  --line: #d7d3d4;
+  --accent: #c9baff;
+}
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: #fffaf0; color: #11194f; font: 16px/1.35 Arial, "Segoe UI", sans-serif; }
+.ref-task {
+  height: 74px; min-height: 74px; padding: 0 28px; gap: 0;
+  border-bottom: 1px solid #c4bfca; background: #fffaf0;
+  position: relative; overflow: hidden;
+}
+.ref-task::after {
+  content: ""; position: absolute; z-index: 0; right: 17%; top: -42px; width: 230px; height: 142px;
+  background: #ff8581; transform: rotate(-34deg); opacity: .9; pointer-events: none;
+}
+.ref-task::before {
+  content: ""; position: absolute; z-index: 0; right: 9%; top: 12px; width: 112px; height: 112px;
+  border-radius: 50%; background: #c9baff; pointer-events: none;
+}
+.ref-brand {
+  position: relative; z-index: 1; flex: 0 0 300px; color: #11194f;
+  font-size: 25px; line-height: 1; font-weight: 800; letter-spacing: -1px;
+}
+.ref-brand::before {
+  content: ""; display: inline-block; width: 42px; height: 42px; margin-right: 12px;
+  vertical-align: middle; border-radius: 50%; background: conic-gradient(#11194f 0 25%, #c9baff 25% 50%, #11194f 50% 100%);
+}
+.ref-nav { height: 100%; gap: 0; position: relative; z-index: 1; }
+.ref-navlink {
+  height: 100%; min-width: 100px; display: flex; align-items: center; justify-content: center;
+  padding: 0 20px; color: #11194f; font-size: 18px; font-weight: 700;
+}
+.ref-navlink:last-child { background: #c9baff; border-bottom: 4px solid #11194f; }
+.ref-spacer { flex: 1; min-width: 8px; }
+.ref-tools { position: relative; z-index: 2; }
+.ref-body { min-height: 0; width: 100%; background: #fffaf0; }
+.ref-body.ref-panel-right { flex-direction: row; }
+.ref-side { display: none; }
+.ref-stage { width: 100%; padding: 0; justify-content: stretch; align-items: stretch; }
+.ref-stage::after {
+  content: ""; position: absolute; z-index: 5; top: 18px; right: 18px; width: 78px; height: 54px;
+  background-image: radial-gradient(#11194f 2.3px, transparent 2.5px); background-size: 18px 18px;
+  pointer-events: none;
+}
+.ref-instruction {
+  position: relative; z-index: 2; max-width: 600px; padding: 8px 14px;
+  color: #11194f; font-size: 15px; font-weight: 600; line-height: 1.3;
+}
+.ref-submit { border: 2px solid #11194f; border-radius: 3px; background: #c9baff; color: #11194f; font-weight: 700; }
+.ref-xtra { border: 2px solid #11194f; border-radius: 3px; color: #11194f; background: #fffaf0; }
+.ref-foot { min-height: 46px; padding: 4px 24px; border-top: 1px solid #c5bfdb; background: #f2eefb; color: #4c5b91; }
+.ref-endlink { color: #11194f; }
+.ref-panel { border: 2px solid #11194f; border-radius: 3px; background: #f2eefb; }
+.ref-note { border: 2px solid #11194f; border-left: 8px solid #ff8581; border-radius: 3px; background: #fffdf8; color: #11194f; }
+.ref-note-x { color: #11194f; }
+@media (max-width: 800px) {
+  .ref-task { padding: 0 12px; height: 62px; min-height: 62px; }
+  .ref-brand { flex-basis: 190px; font-size: 19px; }
+  .ref-brand::before { width: 32px; height: 32px; margin-right: 7px; }
+  .ref-navlink { min-width: 58px; padding: 0 8px; font-size: 13px; }
+}
+
+/* Final Aqua overrides: these follow the inherited Umbra rules above. */
+:root { --bg:#eaf1fa; --panel:#f8fbff; --fg:#142b55; --muted:#50688f; --line:#b7cce8; --accent:#1689ed; }
+body {
+  position:relative; border:6px solid #7e9dbb; border-radius:15px 15px 10px 10px;
+  background:#edf4fc; color:#172d59; font:18px/1.38 "Lucida Grande","Lucida Sans Unicode",Arial,sans-serif;
+  box-shadow:inset 0 0 0 1px #fff;
+}
+.ref-task {
+  position:relative; height:38px; min-height:38px; justify-content:center; gap:0; padding:0 14px;
+  overflow:visible; border:1px solid #a9b8c9; border-radius:10px 10px 0 0;
+  background:linear-gradient(#f9fbfd,#d7dfe8 52%,#c3ceda); box-shadow:inset 0 1px #fff,0 1px 3px #7f99b4;
+}
+.ref-task::before {
+  content:""; position:absolute; left:14px; top:8px; width:56px; height:21px;
+  background:radial-gradient(circle at 10px 10px,#f04d48 0 8px,#9e1618 9px,transparent 11px),radial-gradient(circle at 31px 10px,#ffca4a 0 8px,#b77b17 9px,transparent 11px),radial-gradient(circle at 52px 10px,#67c34f 0 8px,#337d25 9px,transparent 11px);
+}
+.ref-task::after {
+  content:"Zephyr Streaming – Data & Privacy"; position:absolute; left:80px; right:80px; top:4px; z-index:1;
+  color:#1c2633; text-align:center; font:19px/27px Arial,sans-serif; text-shadow:0 1px #fff; pointer-events:none;
+}
+.ref-brand,.ref-nav { display:none; }
+.ref-task .ref-tools { position:absolute; right:10px; top:2px; z-index:3; }
+.ref-instruction {
+  position:static; max-width:none; padding:8px 12px;
+  border:1px solid #98b8df; border-radius:5px; background:linear-gradient(#fff,#e2edfb); color:#244b86;
+  font-size:16px; font-weight:500;
+}
+.ref-task:has(.ref-instruction) { height:auto; padding-top:38px; padding-bottom:6px; }
+.ref-spacer { display:none; }
+.ref-body { flex:1; min-height:0; background:#f3f8ff; }
+.ref-body.ref-panel-right { flex-direction:row; }
+.zephyr-inspector {
+  flex:0 0 27%; min-width:255px; max-width:32%; padding:29px 28px 20px; overflow:hidden;
+  border-right:2px solid #b7cce4; background:repeating-linear-gradient(90deg,#f2f7fd 0 3px,#edf4fc 3px 6px); color:#172d59;
+}
+.zephyr-logo { padding:4px 0 0 24px; color:#153368; font-size:clamp(27px,2.5vw,45px); font-weight:800; font-style:italic; letter-spacing:-1.8px; line-height:1.2; }
+.zephyr-logo::first-letter { color:#1689ed; font-size:1.2em; }
+.zephyr-tagline { padding:0 0 22px 118px; color:#36598e; font-size:12px; letter-spacing:5px; }
+.zephyr-info { padding:12px 10px 19px; border-top:1px solid #adc4df; }
+.zephyr-info h2 { margin:0 0 12px; color:#1456af; font-size:20px; font-weight:700; }
+.zephyr-property { display:flex; justify-content:space-between; gap:8px; padding:6px 0; color:#52688d; }
+.zephyr-property strong { color:#111d3d; font-weight:500; text-align:right; }
+.zephyr-privacy { margin-top:3px; }
+.zephyr-reassurance { display:flex; gap:15px; align-items:flex-start; margin-top:4px; padding:25px 8px 0; border-top:1px solid #adc4df; color:#536a91; }
+.zephyr-reassurance p { margin:0; }
+.zephyr-lock { flex:none; color:#617995; font-size:66px; line-height:1; text-shadow:0 2px 2px #fff; }
+.ref-stage { flex:1; min-width:0; min-height:0; padding:18px 16px 14px; justify-content:flex-start; align-items:stretch; background:repeating-linear-gradient(90deg,#f7fbff 0 3px,#f1f7fd 3px 6px); }
+.ref-stage::after { display:none; }
+.sp-win {
+  border-color:#adc5e4; border-radius:15px;
+  background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(230,239,250,.98));
+  box-shadow:0 1px 2px #c4d4e7,inset 0 1px #fff; color:#172d59;
+}
+.sp-btn,.sp-in { accent-color:#1689ed; font-family:inherit; }
+.ref-submit { padding:7px 17px; border:1px solid #1476ce; border-radius:5px; background:linear-gradient(#64c5ff,#1387e4 48%,#0874cf); box-shadow:inset 0 1px rgba(255,255,255,.85),0 1px 2px #6f8398; color:white; font-weight:700; }
+.ref-xtra { border:1px solid #9aabbc; border-radius:5px; background:linear-gradient(#fff,#dce6f1); color:#173b6e; }
+.ref-foot { min-height:42px; padding:4px 18px; border-top:1px solid #adc4df; background:linear-gradient(#edf5fd,#dbe8f7); color:#52688d; }
+.ref-panel { background:#e8f0fb; border-color:#abc3e2; }
+.ref-note { border-color:#9db9da; border-left-color:#1689ed; border-radius:8px; background:#f5f9ff; color:#163968; }
+.ref-endlink { color:#075db1; }
+@media(max-width:900px) {
+  .zephyr-inspector { flex-basis:29%; min-width:220px; padding:20px 14px 12px; }
+  .zephyr-property { font-size:13px; }
+  .zephyr-logo { padding-left:2px; }
+  .zephyr-tagline { padding-left:66px; letter-spacing:3px; }
+  .zephyr-lock { font-size:44px; }
+  .ref-stage { padding:10px; }
+}
+@media(max-width:1100px) {
+  .zephyr-inspector { min-width:205px; padding:14px 10px; overflow-y:auto; }
+  .zephyr-logo { font-size:25px; }
+  .zephyr-tagline { padding-left:55px; padding-bottom:10px; font-size:9px; letter-spacing:2px; }
+  .zephyr-info { padding:8px 5px 10px; }
+  .zephyr-info h2 { margin-bottom:5px; font-size:16px; }
+  .zephyr-property { gap:4px; padding:3px 0; font-size:11px; line-height:1.25; }
+  .zephyr-reassurance { display:none; }
+}
+.ref-task::after { width:auto; height:auto; transform:none; background:none; opacity:1; }
+.sp-win { font-family:"Lucida Grande","Lucida Sans Unicode",Arial,sans-serif; }
+.sp-btn { border-radius:4px; }
+.zephyr-lock {
+  position:relative; display:inline-block; width:78px; height:96px; overflow:visible;
+  color:transparent!important; font-size:0!important;
+  background:linear-gradient(110deg,#566b85,#edf5ff 24%,#879ab2 48%,#dce7f5 69%,#7589a2);
+  border:2px solid #73869d; border-radius:13px 13px 10px 10px;
+  box-shadow:inset 2px 2px 4px #fff, inset -3px -3px 5px #61758e, 0 2px 3px #aab9cc;
+  margin:18px 0 0 8px;
+}
+.zephyr-lock::before {
+  content:""; position:absolute; left:17px; top:-34px; width:38px; height:55px;
+  border:7px solid #8296ad; border-bottom:0; border-radius:24px 24px 0 0;
+  background:linear-gradient(90deg,transparent 0 28%,#e5edf7 43%,transparent 73%);
+  box-shadow:inset 2px 1px 1px #fff;
+}
+.zephyr-lock::after {
+  content:""; position:absolute; left:32px; top:34px; width:13px; height:25px;
+  border-radius:9px; background:radial-gradient(circle at 50% 6px,#1b3150 0 5px,transparent 6px),linear-gradient(#3b536f,#3b536f) center 14px/5px 11px no-repeat;
+  filter:drop-shadow(0 1px #fff);
+}
+/* Task geometry belongs to the widget; these only paint its surfaces. */
+.sp-cb { border-bottom:1px solid #d0deee; background:linear-gradient(90deg,#fff,#f0f6fd); color:#183b6f; }
+.sp-cb:hover { background:#e5f1ff; }
+.sp-cols { background:#edf5fd; border:1px solid #b5cce7; border-radius:12px; }
+.sp-card { background:#f8fbff; }
+.sp-sec { background:linear-gradient(#edf5ff,#dce9f8); color:#174987; }
+.sp-muted { color:#536d92; }

@@ -1,0 +1,31 @@
+// Design on the shared use-spreadsheet/workbook template.
+env.widget({
+  task: 'use-spreadsheet',
+  site: 'design-use-spreadsheet-range-01',
+  name: 'design',
+  split: 'train',
+  scenarios: ['range'],
+  template: 'use-spreadsheet/workbook',
+  design: {
+    font: 'Arial',
+    cellFontSize: 16,
+    largeFontSize: 17,
+    gutter: 56,
+    canvasGutter: 56,
+    headerHeight: 31,
+    canvasHeaderHeight: 31,
+    rowHeight: 33,
+    canvasRowHeight: 33,
+    minRowHeight: 23,
+    scrollbarWidth: 28,
+    columnWeights: [1.05, 1, 1, .98, 1, .92, .92, .84],
+    canvasColumnWeights: [1.05, 1, 1, .98, 1, .92, .92, .84],
+    parts: {
+      title: () => () => {},
+      navigation: () => () => {},
+      workspace: () => () => {},
+      activity: () => () => {},
+      bottom: () => () => {},
+    },
+  },
+});

@@ -1,0 +1,23 @@
+// Design on templates/site/base.js (the base site.js): only what this site changed.
+(function () {
+  'use strict';
+
+  const parts = {
+    'frame.header': (base, S) => function (_c) {
+      const { util } = _c;
+      const header = util.el('header', 'ref-task', document.body);
+      const winbar = util.el('div', 'gtk-windowbar', document.body);
+      winbar.textContent = '▣  Sales Workbook';
+      const winbuttons = util.el('div', 'gtk-window-buttons', winbar);
+      for (const glyph of ['−', '□', '×']) util.el('span', '', winbuttons, glyph);
+      S.frameBrand(_c, header);
+      Object.assign(_c, { header, winbar, winbuttons });
+    },
+  };
+
+  env.site({
+    name: 'design-use-spreadsheet-sort-04',
+    template: 'site/base',
+    design: { parts },
+  });
+})();

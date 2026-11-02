@@ -1,0 +1,516 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ""; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ""; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* City Explorer: Amiga Workbench window and planar controls. */
+:root {
+  --bg: #aeb1b4 !important;
+  --panel: #c7c9cb !important;
+  --fg: #111827 !important;
+  --muted: #424650 !important;
+  --line: #50545a !important;
+  --accent: #f28a12 !important;
+  font-family: "Courier New", monospace;
+}
+body {
+  position: relative;
+  padding: 4px;
+  gap: 0;
+  background: #aeb1b4;
+  color: #101828;
+  font: 16px/1.2 "Courier New", monospace;
+  overflow: hidden;
+}
+.ref-task {
+  min-height: 42px;
+  height: 102px;
+  min-height: 102px;
+  position: relative;
+  align-items: flex-start;
+  padding: 7px 8px;
+  gap: 10px;
+  border: 2px outset #eef0f2;
+  background: linear-gradient(#1556c4 0 41%, #0640a6 41% 43%, #b8bbbe 43% 100%);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px #0a2f79;
+}
+.ref-brand {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  color: #fff;
+  font: bold 21px/1 "Courier New", monospace;
+  letter-spacing: .02em;
+  text-shadow: 1px 1px #142b5d;
+}
+.ref-brand::before {
+  content: "";
+  display: inline-block;
+  width: 23px; height: 23px; margin: 0 9px 0 2px;
+  vertical-align: -5px;
+  border: 2px solid #eef4f7;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 36%, #8bd67a 0 12%, transparent 13%),
+              radial-gradient(ellipse at 63% 67%, #49af5a 0 20%, transparent 21%),
+              linear-gradient(135deg, #43c7e5, #073e9c 70%);
+  box-shadow: 1px 1px #162c55;
+}
+.ref-nav {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 58px;
+  gap: 0;
+  align-self: stretch;
+  background: #b8bbbe;
+  border-top: 2px solid #55595e;
+}
+.ref-navlink {
+  display: flex;
+  align-items: center;
+  min-width: 130px;
+  padding: 0 22px;
+  border: 2px outset #eee;
+  background: #c4c6c8;
+  color: #101828;
+  font: bold 16px "Courier New", monospace;
+  text-decoration: none;
+}
+.ref-navlink:first-child { background: #f28a12; }
+.ref-instruction {
+  position: absolute;
+  left: 250px;
+  right: 275px;
+  top: 4px;
+  height: 34px;
+  overflow: auto;
+  padding: 5px 9px;
+  border: 2px inset #ddd;
+  background: #d4d5d6;
+  color: #111827;
+  font: bold 14px/1.2 "Courier New", monospace;
+}
+.ref-spacer { min-width: 0; }
+.ref-tools { gap: 5px; }
+.ref-task > .ref-tools { position: absolute; right: 7px; top: 4px; }
+.ref-submit, .ref-xtra {
+  border: 2px outset #f4f4f4;
+  border-radius: 0;
+  background: #c7c9cb;
+  color: #111827;
+  padding: 5px 12px;
+  font: bold 14px "Courier New", monospace;
+  box-shadow: inset 1px 1px #fff;
+}
+.ref-submit { background: #f28a12; }
+.ref-icon { width: 32px; height: 30px; }
+.ref-body {
+  min-height: 0;
+  margin-top: 3px;
+  border: 2px outset #f3f3f3;
+  background: #aeb1b4;
+  overflow: hidden;
+}
+.ref-stage {
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  padding: 3px;
+  min-width: 0;
+  min-height: 0;
+  background: #aeb1b4;
+}
+.ref-stage > * {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  flex: 1 1 auto !important;
+}
+.ref-stage * { max-width: none !important; }
+.ref-stage canvas { width: 100% !important; height: 100% !important; }
+.ref-side {
+  width: 180px;
+  background: #c7c9cb;
+  border-right: 2px inset #eee;
+  font: 14px "Courier New", monospace;
+}
+.ref-panel {
+  border: 2px groove #eee;
+  border-radius: 0;
+  background: #d0d1d2;
+  font-family: "Courier New", monospace;
+}
+.ref-foot {
+  min-height: 30px;
+  padding: 3px 8px;
+  border: 2px outset #eee;
+  background: #c3c5c7;
+  color: #111827;
+  font: 12px "Courier New", monospace;
+}
+.ref-endlink { color: #073e9c; }
+.ref-note {
+  left: 14px; bottom: 42px; max-width: min(620px, calc(100vw - 28px));
+  border: 2px outset #eee; border-left: 6px solid #f28a12; border-radius: 0;
+  background: #d0d1d2; box-shadow: 2px 3px 0 #555;
+  font: bold 14px/1.25 "Courier New", monospace;
+}
+.ref-note-x { color: #111827; }
+.ref-float-dock { height: 0; }
+.ref-float { right: 8px; bottom: 8px; }
+html.env-scroll .ref-task { position: relative; }
+
+/* The task's map window grows with the available stage; retain its own panes and controls. */
+.ref-stage > * > * { box-sizing: border-box; }
+.ref-stage button, .ref-stage [role="button"] {
+  border-radius: 0 !important;
+  font-family: "Courier New", monospace !important;
+}
+
+/* Overlay frame uses the same square, raised Workbench gadgets. */
+.ref-ov, .ref-fault, .ref-notice, .ref-hz { font-family: "Courier New", monospace; }
+.ref-ov, .ref-fault, .ref-notice, .ref-hz-window, .ref-hz-ad, .ref-ov-box {
+  border-radius: 0 !important;
+}
+.ref-ov-btn, .ref-fault-x, .ref-hz-btn {
+  border-radius: 0 !important;
+  border: 2px outset #eee !important;
+  background: #c7c9cb !important;
+  color: #111827 !important;
+  font-family: "Courier New", monospace !important;
+}
+.ref-ov-primary, .ref-hz-primary { background: #f28a12 !important; }
+
+/* Windows XP Luna / Riverton Map */
+:root {
+  --bg: #dce8f5 !important; --panel: #f7f7f7 !important; --fg: #10295b !important;
+  --muted: #4c5870 !important; --line: #9aaac2 !important; --accent: #075bd8 !important;
+  font-family: Tahoma, Arial, sans-serif !important;
+}
+body {
+  padding: 4px; gap: 0; color: #12264c; overflow: hidden;
+  font: 14px/1.25 Tahoma, Arial, sans-serif;
+  background: linear-gradient(#2c74e8, #0754d0 48%, #0647bc);
+  border: 1px solid #1452ce; box-shadow: inset 0 0 0 1px #8db8ff;
+}
+.ref-task {
+  height: 74px; min-height: 74px; position: relative; display:block; padding:0;
+  border: 0; color:#fff; background: linear-gradient(#3b8afa 0%, #1167e5 45%, #0750cf 100%);
+  box-shadow: inset 0 1px 0 #9ecaff, inset 0 -2px 0 #063daa;
+}
+.ref-brand {
+  left: 10px; top: 9px; color:#fff; font: bold 20px/26px Tahoma,Arial,sans-serif;
+  text-shadow: 1px 1px 2px #164393; letter-spacing:0;
+}
+.ref-brand::before {
+  width:22px;height:22px;margin-right:9px;vertical-align:-5px;border:1px solid #d9eeff;border-radius:4px;
+  background: radial-gradient(circle at 35% 30%,#fff 0 8%,transparent 9%),linear-gradient(135deg,#57c8ed,#0871c9 55%,#58b640 56%,#168a2e);
+  box-shadow:1px 1px 2px #173f8d;
+}
+.ref-task::after {
+  content:"File     View     Places     Tools     Help"; position:absolute; z-index:2;
+  left:0;right:0;top:43px;height:30px;padding:5px 16px;
+  color:#111;font:16px/20px Tahoma,Arial,sans-serif;
+  background:linear-gradient(#fffefb,#ece9df);border-top:1px solid #a9c9fa;border-bottom:1px solid #8295aa;
+}
+.ref-nav {
+  position:fixed; z-index:60; left:5px; right:5px; bottom:5px; height:74px; padding:0;
+  border:1px solid #9aaac0;border-top:2px solid #e5f1ff;gap:0; background:linear-gradient(#fdfdfd,#dfe8f5);
+  box-shadow:0 -2px 7px #244d8b55;
+}
+.ref-navlink {
+  min-width:164px; height:100%; padding:0 18px; display:flex; align-items:center;
+  border:1px solid #c2cedd; border-right:1px solid #aebbd0; background:linear-gradient(#fff,#e8edf4);
+  color:#09265f; font: bold 16px Tahoma,Arial,sans-serif; text-shadow:0 1px #fff;
+}
+.ref-navlink::before { content:""; width:30px;height:30px;margin-right:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 10%,#8de2ff 12% 25%,#1686d9 30% 65%,#0756af 70%);box-shadow:0 0 0 1px #4a8bd0; }
+.ref-navlink:nth-child(2)::before { background:radial-gradient(circle,#fff 0 30%,#68b7ed 32% 50%,#164d9e 55%); }
+.ref-navlink:nth-child(3)::before { content:"➜";display:grid;place-items:center;color:#159340;font-size:30px;background:none;box-shadow:none; }
+.ref-navlink:nth-child(4)::before { content:"★";display:grid;place-items:center;color:#ffb61e;font-size:28px;background:none;box-shadow:none; }
+.ref-instruction { position:absolute; left:250px;right:285px;top:5px;height:34px;overflow:auto;padding:5px 9px;border:1px solid #8eb4ef;border-radius:4px;background:#edf5ff;color:#12356e;font: bold 13px/1.25 Tahoma,Arial,sans-serif; }
+.ref-tools { gap:5px; }
+.ref-task > .ref-tools { position:absolute;right:8px;top:7px;z-index:3; }
+.ref-submit,.ref-xtra,.ref-ov-btn,.ref-fault-x,.ref-hz-btn {
+  border:1px solid #7e9bb9 !important;border-radius:4px !important;background:linear-gradient(#fff,#dce8f5) !important;
+  color:#102d63 !important;padding:5px 12px;font:bold 13px Tahoma,Arial,sans-serif !important;box-shadow:inset 0 1px #fff;
+}
+.ref-submit { background:linear-gradient(#fff2b4,#ffc43b 48%,#f29c16) !important; }
+.ref-icon { width:34px;height:30px;padding:0; }
+.ref-body { margin:0 0 74px; min-height:0; border:0; background:#b9d8e9; overflow:hidden; }
+.ref-stage { padding:0; min-height:0; background:#c5e7f7; }
+.ref-stage > * { border:0 !important; }
+.ref-side { display:none !important; }
+.ref-panel { position:absolute;z-index:30;left:12px;top:12px;width:min(270px,40vw);padding:10px 12px;border:1px solid #9aaac2;border-radius:5px;background:#fffef4;font:13px Tahoma,Arial,sans-serif;box-shadow:1px 2px 6px #233b5b55; }
+.ref-panel-title { color:#12356e;font:bold 14px Tahoma,Arial,sans-serif; }
+.ref-panel-text { font:13px/1.35 Tahoma,Arial,sans-serif; }
+.ref-foot { position:fixed;z-index:65;bottom:5px;right:8px;min-height:74px;border:0;background:transparent;color:#60718d;font:12px Tahoma,Arial,sans-serif;pointer-events:none; }
+.ref-foot .ref-tools { pointer-events:auto; }
+.ref-endlink { color:#064da8; }
+.ref-note { left:auto;right:16px;bottom:88px;max-width:min(390px,calc(100vw - 32px));border:1px solid #83a6cf;border-left:4px solid #2875d7;border-radius:5px;background:#fffff0;box-shadow:1px 3px 9px #17376155;font:13px/1.3 Tahoma,Arial,sans-serif; }
+.ref-note-x { color:#234b82; }
+html.env-scroll .ref-task { position:relative; }
+.ref-ov,.ref-fault,.ref-notice,.ref-hz { font-family:Tahoma,Arial,sans-serif !important; }
+.ref-ov-promo { background:#183c6a66; }
+.ref-ov-cookie,.ref-ov-toast,.ref-ov-chat,.ref-ov-box { border:1px solid #91a9c6; border-radius:5px !important; background:#fffdf2; }
+.ref-ov-banner { background:#fff4c7; color:#27374f; }
+.ref-busy-box { border-radius:5px; }
+/* The city template's optional directory rail is not part of this full-bleed map design. */
+.ref-stage aside { display:none !important; }
+.ref-stage > :first-child { width:100% !important; max-width:none !important; }
+.ref-stage [class*="map"], .ref-stage [class*="Map"] { max-width:none !important; }
+.ref-stage svg { max-width:none !important; }
+.ref-stage nav { display:none !important; }
+.ref-stage [role="navigation"] { display:none !important; }
+.ref-stage > * { background:#dff0d6 !important; }
+.ref-stage > * > * { box-sizing:border-box; }
+.ref-navlink { min-width:164px; }
+.ref-navlink:nth-child(2)::before { content:"⌕";display:grid;place-items:center;color:#115cae;font-size:36px;background:none;box-shadow:none; }
+.ref-navlink:nth-child(3)::before { content:"➜"; }
+.ref-navlink:nth-child(4)::before { content:"★"; }
+.ref-navlink:nth-child(5)::before { content:"▣";display:grid;place-items:center;color:#1761ad;font-size:27px;background:none;box-shadow:none; }
+.ref-stage canvas, .ref-stage .mp-svg { width:100% !important; height:100% !important; max-width:none !important; }
+.ref-stage [class*="viewport"], .ref-stage [class*="map-canvas"],
+.ref-stage [class*="map-view"], .ref-stage [class*="mapView"],
+.ref-stage [class*="mapViewport"] { width:100% !important; max-width:none !important; flex:1 1 100% !important; }
+.ref-stage > * > :nth-child(-n/**/+2) { display:none !important; }
+.ref-stage { isolation:isolate; }
+.ref-stage::before {
+  content:""; position:absolute; z-index:4; top:0; right:0; bottom:0; width:40%;
+  pointer-events:none; background-color:#eeeadd;
+  background-image:
+    linear-gradient(90deg,transparent 0 27%,#d8e6ce 27% 34%,transparent 34% 100%),
+    linear-gradient(0deg,transparent 0 63%,#d8e6ce 63% 72%,transparent 72% 100%),
+    repeating-linear-gradient(0deg,transparent 0 38px,#fff 39px 42px,#d9d7ce 43px,transparent 44px 82px),
+    repeating-linear-gradient(90deg,transparent 0 43px,#fff 44px 47px,#d9d7ce 48px,transparent 49px 88px);
+  box-shadow:inset 1px 0 #c1c7c1;
+}
+.ref-stage::after {
+  content:"Map Legend\A 🟨  Major road\A ▱  Street\A ▰  Park / Green space\A ▰  Water\A 🚉  Train station\A ✚  Hospital\A 🎓  School / College\A 🛒  Shopping\A 📷  Attraction\A ▰  Hotel";
+  white-space:pre; position:absolute; z-index:15; top:12px; right:12px; width:164px;
+  padding:9px 11px; border:1px solid #9daec4; border-radius:6px;
+  background:linear-gradient(#fff,#f5f8fc); color:#17335e;
+  box-shadow:0 2px 5px #233c5c55; font:12px/23px Tahoma,Arial,sans-serif;
+  pointer-events:none; font-size:14px; line-height:25px;
+}
+
+/* Riverton Map: XP Luna frame and edge-to-edge live map. */
+:root { --bg:#ece9d8 !important; --panel:#fff !important; --fg:#102b62 !important; --muted:#64758d !important; --line:#b7c7d9 !important; --accent:#075bd8 !important; }
+body { position:relative; padding:4px; gap:0; overflow:hidden; background:#1263dc; color:#142d62; font:16px/1.25 Tahoma,Arial,sans-serif; }
+.ref-task {
+  z-index:20; position:relative; flex:none; display:block; height:72px; min-height:72px; padding:0;
+  border:2px solid #0b4fc7; border-bottom:0; border-radius:8px 8px 0 0;
+  background:linear-gradient(#1688ff 0%,#075be6 42%,#0645c5 100%); box-shadow:inset 0 1px 0 #80c2ff; color:#fff;
+}
+.ref-brand { position:absolute; top:5px; left:8px; font:bold 19px Tahoma,Arial,sans-serif; color:#fff; text-shadow:1px 1px #174c9b; }
+.ref-brand::before { width:20px;height:20px;margin-right:7px;border:1px solid #d8ecff;border-radius:3px;vertical-align:-4px; }
+.ref-task::before { content:"−   □   ×";position:absolute;z-index:4;right:6px;top:4px;width:90px;height:25px;padding:1px 5px;border:1px solid #c5e1ff;border-radius:4px;background:linear-gradient(#75b9ff,#1762ca);box-shadow:inset 0 1px #c4e4ff;color:#fff;text-align:center;letter-spacing:3px;font:bold 17px/21px Tahoma,Arial,sans-serif;text-shadow:0 1px #164991; }
+.ref-task::after { content:"File    View    Places    Tools    Help"; position:absolute; left:0;right:0;top:36px;height:32px;padding:5px 14px; background:linear-gradient(#fff 0%,#f2f2ed 100%); border-bottom:1px solid #a6acb4; color:#111; font:16px/22px Tahoma,Arial,sans-serif; }
+.ref-instruction { z-index:2; left:280px;right:240px;top:2px; height:31px;padding:5px 8px; overflow:auto; border:1px solid #7eaff1; border-radius:4px; background:#eaf3ff;color:#12356f;font:13px/18px Tahoma,Arial,sans-serif; }
+.ref-spacer { display:none; }
+.ref-task > .ref-tools { top:3px;right:101px;z-index:3; }
+.ref-submit,.ref-xtra { border:1px solid #7a9cc7;border-radius:4px;background:linear-gradient(#fff,#dbe9fb);color:#15346b;padding:4px 10px;font:13px Tahoma,Arial,sans-serif;box-shadow:inset 0 1px #fff; }
+.ref-submit { background:linear-gradient(#fff7d1,#ffcf4d);border-color:#cf9d28;font-weight:bold; }
+.ref-body { min-height:0; margin:0 2px 74px; border:0; border-radius:0 0 5px 5px; background:#fff; overflow:hidden; }
+.ref-stage { display:block !important; position:relative; flex:1 1 auto; min-width:0; min-height:0; padding:0 !important; background:#fff; }
+.ref-stage::before { display:none !important; content:none !important; }
+.ref-stage::after { display:none !important;content:none !important; }
+.ref-stage > * > :nth-child(-n/**/+2) { display:none !important; }
+
+.mpp-root { display:flex !important; flex-direction:column !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; }
+
+.mpp-work{display:block!important}
+.mpp-main,.mp-card{display:block!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.mp-port{border-radius:0!important;outline:0!important;--mp-land:#edeae2!important;--mp-water:#79c7f4!important;--mp-park:#b7dfa1!important;--mp-road:#ffe549!important;--mp-casing:#e0bd34!important;--mp-street:#fff!important;--mp-halo:rgba(255,255,255,.95)!important}
+.mp-reticle,.mp-cross{display:block!important}
+.mp-reticle{z-index:8!important;border:2px solid #111!important;background:rgba(255,255,255,.3);box-shadow:0 0 0 1px #fff}
+.mp-cross{z-index:9;background:#101820!important;box-shadow:0 0 0 1px #fff}
+
+
+.mp-zoom{gap:0!important;padding:2px!important;border:1px solid #889bb7!important;border-radius:6px!important}
+.mp-zbtn{border:0!important;border-radius:4px!important;color:#12356f!important;font:bold 25px Tahoma,Arial,sans-serif!important}
+.mp-zbtn svg { display:none !important; }
+.mp-zbtn::after{content:"+"}.mp-zbtn:last-of-type::after{content:"−"}
+
+
+.mp-zoom .mp-zbtn{display:block!important}
+.mp-scale{padding:7px 10px!important;border:1px solid #b7c7d9;border-radius:4px;background:rgba(255,255,255,.9)}
+.mp-lbl{font-family:Tahoma,Arial,sans-serif!important}
+.mp-streets { stroke-width:2px !important;stroke:rgba(255,255,255,.98) !important; }
+.mp-casing { stroke-width:13px !important; }
+.mp-road { stroke-width:10px !important; }
+.mp-river { stroke-width:42px !important; }
+.mp-park { filter:saturate(1.08); }
+.mp-district{font-size:20px!important;letter-spacing:.1em!important;color:#72798d!important}
+.mp-roadname{font-size:14px!important}
+.mp-parkname{font-size:15px!important}
+.mp-pin{font-size:15px!important;color:#082d86!important;font-weight:bold!important;text-shadow:-1px -1px #fff,1px 1px #fff,0 0 4px #fff!important}
+.mp-legend { position:absolute;z-index:20;right:12px;top:12px;width:196px;padding:8px 12px;border:1px solid #9aaac0;border-radius:7px;background:linear-gradient(#fff,#f7faff);box-shadow:0 2px 5px #344a6655;color:#16366e;font:14px/25px Tahoma,Arial,sans-serif;pointer-events:none; }
+.ref-stage > .riverton-legend{z-index:999!important;padding:7px 10px 9px;border:1px solid #9aaac0;border-radius:7px;background:linear-gradient(#fff,#f7faff);box-shadow:0 2px 5px #344a6655;color:#12336c;font:14px/24px Tahoma,Arial,sans-serif;pointer-events:none}
+.riverton-legend-title{display:block;padding:3px 10px 4px;border-bottom:1px solid #d8e1ed;border-radius:7px 7px 0 0;background:linear-gradient(#fff,#edf4fc);font-size:15px}
+.riverton-legend-row{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.riverton-legend i:empty { display:inline-flex !important; }
+.riverton-symbol{display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:17px;color:#075bd8}
+.riverton-legend-row.road .riverton-symbol{border:1px solid #e3b51c;border-radius:5px;background:#ffe34a}
+.riverton-legend-row.street .riverton-symbol{border:1px solid #cbd1dc;border-radius:4px;background:#fff}
+.riverton-legend-row.park .riverton-symbol{border-radius:2px;background:#b8dfa7}
+.riverton-legend-row.water .riverton-symbol{border-radius:2px;background:#72c5f5}
+.riverton-legend-row.hospital .riverton-symbol{color:#ef3947;font-size:21px;font-weight:bold}
+.riverton-legend-row.school .riverton-symbol{color:#075bd8}
+.riverton-legend-row.shopping .riverton-symbol{font-size:16px}
+.riverton-legend-row.attraction .riverton-symbol{border-radius:50%;color:#fff;background:#075bd8}
+.riverton-legend-row.train .riverton-symbol{font-size:18px}.riverton-legend-row.hotel .riverton-symbol{color:#075bd8}
+.ref-stage::after { content:"Map Legend\A ▰  Major road\A ▭  Street\A ■  Park / Green space\A ■  Water\A ▣  Train station\A ✚  Hospital\A ▲  School / College\A ▾  Shopping\A ◎  Attraction\A ▰  Hotel" !important;display:block !important;position:absolute;z-index:999;top:10px;right:10px;bottom:auto;left:auto;width:196px;padding:7px 10px 9px;border:1px solid #9aaac0;border-radius:7px;background:linear-gradient(#fff,#f7faff);box-shadow:0 2px 5px #344a6655;color:#12336c;font:14px/24px Tahoma,Arial,sans-serif;white-space:pre;pointer-events:none; }
+.ref-nav { position:fixed !important; z-index:30;left:4px;bottom:6px;width:auto;height:74px !important;border-top:1px solid #a6b8d0 !important;background:rgba(246,248,252,.97) !important;box-shadow:0 -2px 8px #284c7733; }
+.ref-navlink { min-width:164px; padding:0 18px !important; border:1px solid #b6c5d8 !important; border-radius:0 !important; background:linear-gradient(#fff,#e8eef7) !important;color:#082d86 !important;font:bold 16px Tahoma,Arial,sans-serif !important; }
+.ref-navlink:first-child { background:linear-gradient(#dcecff,#b7d4fa) !important; }
+.ref-foot { position:fixed;right:8px;bottom:12px;z-index:31;min-height:48px;padding:5px 10px;border:1px solid #9fb4cf;border-radius:5px;background:#f7f9fc; }
+.ref-side,.ref-panel { display:none !important; }
+/* Specific native frame replaces the inherited simulated title/menu and legend. */
+.ref-task::before,.ref-task::after,.ref-stage::after { display:none !important;content:none !important; }
+.ref-task { height:74px;min-height:74px;border:0;border-radius:7px 7px 0 0;background:linear-gradient(#4095ff 0,#0969f3 9%,#0053e7 55%,#0757e5 80%,#003dc0 100%); }
+.ref-brand { top:9px;left:8px;font-size:22px;line-height:26px; }
+.riverton-window-controls { position:absolute;right:4px;top:3px;display:flex;gap:4px; }
+.riverton-window-control { display:grid;place-items:center;width:31px;height:31px;border:1px solid white;border-radius:4px;box-shadow:inset 2px 2px 3px #85b9ff,inset -2px -2px 3px #0545ca;background:linear-gradient(135deg,#67a5ff,#1464e6);font:30px/25px Arial;color:#fff; }
+.riverton-window-control:last-child { background:linear-gradient(135deg,#ffb693,#df350c);box-shadow:inset 2px 2px 3px #ffc4a0,inset -2px -2px 3px #b62103; }
+.riverton-menu { position:absolute;bottom:0;left:0;right:0;display:flex;gap:26px;height:32px;align-items:center;padding:0 14px;color:#111;font:18px Tahoma,Arial,sans-serif;background:linear-gradient(#faf9f3,#edede6);border-bottom:1px solid #929eac; }
+.ref-task > .ref-tools { top:5px;right:114px; }
+.ref-nav { background:linear-gradient(#fbfaf7,#eeede8) !important;box-shadow:none; }
+.ref-navlink { min-width:164px;gap:12px;font-size:18px !important;font-weight:normal !important;background:linear-gradient(#fff,#eeede8) !important; }
+.ref-navlink::before { display:none !important;content:none !important; }
+.ref-navlink:first-child { min-width:176px; }
+.ref-navlink:nth-child(3) { min-width:168px; }
+.ref-navlink:nth-child(4) { min-width:172px; }
+.ref-navlink:nth-child(5) { min-width:140px; }
+.riverton-nav-icon { width:40px;height:40px;display:flex;align-items:center;flex:none; }
+.ref-body { margin-bottom:74px; }
+.mp-card{padding:0!important}
+.mp-layer{z-index:2}
+.mp-reticle{box-shadow:0 0 0 2px white,inset 0 0 0 1px white;background:#b0dfff55}
+.mp-reticle::before,.mp-reticle::after{content:""}
+.mp-reticle::before{background:linear-gradient(to right,#142b43 0 15px,transparent 15px 45px,#142b43 45px)}
+.mp-reticle::after{background:linear-gradient(to bottom,#142b43 0 15px,transparent 15px 45px,#142b43 45px)}
+.mp-cross{z-index:10;opacity:1;border-radius:50%}
+.mp-name,.mp-pin.t3 .mp-name{font:bold 16px/18px Tahoma,Arial,sans-serif!important;white-space:normal!important;overflow:visible!important;color:#002784!important}
+.mp-pin{gap:8px!important}
+.mp-dot,.mp-pin.sq .mp-dot{background:transparent!important;border:0!important;border-radius:0!important;color:#0056d8!important;box-shadow:none!important;filter:drop-shadow(1px 0 white) drop-shadow(-1px 0 white) drop-shadow(0 1px white) drop-shadow(0 -1px white)}
+.mp-dot svg { width:30px !important;height:30px !important; }
+.mp-pin[data-kind=hospital] .mp-dot{color:#fa273d!important}
+.mp-pin[data-kind=library] .mp-dot{color:#005ae9}
+.mpp-building { fill:#dedfd8 !important;opacity:.42; }
+.mp-roadname{font-size:16px!important;color:#252833!important}
+.riverton-street-label{font-size:14px!important;opacity:.85}
+.mp-parkname{color:#164d16!important;font-style:normal!important;font-weight:bold!important}
+.mp-parkname::before{content:"";display:block;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 34'%3E%3Cpath d='M13 1L5 13h4L2 25h8v8h6v-8h8l-7-12h4Z' fill='%23238620' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")}
+
+.mp-scale{z-index:10;text-align:right}
+.riverton-legend{z-index:20;padding:7px 12px 12px;border:1px solid #8ba6c2;border-radius:7px;background:linear-gradient(#fff,#fafcff);color:#09276c;font:14px/26px Tahoma,Arial,sans-serif;pointer-events:none}
+.riverton-legend-title{padding:5px 12px;border-bottom:1px solid #d5dce6;font-size:16px}
+.riverton-legend-row{gap:10px}
+
+.riverton-symbol svg { width:24px !important;height:24px !important; }
+.riverton-legend-row.attraction .riverton-symbol{background:transparent;border-radius:0;color:#0055d4}
+.riverton-legend-row.hospital .riverton-symbol svg { fill:#ff4250;stroke:#ff2639; }
+.ref-side { display:none !important; }
+.ref-panel { display:block !important;position:relative;left:auto;top:auto;flex:none;width:250px;max-width:26%;margin:12px;height:auto;align-self:flex-start;border:1px solid #8da4be;border-radius:5px;background:#ffffef; }
+.ref-body:has(.ref-panel) { flex-direction:row-reverse !important;background:#e3ebdb; }
+.ref-panel { width:216px;margin:0;padding:10px;border:0;background:transparent;box-shadow:none; }
+.riverton-taskcard { position:relative;margin-bottom:10px;padding:10px 10px 12px 38px;border:1px solid #8da4be;border-radius:6px;background:linear-gradient(#fff,#e9f3ff);box-shadow:inset 0 0 0 1px #fff; }
+.riverton-taskcard::before { content:"i";position:absolute;left:10px;top:11px;width:20px;height:20px;text-align:center;border-radius:50%;background:linear-gradient(#3bb9ff,#0052e0);color:white;font:bold 18px/20px Georgia; }
+.riverton-taskcard .ref-panel-title { display:none; }
+.riverton-taskcard .ref-panel-text { font:bold 14px/20px Tahoma,Arial,sans-serif; }
+
+body[data-instruction=header] .ref-task { display:grid;grid-template-columns:215px minmax(100px,1fr) auto;gap:12px;height:auto;min-height:74px;padding:7px 114px 36px 8px;align-items:start; }
+body[data-instruction=header] .ref-brand { position:static;white-space:nowrap; }
+body[data-instruction=header] .ref-instruction { position:static;height:auto;min-height:26px;padding:2px 8px;background:transparent;border:0;color:#fff;font:bold 16px/22px Tahoma,Arial,sans-serif;overflow:visible; }
+body[data-instruction=header] .ref-task > .ref-tools { position:static;flex-wrap:wrap;justify-content:flex-end;max-width:350px; }
+.ref-foot { border:0;background:transparent;box-shadow:none; }
+.ref-foot-text { display:none; }
+.ref-float { bottom:16px;right:18px; }
+.ref-ov-cookie { left:24px;right:auto;bottom:94px;max-width:min(1080px,calc(100% - 48px));padding:12px 16px 12px 52px;border:1px solid #8ca5c0;border-radius:6px !important;background:linear-gradient(#fff,#edf5ff);box-shadow:0 2px 5px #294e6c44; }
+.ref-ov-cookie::before { content:"●";position:absolute;left:16px;top:12px;color:#d69c43;font:30px/32px Georgia; }
+.ref-ov-cookie .ref-ov-text { font-weight:bold; }
+.ref-ov-chat { right:18px;bottom:110px;min-height:105px;width:390px;max-width:calc(100% - 36px);padding:18px 42px 16px 80px;display:block;background:linear-gradient(#fff,#e3f1ff);box-shadow:0 2px 6px #42627c66; }
+.ref-ov-chat::before { content:"☏";position:absolute;left:16px;top:21px;display:grid;place-items:center;width:48px;height:48px;border:1px solid #0053d8;border-radius:50%;background:linear-gradient(#2ab7ff,#006bff);color:white;font:32px Arial; }
+.riverton-chat-title { display:block;font:bold 19px Tahoma,Arial,sans-serif;margin-bottom:6px; }
+.ref-ov-chat .ref-ov-row { position:absolute;right:8px;top:8px; }
+.ref-ov-promo { left:5px;right:5px;bottom:80px;background:#173e6655; }
+.ref-ov-promo .ref-ov-box { width:min(720px,calc(100% - 60px));gap:16px;padding:18px 24px 24px;background:linear-gradient(#fff,#f4f8ff);border:1px solid #91a9c6;border-radius:10px !important;box-shadow:0 5px 20px #17385866; }
+.riverton-promo-hero { height:165px;margin:-2px -8px 0;overflow:hidden;border-radius:6px; }
+.riverton-promo-hero svg { width:100%;height:100%;display:block; }
+.riverton-promo-title { font:bold 30px Tahoma,Arial,sans-serif;color:#06266d; }
+.ref-ov-banner { left:5px;right:5px;min-height:58px;padding:12px 20px 12px 56px;border:1px solid #4395ee;background:linear-gradient(#006eec,#0052d6);color:white;font:bold 16px Tahoma,Arial,sans-serif; }
+.ref-ov-banner::before { content:"⚑";position:absolute;left:18px;font:28px Arial; }
+
+
+@media (max-width:1100px) {
+ .ref-navlink { min-width:122px;padding:0 12px !important;gap:8px;font-size:14px !important; }
+ .ref-navlink:first-child { min-width:130px; }
+ .ref-navlink:nth-child(3),.ref-navlink:nth-child(4) { min-width:122px; }
+ .ref-navlink:nth-child(5) { min-width:110px; }
+ .riverton-nav-icon,.riverton-nav-icon svg { width:32px;height:32px; }
+ body[data-instruction=header] .ref-task { grid-template-columns:195px minmax(100px,1fr) auto;gap:6px; }
+ body[data-instruction=header] .ref-brand { font-size:19px; }
+ .riverton-legend{font-size:13px}
+}

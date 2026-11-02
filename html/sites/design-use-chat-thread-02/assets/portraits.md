@@ -1,0 +1,5 @@
+Generated with the built-in imagegen tool for this site. Saved asset: `team-portraits.png`.
+
+Prompt:
+
+Use case: photorealistic-natural. Project asset: one horizontal contact strip of exactly SIX equal square grayscale employee headshot photographs, edge to edge with NO gaps, NO borders, NO words or text. Overall aspect ratio 6:1. Each square shows a different fictional adult colleague head and shoulders, centered, plain medium gray studio background, black and white office directory photography from the early 1990s. From left: smiling woman with dark shoulder length hair; smiling man with short dark hair and rectangular glasses; smiling woman with wavy short dark hair; smiling man with short dark hair; smiling woman with long dark hair; smiling clean shaven man with short hair. Faces should occupy most of each square with head tops visible, high contrast grayscale photo texture. This strip will be CSS cropped into six small square messenger avatars. The SIX equal square grid boundaries must be exactly evenly spaced, no margins, one face centered in each square. Do not generate a UI, only photographs.

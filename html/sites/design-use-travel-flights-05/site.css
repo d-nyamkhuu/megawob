@@ -1,0 +1,772 @@
+@import url("../../templates/site/css/design-179c67.css");
+
+.ref-ov-banner {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: ref-spin .8s linear infinite;
+}
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+/* SkyWays 2005 flight desk */
+body { background:#fffdf3; color:#073b7e; font-family:Arial,sans-serif; }
+.ref-task { height:95px; min-height:95px; padding:0; gap:0; border:0; border-bottom:4px solid #06467c;
+  background:#fffdf3 url('assets/skyways-header.webp') center center / 100% 95px no-repeat; }
+.ref-task > .ref-instruction { display:block !important; position:absolute; left:30%; right:19%; top:10px; max-height:74px; overflow:auto;
+  padding:6px 10px; color:#073b7e; background:rgba(255,253,243,.94); border:1px solid #66adbd; font-size:16px; }
+.ref-task > .ref-spacer, .ref-task > .ref-brand, .ref-task > .ref-nav { display:none !important; }
+.ref-task::before { content:''; position:absolute; left:26px; top:10px; z-index:2; color:#123f7d;
+  font:bold 34px/1 Arial,sans-serif; text-shadow:1px 1px #d5e9ed; }
+.ref-task::after { content:''; position:absolute; right:28%; top:9px; color:#fff; font-size:36px; text-shadow:0 1px 3px #164b83; }
+.ref-task { background-image:url('assets/skyways-header.webp') !important; background-position:center center !important; background-size:100% 95px !important; }
+.ref-task > .ref-tools { display:flex !important; position:absolute; right:12px; top:22px; z-index:3; }
+.ref-body { padding:0 4px 4px; gap:0; background:#f8f6e9; }
+.ref-stage { align-items:stretch !important; justify-content:stretch !important; }
+.ref-side, .ref-nav, .ref-brand { display:none !important; }
+.ref-submit { border:1px solid #07518b; border-radius:2px; background:#087e9c; box-shadow:inset 1px 1px #62b8c7; }
+.ref-panel { border-radius:2px; }
+.at-app { border:0 !important; border-radius:0 !important; box-shadow:none !important; background:#f8f6e9 !important; }
+.at-top { display:none !important; }
+.at-route { min-height:47px !important; padding:5px 14px !important; background:#0785a1 !important; color:#fff !important; border:1px solid #0c6b91 !important; border-radius:4px !important; }
+.at-route h2 { color:#fff !important; font-size:25px !important; }
+.at-route .at-breadcrumb, .at-tripbrief { display:none !important; }
+.at-progress { display:none !important; }
+.at-content { gap:8px; padding:7px 8px 4px !important; }
+.at-rail { width:226px !important; padding:10px 15px !important; border:1px solid #78bfd0 !important; border-radius:4px !important; background:#fffdf3 !important; }
+.at-rail h3 { font-size:21px !important; color:#073b7e !important; padding-bottom:7px; border-bottom:1px solid #9acbd4; }
+.at-rail .at-field { margin:14px 0 20px !important; }
+.at-rail .at-field>span { font-size:18px !important; color:#073b7e !important; font-weight:bold; }
+.at-rail .at-field>button { min-height:41px !important; border-radius:2px !important; font-size:17px !important; }
+.at-main { border:1px solid #79bfd0 !important; border-radius:4px !important; background:#fffdf3 !important; }
+.at-toolbar { min-height:43px; background:#07518b; color:white; }
+.at-pane { padding:0 0 30px !important; }
+.at-card { min-height:68px !important; height:auto; margin:0 !important; padding:4px 12px !important; gap:10px !important; border:0 !important; border-bottom:1px dashed #9bcbd5 !important; border-radius:0 !important; background:#fffdf3 !important; }
+.at-card h3 { font-size:17px !important; margin:0 !important; }
+.at-card-meta { font-size:15px !important; }
+.at-card-price strong { font-size:18px !important; }
+.at-card-price button { min-width:100px; border:1px solid #2465a0 !important; border-radius:2px !important; font-size:16px !important; }
+.at-airline { width:45px !important; height:38px !important; background:transparent !important; font-size:20px; }
+.at-footer { background:#fffdf3 !important; }
+.at-card-main { display:block; }
+.at-card-main .at-card-meta { overflow:hidden; white-space:nowrap; font-size:12px !important; }
+.sky-route-fields { flex:none; margin:0 8px 7px; padding:7px 12px 10px; border:1px solid #83c2d0; border-radius:4px; background:#fffdf3; }
+.sky-route-title { display:block; padding:0 0 5px; margin-bottom:7px; border-bottom:1px solid #8ec4cf; font-size:17px; }
+.sky-route-grid { display:grid; grid-template-columns:1fr 1fr 1.12fr; gap:18px; }
+.sky-route-field { min-width:0; }
+.sky-route-field b { display:block; font-size:14px; margin:0 0 3px; }
+.sky-route-field span { display:block; position:relative; min-height:31px; padding:4px 32px 4px 8px; border:1px solid #4c81ad; border-radius:2px; background:#fff; font-size:15px; white-space:nowrap; overflow:hidden; }
+.sky-route-field i { position:absolute; right:0; top:0; width:29px; height:100%; border-left:1px solid #4c81ad; text-align:center; font-style:normal; font-weight:bold; }
+.at-main { display:flex; flex-direction:column; }
+.at-main { container-type:inline-size; }
+.at-toolbar { min-height:39px; }
+.at-filterline { display:none !important; }
+.at-pane { padding:28px 0 26px !important; }
+.sky-flight-row { flex:none; min-height:49px; display:grid; grid-template-columns:40px minmax(94px,1.2fr) minmax(64px,.75fr) minmax(68px,.8fr) minmax(70px,.9fr) minmax(65px,.8fr) minmax(76px,.85fr) 88px; align-items:center; gap:7px; padding:4px 10px; border-bottom:1px dashed #9bcbd5; color:#073b7e; background:#fffdf3; font-size:17px; }
+.sky-flight-row { min-height:56px; }
+.sky-table-head { flex:none; display:grid; grid-template-columns:40px minmax(94px,1.2fr) minmax(64px,.75fr) minmax(68px,.8fr) minmax(70px,.9fr) minmax(65px,.8fr) minmax(76px,.85fr) 88px; align-items:center; gap:7px; min-height:34px; padding:4px 10px; color:#073b7e; background:#cce8f0; border-bottom:1px solid #a6ced8; font-size:16px; font-weight:bold; white-space:nowrap; }
+.sky-flight-row:nth-child(odd) { background:#fffef8; }
+.sky-airline-mark { color:white; background:#0876ad; font-weight:bold; font-size:13px; text-align:center; padding:5px 1px; clip-path:polygon(7% 16%,72% 0,100% 28%,81% 100%,0 74%); }
+.sky-logo-horizon-air { background:#1264a2; }
+.sky-logo-iberian { background:linear-gradient(135deg,#e33218 0 48%,#f6b21a 49%); }
+.sky-logo-air-europa { background:#bd202c; border-radius:50%; }
+.sky-logo-spanair { background:linear-gradient(135deg,#e94c2c 0 49%,#2469a5 50%); }
+.sky-logo-vueling { color:#163e63; background:#e6d260; }
+.sky-airline { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sky-flight-no,.sky-stops,.sky-duration { white-space:nowrap; }
+.sky-price { white-space:nowrap; }
+.sky-view { height:31px; border:1px solid #2465a0 !important; border-radius:2px !important; font-size:14px; }
+.sky-flight-row.chosen { background:#e4f4f6; }
+.at-main .at-toolbar strong { font-size:18px; }
+.at-worknav { display:none !important; }
+.at-sidepanel { border:1px solid #84bfd0 !important; border-radius:4px !important; background:#fffdf3 !important; padding:12px !important; }
+.at-sidepanel:before { content:'My Itinerary'; display:block; margin:-12px -12px 10px; padding:9px 12px; background:#064e88; color:white; font-size:18px; font-weight:bold; }
+@container (max-width:760px) {
+  .sky-flight-row, .sky-table-head { grid-template-columns:30px minmax(75px,1.1fr) 52px 58px 48px 52px 62px 58px; gap:4px; padding-left:6px; padding-right:6px; }
+  .sky-flight-row { font-size:12px; }
+  .sky-table-head { font-size:11px; }
+  .sky-airline { min-width:0; }
+  .sky-stops,.sky-duration,.sky-flight-no,.sky-departure { font-size:12px; }
+  .sky-view { padding:3px 5px !important; font-size:12px; }
+}
+@media (max-width:1100px) {
+  .at-content { gap:5px; }
+  .at-rail { width:205px !important; }
+  .ref-body::before { padding:8px; font-size:13px; line-height:1.25; }
+  .ref-task > .ref-instruction { left:25%; right:17%; top:7px; max-height:80px; padding:5px 8px; font-size:12px; line-height:1.3; }
+}
+.at-card-main .at-tags { display:none !important; }
+/* ---- shadcn SaaS design ---- */
+body { background:#fff; color:#18181b; font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif; }
+.ref-task { height:58px; min-height:58px; border-bottom:1px solid #e4e4e7 !important;
+  background:#fff !important; background-image:none !important; }
+.ref-task::before { content:'\2708  SkyWay'; left:24px; top:14px; color:#18181b; font:700 23px/30px Inter,"Segoe UI",Arial,sans-serif; text-shadow:none; }
+.ref-task::after { content:'Flights        Hotels        Cars        Packages        My Trips'; white-space:pre; left:248px; right:auto; top:0; height:58px; line-height:58px; color:#52525b; font-size:15px; text-shadow:none; }
+.ref-task > .ref-instruction { left:520px; right:180px; top:6px; max-height:48px; padding:3px 8px; color:#18181b; background:#fafafa; border:1px solid #e4e4e7; border-radius:6px; font-size:12.5px; line-height:1.3; z-index:4; }
+.ref-task > .ref-tools { top:14px; right:16px; }
+.ref-body { padding:0; background:
+  radial-gradient(ellipse 9% 30% at 92% 36%,#c9d4e8 0 55%,transparent 56%),
+  radial-gradient(ellipse 12% 22% at 80% 55%,#cdb497 0 60%,transparent 61%),
+  linear-gradient(180deg,transparent 0 78%,#b4573a 78% 88%,#d27a55 88% 94%,#8a3f2c 94%),
+  linear-gradient(100deg,#fff 0,#fff 18%,#a9c3dc 18%,#8fb0d2 50%,#6f9bc4 66%,#8b8f7a 80%,#b9a58d 100%); }
+.ref-task > .ref-tools::before { content:'\2315   Help'; order:-2; align-self:center; margin-right:14px; font-size:15px; color:#18181b; }
+.ref-task > .ref-tools::after { content:'JD'; order:-1; align-self:center; width:38px; height:38px; line-height:38px; text-align:center; border-radius:50%; background:#e4e4e7; font-weight:600; font-size:14px; color:#18181b; margin:0 10px 0 -4px; }
+.at-sidepanel li::before, .at-sidepanel [class*="trip"]::before { }
+.sky-route-field:nth-child(2)::before { content:'\21C4'; position:absolute; left:-18px; top:30px; width:26px; height:26px; line-height:26px; text-align:center; background:#fff; border:1px solid #e4e4e7; border-radius:6px; font-size:13px; z-index:2; }
+.sky-route-field { position:relative; }
+.sky-route-field i { font-size:0 !important; }
+.sky-route-field i::before { content:'\25A3'; font-size:15px; }
+.ref-stage { background:transparent; }
+.ref-submit { border:1px solid #18181b; border-radius:6px; background:#18181b; box-shadow:none; color:#fff; }
+.ref-panel { border-radius:6px; }
+.at-app { background:transparent !important; }
+.at-app { position:relative; padding:0 !important; }
+.at-route { background:#fff !important; color:#18181b !important; border:0 !important; border-radius:8px 8px 0 0 !important; min-height:44px !important; padding:10px 24px 4px !important; margin:20px 24px 0 292px !important; }
+.at-route h2 { color:#18181b !important; font-size:20px !important; font-weight:600; }
+.sky-route-fields { margin:0 24px 0 292px; border:0; border-radius:0; padding:6px 24px 14px; background:#fff; border-bottom:1px solid #e4e4e7; }
+.sky-route-title { display:none; }
+.sky-route-grid { gap:10px; }
+.sky-route-field b { font-size:11px; color:#52525b; font-weight:500; }
+.sky-route-field span { border:1px solid #e4e4e7; border-radius:6px; background:#fff; font-size:14px; min-height:34px; color:#18181b; }
+.sky-route-field i { border-left:0; color:#52525b; }
+.at-content { margin:0 24px 14px 292px !important; padding:0 !important; gap:0 !important; background:#fff; border-radius:0 0 8px 8px; }
+.at-rail { width:240px !important; border:0 !important; border-right:1px solid #e4e4e7 !important; border-radius:0 !important; background:#fff !important; padding:14px 24px !important; }
+.at-rail h3 { font-size:18px !important; color:#18181b !important; border-bottom:0; font-weight:600; }
+.at-rail .at-field { margin:10px 0 14px !important; }
+.at-rail .at-field>span { font-size:14px !important; color:#18181b !important; font-weight:600; }
+.at-rail .at-field>button { min-height:34px !important; border-radius:6px !important; font-size:13px !important; border:1px solid #e4e4e7 !important; background:#fafafa !important; color:#52525b !important; }
+.at-main { border:0 !important; border-radius:0 !important; background:#fff !important; }
+.at-toolbar { background:#fff; color:#18181b; min-height:40px; }
+.at-main .at-toolbar strong { font-size:17px; font-weight:600; }
+.at-pane { padding:4px 0 10px !important; }
+.at-footer { background:#fff !important; }
+.sky-table-head { background:#fff; color:#52525b; font-size:12.5px; font-weight:500; border-bottom:1px solid #e4e4e7; min-height:30px; }
+.sky-flight-row, .sky-flight-row:nth-child(odd) { background:#fff; border-bottom:1px solid #e4e4e7; color:#18181b; font-size:13.5px; min-height:46px; }
+.sky-flight-row.chosen { background:#f4f4f5; }
+.sky-view { border:1px solid #e4e4e7 !important; border-radius:6px !important; background:#fff !important; color:#18181b !important; font-size:13px; }
+.sky-airline-mark { clip-path:none; border-radius:4px; background:#2f8fe0; font-size:11px; }
+.at-app { background:transparent !important; }
+.at-route, .at-content, .sky-route-fields { margin-left:24px !important; }
+.at-sidepanel { border:0 !important; border-radius:0 !important; background:#fff !important; padding:36px 24px !important; color:#18181b; overflow:auto; font-size:13px; }
+[class*="side"]:not(.ref-side), [class*="rail"]:not(.at-rail) { background:#fff !important; border-color:transparent !important; }
+.sky-view { min-width:0; padding:3px 4px !important; }
+.sky-flight-row, .sky-table-head { padding-right:12px !important; }
+@media (max-width:1300px) {
+  .ref-task::after { font-size:13px; left:210px; content:'Flights     Hotels     Cars     Packages     My Trips'; }
+  .ref-task > .ref-instruction { left:560px; right:150px; }
+  .ref-task::before { font-size:20px; }
+}
+.at-sidepanel * { font-weight:400; color:#18181b !important; }
+[class*="at-summary"], [class*="at-workspace"], .at-sidepanel { background:#fff !important; border:0 !important; box-shadow:none !important; }
+.ref-task::after { font-family:Inter,"Segoe UI",Arial,sans-serif; }
+.at-sidepanel:before { content:'My Trips'; background:none; color:#18181b; margin:-12px 0 14px; padding:0; font-size:17px; font-weight:600; }
+
+.ref-hz { position: fixed; z-index: 1100; color: var(--fg); font-size: 14px; line-height: 1.4; }
+.ref-hz-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.ref-hz-btn {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--fg); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.ref-hz-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-link { border: 0; background: none; color: var(--muted); text-decoration: underline; }
+.ref-hz-x { border: 0; background: none; color: var(--muted); padding: 2px 8px; font-size: 16px; }
+.ref-hz-title { font-weight: 700; font-size: 15px; }
+.ref-hz-text { margin-top: 6px; }
+.ref-hz-from { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.ref-hz-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.ref-hz-field input {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; user-select: text;
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* SkyWays 2005 flight desk: compact, hard-edged controls and an ivory/navy palette. */
+:root {
+  --bg: #fffdf3;
+  --panel: #fffdf5;
+  --fg: #073b7c;
+  --muted: #245b91;
+  --line: #9bc8d5;
+  --accent: #08658f;
+}
+body {
+  background: #fffdf3;
+  color: #073b7c;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.28;
+}
+.ref-task, .ref-foot { background: #fffdf3; color: #073b7c; border-color: #0a4b87; }
+.ref-task { min-height: 48px; padding: 7px 12px; border-bottom: 3px solid #0a4b87; }
+.ref-brand { color: #073b7c; font-size: 24px; font-weight: 900; letter-spacing: -.06em; }
+.ref-instruction, .ref-panel-text { font-size: 14px; line-height: 1.3; }
+.ref-submit, .ref-xtra, .ref-ov-btn, .ref-hz-btn {
+  border: 1px solid #15518a; border-radius: 2px; box-shadow: inset 1px 1px #fff;
+  background: linear-gradient(#fff, #e8f1f5); color: #073b7c; font-family: inherit;
+}
+.ref-submit, .ref-ov-primary, .ref-hz-primary { background: #07588e; border-color: #073b7c; color: #fff; }
+.ref-stage { background: #fffdf3; padding: 5px; }
+.ref-panel, .ref-side { border: 1px solid #7db9ca; border-radius: 2px; background: #fffdf3; }
+.ref-foot { min-height: 34px; padding: 4px 12px; border-top: 2px solid #0a4b87; }
+
+/* The task template owns the interactive controls; give its native form and list
+   elements the same squared 2005 treatment without changing their event handlers. */
+.ref-stage button, .ref-stage input, .ref-stage select, .ref-stage textarea,
+.ref-stage [role="button"], .ref-stage [role="listbox"] {
+  font-family: inherit;
+  color: #073b7c;
+  border-radius: 2px;
+  border-color: #4b83b2;
+  box-shadow: inset 1px 1px #fff;
+}
+.ref-stage button { background: linear-gradient(#fff, #e8f1f5); }
+.ref-stage input, .ref-stage select, .ref-stage textarea { background: #fff; }
+.ref-stage [class*="flight"], .ref-stage [class*="Flight"],
+.ref-stage [class*="result"], .ref-stage [class*="Result"],
+.ref-stage [class*="filter"], .ref-stage [class*="Filter"],
+.ref-stage [class*="route"], .ref-stage [class*="Route"] {
+  border-color: #8bc2d2;
+}
+.ref-stage [class*="header"], .ref-stage [class*="Header"],
+.ref-stage [class*="title"], .ref-stage [class*="Title"] {
+  color: #073b7c;
+}
+.ref-stage [class*="table"], .ref-stage [class*="Table"],
+.ref-stage [class*="row"], .ref-stage [class*="Row"] {
+  border-color: #a9ced8;
+}
+.ref-stage, .ref-stage * { font-family: Arial, "Lucida Console", sans-serif !important; }
+.ref-stage { color: #073b7c !important; }
+.ref-stage section, .ref-stage aside, .ref-stage article,
+.ref-stage [class*="panel"], .ref-stage [class*="Panel"],
+.ref-stage [class*="card"], .ref-stage [class*="Card"],
+.ref-stage [class*="list"], .ref-stage [class*="List"],
+.ref-stage [class*="result"], .ref-stage [class*="Result"],
+.ref-stage [class*="content"], .ref-stage [class*="Content"] {
+  background-color: #fffdf3 !important;
+  color: #073b7c !important;
+  border-color: #8bc2d2 !important;
+  border-radius: 2px !important;
+}
+.ref-stage button, .ref-stage [role="button"] {
+  background: linear-gradient(#fff, #e8f1f5) !important;
+  color: #073b7c !important;
+}
+.ref-stage input, .ref-stage select { background: #fff !important; }
+
+/* The itinerary rail and SkyWays masthead are part of this site shell. */
+.ref-task {
+  position: relative;
+  min-height: 78px;
+  padding: 8px 12px;
+  background: linear-gradient(105deg, #fffdf4 0%, #fffdf4 43%, #d8edf4 68%, #1680bc 100%);
+  border: 3px solid #08457d;
+  border-bottom-width: 3px;
+}
+.ref-brand { font-size: 0; width: auto; flex: 1 1 auto; min-width: 0; }
+.ref-brand::after {
+  content: "SkyWays Travel";
+  font: 900 27px/1 Arial, sans-serif;
+  letter-spacing: -.8px;
+  color: #073b7c;
+  text-shadow: 1px 1px #d2e8ed;
+}
+.ref-task .ref-instruction { color: #073b7c; }
+.ref-stage [class*="card"], .ref-stage [class*="Card"],
+.ref-stage [class*="flight-option"], .ref-stage [class*="FlightOption"] {
+  min-height: 0 !important;
+  padding: 8px !important;
+  margin-block: 3px !important;
+}
+.ref-body { gap: 0; }
+.ref-body::before {
+  content: "My Itinerary\A\A Trip Summary\A\A▣  1 traveler\A      Last updated: May 14, 2005\A\A✈  Zaragoza (ZAZ)  →  Palma (PMI)\A      Not yet booked\A      —\A\A▰  Hotel in Palma\A      Not yet booked\A      —\A\A▦  Trip Dates\A      Not set\A      —\A\A Your Search Status\A Flights found                         8\A Nonstop flights                     3\A Within $450.00                      5\A Horizon Partners                    4";
+  white-space: pre-wrap;
+  flex: 0 0 25%;
+  max-width: 410px;
+  min-width: 230px;
+  margin: 5px 7px 5px 5px;
+  padding: 12px 14px;
+  overflow: hidden;
+  color: #073b7c;
+  background: #fffdf3;
+  border: 1px solid #8bc2d2;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #edf5ed;
+  font: 700 19px/1.48 Arial, sans-serif;
+}
+.ref-stage { padding: 5px; }
+.ref-body:has(> .ref-panel) {
+  display: grid;
+  grid-template-columns: minmax(230px, 25%) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.ref-body:has(> .ref-panel)::before {
+  grid-area: 2 / 1;
+  min-width: 0;
+  max-width: none;
+}
+.ref-body > .ref-panel {
+  grid-area: 1 / 1;
+  width: auto;
+  min-width: 0;
+  margin: 5px 7px 0 5px;
+}
+.ref-body:has(> .ref-panel) > .ref-stage {
+  grid-area: 1 / 2 / 3 / 3;
+}
+/* shadcn final overrides */
+.sky-route-grid { grid-template-columns: 1fr 1fr 1fr .8fr !important; }
+.sky-route-field span { padding-left: 12px !important; }
+.sky-tabs { display: flex; gap: 28px; margin-top: 12px; border-bottom: 1px solid #e4e4e7; font-size: 14px; color: #71717a; font-weight: 400; }
+.sky-tabs span { padding: 6px 0 8px; margin-bottom: -1px; }
+.sky-tabs span.on { color: #18181b; border-bottom: 2px solid #18181b; }
+.ref-stage { padding: 0 !important; }
+.at-route { margin-left: 40px !important; margin-right: 70px !important; border-radius: 10px 10px 0 0 !important; }
+.sky-route-fields { margin-left: 40px !important; margin-right: 70px !important; }
+.at-content { margin-left: 40px !important; margin-right: 70px !important; margin-bottom: 16px !important; border-radius: 0 0 10px 10px !important; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+.ref-body::before { padding-top: 24px !important; }
+.ref-task::after { box-shadow: none; }
+.ref-task > .ref-tools::after { content: ''; }
+.at-footer { background: transparent !important; }
+html body .ref-stage .at-app { background: linear-gradient(100deg,#dfe7ee 0%,#b9c7d4 45%,#7f9fb9 75%,#b5714f 100%) !important; }
+.at-route { flex-wrap: wrap; }
+.at-route .sky-tabs { flex: 0 0 100%; margin-top: 8px; }
+.at-route h2 { flex: 0 0 100%; }
+.ref-foot { background: #fff !important; border-top: 1px solid #e4e4e7 !important; }
+.ref-foot button, .ref-foot .ref-submit { font-family: Inter,"Segoe UI",Arial,sans-serif !important; border-radius: 6px !important; }
+.ref-task > .ref-tools { align-items: center; gap: 8px; }
+.ref-task > .ref-tools::before { content: '\2315   Help    JD \2335'; white-space: pre; color: #52525b; font: 400 14px/32px Inter,"Segoe UI",Arial,sans-serif; margin-right: 6px; }
+.sky-route-field:first-child span::before { content: '\2708  '; color: #52525b; }
+.sky-route-field:nth-child(2) span::before { content: '\2708  '; color: #52525b; }
+.ref-task { background: linear-gradient(#18181b,#18181b) 246px 56px / 52px 2px no-repeat, #fff !important; }
+@media (max-width:1300px) { .ref-task { background: linear-gradient(#18181b,#18181b) 208px 56px / 42px 2px no-repeat, #fff !important; } }
+.ref-task { border-top: 0 !important; border-left: 0 !important; border-right: 0 !important; }
+.at-footer button[disabled] { background: #e4e4e7 !important; color: #71717a !important; }
+.sky-route-fields, .sky-route-field span { background: #fff !important; }
+@media (max-width:1300px) {
+  .at-route, .sky-route-fields, .at-content { margin-left: 14px !important; margin-right: 14px !important; }
+  .at-route { margin-top: 10px !important; }
+}
+@container (max-width:760px) {
+  .sky-flight-row, .sky-table-head { grid-template-columns:26px minmax(50px,1fr) 44px 46px 46px 46px 56px 44px !important; gap:3px !important; padding-left:4px !important; padding-right:4px !important; }
+  .sky-flight-row { font-size:11.5px !important; }
+  .sky-view { padding:2px !important; font-size:11px !important; }
+}
+@media (max-width:1300px) { .ref-task > .ref-instruction { right:250px !important; left:520px !important; font-size:11px !important; } }
+.ref-body::before {
+  content: "" !important;
+  background: #fafafa !important; color: #52525b !important; border: 0 !important; border-right: 1px solid #e4e4e7 !important; border-radius: 0 !important;
+  box-shadow: none !important; margin: 0 !important; padding: 28px 22px !important;
+  font: 400 13px/1.55 Inter,"Segoe UI",Arial,sans-serif !important;
+}
+.ref-stage { background: linear-gradient(100deg,#dfe7ee 0%,#b9c7d4 45%,#7f9fb9 75%,#b5714f 100%) !important; }
+.ref-body { background: #fafafa !important; }
+.ref-stage > *, .at-app { background: transparent !important; }
+.at-route { margin-top: 18px !important; }
+.ref-task > .ref-tools button, .ref-task .ref-submit { font-family: Inter,"Segoe UI",Arial,sans-serif !important; font-size: 13px; }
+.at-card, .at-pane { font-family: Inter,"Segoe UI",Arial,sans-serif; }
+.at-main, .at-rail, .at-toolbar, .sky-flight-row, .sky-table-head { font-family: Inter,"Segoe UI",Arial,sans-serif !important; }
+.at-main .at-toolbar { border-bottom: 0; }
+.at-main .at-toolbar button { border-radius: 6px !important; border: 1px solid #e4e4e7 !important; background: #fff !important; color: #18181b !important; font-size: 13px !important; }
+.at-rail a, .at-rail .at-reset { color: #2563eb !important; }
+.at-footer, .at-footer * { font-family: Inter,"Segoe UI",Arial,sans-serif !important; }
+.at-footer button { background: #18181b !important; color: #fff !important; border-radius: 6px !important; border: 0 !important; }
+.sky-flight-row .sky-airline { font-weight: 500; }
+.sky-flight-row .sky-flight-no, .sky-flight-row .sky-stops, .sky-flight-row .sky-duration { color: #52525b; }
+.sky-flight-row .sky-price { font-weight: 700; }
+.sky-trips { position: fixed; left: 0; top: 59px; bottom: 0; width: 302px; box-sizing: border-box; padding: 34px 25px 0; background: #fff; border-right: 1px solid #e4e4e7; z-index: 3; font-family: Inter,"Segoe UI",Arial,sans-serif; overflow: hidden; }
+.sky-trips-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+.sky-trips-head b { font-size: 17px; font-weight: 600; color: #18181b; }
+.sky-trips-head span { font-size: 13px; color: #2563eb; }
+.sky-trip { display: flex; gap: 15px; align-items: center; height: 74px; margin-bottom: 26px; }
+.sky-trip-img { flex: none; width: 72px; height: 74px; border-radius: 4px; }
+.sky-trip b { display: block; font-size: 15px; font-weight: 600; color: #18181b; line-height: 1.35; }
+.sky-trip em { display: block; font-style: normal; font-size: 13px; color: #52525b; line-height: 1.5; }
+.sky-t0 { background: linear-gradient(180deg,#9fc2e6 0 45%,#6b8b6a 45% 70%,#c0623e 70%); }
+.sky-t1 { background: linear-gradient(180deg,#bcd3e3 0 40%,#6fa0b5 40% 55%,#8b7a5e 55%); }
+.sky-t2 { background: linear-gradient(180deg,#a9c6e8 0 45%,#d9d2c0 45% 70%,#b4573a 70%); }
+.sky-t3 { background: linear-gradient(180deg,#a8bfd6 0 50%,#5d6b7a 50% 80%,#2f3a46 80%); }
+.sky-t4 { background: linear-gradient(180deg,#8cc7e8 0 45%,#3d9aa8 45% 60%,#e6cf9a 60%); }
+@media (max-width:1300px) { .sky-trips { width: 240px; padding: 24px 16px 0; } .sky-trip-img { width: 56px; height: 58px; } .sky-trip { height: 58px; margin-bottom: 18px; gap: 10px; } .sky-trip b { font-size: 13px; } .sky-trip em { font-size: 11.5px; } }
+.sky-route-field i { position: absolute; right: 10px; top: 50%; }
+.sky-route-field:nth-child(2)::before { left: -17px; }
+.ref-body .sky-flight-row > .sky-flight-no { order: 1; }
+.ref-body .sky-flight-row > .sky-stops, .ref-body .sky-flight-row > .sky-duration, .ref-body .sky-flight-row > .sky-price, .ref-body .sky-flight-row > .sky-view { order: 2; }
+.ref-body .sky-trips { background: #fff !important; border-right: 1px solid #e4e4e7 !important; }
+.ref-body, .ref-stage { background-color: #fff !important; }
+.sky-deco { margin-top: 6px; font-family: Inter,"Segoe UI",Arial,sans-serif; }
+.sky-deco b { display: block; margin: 14px 0 8px; font-size: 14px; font-weight: 600; color: #18181b; }
+.sky-deco-row { display: flex; align-items: center; gap: 10px; height: 26px; font-size: 13.5px; color: #3f3f46; }
+.sky-deco-row i { width: 15px; height: 15px; border: 1px solid #a1a1aa; border-radius: 3px; background: #fff; }
+.ref-task > .ref-tools::after { content: 'JD'; }
+/* zinc cleanup of leftover cream/blue */
+.ref-body .sky-route-fields, .ref-body .sky-route-field span, .ref-body .at-rail, .ref-body .at-main, .ref-body .at-content, .ref-body .at-route, .ref-body .sky-flight-row, .ref-body .sky-flight-row:nth-child(odd), .ref-body .sky-table-head, .ref-body .at-toolbar, .ref-body .at-pane { background: #fff !important; }
+.ref-body .at-content { border-top: 1px solid #e4e4e7 !important; }
+.ref-body .sky-route-fields { border-bottom: 0 !important; }
+.ref-body .at-rail, .ref-body .at-main { border: 0 !important; }
+.ref-body .at-rail { border-right: 1px solid #e4e4e7 !important; }
+.ref-body .sky-flight-row, .ref-body .sky-table-head { border-bottom: 1px solid #f0f0f2 !important; border-top: 0 !important; color: #18181b !important; font-family: Inter,"Segoe UI",Arial,sans-serif !important; font-size: 13.5px !important; grid-template-columns: 38px minmax(0,1.5fr) minmax(0,.8fr) minmax(0,.8fr) minmax(0,.9fr) minmax(0,.8fr) minmax(0,.8fr) 60px !important; gap: 4px !important; padding-left: 8px !important; padding-right: 10px !important; }
+.ref-body .sky-flight-row > *, .ref-body .sky-table-head > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ref-body .sky-airline-mark { width: 30px; }
+.ref-body .sky-table-head { color: #52525b !important; font-size: 12.5px !important; font-weight: 500 !important; border-bottom: 1px solid #e4e4e7 !important; }
+.ref-body .sky-flight-row *, .ref-body .at-rail *, .ref-body .at-toolbar strong, .ref-body .sky-route-field b { color: #18181b; }
+.ref-body .sky-flight-row .sky-flight-no, .ref-body .sky-flight-row .sky-stops, .ref-body .sky-flight-row .sky-duration, .ref-body .sky-route-field b { color: #52525b !important; font-weight: 400; }
+.ref-body .sky-flight-row .sky-airline { color: #18181b !important; font-weight: 500; }
+.ref-body .sky-flight-row .sky-departure { font-weight: 400; }
+.ref-body .sky-flight-row .sky-price { font-weight: 700; font-size: 14.5px; }
+.ref-body .sky-view { color: #18181b !important; background: #fff !important; border: 1px solid #d4d4d8 !important; }
+.ref-body .at-rail .at-field>span, .ref-body .at-rail h3 { color: #18181b !important; }
+.ref-body .at-rail label, .ref-body .at-rail button { color: #3f3f46 !important; }
+.ref-body .at-rail a, .ref-body .at-rail .at-reset, .ref-body .at-rail h3 button { color: #2563eb !important; }
+.ref-body .sky-airline-mark { color: transparent !important; font-size: 0; width: 34px; height: 22px; padding: 0 !important; border-radius: 0; clip-path: polygon(0 60%,35% 0,55% 40%,70% 10%,100% 100%,45% 75%); background: #2f8fe0; }
+.ref-body .sky-flight-row:nth-child(4n+2) .sky-airline-mark { background: #e23b2e; }
+.ref-body .sky-flight-row:nth-child(4n+3) .sky-airline-mark { background: #2ea9d9; }
+.ref-body .sky-flight-row:nth-child(4n) .sky-airline-mark { background: #2f9e6e; }
+.ref-task > .ref-tools::before { font-size: 17px; }
+.ref-task > .ref-tools::after { background: #e4e4e7; }
+@media (max-width:1300px) { .ref-task > .ref-instruction { right: 330px !important; left: 480px !important; } }
+
+/* Reference layout: a floating search window over the Cuenca panorama. */
+:root { --trip-width:18.08vw; --fg:#0c193a; --muted:#606981; --line:#e1e5ed; --panel:#fff; --accent:#2874ff; }
+html body { font-family:Arial,"Segoe UI",sans-serif; color:#0c193a; background:#f7f9fb; }
+.ref-task { display:block!important; height:auto!important; min-height:59px!important; padding:0!important; flex:none; border:0!important; border-bottom:1px solid #dbe0e8!important; background:#f7f9fb!important; }
+.ref-task::before,.ref-task::after,.ref-task>.ref-tools::before,.ref-task>.ref-tools::after { display:none!important; }
+.sky-masthead { height:58px; display:flex; align-items:center; gap:72px; padding:0 25px; }
+.sky-brand { display:flex; gap:9px; align-items:center; font-size:24px; color:#0b193a; letter-spacing:-.6px; }
+.sky-brand svg { width:36px; height:32px; }
+.sky-navigation { display:flex; align-self:stretch; gap:42px; align-items:center; font:16px Arial,sans-serif; color:#444c63; }
+.sky-navigation span { height:100%; display:flex; align-items:center; position:relative; white-space:nowrap; }
+.sky-navigation .active { color:#0b193a; font-weight:600; }
+.sky-navigation .active::after { content:''; position:absolute; height:4px; border-radius:3px 3px 0 0; bottom:0; left:-5px; right:-5px; background:#3077ff; }
+.ref-task>.ref-tools { position:absolute!important; display:flex!important; flex-direction:row!important; left:auto!important; bottom:auto!important; width:auto!important; top:9px!important; right:24px!important; gap:8px; height:40px; }
+.ref-task>.ref-tools .ref-submit { position:static!important; inset:auto!important; }
+.sky-account { display:flex; align-items:center; gap:24px; order:-1; margin-right:8px; color:#374057; font:16px Arial,sans-serif; }
+.sky-account svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:2; }
+.sky-account b { display:flex; width:38px; height:38px; align-items:center; justify-content:center; border-radius:50%; background:linear-gradient(135deg,#dce1e9,#c5ccd8); color:#0d1a36; font-size:15px; margin-left:10px; }
+.sky-account-down { margin-left:-17px; }
+.ref-task>.ref-instruction { position:relative!important; left:auto!important; right:auto!important; top:auto!important; margin:0 24px 10px calc(var(--trip-width) + 16px)!important; padding:9px 12px!important; max-height:none!important; font:14px/1.4 Arial,sans-serif!important; color:#24334e!important; border:1px solid #e1e5ed!important; border-radius:6px!important; background:white!important; }
+.ref-body { position:relative; display:flex!important; padding:0 0 0 var(--trip-width)!important; gap:0!important; min-height:0; background:#f7f9fb!important; }
+.ref-body::before { display:none!important; }
+.ref-stage { margin:0!important; flex:1!important; min-width:0; background:#8fb7d8 url('assets/cuenca.webp') center center/cover no-repeat!important; }
+html body .ref-stage .at-app { position:absolute!important; inset:0!important; width:100%!important; height:100%!important; background:transparent!important; }
+.ref-body .at-route,.ref-body .sky-route-fields,.ref-body .at-content { margin-left:1vw!important; margin-right:11.5vw!important; }
+.ref-body .at-route { margin-top:20px!important; padding:17px 24px 0!important; gap:8px!important; min-height:0!important; border-radius:8px 8px 0 0!important; }
+.ref-body .at-route h2 { font-size:22px!important; color:#0b193a!important; margin:0!important; line-height:1.3; }
+.sky-tabs { font-size:16px; gap:40px; width:100%; margin:0!important; color:#626980; }
+.sky-tabs span { padding:8px 0 10px; }
+.sky-tabs span.on { color:#0d193a; font-weight:600; border-bottom:3px solid #0d193a; }
+.ref-body .sky-route-fields { padding:17px 24px 16px!important; border-radius:0!important; }
+.sky-route-grid { grid-template-columns:1.05fr 1.1fr 1fr .94fr!important; gap:10px!important; }
+.sky-route-field { height:67px; border:1px solid #d9dee7!important; border-radius:6px; padding:9px 12px 8px 50px; }
+.sky-route-field b { font-size:13px!important; line-height:16px; margin-bottom:6px; }
+.ref-body .sky-route-field span { border:0!important; padding:0!important; min-height:0!important; font-size:16px; line-height:20px; overflow:hidden; text-overflow:ellipsis; }
+.sky-route-field span::before { display:none; }
+.sky-route-field::after { content:'✈'; position:absolute; left:14px; top:23px; font-size:24px; color:#404655; }
+.sky-route-field:nth-child(3)::after { content:'▦'; font-size:23px; }
+.sky-route-field:nth-child(4)::after { content:'♟'; font-size:22px; }
+.sky-route-field i { display:none; }
+.sky-route-field:nth-child(2)::before { top:14px; left:-28px; width:40px; height:40px; line-height:40px; background:#fff; }
+.sky-route-field:nth-child(4) span::after { content:'⌄'; float:right; }
+.ref-body .at-content { margin-bottom:28px!important; border-radius:0 0 8px 8px!important; box-shadow:0 3px 12px #23345010; }
+.ref-body .at-rail { width:clamp(180px,16.5vw,276px)!important; padding:20px 20px 20px 24px!important; }
+.ref-body .at-rail h3 { display:flex; align-items:center; justify-content:space-between; font-size:21px!important; padding:0!important; margin:0 0 16px; color:#0b193a!important; }
+.ref-body .at-rail h3 button { border:0!important; background:none!important; padding:0; font-size:14px!important; font-weight:400; box-shadow:none; }
+.ref-body .sky-filter-group { color:#0c193a!important; background:white!important; border:0!important; border-radius:0!important; margin:0; padding:0; }
+.sky-filter-group h4 { font-size:16px!important; font-weight:600; margin:0 0 9px!important; }
+.sky-stops-group { padding-bottom:17px!important; border-bottom:1px solid #e8ebf0!important; }
+.ref-body .at-check { font-size:15px; gap:10px; margin:9px 0; color:#606980!important; }
+.at-check input { width:19px; height:19px; accent-color:#2874ff; }
+.sky-deco-row { height:30px; font-size:15px; color:#606980; gap:11px; }
+.sky-deco-row i { width:18px; height:18px; flex:none; }
+.sky-price-group { padding:18px 0!important; border-bottom:1px solid #e8ebf0!important; }
+.sky-fare-range { display:none; }
+.ref-body .sky-price-group .at-field>span { display:none!important; }
+.ref-body .sky-price-group .at-field>button { border:0!important; padding:0!important; min-height:22px!important; font-size:15px!important; background:white!important; }
+.ref-body .sky-price-group .at-field>button .at-ico { display:none; }
+.sky-price-group .at-track { height:5px; background:#2874ff; margin:12px 10px 16px; border-radius:4px; position:relative; }
+.sky-price-group .at-thumb { position:absolute; width:20px; height:20px; border-radius:50%; background:#fff; border:2px solid #2874ff; box-shadow:0 1px 3px #194a8c20; }
+.ref-body .at-rail .at-field { margin:0!important; }
+.ref-body .at-rail .at-field>span { font-size:15px!important; margin:0 0 8px; color:#0c193a!important; }
+.ref-body .at-rail .at-field>button { background:white!important; font-size:14px!important; min-height:39px!important; color:#606980!important; box-shadow:none!important; border-color:#dce1e9!important; }
+.sky-price-group .at-field>span,.sky-depart-group .at-field>span { font-size:12px!important; margin:4px 0!important; }
+.sky-price-group .at-field>button,.sky-depart-group .at-field>button { min-height:28px!important; padding:4px 8px!important; font-size:12px!important; }
+.sky-alliance-group { padding:18px 0 24px!important; }
+.sky-depart-group .at-field { margin-top:10px!important; }
+.ref-body .at-main { padding:0 24px 24px 20px!important; }
+.ref-body .at-main .at-toolbar { padding:19px 0 18px!important; min-height:62px; justify-content:space-between; gap:8px; }
+.ref-body .at-main .at-toolbar strong { font-size:20px!important; color:#0b193a!important; }
+.sky-result-count { white-space:nowrap; margin-left:auto; color:#626980; font-size:14px; }
+.ref-body .sky-flight-row,.ref-body .sky-table-head { grid-template-columns:36px minmax(100px,1.55fr) minmax(55px,.9fr) minmax(50px,.72fr) minmax(58px,.8fr) minmax(55px,.8fr) minmax(68px,.9fr) 78px!important; gap:5px!important; padding:0!important; font-size:14px!important; color:#0d1b3b!important; }
+.ref-body .sky-table-head { min-height:35px; height:35px; font-size:14px!important; color:#606980!important; }
+.sky-table-head>span:first-child { grid-column:span 2; }
+.sky-table-head .at-field { margin:0; }
+.sky-table-head .at-field>span { display:none; }
+.ref-body .sky-table-head .at-field>button { border:0!important; box-shadow:none; background:white!important; color:#606980!important; padding:0!important; font:14px Arial,sans-serif; display:flex; align-items:center; gap:4px; }
+.sky-table-head .at-ico { width:12px; height:12px; }
+.ref-body .at-pane { padding:0!important; display:flex; flex-direction:column; }
+.ref-body .at-pane>.at-calnote { display:none; }
+.ref-body .at-check input { appearance:none; border:1px solid #a0a7b7!important; border-radius:3px; box-shadow:inset 0 1px 2px #172f4510; background:white!important; }
+.ref-body .at-check input:checked { background:#2874ff!important; border-color:#2874ff!important; }
+.ref-body .at-check input:checked::after { content:'✓'; display:block; color:white; text-align:center; line-height:16px; font-size:14px; }
+.ref-body .at-rail h3 button { color:#2874ff!important; }
+.ref-body .sky-result-count { color:#606980!important; }
+.ref-body .sky-flight-row { min-height:34px!important; max-height:50px; flex:1 0 34px; }
+.ref-body .sky-flight-row>* { order:0!important; }
+.ref-body .sky-flight-row .sky-airline { font-size:14px; color:#0c193a!important; font-weight:400; }
+.ref-body .sky-flight-row .sky-price { font-size:16px!important; color:#0c193a!important; }
+.ref-body .sky-flight-row .sky-departure { font-size:14px!important; }
+.ref-body .sky-flight-row .sky-airline-mark { background:transparent!important; clip-path:none!important; width:36px; height:34px; }
+.sky-airline-mark svg { width:100%; height:100%; }
+.ref-body .sky-view { height:33px; font-size:14px!important; border-radius:6px!important; padding:3px 8px!important; box-shadow:0 1px 2px #142d4a06!important; }
+.at-footer.sky-footer-idle { display:none!important; }
+.at-footer { margin:0 11.5vw 12px 1vw; border-radius:6px; background:white!important; padding:8px 18px; }
+.sky-trips { position:absolute!important; left:0; top:0!important; bottom:0; width:var(--trip-width); padding:34px 25px 0; background:#f7f9fb!important; }
+.sky-trips-head { margin-bottom:24px; }
+.sky-trips-head b { color:#0c193a; font-size:18px; }
+.sky-trip { margin-bottom:26px; }
+.sky-trip-img { background-size:cover!important; background-position:center!important; }
+.sky-t0 { background-image:url('assets/quito.webp'); }
+.sky-t1 { background-image:url('assets/tortoise.webp'); }
+.sky-t2 { background-image:url('assets/cuenca.webp'); background-position:85% center!important; }
+.sky-t3 { background-image:url('assets/city.webp'); }
+.sky-t4 { background-image:url('assets/beach.webp'); }
+.sky-trip b { font-size:15px; color:#0c193a; }
+.sky-trip em { color:#69728b; font-size:14px; }
+.ref-body>.ref-panel { flex:0 0 205px; width:205px!important; margin:20px 0 20px 14px!important; padding:14px!important; align-self:flex-start; background:#fff!important; border:1px solid #e0e4eb; color:#0c193a; }
+.ref-submit,.ref-xtra { font:14px Arial,sans-serif!important; border-radius:6px!important; box-shadow:none!important; padding:7px 14px!important; }
+.ref-submit { background:#0e1a32!important; border-color:#0e1a32!important; color:white!important; }
+.ref-xtra { background:white!important; color:#0e1a32!important; border-color:#d6dce5!important; }
+.ref-foot { color:#69728b!important; font-family:Arial,sans-serif!important; }
+.ref-note { position:fixed!important; left:14px!important; right:auto!important; top:auto!important; bottom:65px!important; width:calc(var(--trip-width) - 28px)!important; max-width:none!important; padding:12px 26px 12px 13px!important; border:1px solid #dce2eb!important; border-left:3px solid #2874ff!important; border-radius:6px!important; background:white!important; color:#172a48!important; box-shadow:0 4px 15px #10294a18!important; }
+.ref-note-text { font:13px/1.4 Arial,sans-serif!important; font-weight:400!important; }
+.ref-note-x { position:absolute!important; right:5px!important; top:6px!important; color:#65708a!important; }
+.ref-body .sky-filter-group { border-color:#e8ebf0!important; }
+.ref-body .sky-price-group .at-field { margin:0!important; }
+.ref-body .sky-price-group .at-field>button { height:22px!important; min-height:22px!important; }
+.ref-body .sky-stops-group { padding-bottom:13px!important; }
+.ref-body .sky-price-group { padding-top:17px!important; padding-bottom:17px!important; }
+.ref-body .sky-alliance-group { padding-top:17px!important; padding-bottom:23px!important; }
+.ref-body .sky-table-head .at-field>button { justify-content:flex-start; gap:5px; }
+.ref-body .sky-table-head .at-field>button .at-ico { flex:none; }
+.ref-body .at-rail h3 .at-textbtn { color:#2874ff!important; }
+.ref-body .sky-deco-row span,.ref-body .at-check span { color:#606980!important; }
+.ref-body .sky-filter-group h4 { color:#0c193a!important; }
+.ref-body .sky-price-group .at-field>button { color:#606980!important; }
+.at-route>.sky-task-note { position:static!important; flex:0 0 100%; margin:0!important; padding:0 0 3px!important; max-height:none!important; font:14px/1.45 Arial,sans-serif!important; font-weight:400!important; color:#24334e!important; background:white!important; border:0!important; }
+.sky-route-field::after { display:none; }
+.sky-route-field>.at-ico { position:absolute; left:14px; top:23px; width:21px; height:21px; color:#404655; }
+.sky-route-field:first-child>.at-ico,.sky-route-field:nth-child(2)>.at-ico { width:25px; height:25px; top:21px; left:12px; }
+@media(max-width:1400px) {
+ .sky-masthead { gap:60px; padding:0 20px; } .sky-navigation { gap:36px; font-size:14px; }
+ .sky-trips { padding:28px 20px 0; } .sky-trip { gap:12px; margin-bottom:22px; height:62px; } .sky-trip-img { width:60px; height:62px; } .sky-trip b { font-size:13px; } .sky-trip em { font-size:12px; }
+ .ref-body .at-route { padding:14px 20px 0!important; margin-top:16px!important; } .ref-body .at-route h2 { font-size:20px!important; }
+ .sky-tabs { font-size:14px; gap:35px; } .ref-body .sky-route-fields { padding:14px 20px!important; }
+ .sky-route-field { height:56px; padding:6px 8px 5px 38px; } .sky-route-field b { font-size:11px!important; margin-bottom:3px; } .ref-body .sky-route-field span { font-size:14px; }
+ .sky-route-field::after { left:10px; top:18px; font-size:20px!important; } .sky-route-field:nth-child(2)::before { top:12px; left:-21px; width:29px; height:29px; line-height:29px; }
+ .sky-route-field>.at-ico { left:11px; top:18px; width:18px; height:18px; }
+ .ref-body .at-rail { padding:17px 16px 16px 20px!important; } .ref-body .at-rail h3 { font-size:18px!important; margin-bottom:12px; }
+ .sky-filter-group h4 { font-size:14px!important; margin-bottom:7px!important; } .ref-body .at-check,.sky-deco-row { font-size:13px; } .sky-deco-row { height:26px; } .at-check input,.sky-deco-row i { width:16px; height:16px; }
+ .sky-stops-group { padding-bottom:12px!important; } .sky-price-group { padding:12px 0!important; } .sky-alliance-group { padding:13px 0 17px!important; }
+ .ref-body .at-main { padding:0 20px 20px 16px!important; } .ref-body .at-main .at-toolbar { min-height:55px; padding:15px 0!important; } .ref-body .at-main .at-toolbar strong { font-size:17px!important; }
+ .ref-body .sky-flight-row,.ref-body .sky-table-head { grid-template-columns:30px minmax(72px,1.5fr) 70px 49px 58px 52px 65px 64px!important; font-size:12px!important; gap:4px!important; }
+ .ref-body .sky-flight-row .sky-airline,.ref-body .sky-flight-row .sky-departure { font-size:12px!important; } .ref-body .sky-flight-row .sky-price { font-size:14px!important; }
+ .ref-body .sky-view { height:29px; font-size:12px!important; } .ref-body .sky-flight-row .sky-airline-mark { width:30px; height:28px; }
+}
+@media(max-width:1200px) {
+ :root { --trip-width:190px; } .sky-masthead { gap:36px; padding-left:16px; } .sky-brand { font-size:22px; } .sky-navigation { gap:25px; font-size:13px; }
+ .sky-account { gap:12px; font-size:13px; } .sky-account b { width:32px; height:32px; margin-left:0; } .sky-account-down { margin-left:-8px; }
+ .ref-task>.ref-tools { right:12px!important; } .ref-submit,.ref-xtra { font-size:12px!important; padding:6px 9px!important; }
+ .sky-trips { padding:22px 13px 0; } .sky-trip { gap:9px; } .sky-trip-img { width:47px; height:53px; } .sky-trip b { font-size:12px; } .sky-trip em { font-size:10.5px; } .sky-trips-head b { font-size:16px; }
+ .ref-body .at-route,.ref-body .sky-route-fields,.ref-body .at-content { margin-left:12px!important; margin-right:16px!important; } .at-footer { margin-left:12px; margin-right:16px; }
+ .ref-body .at-rail { width:172px!important; padding:14px!important; } .ref-body .at-main { padding:0 12px 12px!important; }
+ .ref-body .at-main .at-toolbar strong { font-size:15px!important; } .sky-result-count { font-size:12px; }
+ .ref-body .sky-flight-row,.ref-body .sky-table-head { grid-template-columns:25px minmax(65px,1fr) 49px 44px 52px 47px 63px 52px!important; gap:3px!important; font-size:11.5px!important; }
+ .ref-body .sky-flight-row .sky-price { font-size:13px!important; } .ref-body .sky-flight-row .sky-departure { font-size:11.5px!important; }
+ .ref-body .sky-flight-row .sky-airline-mark { width:25px; } .ref-body .sky-table-head .at-field>button { font-size:12px!important; }
+ .sky-route-grid { gap:8px!important; } .sky-route-field { padding-left:28px; } .sky-route-field::after { left:6px; font-size:17px!important; }
+ .sky-route-field>.at-ico { left:7px; width:16px; height:16px; }
+ .sky-route-field:first-child>.at-ico,.sky-route-field:nth-child(2)>.at-ico { left:5px; top:18px; width:20px; height:20px; }
+ .ref-body .sky-route-field span { font-size:12px; } .ref-body .at-route,.ref-body .sky-route-fields { padding-left:16px!important; padding-right:16px!important; }
+}
+@media(max-width:1400px) {
+ .ref-body .at-route,.ref-body .sky-route-fields,.ref-body .at-content { margin-right:6vw!important; }
+ .ref-body:has(>.ref-panel) .at-route,.ref-body:has(>.ref-panel) .sky-route-fields,.ref-body:has(>.ref-panel) .at-content { margin-right:14px!important; }
+ .ref-body .sky-stops-group { padding-bottom:8px!important; }
+ .ref-body .sky-price-group { padding-top:12px!important; padding-bottom:12px!important; }
+ .ref-body .sky-alliance-group { padding-top:12px!important; padding-bottom:16px!important; }
+ .ref-body .sky-price-group .at-track { margin-top:10px; margin-bottom:8px; }
+ .ref-body .sky-depart-group .at-field>button { min-height:26px!important; }
+ .ref-body .sky-flight-row { min-height:30px!important; flex-basis:30px; }
+}
+@media(max-width:1200px) {
+ .ref-body .at-route,.ref-body .sky-route-fields,.ref-body .at-content { margin-right:16px!important; }
+ .ref-body .at-main { padding-left:10px!important; padding-right:10px!important; }
+ .ref-body .sky-flight-row,.ref-body .sky-table-head { grid-template-columns:25px minmax(65px,1fr) 65px 44px 52px 47px 63px 52px!important; }
+ .ref-body .sky-table-head>span:nth-child(2) { font-size:11px!important; }
+}

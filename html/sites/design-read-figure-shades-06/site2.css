@@ -1,0 +1,64 @@
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{--fg:#111;--muted:#444;--panel:#faf9f5;--line:#999;--accent:#c8201e;background:#faf9f5;color:#111;font:16px/normal Georgia,'Times New Roman',serif}
+.vt{position:absolute;inset:0;display:flex;flex-direction:column}
+.vt-top{flex:none;margin:0 2.4% 0;height:8.2%;min-height:46px;border-bottom:1.5px solid #111;display:flex;align-items:flex-start;justify-content:space-between;padding-top:.9%}
+.vt-title{font-size:clamp(28px,3.1vw,48px);line-height:1.1;margin:0;font-weight:700}
+.vt-nav{display:flex;align-items:center;font-size:clamp(14px,1.45vw,24px);padding-top:.3%}
+.vt-nav span{padding:0 28px;border-left:1px solid #888;color:#c01c1c;line-height:1.4}
+.vt-nav span:first-child{border:0;color:#333}
+.vt-nav span:last-child{padding-right:10px}
+.vt-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.vt .brief{flex:none;text-align:center;font-size:clamp(22px,2.9vw,48px);font-weight:600;padding:2.6% 2% calc(2% - 4px);line-height:1.15;overflow-wrap:anywhere}
+.vt .brief em{font-style:normal;color:#c01c1c}
+.vt .stage{display:flex;align-items:flex-start;justify-content:center;position:relative;flex:1 1 auto;min-height:0}
+.vt-dock{flex:none;height:19.6%;min-height:96px;border-top:1.5px solid #111;display:flex;align-items:stretch;padding:1.2% 2.4% 1.6%}
+.vt-notes{flex:0 0 30.6%;padding-right:4%;border-right:1px solid #999}
+.vt-notes h3{margin:0 0 10px;font-size:clamp(20px,1.8vw,30px);font-weight:600}
+.vt-notes p{margin:0;font-size:clamp(14px,1.45vw,24px);line-height:1.18;color:#333}
+.vt-mid{flex:1;display:flex;align-items:center;justify-content:flex-start;padding-left:3.4%;gap:36px;font-size:clamp(14px,1.45vw,24px)}
+.vt-selected{white-space:pre;border-right:1px solid #888;padding:6px 36px 6px 0}
+.vt-clear{font:inherit;font-size:inherit;padding:.5em 1.1em;background:#efefef;border:1.5px solid #555;border-radius:3px;color:#111}
+.vt-right{flex:0 0 26.8%;border-left:1px solid #999;display:flex;align-items:center;justify-content:flex-end;padding-left:5.6%}
+.vt .submit{font-family:inherit;font-size:clamp(20px,2.1vw,34px);font-weight:700;background:#ca211e;color:#fff;border:1px solid #52201d;border-radius:3px;width:100%;height:58%;cursor:pointer}
+.aside{display:none}
+.vt .up-panel{position:relative!important;left:auto!important;top:auto!important;margin:0!important;transform:scale(var(--up-scale,1))!important;transform-origin:50% 0!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+.vt .up-panel{width:max-content!important;max-width:none!important;min-width:0!important}
+.vt .up-body{width:max-content!important;max-width:none!important}
+.vt .up-tiles{width:max-content!important}
+.vt .up-head{display:none!important}
+.vt .up-body{padding:0!important;background:none!important}
+.vt .up-tile{border:1px solid #222!important;border-radius:1px!important;box-shadow:none!important}
+.vt-nav span{flex:none}
+.vt-xtra,.vt-end-header,.vt-end-link{font:inherit;cursor:pointer}
+.vt-xtra,.vt-end-header{margin-left:12px}
+.vt-xtra{background:none;border:0;border-left:1px solid #bbb;padding:0 0 0 16px;color:#c01c1c}
+.vt-end-header{background:#c8201e;border:1px solid #8a1010;border-radius:3px;color:white;padding:.35em .85em;max-width:190px}
+.vt-end-link{color:#c01c1c;border:0;background:none;text-decoration:underline;text-underline-offset:4px;font-size:clamp(20px,2.1vw,32px);padding:.6em}
+.vt.finish-mode .vt-mid,.vt.end-header .vt-mid{justify-content:flex-end;padding-right:0}
+.instruction-hidden .vt .brief{display:none}
+.instruction-hidden .vt .stage{align-items:center}
+.instruction-panel .vt .stage,.instruction-toast .vt .stage{align-items:center}
+.instruction-panel .vt-main{display:grid;grid-template-columns:minmax(190px,23%) minmax(0,1fr);padding:20px 2.4%;gap:20px}
+.instruction-panel .vt .brief{text-align:left;align-self:start;border-top:1px solid #111;border-bottom:1px solid #999;padding:20px 0;font-size:clamp(20px,1.7vw,28px);line-height:1.35;overflow-wrap:anywhere}
+.instruction-toast .vt-main{display:grid;grid-template-rows:minmax(0,1fr) auto;padding:12px 2.4%;gap:12px}
+.instruction-toast .vt .brief{grid-row:2;justify-self:end;width:min(560px,65%);font-size:clamp(18px,1.4vw,23px);font-weight:400;text-align:left;line-height:1.3;border:1px solid #999;border-left:3px solid #c01c1c;padding:10px 16px;background:#fffdf8;overflow-wrap:anywhere}
+.instruction-toast .vt .stage{grid-row:1}
+.overlay{position:fixed;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:calc(100% - 40px);padding:22px 26px;background:#faf8f3;border:1px solid #333;box-shadow:0 6px 24px #0003;font:20px/1.4 Georgia,'Times New Roman',serif}
+.overlay button{flex:none;font:inherit;padding:.4em .9em;color:#fff;background:#c8201e;border:1px solid #8a1010;border-radius:3px;cursor:pointer}
+.overlay.cookie{bottom:20px;left:20px;right:20px}
+.overlay.banner{top:20px;left:20px;right:20px}
+.overlay.toast,.overlay.chat{right:20px;bottom:20px;width:430px}
+.overlay.promo{left:50%;top:50%;transform:translate(-50%,-50%);width:520px;padding:32px}
+@media(max-width:1100px){.vt-nav span{padding:0 10px}.vt-xtra,.vt-end-header{margin-left:6px}.vt-xtra{padding-left:10px}.vt-end-header{max-width:145px}.instruction-panel .vt-main{grid-template-columns:180px minmax(0,1fr);gap:12px}.instruction-panel .vt .brief{font-size:20px}.vt-mid{gap:10px}.vt-clear{padding:.5em .7em}}
+
+/* Adapt the template's instruction elements to the editorial frame. */
+.vt .ref-panel{width:auto;margin:0;border-left:0;border-right:0;border-radius:0;background:none}
+.vt .ref-panel-title{display:none}
+.vt .ref-panel-text{font:inherit}
+.vt .ref-note{position:relative;left:auto;bottom:auto;min-height:0;max-width:none;border-radius:0;box-shadow:none}
+.vt .ref-note-text{flex:1;min-width:0}
+.vt-nav{flex-wrap:wrap;justify-content:flex-end;max-width:72%;row-gap:4px}
+.vt.end-icon .vt-mid,.vt.end-floating .vt-mid{justify-content:flex-end}
+.vt .vt-end-floating{width:90%;height:54%;border-radius:18px;box-shadow:0 4px 12px #0003}
+.vt .vt-end-link{display:block}

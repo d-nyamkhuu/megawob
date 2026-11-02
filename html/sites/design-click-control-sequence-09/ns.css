@@ -1,0 +1,114 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.ref.ns{background:#a8a8a8;color:#111;font:16px Helvetica,Arial,sans-serif;--accent:#222;--panel:#c4c4c4}
+.ns .shell{height:100vh;display:flex;flex-direction:column;background:#a6a6a6}
+.ns .menubar{flex:none;height:44px;display:flex;align-items:center;gap:0;padding:0 14px;background:linear-gradient(#b4b4b4,#9e9e9e);font-size:22px;color:#1a1a1a}
+.ns .menubar .logo{width:30px;height:30px;margin-right:24px}
+.ns .menubar span.m{margin-right:40px}
+.ns .menubar .clock{margin-left:auto;margin-right:8px}
+.ns .titlebar{flex:none;height:42px;margin:0 3px;background:#2a2a2a;border:1px solid #111;border-bottom:2px solid #000;color:#e8e8e8;display:flex;align-items:center;justify-content:center;position:relative;font-size:21px;box-shadow:inset 0 1px 0 #555}
+.ns .titlebar .wc{position:absolute;left:10px;top:9px;display:flex;gap:7px}
+.ns .titlebar .wc i{width:22px;height:22px;background:#c8c8c8;border:1px solid #eee;border-right-color:#444;border-bottom-color:#444;display:block}
+.ns .titlebar .wc i:nth-child(2){background:#d8d8d8}
+.ns .panes{flex:1;min-height:0;display:flex;gap:14px;padding:10px 14px 10px 14px}
+.ns .pane{display:flex;flex-direction:column;min-width:0;min-height:0;border:1px solid #333;background:#b0b0b0;box-shadow:inset 1px 1px 0 #d8d8d8,inset -1px -1px 0 #777}
+.ns .pane.task{flex:60 1 0}
+.ns .pane.details{flex:40 1 0}
+.ns .pane>h2{flex:none;margin:0;height:36px;line-height:36px;padding:0 12px;background:#2c2c2c;color:#f0f0f0;font-size:21px;font-weight:700}
+.ns .center{flex:1;min-height:0;display:flex;flex-direction:column;padding:22px 24px 24px}
+.ns .instruction{flex:none;margin:0 0 12px;padding:30px 16px;text-align:center;font-size:clamp(24px,2.9vw,46px);font-weight:700;line-height:1.2;background:#c6c6c6;border:1px solid #333;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #888,0 0 0 1px #d6d6d6;letter-spacing:-.01em}
+.ns .instruction[hidden]{display:none}
+.ns .instruction-toast{position:absolute;z-index:25;top:80px;left:10%;max-width:70%;font-size:20px;pointer-events:none}
+.ns .stage{flex:1;min-height:0;min-width:0;position:relative;overflow:hidden}
+.ns .uc-page{inset:0!important;width:100%!important;border:0;border-radius:0;box-shadow:none;background:transparent;overflow:visible}
+.ns .uc-content{height:100%;padding:0}
+.ns .uc-box{width:100%;height:100%}
+.ns .uc-surface{width:100%!important;height:100%!important;border:0!important;background:none!important}
+.ns .uc-btn,.ns .submit,.ns .tr{font:21px Helvetica,Arial,sans-serif;color:#111;background:linear-gradient(#cbcbcb,#bdbdbd);border:1px solid #1c1c1c;border-radius:0;box-shadow:inset 1px 1px 0 #f2f2f2,inset -1px -1px 0 #7c7c7c,1px 1px 0 #5c5c5c;transition:none;animation:none}
+.ns .uc-surface .uc-btn{width:24%!important;height:max(48px,10.5vh)!important;max-height:78px;font-size:clamp(19px,1.7vw,28px)}
+.ns .uc-surface .uc-btn:nth-child(1){left:3%!important;top:8%!important}
+.ns .uc-surface .uc-btn:nth-child(2){left:50%!important;top:7%!important}
+.ns .uc-surface .uc-btn:nth-child(3){left:2%!important;top:70%!important}
+.ns .uc-surface .uc-btn:nth-child(4){left:34%!important;top:34%!important;width:18%!important}
+.ns .uc-surface .uc-btn:nth-child(5){left:68%!important;top:34%!important;width:18%!important}
+.ns .uc-surface .uc-btn:nth-child(6){left:36%!important;top:76%!important;width:18%!important}
+.ns .uc-surface .uc-btn[data-clicked]{background:linear-gradient(#a2a2a2,#b4b4b4);box-shadow:inset 2px 2px 3px #555,inset -1px -1px 0 #ddd}
+.ns .det{flex:1;min-height:0;margin:20px 24px 22px;padding:20px 20px 18px;border:1px solid #444;background:#b8b8b8;box-shadow:inset 1px 1px 0 #eee,inset -1px -1px 0 #777;display:flex;flex-direction:column;overflow:hidden}
+.ns .row{display:flex;font-size:clamp(14px,1.25vw,21px);line-height:clamp(22px,2.1vw,36px)}
+.ns .row b{font-weight:400;width:30%;flex:none}
+.ns .det{padding:14px 18px;margin:14px 18px 16px}
+.ns .row.bold b{font-weight:700}
+.ns .det hr{border:0;border-top:1px solid #555;border-bottom:1px solid #d6d6d6;margin:16px 0 14px;flex:none}
+.ns .det h3{margin:0;font-size:19px;line-height:30px}
+.ns .log{flex:1;min-height:40px;margin-top:6px;border:1px solid #333;background:#c4c4c4;box-shadow:inset 1px 1px 0 #777;display:flex;padding:10px 12px;font-size:19px;position:relative;padding-right:46px}
+.ns .log .sb{position:absolute;right:0;top:0;bottom:0;width:32px;border-left:1px solid #444;background:#b4b4b4}
+.ns .log .sb i{position:absolute;left:3px;right:3px;height:26px;background:#c8c8c8;border:1px solid #222;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #777;font:10px/24px Helvetica;text-align:center;font-style:normal}
+.ns .statusbar{flex:none;height:50px;margin:0 8px 10px;border:1px solid #444;background:#aaa;box-shadow:inset 1px 1px 0 #ddd;display:flex;align-items:center;padding:0 0 0 18px;font-size:19px}
+.ns .statusbar .gap{margin-left:auto}
+.ns .submit{margin:0 3px 0 10px;height:38px;min-width:130px;padding:0 20px;font-weight:700;cursor:pointer}
+.ns .title-tools{position:absolute;right:8px;top:3px;display:flex;align-items:center;gap:5px}
+.ns .end-action,.ns .end-xtra{height:32px;min-width:76px;padding:0 12px;font:700 15px Helvetica,Arial,sans-serif;color:#111;background:linear-gradient(#d2d2d2,#b8b8b8);border:1px solid #111;box-shadow:inset 1px 1px 0 #eee,inset -1px -1px 0 #777;cursor:pointer}
+.ns .end-xtra{font-weight:400;min-width:68px}
+.ns .end-link{display:inline-flex;align-items:center;height:30px;margin:0 10px;padding:0 6px;color:#111;font:16px Helvetica,Arial,sans-serif;text-decoration:underline;cursor:pointer}
+.ns .instruction-panel{margin:0 0 10px;padding:8px 10px;font-size:15px;font-weight:400;line-height:1.32;text-align:left;overflow-wrap:anywhere}
+.ns .instruction-panel[hidden]{display:none}
+.ns .statusbar .instruction-toast{position:static;z-index:auto;display:block;flex:1;max-width:none;margin:0 10px 0 0;padding:5px 8px;font-size:14px;line-height:1.22;text-align:left;pointer-events:none;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #888;background:#c3c3c3;border:1px solid #555;overflow-wrap:anywhere}
+.ns .statusbar .end-xtra{height:30px;font-size:14px}
+.ns .statusbar .end-link{font-size:15px}
+@media(max-width:1119px),(max-height:679px){.ns .instruction-panel{display:none}.ns .instruction[data-display=panel]:not([hidden]){display:block;margin:0 0 12px;padding:18px 12px;text-align:center;font-size:clamp(20px,2.7vw,30px)}.ns .statusbar .instruction-toast{display:none}.ns .instruction[data-display=toast]:not([hidden]){position:static;display:block;margin:0 0 12px;padding:18px 12px;text-align:center;font-size:clamp(20px,2.7vw,30px)}}
+.ns .perturb{position:fixed;z-index:40;right:20px;bottom:70px;width:300px;padding:14px;background:#c4c4c4;border:2px solid #111;box-shadow:inset 1px 1px 0 #fff,3px 3px 0 #444}
+.ns .perturb strong{display:block;margin-bottom:6px}
+.ns .shell{border:2px ridge #777;background:linear-gradient(120deg,#aaa,#b6b6b6 60%,#aaa)}
+.ns .shell:after{content:'';position:absolute;inset:0;pointer-events:none;background:url('assets/grain.svg');opacity:.15;z-index:100}
+.ns .menubar{height:42px;padding:0 22px;font-size:22px;background:linear-gradient(110deg,#a4a4a8,#aaaab0 70%,#9e9ea5)}
+.ns .menubar .logo{width:32px;height:36px;margin-right:38px}
+.ns .menubar span.m{margin-right:38px}
+.ns .titlebar{height:45px;margin:0;background:linear-gradient(#303030,#292929);font-size:24px;border:2px ridge #777}
+.ns .titlebar .wc{left:10px;top:9px}
+.ns .titlebar .wc i{font:18px/20px Arial;text-align:center;color:#333;box-shadow:inset 1px 1px #fff,1px 1px #111}
+.ns .titlebar .wc svg{width:20px;height:20px;display:block}
+.ns .panes{padding:10px 14px;gap:14px}
+.ns .pane.task{flex:60.35 1 0}
+.ns .pane.details{flex:39.65 1 0}
+.ns .pane{background:linear-gradient(115deg,#aaa,#b4b4b4 65%,#a9a9a9);border:2px ridge #ddd;box-shadow:0 0 0 1px #333}
+.ns .pane>h2{font-size:24px;line-height:34px;height:34px;font-weight:600;background:linear-gradient(#343434,#2a2a2a)}
+.ns .center{position:relative;padding:22px 22px 24px}
+.ns .instruction{padding:28px 16px 30px;font-size:clamp(24px,2.87vw,48px);background:linear-gradient(125deg,#bcbcbc,#c5c5c5);margin-bottom:12px}
+.ns .uc-surface .uc-btn{width:18%!important;height:74px!important;max-height:14%;font-weight:400;border:2px solid #333;box-shadow:inset 2px 2px #f5f5f5,inset -1px -1px #777,1px 1px #ddd;background:linear-gradient(115deg,#bdbdbd,#b7b7b7);font-size:clamp(18px,1.7vw,28px)}
+.ns .uc-surface .uc-btn:nth-child(1){left:34.5%!important;top:35.5%!important;width:18.5%!important}
+.ns .uc-surface .uc-btn:nth-child(2){left:78%!important;top:35.5%!important;width:18%!important}
+.ns .uc-surface .uc-btn:nth-child(3){left:4%!important;top:10%!important;width:17.2%!important}
+.ns .uc-surface .uc-btn:nth-child(4){left:54.5%!important;top:10%!important;width:17%!important;font-weight:400}
+.ns .uc-surface .uc-btn:nth-child(5){left:4.2%!important;top:65.8%!important;width:18%!important;font-weight:400}
+.ns .uc-surface .uc-btn:nth-child(6){left:42.7%!important;top:71.6%!important;width:18.2%!important}
+.ns .stage-submit{position:absolute;right:6.3%;bottom:9.3%;width:18%;height:70px;margin:0;min-width:0;font-size:clamp(18px,1.7vw,28px);font-weight:400;border:2px solid #333;box-shadow:inset 2px 2px #fff,inset -1px -1px #777;background:linear-gradient(115deg,#bdbdbd,#b7b7b7)}
+.ns .det{margin:20px 26px 28px;padding:17px 20px 24px;background:linear-gradient(115deg,#b9b9b9,#bebebe);border:1px solid #333;box-shadow:inset 1px 1px #777,1px 1px #eee}
+.ns .row{font-size:clamp(14px,1.26vw,21px);line-height:36px;letter-spacing:-.25px}
+.ns .row b{width:24.3%}
+.ns .det hr{margin:26px 0 10px}
+.ns .det h3{font-size:22px;line-height:36px}
+.ns .det h3:first-of-type{line-height:40px}
+.ns .det .row:nth-of-type(4),.ns .det .row:nth-of-type(5){line-height:40px}
+.ns .det hr:nth-of-type(2){margin-top:16px;margin-bottom:13px}
+.ns .det h3:nth-of-type(2){line-height:32px}
+.ns .log{margin-top:0;padding:10px;font-size:22px;background:linear-gradient(115deg,#bcbcbc,#c4c4c4);box-shadow:1px 1px #eee}
+.ns .log-text{white-space:pre-line}
+.ns .log .sb{width:31px}
+.ns .log .sb i{left:0;right:0;height:30px;font:15px/28px Arial;border:2px outset #ddd}
+.ns .statusbar{height:50px;margin:0 8px 10px;padding-left:16px;font-size:22px;background:linear-gradient(115deg,#a9a9a9,#b4b4b4);border:2px ridge #ddd}
+.ns .task-runner{margin-left:auto;align-self:stretch;display:flex;align-items:center;padding:0 15px;border:3px ridge #ddd;font-size:22px}
+.ns .instruction.instruction-panel{margin:0 0 12px;padding:10px;font-size:17px;line-height:1.3;text-align:left}
+@media(max-width:1200px),(max-height:740px){.ns .menubar{font-size:18px}.ns .menubar span.m{margin-right:26px}.ns .menubar .logo{margin-right:24px}.ns .det{margin:16px 18px;padding:12px 14px}.ns .row,.ns .det .row:nth-of-type(4),.ns .det .row:nth-of-type(5){line-height:26px}.ns .det hr,.ns .det hr:nth-of-type(2){margin:16px 0 8px}.ns .det h3,.ns .det h3:first-of-type,.ns .det h3:nth-of-type(2){line-height:28px;font-size:18px}.ns .log{font-size:16px}.ns .center{padding:18px}.ns .instruction{padding:20px 12px}.ns .uc-surface .uc-btn{height:58px!important}.ns .stage-submit{height:54px}.ns .statusbar,.ns .task-runner{font-size:17px}}
+.ns .perturb .dismiss{margin-top:8px;font:inherit;padding:4px 14px;border:1px solid #111;background:#ccc}
+
+/* Shared template behavior in the NEXTSTEP frame. */
+.ns .instruction-panel .ref-panel-text{font:inherit;overflow-wrap:anywhere}
+.ns .statusbar .ref-tools{gap:5px}
+.ns .statusbar .ref-note{position:static;transform:none;bottom:auto;left:auto;right:auto;width:auto;display:flex;align-items:center;gap:8px;border-radius:0;color:#111;box-shadow:inset 1px 1px #fff,inset -1px -1px #888}
+.ns .statusbar .ref-note-text{font:inherit;flex:1;max-height:none;overflow:visible}
+.ns .statusbar .ref-note-x{position:static;flex:none;border-radius:0}
+.ns .ref-ov:not(.ref-ov-promo),.ns .ref-ov-box,.ns .ref-fault,.ns .ref-busy-box,.ns .ref-notice{background:#c4c4c4;color:#111;border:2px solid #333;border-radius:0;box-shadow:inset 1px 1px #fff,3px 3px #444}
+.ns .ref-ov-btn,.ns .ref-fault-x,.ns .ref-notice-x,.ns .ref-hz-btn{border:1px solid #111;border-radius:0;background:linear-gradient(#d2d2d2,#b8b8b8);color:#111;box-shadow:inset 1px 1px #eee,inset -1px -1px #777}
+.ns .ref-shift{flex:none}
+.ns .end-action,.ns .end-xtra{border-radius:0}
+.ns .title-tools .ref-icon{width:auto;min-width:76px;font-size:18px}

@@ -1,0 +1,658 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Mac OS 9 Platinum window and TicketMaster basket layout. */
+:root { --bg:#e4e7e9; --panel:#f7f8f8; --fg:#17191b; --muted:#59616a; --line:#aab1b7; --accent:#2463bd; }
+body { font:16px/1.32 Arial,Helvetica,sans-serif; background:linear-gradient(#d6d9dc,#f2f3f4); color:#17191b; padding:0 5px 5px; }
+.mac-titlebar { height:29px; flex:none; display:flex; align-items:center; gap:9px; padding:2px 7px; font-size:17px; background:repeating-linear-gradient(0deg,#d8dbde 0,#d8dbde 2px,#c8cdd1 3px,#eceeef 4px); border:1px solid #89939b; box-shadow:inset 0 1px #fff; }
+.mac-app-icon { display:inline-flex; align-items:center; justify-content:center; width:21px;height:21px;border:1px solid #52616d;border-radius:4px;background:linear-gradient(#85bce9,#2463a0);color:white;font-size:14px; }
+.mac-window-buttons { margin-left:auto; font-size:15px; color:#315a83; }
+.mac-menubar { height:35px; flex:none; display:flex; align-items:center; gap:26px; padding:0 18px; background:linear-gradient(#f0f1f2,#cfd3d6); border:1px solid #a5acb1; border-top:0; font-size:16px; }
+.mac-toolbar { height:76px; flex:none; display:flex; align-items:center; gap:0; padding:3px 15px; background:linear-gradient(#e3e6e8,#cbd0d3); border-bottom:2px solid #9ba4aa; }
+.mac-tool { min-width:82px; height:62px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; border-right:1px solid #aab0b4; font-size:14px; }
+.mac-tool-icon { font-size:30px; line-height:30px; color:#174c83; text-shadow:0 1px #fff; }
+@media (max-height: 768px) {
+  .mac-titlebar { height:24px; }
+  .mac-menubar { height:28px; }
+  .mac-toolbar { height:48px; }
+  .mac-tool { height:42px; }
+  .mac-tool-icon { font-size:24px; line-height:24px; }
+}
+.ref-task { order:3; min-height:42px; padding:4px 14px; gap:10px; background:linear-gradient(#e4e6e8,#cfd3d6); border:1px solid #9da6ac; border-radius:0; }
+.ref-brand { font-size:16px; }
+.ref-instruction { font-size:15px; font-weight:600; }
+.ref-tools { gap:6px; }
+.ref-submit,.ref-xtra,.ref-ov-btn { padding:6px 16px; border:1px solid #818b92; border-radius:7px; background:linear-gradient(#fff,#d6dade); color:#111; box-shadow:inset 0 1px #fff,0 1px 1px #a7adb1; font-size:15px; }
+.ref-submit { background:linear-gradient(#fff,#cbd1d5); font-weight:600; }
+.ref-body { order:4; border:1px solid #9da6ac; background:#eef0f1; }
+.ref-side { width:275px; padding:10px 12px; gap:0; background:linear-gradient(90deg,#f5f6f7,#e4e7e9); border-right:3px ridge #aab0b4; }
+.ref-sidelink { padding:5px 9px; color:#202326; font-size:16px; border-radius:2px; }
+.ref-sidelink.mac-selected { background:#3975cf; color:white; }
+.ref-panel { border-radius:3px; border-color:#aeb4b8; box-shadow:inset 0 1px #fff; }
+.ref-stage { padding:14px; background:#e9ecee; }
+.ref-foot { order:5; min-height:32px; padding:3px 14px; background:linear-gradient(#d6dade,#c6cbcf); border:1px solid #a3aaae; color:#42484d; font-size:12px; }
+@media (max-height: 720px) {
+  .mac-titlebar { height:22px; }
+  .mac-menubar { height:24px; }
+  .mac-toolbar { height:40px; }
+  .mac-tool { height:36px; }
+  .mac-tool-icon { font-size:20px; line-height:20px; }
+  .ref-task { min-height:34px; }
+  .ref-foot { min-height:24px; }
+}
+.ref-note { border-radius:2px; border:1px solid #89939a; background:#fff; }
+.ref-ov-cookie,.ref-ov-toast,.ref-ov-chat,.ref-ov-box,.ref-ov-banner { border-radius:2px; }
+.ref-ov-toast { top:8px; bottom:auto; }
+html.env-scroll .ref-body,html.env-scroll .ref-stage { min-height:calc(100vh - 185px); }
+
+/* Full-window TicketMaster workspace: the Platinum frame is the app frame, not a browser. */
+.ref-stage { padding:0; }
+.sd-win { border:0; border-radius:0; box-shadow:none; }
+.sd-page { background:#eef0f1; }
+.sd-head { border-bottom:1px solid #aab1b7; }
+.sd-main { background:#f8f9f9; border:1px solid #b3bbc0; border-radius:6px; }
+.sd-line { border-radius:3px; background:#fff; }
+.ticket-recommendations { flex:1 1 0; margin-top:8px; min-height:0; min-width:0; display:flex; flex-direction:column; overflow:auto; }
+.ticket-rec-heading { flex:none; padding:7px 12px; border:1px solid #b7bec3; border-radius:4px; background:linear-gradient(#e3e6e8,#d1d5d8); font-size:16px; font-weight:600; }
+.ticket-rec-row { flex:1; min-height:82px; display:flex; align-items:center; gap:14px; padding:8px 7px; border-bottom:1px solid #d3d7da; }
+.ticket-rec-thumb { flex:none; width:84px; height:74px; display:grid; place-items:center; border:1px solid #8a9399; border-radius:4px; background:linear-gradient(145deg,#334963,#151a21); color:white; font-size:15px; font-weight:bold; }
+.ticket-rec-copy { display:flex; flex-direction:column; flex:1; min-width:0; line-height:1.3; }
+.ticket-rec-copy strong { font-size:16px; }
+.ticket-rec-copy span { color:#27303a; }
+.ticket-rec-copy a { color:#1261c5; text-decoration:underline; }
+.ticket-rec-price { flex:none; font-size:16px; }
+.ticket-rec-add { flex:none; padding:6px 12px; border:1px solid #858f96; border-radius:5px; background:linear-gradient(#fff,#d4d9dc); font:inherit; }
+.mac-recent .ref-sidelink { display:block; width:100%; }
+.ticket-rec-heading { flex:none; padding:8px 12px; border:1px solid #b7bec3; border-radius:4px; background:linear-gradient(#e3e6e8,#d1d5d8); font-size:17px; font-weight:600; }
+.ticket-rec-row { flex:1; min-height:82px; display:flex; align-items:center; gap:14px; padding:8px 7px; border-bottom:1px solid #d3d7da; }
+.ticket-rec-thumb { flex:none; width:84px; height:74px; display:grid; place-items:center; border:1px solid #8a9399; border-radius:4px; background:linear-gradient(145deg,#334963,#151a21); color:white; font-size:15px; font-weight:bold; }
+.ticket-rec-copy { display:flex; flex-direction:column; flex:1; min-width:0; line-height:1.3; }
+.ticket-rec-copy strong { font-size:16px; }
+.ticket-rec-copy span { color:#27303a; }
+.ticket-rec-copy a { color:#1261c5; text-decoration:underline; }
+.ticket-rec-price { flex:none; font-size:16px; }
+.ticket-rec-add { flex:none; padding:6px 12px; border:1px solid #858f96; border-radius:5px; background:linear-gradient(#fff,#d4d9dc); font:inherit; }
+.ticket-summary-detail { margin:2px -8px 0; padding:10px 8px; border-top:1px solid #c2c8cc; border-bottom:1px solid #c2c8cc; font-size:16px; }
+.ticket-summary-row { display:flex; justify-content:space-between; gap:10px; padding:5px 0; }
+.ticket-summary-row span:last-child { white-space:nowrap; }
+.ticket-summary-row.strong { margin-top:4px; border-top:1px solid #d2d6d9; font-weight:bold; }
+.ticket-summary-row.total { font-size:19px; }
+.ticket-code { margin:8px -8px 0; padding:12px; border:1px solid #c3c8cc; border-radius:5px; background:linear-gradient(#f5f6f7,#e5e8ea); font-size:17px; }
+.ticket-code-form { display:flex; gap:8px; margin-top:8px; }
+.ticket-code-form input { min-width:0; flex:1; padding:7px 9px; border:1px solid #aab2b8; border-radius:4px; background:#fff; font:inherit; }
+.ticket-code-form button { padding:5px 14px; border:1px solid #858f96; border-radius:5px; background:linear-gradient(#fff,#d4d9dc); font:inherit; }
+.sd-thumb { border-radius:3px; }
+.sd-step .sd-b { border-radius:3px; }
+.ref-side { overflow:auto; padding:8px 5px; }
+.mac-side-title { padding:5px 14px; font-weight:700; border-top:1px solid #a9afb4; border-bottom:1px solid #c4c9cd;
+  background:repeating-linear-gradient(0deg,#e7e9ea 0,#e7e9ea 2px,#d8dbdd 3px,#f2f3f4 4px); }
+.mac-side-group { padding:6px 12px 3px; font-weight:600; }
+.ref-sidelink { flex:none; padding:4px 10px 4px 32px; line-height:1.1; }
+.ref-sidelink.mac-selected { background:#3975cf; color:#fff; }
+.mac-recent { margin-top:14px; border:1px solid #b5bbc0; min-height:180px; }
+.mac-recent .ref-sidelink { padding-left:12px; }
+@media (max-width: 1100px) {
+  .ref-side { width:220px; }
+  .ticket-recommendations { min-height:0; }
+  .ticket-rec-heading { padding:4px 8px; font-size:13px; }
+  .ticket-rec-row { flex:1; min-height:48px; gap:6px; padding:4px; }
+  .ticket-rec-thumb { width:38px; height:42px; font-size:11px; }
+  .ticket-rec-copy { font-size:10px; }
+  .ticket-rec-copy strong { font-size:11px; }
+  .ticket-rec-copy a { display:none; }
+  .ticket-rec-add { padding:3px 5px; font-size:10px; }
+  .ticket-rec-price { font-size:11px; }
+  .ticket-code { padding:7px; font-size:13px; }
+}
+.sd-side .sd-sum { border-radius:4px; background:#f8f9f9; border:1px solid #b5bcc1; }
+.ticket-code { margin:8px 0 0; }
+.ticket-side-extras { flex:1 1 0; min-height:0; min-width:0; overflow:auto; }
+.ticket-marquee-offer { margin-top:10px; padding:12px 14px; border:1px solid #ddc98b; border-radius:5px;
+  background:linear-gradient(135deg,#fff5d8,#ffedbd); color:#181818; font-size:16px; }
+.ticket-marquee-offer > strong { display:block; margin-bottom:10px; font-size:19px; }
+.ticket-perk { margin:5px 0; }
+.ticket-perk:first-letter { color:#1768c5; }
+.ticket-marquee-offer p { margin:14px 0 8px; }
+.ticket-offer-button { display:inline-block; padding:6px 14px; border:1px solid #879097; border-radius:5px; background:linear-gradient(#fff,#d6dade); box-shadow:inset 0 1px #fff; }
+.ticket-columns { flex:none; display:grid; grid-template-columns:minmax(0,1fr) 80px 95px 84px; gap:8px; padding:8px 12px;
+  margin:0 0 3px; border:1px solid #c0c6ca; border-radius:4px; background:linear-gradient(#e1e4e6,#d2d6d9); font-size:15px; }
+.ticket-columns span:not(:first-child) { text-align:center; }
+.ticket-count { margin-left:auto; font-size:15px; font-weight:400; }
+.sd-line { border:0; border-bottom:1px solid #d0d5d8; border-radius:0; background:#fff; }
+.sd-line .sd-thumb { border-radius:3px; }
+.ticket-rec-row:nth-of-type(2) .ticket-rec-thumb { background:linear-gradient(145deg,#bf2828,#591010); }
+.ticket-rec-row:nth-of-type(3) .ticket-rec-thumb { background:linear-gradient(145deg,#27323c,#07090b); clip-path:polygon(24% 0,76% 0,100% 23%,82% 38%,78% 100%,22% 100%,18% 38%,0 23%); }
+.ticket-rec-row:nth-of-type(4) .ticket-rec-thumb { background:linear-gradient(90deg,#77432c,#dfb180,#47332d); }
+.sd-line.ticket-main-line .sd-thumb { background:linear-gradient(145deg,#173f70,#061b36) !important; color:#dcecff; }
+.sd-line.ticket-main-line .sd-thumb { font-size:0; }
+.sd-line.ticket-main-line .sd-thumb::after { content:'The\A Cobalt\A Hour'; white-space:pre; text-align:left; font-size:16px; line-height:1.05; color:#e4f1ff; }
+.sd-line.ticket-extra-line .sd-thumb { background:linear-gradient(145deg,#e2e4e5,#c9cdd0) !important; color:#176dbe; clip-path:polygon(50% 0,92% 15%,88% 65%,50% 100%,12% 65%,8% 15%); }
+.sd-line.ticket-extra-line .sd-thumb { font-size:0; }
+.sd-line.ticket-extra-line .sd-thumb::after { content:'✓'; color:white; font-size:35px; }
+
+/* RISC OS desktop and Bramblewick shop window */
+html, body { width:100%; height:100%; min-height:0; margin:0; }
+body.riscos-desktop {
+  box-sizing:border-box; overflow:hidden; display:flex; flex-direction:column; padding:0;
+  color:#11131b; font:16px/1.25 "Arial Narrow", "Segoe UI", Arial, sans-serif;
+  background-color:#7085a0;
+  background-image: repeating-linear-gradient(45deg,rgba(28,48,76,.16) 0 2px,transparent 2px 9px),repeating-linear-gradient(-45deg,rgba(28,48,76,.12) 0 2px,transparent 2px 9px);
+}
+.riscos-iconbar {
+  order:0; flex:none; height:60px; box-sizing:border-box; display:flex; align-items:center; gap:38px;
+  padding:3px 26px; color:#080a10; background:linear-gradient(#f6f6f5,#c6c7c5);
+  border:2px ridge #b6b8b8; box-shadow:inset 0 1px #fff; font-size:18px;
+}
+.riscos-icon { min-width:46px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; line-height:1; text-shadow:0 1px #fff; }
+.riscos-glyph { font-size:28px; height:31px; line-height:30px; }
+.riscos-icon:first-child { margin-right:18px; font-size:30px; }
+.riscos-clock { margin-left:auto; align-self:stretch; display:flex; align-items:center; padding:0 24px; border-left:3px ridge #aaa; font:20px "Courier New",monospace; background:linear-gradient(#eee,#d0d0ce); }
+.mac-titlebar {
+  order:1; flex:none; box-sizing:border-box; width:93.4%; height:38px; margin:18px auto 0; padding:2px 8px;
+  display:flex; align-items:center; gap:10px; color:#111; font-size:20px;
+  background:repeating-linear-gradient(0deg,#d7d8d7 0,#d7d8d7 2px,#c5c7c6 3px,#eeeeed 4px);
+  border:3px ridge #b8b9b8; box-shadow:inset 0 1px #fff;
+}
+.mac-app-icon { width:22px;height:22px; display:grid;place-items:center; background:linear-gradient(#fff,#d0d0ce);border:2px ridge #aaa;color:#111;font-size:14px; }
+.mac-window-buttons { margin-left:auto; width:27px;height:25px; display:grid;place-items:center; color:#111; background:linear-gradient(#f8f8f8,#c8c8c8);border:2px outset #aaa;font-size:21px;line-height:1; }
+.ref-task {
+  order:2; flex:none; box-sizing:border-box; width:93.4%; min-height:111px; margin:0 auto; padding:8px 18px;
+  position:relative; display:flex; align-items:center; gap:18px; color:#10172d;
+  background:linear-gradient(#fafaf9,#e0e1df); border:3px ridge #b8b9b8; border-top:0; border-radius:0;
+}
+.ref-task::before { content:"🏠  Bramblewick Depot  🌿"; white-space:nowrap; color:#10152d; font:bold 45px/1 Georgia,"Times New Roman",serif; text-shadow:1px 1px #fff; }
+.ref-task::after { content:"For Home, Garden and Family"; position:absolute; left:120px; bottom:12px; color:#171717; font-size:22px; letter-spacing:1px; }
+.riscos-search { position:absolute;right:220px;top:27px;width:min(365px,30vw);height:38px;display:flex;align-items:center;gap:12px;color:#111;font-size:17px; }
+.riscos-search-field { flex:1;min-width:80px;height:34px;box-sizing:border-box;border:2px inset #aaa;background:linear-gradient(#fff,#f0f0ef); }
+.riscos-search-go { flex:none;height:34px;min-width:70px;padding:2px 12px;border:2px outset #aaa;border-radius:2px;background:linear-gradient(#fff,#d4d4d2);color:#111;font:16px Arial,sans-serif; }
+.ref-brand { display:none; }
+.ref-nav { display:none!important; }
+.ref-instruction { position:absolute;left:20px;right:250px;top:4px;font-size:14px;line-height:1.2;color:#15204c; }
+.ref-spacer { display:none; }
+.ref-tools { margin-left:auto; display:flex;align-items:center;gap:7px;z-index:2; }
+.ref-submit,.ref-xtra,.ref-ov-btn { min-height:35px;padding:4px 15px;border:2px outset #aaa;border-radius:2px;background:linear-gradient(#fff,#d4d4d2);color:#111;box-shadow:inset 0 1px #fff;font:16px Arial,sans-serif; }
+.ref-submit { font-weight:600; }
+.ref-body {
+  order:3; flex:1 1 auto; min-height:0; width:93.4%; box-sizing:border-box; margin:0 auto 5px; padding:0;
+  position:relative; overflow:hidden; border:3px ridge #b8b9b8; background:linear-gradient(90deg,#c7d5e7 0 70%,#e8e8e5 70% 100%);
+}
+.ref-body::before { content:"✿\A 🌿🌼🌱\A 🌿  ⚱  ◉\A  ▱"; white-space:pre; position:absolute;left:1%;bottom:2%;width:16%;height:64%;display:flex;align-items:flex-end;
+  padding:8px;box-sizing:border-box;color:#355439;font-size:29px;line-height:1.35;text-shadow:1px 1px #fff;background:linear-gradient(0deg,#c6b49b 0 22%,#d8e0e5 22% 100%);border-bottom:3px ridge #aaa; }
+.ref-side { display:none !important; }
+.ref-stage { position:absolute;inset:0;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden;padding:0!important;background:transparent!important; }
+.ref-stage::before {
+  content:"🌿  Everything for a brighter home and garden"; position:absolute;right:2%;top:7%;width:16%;height:24%;box-sizing:border-box;
+  display:flex;align-items:flex-end;justify-content:center;padding:20px;text-align:center;font-size:24px;color:#131722;
+  background:linear-gradient(160deg,#d9e3f0,#aabbd1);border:2px ridge #f5f5f5;
+}
+.ref-stage::after {
+  content:"Popular this week     ▧ Garden Tools  From £3.99     ▧ Toys & Games  From £2.50     ▧ Home Essentials  From £4.25     ▧ Plants & Seeds  From £1.99";
+  position:absolute;right:2%;top:37%;width:16%;height:49%;box-sizing:border-box;padding:13px 9px;color:#171717;
+  white-space:pre-line;line-height:2.5;font-size:14px;background:linear-gradient(#f5f5f4,#d9d9d7);border:2px ridge #aaa;
+}
+.sd-win { position:absolute!important; z-index:4; transform:none!important; flex:none!important; min-height:0!important; box-sizing:border-box;
+  padding:0!important; overflow:hidden!important; isolation:isolate; border:4px ridge #b8b8b7!important; background:#e8e8e6!important; box-shadow:2px 3px 7px #283343!important; border-radius:0!important; }
+.sd-win::before { content:"♙  Bramblewick Depot  —  Shopping Basket"; position:relative;z-index:4;height:32px;box-sizing:border-box;display:flex;align-items:center;padding:2px 42px 2px 10px;
+  color:#111;font-size:17px;background-image:linear-gradient(45deg,transparent 44%,#111 45% 55%,transparent 56%),linear-gradient(-45deg,transparent 44%,#111 45% 55%,transparent 56%),linear-gradient(#ef4b3e,#c82118),repeating-linear-gradient(0deg,#d9d9d7 0,#d9d9d7 2px,#c8c9c7 3px,#f1f1ef 4px);
+  background-size:12px 12px,12px 12px,24px 22px,100% 100%;background-position:right 14px center,right 14px center,right 8px center,center;background-repeat:no-repeat;border-bottom:2px ridge #aaa; }
+.sd-win::after { content:"⌂  Bramblewick Depot     For Home, Garden and Family          🛒  Your Basket";position:absolute;z-index:1;pointer-events:none;top:32px;left:0;right:0;height:54px;
+  box-sizing:border-box;display:flex;align-items:center;padding:0 18px;color:#11152d;font:bold 20px Georgia,"Times New Roman",serif;
+  background:repeating-linear-gradient(0deg,#e8e8e7 0,#e8e8e7 2px,#d3d4d2 3px,#f4f4f2 4px);border-bottom:2px ridge #aaa; }
+.sd-win::before,.sd-win::after { display:none!important; }
+.sd-tabs { display:flex!important;position:relative;flex:none!important;height:30px!important;min-height:30px!important;padding:0 8px!important;border-bottom:2px ridge #aaa!important;background:linear-gradient(#ececea,#c9c9c7)!important; }
+.sd-tabs > * { display:none!important; }
+.sd-tabs::before { content:"♙  Bramblewick Depot  —  Shopping Basket";align-self:center;font:17px "Arial Narrow",Arial,sans-serif;color:#111; }
+.sd-tabs::after { content:"×";margin-left:auto;align-self:center;display:grid;place-items:center;width:24px;height:24px;border:2px outset #aaa;background:#ed3c21;color:#111;font:26px/1 Arial,sans-serif; }
+.sd-bar { display:flex!important;position:relative;flex:none!important;height:80px!important;min-height:80px!important;border:0!important;border-bottom:2px ridge #aaa!important;background:linear-gradient(#f5f5f3,#dcdcd9)!important;padding:4px 12px!important; }
+.sd-bar .sd-nav,.sd-bar .sd-ext { display:none!important; }
+.sd-bar .sd-omni { position:relative;display:flex!important;height:68px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:none!important;color:transparent!important; }
+.sd-bar .sd-omni > * { font-size:0!important;width:0!important; }
+.sd-bar .sd-omni svg { display:none!important; }
+.sd-bar .sd-omni::before { content:"⌂  Bramblewick Depot  🌿";color:#10152d;font:bold 37px Georgia,"Times New Roman",serif;white-space:nowrap; }
+.sd-bar .sd-omni::after { content:"For Home, Garden and Family";position:absolute;left:49px;bottom:2px;color:#111;font:16px "Arial Narrow",Arial,sans-serif; }
+.sd-page { height:auto!important;flex:1!important; min-height:0!important; display:flex!important; flex-direction:column!important; overflow:hidden!important; padding-top:0!important; box-sizing:border-box!important;background:linear-gradient(#e9e9e7,#d9d9d7)!important; }
+.sd-head { display:none!important; }
+.sd-main { position:relative!important; z-index:2!important; flex:1!important; min-height:0!important; box-sizing:border-box!important; margin:0!important; padding:12px!important;
+  overflow:hidden!important; background:linear-gradient(#f6f6f5,#e3e3e1)!important; border:0!important;border-radius:0!important; }
+.sd-main > * { min-width:0!important; }
+.sd-content,.sd-list,.sd-items { min-height:0!important; overflow:auto!important;display:flex!important;flex-direction:column!important;align-items:stretch!important; }
+.sd-content { position:relative!important; }
+.sd-content::before { content:"Item                                      Quantity       Price       Total";position:absolute;z-index:2;top:0;left:0;right:0;height:26px;box-sizing:border-box;padding:5px 8px;
+  background:linear-gradient(#e5e5e3,#cdcecc);border:1px solid #aaa;color:#111;font-size:13px;font-weight:bold; }
+.sd-side { border:2px ridge #aaa!important;border-radius:0!important;background:linear-gradient(#f3f3f2,#dcdcd9)!important;padding:10px!important; }
+.sd-side::after { content:"▤  Help & Tips\A About your basket\A Ticked items will be included in your order. You can change quantities or remove items before placing your order.\A\A Delivery\A Standard delivery is usually 3–5 working days. Express delivery may be available at checkout.\A\A Related items\A These items are popular with other customers.";
+  display:block;white-space:pre-wrap;margin-top:12px;padding:8px 6px;border-top:1px solid #999;color:#151515;font-size:13px;line-height:1.28; }
+.sd-side .sd-sum { border:0!important;border-radius:0!important;background:transparent!important; }
+.sd-side button { border-radius:0!important;border:2px outset #aaa!important;background:linear-gradient(#fff,#d2d2d0)!important;color:#111!important; }
+.sd-main .sd-line { position:relative!important;float:none!important;min-width:0!important;box-sizing:border-box!important;min-height:68px!important; padding:6px!important; border:0!important;border-bottom:1px solid #aaa!important;border-radius:0!important; background:transparent!important; }
+.sd-line .sd-thumb { width:68px!important;height:68px!important;flex:none!important;border:1px solid #999!important;border-radius:0!important;background:linear-gradient(145deg,#d9e6f1,#8ea9c2)!important; }
+.sd-step .sd-b,.sd-step button,.sd-line button { border-radius:0!important;border:2px outset #aaa!important;background:linear-gradient(#fff,#d1d1cf)!important;color:#111!important; }
+.sd-main::after { content:"Related items you might like\A 🧸 Hooded Baby Towel   🐤 Bath Duck Toy   🔤 Foam Bath Letters   ▤ Baby Washcloths\A £5.99 Add to basket   £2.49 Add to basket   £3.50 Add to basket   £4.25 Add to basket";
+  position:absolute;pointer-events:none;left:12px;right:calc(26% + 12px);bottom:10px;height:25%;box-sizing:border-box;padding:8px 10px;
+  white-space:pre;overflow:hidden;border:2px ridge #aaa;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgba(120,120,120,.4) calc(25% - 1px) 25%),linear-gradient(#e7e7e5,#d4d4d2);font-size:12px;line-height:1.6;color:#111; }
+.sd-main::after { display:none!important; }
+.sd-main:has(.sd-line) { padding-bottom:105px!important; }
+.sd-main:has(.sd-line)::after { display:block!important;height:90px!important;right:8px!important;left:8px!important;bottom:8px!important; }
+.ticket-recommendations { display:none!important; }
+.ticket-side-extras { display:none!important; }
+.ref-panel { z-index:7; }
+.ref-panel-title { font-weight:bold;color:#111; }
+.ref-panel-text { font-size:14px; }
+.ref-foot { order:4; }
+.ref-note { z-index:10; }
+@media (max-width: 1200px) {
+ .riscos-iconbar { height:42px;gap:14px;padding:2px 9px;font-size:12px; }
+ .riscos-glyph { font-size:20px;height:22px;line-height:21px; }
+ .riscos-clock { font-size:13px;padding:0 8px; }
+ .mac-titlebar { height:28px;margin-top:8px;font-size:15px; }
+ .ref-task { min-height:76px;padding:5px 10px; }
+ .ref-task::before { font-size:31px; }
+ .ref-task::after { left:82px;bottom:7px;font-size:14px; }
+ .riscos-search { right:160px;top:24px;width:min(270px,30vw);height:30px;gap:5px;font-size:12px; }
+ .riscos-search-field,.riscos-search-go { height:27px; }
+ .riscos-search-go { min-width:42px;padding:2px 6px;font-size:12px; }
+ .ref-body { width:96%; }
+ .mac-titlebar,.ref-task { width:96%; }
+ .sd-line { min-height:58px!important; }
+ .sd-line .sd-thumb { width:46px!important;height:46px!important; }
+ .sd-side { overflow:auto!important;padding:5px!important; }
+ .sd-side::after { font-size:10px;line-height:1.12;margin-top:6px;padding:5px 3px; }
+ .sd-side .sd-sum { font-size:12px!important; }
+ .sd-side button { padding:3px 6px!important;font-size:11px!important; }
+ .sd-main::after { font-size:9px;line-height:1.35;right:calc(26% + 12px); }
+ .ref-stage::after { line-height:1.9; }
+ .ref-stage::before,.ref-stage::after { right:1%;width:18%;font-size:13px; }
+}
+@media (max-height: 700px) {
+ .riscos-iconbar { height:40px; }
+ .mac-titlebar { margin-top:6px;height:27px; }
+ .ref-task { min-height:68px; }
+ .ref-task::before { font-size:30px; }
+ .riscos-search { top:20px; }
+ .sd-main::after { display:block!important;height:18%;right:calc(26% + 8px);font-size:9px;line-height:1.25;padding:5px 6px; }
+ .sd-main { margin-top:0!important;padding:8px!important; }
+}
+@media (max-width: 1100px) {
+  .ticket-columns { grid-template-columns:minmax(0,1fr) 46px 62px 45px; gap:3px; padding:5px; font-size:11px; }
+  .ticket-marquee-offer { padding:7px; font-size:11px; }
+  .ticket-marquee-offer > strong { font-size:13px; }
+}
+
+/* Native shop artwork and the three-pane basket utility. */
+:root { color-scheme:light; }
+body.riscos-desktop { color:#171717;font-family:"DejaVu Sans Condensed","Arial Narrow",Arial,sans-serif;background-color:#8192ae; }
+.riscos-art { background-image:url("assets/risc-art.png");background-repeat:no-repeat; }
+.riscos-iconbar { gap:45px;padding:2px 25px; }
+.riscos-icon { width:59px;min-width:59px; }
+.riscos-glyph { display:block;width:39px;height:37px; }
+.riscos-icon:first-child .riscos-glyph { width:49px;height:43px; }
+.riscos-icon:first-child { margin-right:18px; }
+.riscos-clock { font-size:20px; }
+.mac-titlebar { font-size:20px;font-weight:normal; }
+.mac-titlebar strong { font-weight:normal; }
+.mac-titlebar .ref-tools { margin-left:auto;gap:7px; }
+.mac-titlebar .mac-window-buttons { margin-left:3px; }
+.mac-titlebar .ref-submit,.mac-titlebar .ref-xtra { min-height:27px;height:29px;padding:2px 14px;font-size:16px; }
+.ref-task { display:flex;gap:16px;padding:8px 14px;min-height:111px; }
+.ref-task::before,.ref-task::after { display:none; }
+.riscos-brand { display:flex;align-items:center;gap:20px;min-width:0;flex:none; }
+.riscos-house { width:83px;height:76px;flex:none; }
+.riscos-branch { width:77px;height:78px;flex:none; }
+.riscos-brand-copy { min-width:0; }
+.riscos-brand-title { color:#0b1034;font:bold clamp(36px,3.9vw,68px)/1 Georgia,"Times New Roman",serif;letter-spacing:-2px;white-space:nowrap; }
+.riscos-brand-tagline { font:22px/1.15 "DejaVu Sans Condensed",Arial,sans-serif;letter-spacing:.6px;white-space:nowrap; }
+.riscos-search { position:static;margin-left:auto;flex:0 1 530px;width:34%;height:40px;font-size:20px;gap:16px; }
+.riscos-search-field { height:37px; }
+.riscos-search-go { height:37px;min-width:73px;font-size:19px; }
+.ref-instruction { position:static;min-width:0;flex:1;align-self:stretch;display:flex;align-items:center;padding:10px 14px;border:2px ridge #c8b782;background:#fff2ca;color:#242017;font-size:16px;line-height:1.35;overflow-wrap:anywhere; }
+body[data-instruction="header"] .riscos-brand { max-width:53%;gap:12px; }
+body[data-instruction="header"] .riscos-search { display:none; }
+body[data-instruction="header"] .riscos-brand-title { font-size:clamp(33px,3.5vw,60px); }
+.ref-body { margin-bottom:10.4vh;background:linear-gradient(90deg,#b5c3db 0 86%,#eee 86%); }
+.ref-body::before,.ref-stage::before,.ref-stage::after { display:none; }
+.riscos-garden { position:absolute;left:0;top:0;bottom:22px;width:15%; }
+.riscos-promo { position:absolute;right:1%;top:0;width:14.1%;height:34.5%; }
+.riscos-popular { position:absolute;right:1%;top:37%;width:13.5%;height:58.5%; }
+.riscos-disc { position:absolute;left:10px;bottom:8px;width:88px;height:73px; }
+.riscos-waste { position:absolute;right:15px;bottom:7px;width:59px;height:82px; }
+.ref-foot { position:absolute;left:3.3%;right:3.3%;bottom:10.4vh;z-index:20;min-height:36px;height:36px;box-sizing:border-box;border:3px ridge #b8b9b8;font-size:12px; }
+body:has(.ref-foot) .ref-body { margin-bottom:calc(10.4vh + 36px); }
+.ref-float-dock { position:absolute!important;right:5%;bottom:4.5%;z-index:30;display:flex;justify-content:flex-end;padding:0!important;width:auto!important;min-height:0!important; }
+.ref-float { position:static!important; }
+.ref-panel { position:absolute;right:12px;top:12px;width:15%;box-sizing:border-box;margin:0;padding:13px;background:#fff2ca;color:#242017;border:2px ridge #c8b782;box-shadow:1px 2px 2px #777; }
+.ref-panel-title { margin-bottom:12px;border-bottom:1px solid #d1bf8c;padding-bottom:9px;font-size:18px;color:#222; }
+.ref-panel-text { font-size:16px;line-height:1.4; }
+.ref-body:has(.ref-panel) .ref-stage { right:18%!important; }
+.ref-body:has(.ref-panel) .riscos-promo { display:none; }
+.ref-body:has(.ref-panel) .riscos-popular { top:43%;height:53%; }
+.ref-body:has(.ref-panel) .sd-win { width:87%!important; }
+.ref-note { left:3.5%;right:auto;top:auto;bottom:12px;width:min(560px,46vw);box-sizing:border-box;display:flex;gap:12px;padding:12px;background:#fff2ca;color:#242017;border:2px ridge #c8b782;box-shadow:2px 2px 3px #42536b;font-size:15px; }
+.ref-note::before { content:"▤";font-size:25px; }
+.ref-note-x { color:#111; }
+.sd-win { position:relative!important;left:auto!important;top:auto!important;width:69.5%!important;height:94%!important; }
+.sd-tabs { height:31px!important;min-height:31px!important; }
+.sd-bar { height:92px!important;min-height:92px!important;padding:5px 10px!important; }
+.sd-bar .sd-omni { position:absolute!important;left:0;right:0;top:0;height:100%!important;margin:0!important;padding:0!important; }
+.sd-bar .sd-omni::before,.sd-bar .sd-omni::after { display:none!important; }
+.riscos-basket-logo { position:relative;z-index:1;display:flex;align-items:center;gap:12px;min-width:0; }
+.riscos-basket-logo .riscos-house { width:54px;height:50px; }
+.riscos-basket-logo .riscos-branch { width:52px;height:53px; }
+.riscos-basket-logo .riscos-brand-title { font-size:47px;letter-spacing:-2px; }
+.riscos-basket-logo .riscos-brand-tagline { font-size:16px;letter-spacing:.2px; }
+.riscos-basket-count { position:relative;z-index:1;margin-left:auto;display:flex;align-items:center;gap:8px;font-size:16px;white-space:nowrap; }
+.riscos-basket-icon { width:62px;height:58px; }
+.riscos-basket-body { display:grid!important;grid-template-columns:minmax(0,1fr) 22% 26%;grid-template-rows:minmax(0,1fr);gap:6px!important;padding:6px!important;min-height:0!important;overflow:hidden!important;container-type:size;container-name:basket; }
+.riscos-basket-body.riscos-cart { --basket-main-min:220px;grid-template-rows:minmax(0,1fr) clamp(45px,calc(100% - var(--basket-main-min)),207px); }
+.riscos-basket-body.riscos-many { --basket-main-min:calc(34px + var(--riscos-rows) * 82px); }
+.riscos-basket-body.riscos-dense { --basket-main-min:calc(34px + var(--riscos-rows) * 68px); }
+.riscos-basket-body.riscos-many .sd-line { min-height:78px!important; }
+.riscos-basket-body.riscos-dense .sd-line { min-height:66px!important; }
+.riscos-basket-body.riscos-dense .sd-line .sd-thumb { width:48px!important;height:52px!important; }
+.riscos-basket-body > .sd-main { grid-column:1;grid-row:1;padding:0!important;margin:0!important;border:2px ridge #b9b9b5!important;overflow:auto!important;gap:0!important; }
+.riscos-basket-body > .sd-side { grid-column:2;grid-row:1;width:auto!important;min-width:0!important;padding:8px!important;overflow:auto!important;gap:8px!important; }
+.riscos-basket-body > .sd-side::after,.riscos-basket-body > .sd-main::after { display:none!important; }
+.riscos-basket-body .sd-h { display:grid!important;flex:none!important;grid-template-columns:minmax(0,1fr) 58px 52px 52px;gap:4px;align-items:center;min-height:30px;margin:0!important;padding:5px 5px 5px 72px!important;background:linear-gradient(#e1e1df,#c9c9c7);border-bottom:1px solid #999;color:#111;font-size:15px!important;font-weight:normal; }
+.riscos-basket-body .sd-h span { text-align:center;font-size:13px; }
+.riscos-basket-body .sd-line { display:grid!important;grid-template-columns:66px minmax(0,1fr) 58px 52px 52px;gap:4px!important;align-items:center;flex:none!important;min-height:91px!important;padding:6px!important; }
+.riscos-basket-body .sd-line .sd-thumb { grid-column:1;grid-row:1;width:66px!important;height:70px!important;box-sizing:border-box;font-size:22px; }
+.riscos-basket-body .sd-line .nm { grid-column:2;grid-row:1;min-width:0;font-size:14px!important;line-height:1.2; }
+.riscos-basket-body .sd-line .sub { font-size:12px!important;color:#444!important;margin-top:4px; }
+.riscos-basket-body .sd-step,.riscos-quantity { grid-column:3;grid-row:1;justify-content:center;font-size:14px;text-align:center;gap:2px!important; }
+.riscos-basket-body .sd-step .sd-b { width:17px!important;height:25px!important;padding:0!important;font-size:14px!important; }
+.riscos-basket-body .sd-step b { min-width:17px;font-weight:normal; }
+.riscos-unit { grid-column:4;grid-row:1;text-align:center;font-size:14px;white-space:nowrap; }
+.riscos-basket-body .sd-line .amt { grid-column:5;grid-row:1;text-align:right;font-size:14px!important;font-weight:normal!important;white-space:nowrap; }
+.riscos-basket-body .riscos-remove { grid-column:3;grid-row:1;display:block;justify-self:center;margin:0!important;padding:2px 3px!important;min-height:25px!important;width:56px;font:11px Arial,sans-serif!important;white-space:normal; }
+.sd-tag { border:0!important;border-radius:0!important;background:none!important;color:#182371!important;font-size:12px!important; }
+.riscos-help { grid-column:3;grid-row:1 / -1;padding:14px 16px;min-height:0;overflow:auto;background:linear-gradient(100deg,#e7e7e4,#d7d7d3);border:2px ridge #aaa;box-sizing:border-box;color:#161616;font-size:17px;line-height:1.24; }
+.riscos-help h3 { padding:4px 0 12px;margin:0 0 10px;border-bottom:1px solid #999;font-size:20px;letter-spacing:.5px;color:#151b64;font-weight:normal; }
+.riscos-help h4 { margin:14px 0 4px;font-size:18px;font-weight:normal;color:#15206c; }
+.riscos-help p { margin:0; }
+.sd-side .sd-sum { padding:5px!important;font-size:15px; }
+.sd-side .sd-sum h4 { margin:0 0 16px;font-size:15px;color:#171717; }
+.sd-side .sd-sum .r { font-size:16px; }
+.sd-side .sd-btns { flex:none!important; }
+.sd-side .sd-b { padding:6px 8px!important;font-size:14px!important; }
+.riscos-related { grid-column:1 / 3;grid-row:2;min-height:0;border:2px ridge #aaa;background:linear-gradient(#ededeb,#dcdcd9);display:flex;flex-direction:column; }
+.riscos-related h3 { font-size:18px;font-weight:normal;margin:0;padding:6px 10px;background:linear-gradient(#dfdfdc,#c8c8c5);border-bottom:1px solid #aaa; }
+.riscos-related-cards { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;padding:10px;min-height:0;flex:1; }
+.riscos-related-card { display:grid;grid-template-columns:76px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto 29px;column-gap:7px;row-gap:3px;min-width:0; }
+.riscos-related-image { grid-row:1 / 3;width:76px;height:90px;align-self:center;border:1px solid #b1b1ae; }
+.riscos-related-copy { min-width:0;font-size:12px;line-height:1.2; }
+.riscos-related-copy strong { font-weight:normal; }
+.riscos-related-copy p { font-size:11px;color:#444;margin:4px 0 0; }
+.riscos-related-price { grid-column:2;grid-row:2;font-size:15px; }
+.riscos-add { grid-column:1 / 3;grid-row:3;justify-self:end;padding:2px 8px;border:2px outset #aaa;border-radius:2px;background:linear-gradient(#fff,#cececa);color:#111;font:14px "DejaVu Sans Condensed",Arial,sans-serif; }
+.ref-ov-chat,.ref-ov-cookie,.ref-ov-toast,.ref-ov-box,.ref-ov-banner { background:#e7e7e3;color:#111;border:3px ridge #aaa;box-shadow:3px 3px 3px #3b4655; }
+.ref-ov-chat .ref-ov-text { font-size:16px; }
+@media(max-height:780px) {
+ .riscos-iconbar { height:48px;gap:30px;font-size:15px; }
+ .riscos-glyph { width:30px;height:28px; }
+ .riscos-icon:first-child .riscos-glyph { width:36px;height:32px; }
+ .riscos-clock { font-size:16px; }
+ .mac-titlebar { height:30px;margin-top:12px;font-size:16px; }
+ .ref-task { min-height:88px;padding:6px 12px; }
+ .riscos-house { width:61px;height:56px; }
+ .riscos-branch { width:55px;height:56px; }
+ .riscos-brand { gap:12px; }
+ .riscos-brand-title { font-size:48px; }
+ .riscos-brand-tagline { font-size:17px; }
+ .riscos-search { font-size:16px; }
+ .sd-win { height:96%!important; }
+ .sd-tabs { height:26px!important;min-height:26px!important; }
+ .sd-tabs::before { font-size:15px; }
+ .sd-bar { height:70px!important;min-height:70px!important; }
+ .riscos-basket-logo .riscos-brand-title { font-size:36px; }
+ .riscos-basket-logo .riscos-house { width:44px;height:41px; }
+ .riscos-basket-logo .riscos-branch { width:39px;height:40px; }
+ .riscos-basket-logo .riscos-brand-tagline { font-size:13px; }
+ .riscos-basket-icon { width:43px;height:41px; }
+ .riscos-basket-count { font-size:12px; }
+ .riscos-basket-body.riscos-cart { --basket-main-min:185px;grid-template-rows:minmax(0,1fr) clamp(45px,calc(100% - var(--basket-main-min)),120px); }
+ .riscos-basket-body.riscos-many { --basket-main-min:calc(28px + var(--riscos-rows) * 58px); }
+ .riscos-basket-body.riscos-dense { --basket-main-min:calc(28px + var(--riscos-rows) * 49px); }
+ .riscos-basket-body.riscos-many .sd-line { min-height:58px!important;padding:4px!important; }
+ .riscos-basket-body.riscos-many .sd-line .sd-thumb { width:38px!important;height:43px!important; }
+ .riscos-basket-body.riscos-many .sd-line .nm { font-size:11px!important; }
+ .riscos-basket-body.riscos-many .sd-line .sub { font-size:9px!important;margin-top:2px; }
+ .riscos-many .nm:has(.riscos-remove) .sub { display:none; }
+ .riscos-many .riscos-remove { min-height:18px!important;margin-top:2px;padding:1px 5px!important;font-size:10px!important; }
+ .riscos-basket-body.riscos-dense .sd-line { min-height:49px!important;padding:3px!important; }
+ .riscos-basket-body.riscos-dense .sd-line .sd-thumb { width:33px!important;height:37px!important; }
+ .riscos-basket-body.riscos-dense .sd-line .nm { font-size:10px!important; }
+ .riscos-basket-body.riscos-dense .sd-line .sub { font-size:9px!important; }
+ .riscos-basket-body.riscos-packed .sd-line { min-height:40px!important; }
+ .riscos-basket-body.riscos-packed .sd-line .sd-thumb { width:26px!important;height:30px!important; }
+ .riscos-basket-body.riscos-packed .sd-line .sub { display:none; }
+ .riscos-basket-body .sd-line { min-height:72px!important;grid-template-columns:46px minmax(0,1fr) 54px 44px 44px; }
+ .riscos-basket-body .sd-line .sd-thumb { width:46px!important;height:52px!important; }
+ .riscos-basket-body .sd-h { grid-template-columns:minmax(0,1fr) 54px 44px 44px;padding-left:52px!important;font-size:13px!important;min-height:25px; }
+ .riscos-basket-body .sd-h span { font-size:10px; }
+ .riscos-basket-body .sd-line .nm { font-size:12px!important; }
+ .riscos-basket-body .sd-line .sub { font-size:10px!important; }
+ .riscos-basket-body .sd-line .amt,.riscos-unit { font-size:12px!important; }
+ .riscos-help { font-size:13px;padding:10px; }
+ .riscos-help h3 { font-size:16px;padding-bottom:7px; }
+ .riscos-help h4 { font-size:14px;margin-top:12px; }
+ .riscos-related h3 { font-size:14px;padding:4px 7px; }
+ .riscos-related-cards { padding:6px;gap:5px; }
+ .riscos-related-card { grid-template-columns:46px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto 23px;gap:2px 5px; }
+ .riscos-related-image { width:46px;height:55px; }
+ .riscos-related-copy { font-size:10px; }.riscos-related-copy p { font-size:9px;margin-top:2px; }
+ .riscos-related-price { font-size:12px; }.riscos-add { font-size:11px;padding:1px 5px; }
+ .riscos-disc { width:70px;height:58px; }.riscos-waste { width:47px;height:65px; }
+}
+@container basket (max-height:310px) {
+ .riscos-related h3 { font-size:12px;padding:3px 6px; }
+ .riscos-related-cards { padding:4px;gap:4px; }
+ .riscos-related-card { grid-template-columns:30px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 20px;gap:2px 4px; }
+ .riscos-related-image { width:30px;height:34px;grid-row:1; }
+ .riscos-related-copy { font-size:9px; }.riscos-related-copy p,.riscos-related-price { display:none; }
+ .riscos-add { grid-row:2;font-size:10px;min-height:19px; }
+}
+@media(max-width:1200px) {
+ .riscos-iconbar { gap:13px;padding:2px 15px; }.riscos-icon { width:47px;min-width:47px; }
+ .riscos-clock { padding:0 10px;font-size:14px; }
+ .ref-task { min-height:85px; }
+ .riscos-brand-title { font-size:40px; }.riscos-brand-tagline { font-size:15px; }
+ .riscos-house { width:52px;height:48px; }.riscos-branch { width:43px;height:44px; }
+ body[data-instruction="header"] .riscos-brand-title { font-size:33px; }
+ body[data-instruction="header"] .riscos-branch { display:none; }
+ .ref-instruction { font-size:13px;padding:7px 9px; }
+ .riscos-search { gap:7px;flex-basis:30%;font-size:14px; }.riscos-search-go { min-width:46px;font-size:14px; }
+ .sd-win { width:92%!important; }
+ .riscos-basket-logo { gap:7px; }.riscos-basket-logo .riscos-brand-title { font-size:34px; }
+ .riscos-basket-body { grid-template-columns:minmax(0,1fr) 21% 24%;gap:4px!important;padding:4px!important; }
+ .riscos-basket-body > .sd-side { padding:5px!important; }
+ .sd-side .sd-sum { font-size:12px; }.sd-side .sd-sum h4 { font-size:12px;margin-bottom:10px; }
+ .sd-side .sd-sum .r { font-size:13px; }.sd-side .sd-b { font-size:12px!important;padding:5px!important; }
+ .riscos-help { font-size:12px;padding:8px; }.riscos-help h4 { font-size:13px; }.riscos-help h3 { font-size:15px; }
+}
+
+.riscos-clock { padding:0;gap:22px; }
+.riscos-clock > span { padding-right:25px;white-space:nowrap; }
+.riscos-monitor { width:47px;height:49px;border-right:3px ridge #aaa;padding-right:12px;box-sizing:content-box; }
+.sd-win { font-family:"DejaVu Sans Condensed","Arial Narrow",Arial,sans-serif!important;color:#171717; }
+.riscos-brand-title { font-size:clamp(36px,4.3vw,73px); }
+.riscos-basket-logo .riscos-brand-title { font-size:51px; }
+.riscos-basket-body .sd-line .nm { font-size:16px!important; }
+.riscos-basket-body .sd-line .sub { font-size:13px!important; }
+.riscos-unit,.riscos-basket-body .sd-line .amt { font-size:15px!important;white-space:normal!important;overflow-wrap:anywhere; }
+.riscos-basket-body .sd-line .sd-thumb.riscos-product-picture { background:linear-gradient(#f2f2ef,#deded9)!important; }
+.riscos-product-picture svg { width:100%;height:100%;display:block; }
+.riscos-related .sd-line.riscos-live-related { display:grid!important;grid-template-columns:76px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 29px!important;min-height:0!important;height:100%;padding:0!important;border:0!important;gap:5px 7px!important;background:none!important; }
+.riscos-related .sd-line.riscos-live-related .sd-thumb { grid-column:1;grid-row:1;width:76px!important;height:90px!important;align-self:center; }
+.riscos-related .sd-line.riscos-live-related .nm { grid-column:2;grid-row:1;font-size:12px!important;font-weight:normal!important;align-self:start;line-height:1.2; }
+.riscos-related .sd-line.riscos-live-related .sub { font-size:11px!important; }
+.riscos-live-related .sd-b { grid-column:1 / 3;grid-row:2;justify-self:end;align-self:end;width:auto!important;min-width:75px;min-height:27px;padding:2px 12px!important;font:14px "DejaVu Sans Condensed",Arial,sans-serif!important; }
+.ref-ov-chat { right:4%;bottom:12%;width:390px;max-width:calc(100vw - 32px);padding:0 12px 12px!important;border-radius:6px; }
+.riscos-chat-title { display:flex;align-items:center;justify-content:space-between;margin:0 -12px 14px;padding:5px 7px;background:linear-gradient(#dbe6f4,#aabbd0);border-bottom:2px ridge #aaa;color:#10152d;font-size:17px; }
+.riscos-chat-title .ref-ov-btn { min-height:24px;width:25px;height:25px;padding:0;font-size:20px; }
+.ref-ov-chat .ref-ov-text { margin:5px 0 16px;padding:13px 15px;background:#fff;border:1px solid #aaa;border-radius:14px;min-height:45px; }
+.ref-ov-chat .ref-ov-row { display:none; }
+.riscos-chat-form { display:flex;gap:9px; }
+.riscos-chat-form input { width:0;flex:1;border:2px inset #aaa;padding:7px;background:#fff;font:15px Arial,sans-serif; }
+.ref-note { background:linear-gradient(#eef4fc,#d5e0f0);border-radius:7px;border-color:#9aa8b8; }
+@media(max-height:780px) {
+ .riscos-brand-title { font-size:48px; }
+ .riscos-basket-logo .riscos-brand-title { font-size:36px; }
+ .riscos-monitor { width:32px;height:35px;padding-right:8px; }
+ .riscos-clock { gap:12px; }.riscos-clock > span { padding-right:15px; }
+ .riscos-basket-body .sd-line { grid-template-columns:46px minmax(0,1fr) 54px 50px 56px; }
+ .riscos-basket-body .sd-h { grid-template-columns:minmax(0,1fr) 54px 50px 56px; }
+ .riscos-basket-body .sd-line .nm { font-size:12px!important; }
+ .riscos-basket-body .sd-line .sub { font-size:10px!important; }
+ .riscos-unit,.riscos-basket-body .sd-line .amt { font-size:12px!important; }
+ .riscos-basket-body.riscos-many .sd-line .nm { font-size:11px!important; }
+ .riscos-basket-body.riscos-many .sd-line .sub { font-size:9px!important; }
+ .riscos-basket-body.riscos-dense .sd-line .nm { font-size:10px!important; }
+ .riscos-related .sd-line.riscos-live-related { grid-template-columns:46px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 23px!important;gap:2px 5px!important; }
+ .riscos-related .sd-line.riscos-live-related .sd-thumb { width:46px!important;height:55px!important; }
+ .riscos-related .sd-line.riscos-live-related .nm { font-size:10px!important; }
+ .riscos-related .sd-line.riscos-live-related .sub { font-size:9px!important; }
+ .riscos-live-related .sd-b { font-size:11px!important;min-height:21px;min-width:55px; }
+}
+@media(max-width:1200px) { .riscos-brand-title { font-size:40px; }.riscos-basket-logo .riscos-brand-title { font-size:34px; } }
+@container basket (max-height:310px) {
+ .riscos-related .sd-line.riscos-live-related { grid-template-columns:30px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 20px!important; }
+ .riscos-related .sd-line.riscos-live-related .sd-thumb { width:30px!important;height:34px!important; }
+ .riscos-related .sd-line.riscos-live-related .nm { font-size:9px!important; }.riscos-related .sd-line.riscos-live-related .sub { display:none; }
+}
+
+.sd-win { --riscos-brand-height:92px; }
+.sd-bar { width:74%!important;box-sizing:border-box!important; }
+.riscos-help { position:relative;z-index:3;margin-top:calc(-1 * var(--riscos-brand-height) - 6px); }
+.riscos-item-count { display:block;font-size:15px;font-weight:normal;margin-top:4px; }
+.riscos-basket-body .sd-line { grid-template-columns:66px minmax(0,1fr) 58px 60px 70px; }
+.riscos-basket-body .sd-h { grid-template-columns:minmax(0,1fr) 58px 60px 70px; }
+.riscos-related-card { grid-template-columns:82px minmax(0,1fr); }
+.riscos-related-image { width:82px;height:100px; }
+.riscos-related-copy { font-size:14px; }.riscos-related-copy p { font-size:12px; }
+.riscos-related-price { font-size:16px; }
+.riscos-related .sd-line.riscos-live-related { grid-template-columns:82px minmax(0,1fr)!important; }
+.riscos-related .sd-line.riscos-live-related .sd-thumb { width:82px!important;height:100px!important; }
+.riscos-related .sd-line.riscos-live-related .nm { font-size:14px!important; }
+.riscos-related .sd-line.riscos-live-related .sub { font-size:12px!important; }
+.riscos-delivery { margin-top:auto;display:flex;align-items:center;gap:9px;padding:10px 0 3px;font-size:14px;line-height:1.3;white-space:pre-line; }
+.riscos-delivery svg { width:36px;height:28px;flex:none; }
+@media(max-height:780px) {
+ .sd-win { --riscos-brand-height:70px; }
+ .riscos-item-count { font-size:11px;margin-top:2px; }
+ .riscos-basket-body .sd-line { grid-template-columns:46px minmax(0,1fr) 54px 50px 56px; }
+ .riscos-basket-body .sd-h { grid-template-columns:minmax(0,1fr) 54px 50px 56px; }
+ .riscos-related-card { grid-template-columns:46px minmax(0,1fr); }
+ .riscos-related-image { width:46px;height:55px; }
+ .riscos-related-copy { font-size:10px; }.riscos-related-copy p { font-size:9px; }.riscos-related-price { font-size:12px; }
+ .riscos-related .sd-line.riscos-live-related { grid-template-columns:46px minmax(0,1fr)!important; }
+ .riscos-related .sd-line.riscos-live-related .sd-thumb { width:46px!important;height:55px!important; }
+ .riscos-related .sd-line.riscos-live-related .nm { font-size:10px!important; }.riscos-related .sd-line.riscos-live-related .sub { font-size:9px!important; }
+ .riscos-delivery { font-size:10px;padding-top:4px;gap:4px; }.riscos-delivery svg { width:25px;height:22px; }
+}
+@media(max-width:1200px) {
+ .sd-bar { width:76%!important; }.riscos-help { margin-top:calc(-1 * var(--riscos-brand-height) - 4px); }
+}
+@container basket (max-height:310px) {
+ .riscos-related-card { grid-template-columns:30px minmax(0,1fr); }.riscos-related-image { width:30px;height:34px; }
+ .riscos-related-copy { font-size:9px; }
+ .riscos-related .sd-line.riscos-live-related { grid-template-columns:30px minmax(0,1fr)!important; }
+ .riscos-related .sd-line.riscos-live-related .sd-thumb { width:30px!important;height:34px!important; }
+ .riscos-related .sd-line.riscos-live-related .nm { font-size:9px!important; }
+}
+
+.sd-page,.riscos-basket-body { overflow:visible!important; }
+.riscos-related { container-type:size;container-name:related; }
+@container related (max-height:90px) {
+ .riscos-related-cards { padding:3px;gap:4px; }
+ .riscos-related-card,.riscos-related .sd-line.riscos-live-related { display:flex!important;align-items:center;gap:4px!important;min-height:0!important; }
+ .riscos-related-image,.riscos-related .sd-line.riscos-live-related .sd-thumb { width:24px!important;height:27px!important;flex:none; }
+ .riscos-related-copy,.riscos-related .sd-line.riscos-live-related .nm { font-size:8px!important;flex:1; }
+ .riscos-related-copy p,.riscos-related-price,.riscos-related .sd-line.riscos-live-related .sub { display:none; }
+ .riscos-add,.riscos-live-related .sd-b { margin-left:auto;width:auto!important;min-width:0!important;font-size:9px!important;min-height:19px!important;padding:1px 3px!important;white-space:normal; }
+}
+
+.riscos-help h3 { display:flex;align-items:center;gap:10px; }
+.riscos-help-book { display:block;width:43px;height:37px;flex:none; }
+.ref-ov-chat { display:block!important; }
+.riscos-chat-title { white-space:nowrap;min-height:27px;gap:12px; }
+.ref-ov-chat .ref-ov-text { max-width:290px;box-sizing:border-box; }
+@media(max-height:780px) { .riscos-help-book { width:28px;height:24px; }.riscos-help h3 { gap:7px; } }
+
+@container related (min-height:91px) and (max-height:195px) {
+ .riscos-related-cards { padding:7px;gap:6px; }
+ .riscos-related-card { grid-template-columns:68px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto 26px; }
+ .riscos-related-image { width:68px;height:82px; }
+ .riscos-related-copy { font-size:12px; }.riscos-related-copy p { font-size:11px; }.riscos-related-price { font-size:14px; }
+ .riscos-add { font-size:12px;padding:1px 6px; }
+ .riscos-related .sd-line.riscos-live-related { grid-template-columns:68px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 26px!important; }
+ .riscos-related .sd-line.riscos-live-related .sd-thumb { width:68px!important;height:82px!important; }
+ .riscos-related .sd-line.riscos-live-related .nm { font-size:12px!important; }.riscos-related .sd-line.riscos-live-related .sub { font-size:11px!important; }
+ .riscos-live-related .sd-b { font-size:12px!important;min-height:24px; }
+}
+.riscos-chat-title .ref-ov-btn { flex:none;display:grid;place-items:center;border:2px outset #aaa;border-radius:0;background:linear-gradient(#fff,#ccc);color:#111; }
+.riscos-chat-form { align-items:center; }
+.riscos-chat-form input { height:36px;box-sizing:border-box; }
+.riscos-chat-form .ref-ov-btn { height:36px;min-height:36px;min-width:70px;padding:3px 10px;border:2px outset #aaa;border-radius:2px;background:linear-gradient(#fff,#ccc);color:#111; }

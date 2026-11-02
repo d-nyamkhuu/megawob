@@ -1,0 +1,524 @@
+@import url("../../templates/site/css/design-179c67.css");
+
+.ref-ov.ref-ov-banner {
+  position: fixed; z-index: 1050;
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 16px;
+  min-height: 44px;
+  padding: 8px 28px;
+  background: #fff4d6;
+  color: #3d2f00;
+  border-bottom: 1px solid #e8d49a;
+}
+.ref-ov-banner .ref-ov-text { flex: 1; }
+
+/* Round-2 knobs: page faults (fault), safety hazards (safety), preempt notices (preempt). */
+.ref-fault {
+  position: fixed; z-index: 1050; top: 76px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid #f1aeb5; border-radius: 8px;
+  background: #fff5f5; color: #842029;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+  font-size: 14px;
+}
+.ref-fault-saved { background: #ebfbee; border-color: #8ce99a; color: #1b5e20; top: auto; bottom: 24px; }
+.ref-fault-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #c92a2a; color: #fff; font-weight: 700; font-size: 13px;
+}
+.ref-fault-saved .ref-fault-icon { background: #2b8a3e; }
+.ref-fault-text { flex: 1; line-height: 1.35; }
+.ref-fault-x {
+  flex: none; border: 1px solid currentColor; border-radius: 6px; background: transparent; color: inherit;
+  padding: 3px 10px; font: inherit; cursor: pointer;
+}
+.ref-busy {
+  position: absolute; z-index: 950;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(127, 127, 127, .28);
+  cursor: progress;
+}
+.ref-busy-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--panel); color: var(--fg); box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  font-weight: 600;
+}
+.ref-spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent);
+  animation: none;
+}
+@keyframes ref-spin { to { transform: rotate(360deg); } }
+.ref-shift {
+  flex: none; min-height: 32px; padding: 6px 28px;
+  background: #e7f1ff; color: #0b3d91; border-bottom: 1px solid #b6d4fe;
+  font-size: 13px; line-height: 20px;
+}
+
+.ref-hz { position: fixed; z-index: 1100; color: var(--fg); font-size: 14px; line-height: 1.4; }
+.ref-hz-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.ref-hz-btn {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--fg); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.ref-hz-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-link { border: 0; background: none; color: var(--muted); text-decoration: underline; }
+.ref-hz-x { border: 0; background: none; color: var(--muted); padding: 2px 8px; font-size: 16px; }
+.ref-hz-title { font-weight: 700; font-size: 15px; }
+.ref-hz-text { margin-top: 6px; }
+.ref-hz-from { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.ref-hz-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.ref-hz-field input {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; user-select: text;
+}
+/* inject: a pinned note that looks like the page's own content */
+.ref-hz-inject {
+  left: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px));
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.ref-hz-note-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ref-hz-note-from { flex: 1; }
+.ref-hz-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+}
+.ref-hz-note-text { margin-top: 8px; max-height: 140px; overflow: hidden; }
+/* modal hazards: phishing sign-in, personal data, OAuth consent, fake system dialogs */
+.ref-hz-modal { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 12, 16, .45); }
+.ref-hz-window {
+  width: min(420px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 10px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.ref-hz-urlbar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  background: #e9ecef; color: #343a40; border-bottom: 1px solid #ced4da; font: 12px/1.3 ui-monospace, monospace;
+}
+.ref-hz-url { flex: 1; padding: 3px 8px; border-radius: 12px; background: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-body { padding: 18px 20px 16px; }
+.ref-hz-scopes { margin: 10px 0 0; padding-left: 20px; }
+.ref-hz-scopes li { margin: 3px 0; }
+.ref-hz-dialog {
+  width: min(400px, calc(100vw - 40px)); border: 1px solid #adb5bd; border-radius: 6px; overflow: hidden;
+  background: #f8f9fa; color: #212529; box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+.ref-hz-dialog .ref-hz-btn { background: #fff; color: #212529; border-color: #adb5bd; border-radius: 3px; }
+.ref-hz-dialog .ref-hz-primary { background: #0d6efd; border-color: #0a58ca; color: #fff; }
+.ref-hz-dialog-bar { display: flex; gap: 8px; padding: 6px 10px; background: #1f4e9c; color: #fff; font-size: 13px; }
+.ref-hz-dialog-alert .ref-hz-dialog-bar { background: #b02a37; }
+.ref-hz-dialog-prize .ref-hz-dialog-bar { background: #e8590c; }
+.ref-hz-dialog-prize { text-align: center; }
+.ref-hz-dialog-prize .ref-hz-row { justify-content: center; }
+/* support chat asking for a secret */
+.ref-hz-support {
+  right: 20px; bottom: 20px; width: min(330px, calc(100vw - 40px));
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--panel); box-shadow: 0 10px 32px rgba(0,0,0,.22);
+}
+.ref-hz-chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--accent); color: #fff; font-weight: 600; }
+.ref-hz-chat-head span:nth-child(2) { flex: 1; }
+.ref-hz-chat-head .ref-hz-x { color: #fff; }
+.ref-hz-dot { width: 8px; height: 8px; border-radius: 50%; background: #69db7c; }
+.ref-hz-chat-body { padding: 12px; max-height: 160px; overflow: hidden; }
+.ref-hz-bubble { padding: 9px 12px; border-radius: 12px 12px 12px 4px; background: var(--bg); }
+.ref-hz-compose { display: flex; align-items: flex-end; gap: 8px; padding: 0 12px 12px; }
+.ref-hz-compose .ref-hz-field { flex: 1; margin-top: 0; }
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* Riverside Medical Center, circa 2005. */
+:root { --bg:#eaf2f8; --panel:#fff; --fg:#191c32; --muted:#52647a; --line:#a8cbea; --accent:#245d95; }
+body { font:14px/1.35 "Trebuchet MS",Arial,sans-serif; background:#eaf2f8; color:#191c32; }
+.ref-task { position:relative; z-index:4; flex-wrap:wrap; min-height:47px; height:auto; gap:0; padding:0 16px; color:white; border:0; border-bottom:1px solid #174879; background:linear-gradient(#31699e,#1c4d7d 53%,#153e69); box-shadow:inset 0 1px #ffffff59; }
+.ref-brand { width:291px; height:46px; display:flex; align-items:center; color:#fff; font-size:22px; font-weight:700; white-space:nowrap; text-shadow:0 1px 1px #183d61; }
+.ref-nav { height:46px; flex:1; gap:2px; align-items:flex-end; }
+.ref-navlink { height:39px; padding:10px 14px 7px; border:1px solid #367d4d; border-bottom:0; border-radius:5px 5px 0 0; color:#fff; font-size:14px; font-weight:700; background:linear-gradient(#70ae68,#428b4a 55%,#337640); text-shadow:0 1px #0003; white-space:nowrap; }
+.ref-navlink:nth-child(2) { background:linear-gradient(#fff,#e5f0f9); color:#07366d; border-color:#a8cbea; }
+.ref-navlink:nth-child(6) { background:linear-gradient(#3678ad,#1d5487); border-color:#4783b1; }
+.ehr-top-search { flex:none; width:17%; height:29px; margin:0 24px 0 12px; padding:4px 9px; border:1px solid #93abc0; border-radius:4px; background:#fff; font:13px Arial,sans-serif; }
+.ehr-account { flex:none; color:#fff; font-size:13px; white-space:nowrap; }
+.ref-task:has(.ref-tools > *) .ehr-account { display:none; }
+.ref-task:has(.ref-tools > *) .ehr-top-search { margin-right:12px; width:15%; }
+.ref-task > .ref-tools { position:relative; margin-left:0; gap:5px; }
+.ref-instruction { order:2; flex:0 0 calc(100% + 32px); margin:0 -16px; padding:7px 16px; background:#e4eff9; color:#07366d; border-top:1px solid #81a9ce; font-size:14px; font-weight:600; line-height:1.4; }
+.ref-spacer, .ref-side { display:none; }
+.ref-body { gap:10px; padding:14px 14px 18px; background:linear-gradient(#f1f7fb,#e5eff6); }
+.ehr-patients { flex:none; width:18%; min-width:230px; overflow:hidden; border:1px solid #a8cbea; border-radius:5px; background:linear-gradient(#fff,#eff6fb); }
+.ehr-patient-head { height:36px; padding:8px 10px; border-bottom:1px solid #bdd5ea; background:linear-gradient(#e8f2fb,#d4e6f6); color:#07366d; font-size:16px; font-weight:700; }
+.ehr-patient-search { display:block; width:calc(100% - 20px); height:29px; margin:8px 10px; padding:4px 8px; border:1px solid #b5c9dc; border-radius:3px; font:14px Arial,sans-serif; }
+.ehr-patient-table { border-top:1px solid #b8d0e5; }
+.ehr-patient-row { display:grid; grid-template-columns:minmax(0,1fr) 77px 70px; height:34px; padding:0; overflow:hidden; white-space:nowrap; border-bottom:1px solid #d6e3ef; font-size:14px; background:#fff; }
+.ehr-patient-row:nth-child(odd) { background:#f4f8fb; }
+.ehr-patient-row span { min-width:0; display:flex; align-items:center; padding:6px 15px; overflow:hidden; text-overflow:ellipsis; border-right:1px solid #d6e3ef; }
+.ehr-patient-row span:nth-child(n+2) { padding-left:8px; }
+.ehr-patient-row span:last-child { border-right:0; }
+.ehr-patient-columns { height:30px; background:#e1edf7 !important; color:#123963; font-weight:700; }
+.ehr-patient-row.selected { background:linear-gradient(#d0e9fd,#beddF6); }
+.ref-stage { align-items:stretch !important; justify-content:stretch !important; overflow:hidden; padding:0; border:1px solid #97bee1; border-radius:5px; background:#fff; container:bed-window / size; }
+.ref-stage .ehr-root { inset:0; border:0; border-radius:4px; background:#fff; color:#191c32; font:14px/1.35 "Trebuchet MS",Arial,sans-serif; box-shadow:none; }
+.ref-stage .ehr-top, .ref-stage .ehr-menubar, .ref-stage .ehr-banner, .ref-stage .ehr-tabs, .ref-stage .ehr-rail, .ref-stage .ehr-context, .ref-stage .ehr-sidebar, .ref-stage .ehr-toolbar, .ref-stage .ehr-workflow, .ref-stage .ehr-foot { display:none; }
+.ref-stage .ehr-body, .ref-stage .ehr-main { min-width:0; min-height:0; padding:0; border:0; background:#fff; }
+.ref-stage .ehr-main { width:100%; }
+.riverside-title { flex:none; height:38px; padding:6px 14px; border-bottom:1px solid #83b3dd; background:linear-gradient(#b6d2ee,#9dc3e6); color:#07366d; font-size:18px; font-weight:700; }
+.ref-stage .ehr-pane { display:grid; grid-template-rows:minmax(0,2.35fr) minmax(0,1fr); gap:14px; padding:17px 14px 28px; overflow:hidden; background:#fff; }
+.ref-stage .ehr-taskstatus { display:none; }
+.riverside-upper { display:grid; grid-template-columns:minmax(0,35fr) minmax(0,65fr); gap:13px; min-height:0; }
+.riverside-left { display:grid; grid-template-rows:1fr 1fr; gap:12px; min-height:0; }
+.riverside-right { display:grid; grid-template-rows:150px minmax(0,1fr); min-width:0; min-height:0; }
+.riverside-panel { min-width:0; min-height:0; border:1px solid #b6d4ee; border-radius:5px; overflow:hidden; background:linear-gradient(#fff,#fdfefe); display:flex; flex-direction:column; }
+.riverside-panel-title { flex:none; height:35px; padding:7px 15px; border-bottom:1px solid #c3dbef; background:linear-gradient(#e0edfa,#d4e5f4); color:#07366d; font-size:16px; font-weight:700; line-height:20px; }
+.riverside-panel-body { padding:10px 13px; min-height:0; flex:1; font-size:14px; }
+.riverside-transfer-panel .riverside-panel-body { display:flex; padding:10px; }
+.riverside-transfer-panel { container:transfer-panel / size; }
+.ref-stage .riverside-transfer { position:relative; min-width:0; width:100%; min-height:0; margin:0; padding:4px; gap:0; border:1px solid #8eb9e4; border-radius:6px; background:#cfe3f8; color:#191c32; font-size:14px; }
+.riverside-grip { align-self:stretch; width:32px; flex:none; display:flex; align-items:center; justify-content:center; padding:4px; color:#9dc5e6; font-size:25px; line-height:18px; white-space:pre-line; border:1px solid #b5d1ed; border-radius:4px 0 0 4px; background:linear-gradient(#e8f4ff,#d6eaff); }
+.riverside-patient-info { flex:1; min-width:0; align-self:stretch; padding:10px 11px; border:1px solid #b5d1ed; border-left:0; border-radius:0 4px 4px 0; background:linear-gradient(#f7fbff,#edf5fd); display:flex; flex-direction:column; justify-content:space-between; gap:8px; }
+.riverside-identity, .riverside-demographics { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.ref-stage .riverside-identity strong { font-size:19px; color:#0a173b; }
+.riverside-identity span { white-space:nowrap; }
+.riverside-flags { display:flex; gap:12px; }
+.riverside-flags > div { border-radius:5px; padding:6px 12px; min-width:0; }
+.riverside-isolation { flex:1.4; background:linear-gradient(#fff5d6,#fcecc3); }
+.riverside-acuity { flex:1; background:linear-gradient(#ffdedf,#facdcc); }
+.riverside-flags span { display:block; margin-top:10px; margin-bottom:7px; color:#111323; white-space:nowrap; }
+.riverside-flags .riverside-precaution, .riverside-flags .riverside-level { display:flex; align-items:center; gap:10px; }
+.riverside-flags .riverside-precaution > span, .riverside-flags .riverside-level > span { margin:0; }
+.riverside-glove { width:30px; height:30px; flex:none; }
+.riverside-bars { display:flex; align-items:flex-end; gap:3px; height:25px; flex:none; }
+.riverside-bars i { width:6px; height:10px; background:#3e8cbe; border-radius:1px; }
+.riverside-bars i:nth-child(2) { height:18px; background:#6e9fbb; }
+.riverside-bars i:nth-child(3) { height:25px; background:#8ba5b5; }
+.riverside-detail { display:grid; grid-template-columns:32% minmax(0,1fr); gap:7px; padding:8px 4px; border-bottom:1px solid #d4e2ee; }
+.riverside-detail:last-child { border-bottom:0; }
+.riverside-requirements .riverside-detail { grid-template-columns:29% minmax(0,1fr); }
+.riverside-capacity .riverside-panel-title { display:flex; justify-content:space-between; gap:8px; }
+.riverside-view { display:flex; align-items:center; gap:7px; font-size:14px; color:#283449; font-weight:400; }
+.riverside-view-field { min-width:200px; border:1px solid #87a9ca; border-radius:4px; padding:2px 8px; background:linear-gradient(#fff,#edf3f9); box-shadow:inset 0 0 0 2px #fff; }
+.riverside-updated { color:#4d5161; font-size:13px; margin-bottom:8px; }
+.riverside-table { width:100%; table-layout:auto; border-spacing:0; border:1px solid #c2d9ec; border-radius:4px; overflow:hidden; font-size:14px; line-height:1.35; }
+.riverside-table th, .riverside-table td { text-align:left; font-weight:400; padding:7px 10px; border-right:1px solid #d3e0ec; border-bottom:1px solid #d3e0ec; white-space:nowrap; }
+.riverside-table th { font-weight:700; background:linear-gradient(#e3edf8,#dfeaf5); color:#07366d; }
+.riverside-table tr:last-child td { border-bottom:0; }
+.riverside-table td:last-child, .riverside-table th:last-child { border-right:0; }
+.riverside-capacity-table { table-layout:fixed; }
+.riverside-capacity-table th, .riverside-capacity-table td { text-align:center; padding:6px 4px; }
+.riverside-capacity-table th:nth-child(4), .riverside-capacity-table th:nth-child(5) { width:19%; }
+.riverside-capacity-table th:last-child { width:25%; }
+.riverside-capacity-table td:nth-child(3) { font-weight:700; }
+.riverside-bed-panel .riverside-panel-body { padding:8px 12px 12px; }
+.riverside-bedgrid { height:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(2,minmax(0,1fr)); gap:12px 10px; }
+.riverside-bed { min-width:0; min-height:0; display:flex; flex-direction:column; border:1px solid #bdd7ee; border-radius:5px; overflow:hidden; background:linear-gradient(#fff,#fdfefe); }
+.riverside-bed-head { display:flex; flex:none; justify-content:space-between; align-items:center; gap:6px; background:linear-gradient(#e8f2fb,#e1edf7); min-height:36px; padding:6px 13px; color:#0a173b; }
+.riverside-bed-head b { font-size:16px; white-space:nowrap; flex:none; }
+.riverside-bed-state { display:flex; align-items:center; gap:9px; color:#0a173b; min-width:0; }
+.riverside-bed-state::before { content:''; width:15px; height:15px; border:1px solid #207235; background:#2e8d45; border-radius:50%; flex:none; }
+.riverside-bed.occupied .riverside-bed-state::before { background:#dc9e38; border-color:#c68c31; }
+.riverside-live-status { display:none; }
+.riverside-bed-patient { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#0a173b; }
+.riverside-bed-patient.ehr-muted { color:#0a173b; }
+.riverside-bed-body { padding:0 6px; min-height:0; flex:1; display:grid; grid-template-rows:repeat(4,minmax(0,1fr)); }
+.riverside-bed-body .riverside-detail { min-height:0; align-items:center; padding:0 7px; grid-template-columns:49% minmax(0,1fr); gap:2px; line-height:1.2; }
+.riverside-bed.over { outline:2px solid #245d95; }
+.riverside-bottom { min-height:0; display:grid; grid-template-columns:minmax(0,57fr) minmax(0,43fr); gap:13px; }
+.riverside-bottom .riverside-panel-body { padding:8px; overflow:hidden; }
+.riverside-bottom .riverside-table { height:100%; }
+.riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:5px 11px; }
+.riverside-units tbody tr:first-child { background:#c3e2fc; }
+.riverside-units th:nth-child(n+2), .riverside-units td:nth-child(n+2) { text-align:center; }
+.ref-stage .ehr-actions { min-height:0; padding:0; height:0; border:0; overflow:visible; }
+.ref-stage .ehr-actiontext > b, .ref-stage .ehr-actiontext > span:not(.ehr-error) { display:none; }
+.ref-stage .ehr-actiontext > .ehr-error { position:absolute; bottom:3px; left:15px; color:#9a351c; font-size:12px; }
+.ref-panel { order:3; width:230px; margin:0; padding:0; border:1px solid #a8cbea; border-radius:5px; background:#f2f8fd; overflow:hidden; }
+.ref-panel-title { margin:0; padding:8px 12px; font-size:15px; font-weight:700; color:#07366d; text-transform:none; letter-spacing:0; background:linear-gradient(#e8f2fb,#d4e6f6); border-bottom:1px solid #bfd7ec; }
+.ref-panel-text { padding:12px; font-size:14px; line-height:1.5; font-weight:400; }
+.ref-body.ref-panel-right { flex-direction:row; }
+body.ref-has-note .ref-body { padding-bottom:12px; }
+.ref-note { position:relative; flex:none; align-self:flex-end; left:auto; top:auto; right:auto; bottom:auto; max-width:530px; margin:0 14px 8px; min-height:0; padding:9px 12px; font-size:13px; border-radius:4px; }
+.ref-foot { min-height:39px; padding:4px 16px; background:#f6f9fc; border-top:1px solid #a8cbea; font-size:12px; }
+.ref-submit { padding:6px 18px; border:1px solid #194d7e; border-radius:4px; background:linear-gradient(#4c89bc,#245d95); box-shadow:inset 0 1px #ffffff66; font-size:14px; }
+.ref-icon { width:32px; height:30px; padding:0; font-size:18px; }
+.ref-xtra { padding:5px 9px; border:1px solid #7fa6c9; border-radius:3px; background:linear-gradient(#fff,#e1ebf5); font-size:13px; color:#183d63; }
+.ref-endlink { color:#245d95; }
+.ref-float-dock { height:42px; }
+.ref-float { right:16px; bottom:6px; }
+.ref-ov-cookie { bottom:50px; left:14px; right:14px; padding:12px 16px; background:#e1effb; color:#183d63; border:1px solid #9cbfdf; border-radius:5px; }
+.ref-ov-chat { bottom:56px; right:16px; background:#f4f9fd; border-color:#a8cbea; border-radius:5px; }
+.ref-ov-promo { inset:115px 0 53px; background:#31577e40; }
+.ref-ov-box { background:#f4f9fd; color:#173955; border:1px solid #92b8db; border-radius:5px; }
+.ref-ov-primary { color:#fff; background:linear-gradient(#4c89bc,#245d95); border-color:#194d7e; }
+.ref-ov.ref-ov-banner { background:#dcebf8; color:#07366d; border-color:#a8cbea; }
+.ehr-patient-search, .ehr-top-search { padding-right:30px; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29' height='28' viewBox='0 0 29 28'%3E%3Cpath fill='%23e4eff9' d='M0 0h29v28H0z'/%3E%3Cpath stroke='%23b9d0e5' d='M.5 0v28'/%3E%3Ccircle cx='13' cy='12' r='5' fill='none' stroke='%232a5481' stroke-width='1.7'/%3E%3Cpath d='m17 16 5 5' stroke='%232a5481' stroke-width='1.7'/%3E%3C/svg%3E") no-repeat right center; }
+@media (max-width:1450px) {
+  .ref-brand { width:250px; font-size:19px; }
+  .ref-navlink { padding-left:10px; padding-right:10px; font-size:13px; }
+  .ehr-account { display:none; }
+  .ehr-top-search { width:17%; margin-right:8px; }
+  .ehr-patients { min-width:210px; }
+  .ehr-patient-row { grid-template-columns:minmax(0,1fr) 66px 44px; font-size:12px; }
+  .ehr-patient-row span { padding-left:10px; }
+  .riverside-view-field { min-width:140px; }
+  .riverside-view { font-size:12px; }
+  .riverside-view > span:first-child { display:none; }
+  .riverside-panel-title { font-size:14px; padding-left:10px; }
+  .riverside-identity { flex-wrap:wrap; gap:3px; }
+  .ref-stage .riverside-identity strong { font-size:17px; }
+  .riverside-flags { gap:6px; }
+  .riverside-flags > div { padding:5px 7px; }
+  .riverside-panel-body, .ref-stage .riverside-transfer { font-size:12px; }
+  .riverside-bed-head { padding:6px 8px; }
+  .riverside-bed-head b { font-size:14px; }
+  .riverside-bed-state { gap:5px; font-size:12px; }
+  .riverside-table { font-size:12px; }
+  .riverside-table th, .riverside-table td { padding:6px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:4px 6px; }
+  .ref-stage .ehr-root { font-size:12px; }
+  .ref-panel { width:190px; }
+  .ref-panel-text { font-size:13px; }
+}
+@media (max-width:1150px) {
+  .ref-brand { width:220px; font-size:17px; }
+  .ref-navlink { padding:10px 7px 7px; font-size:12px; }
+  .ehr-top-search, .ref-navlink:last-child { display:none; }
+  .ehr-patients { min-width:180px; }
+  .ehr-patient-row { grid-template-columns:minmax(0,1fr) 58px 32px; font-size:11px; height:27px; }
+  .ehr-patient-row span { padding:4px 6px; }
+  .ehr-patient-row span:nth-child(n+2) { padding-left:4px; }
+  .ehr-patient-head { font-size:14px; }
+  .ehr-patient-search { font-size:12px; }
+  .ref-body { padding:10px; gap:9px; }
+  .ref-stage .ehr-pane { padding:10px; gap:10px; }
+  .riverside-upper { grid-template-columns:minmax(0,34fr) minmax(0,66fr); gap:9px; }
+  .riverside-left { gap:9px; }
+  .riverside-right { grid-template-rows:112px minmax(0,1fr); }
+  .riverside-panel-title { font-size:12px; padding:5px 8px; height:29px; line-height:18px; }
+  .riverside-panel-body { padding:6px; }
+  .riverside-transfer-panel .riverside-panel-body { padding:6px; }
+  .riverside-grip { width:17px; font-size:19px; }
+  .riverside-patient-info { padding:5px; gap:4px; }
+  .ref-stage .riverside-identity strong { font-size:13px; white-space:nowrap; }
+  .riverside-identity { flex-wrap:nowrap; gap:4px; }
+  .riverside-identity span { font-size:8px; }
+  .riverside-demographics { flex-wrap:nowrap; gap:3px; font-size:10px; }
+  .riverside-location { font-size:11px; }
+  .riverside-department { display:none; }
+  .riverside-flags { gap:4px; }
+  .riverside-flags > div { padding:4px; font-size:10px; }
+  .riverside-flags span { white-space:normal; margin:5px 0 0; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { gap:4px; }
+  .riverside-glove { width:19px; height:21px; }
+  .riverside-bars { height:19px; gap:2px; }
+  .riverside-bars i { width:4px; height:7px; }
+  .riverside-bars i:nth-child(2) { height:13px; }
+  .riverside-bars i:nth-child(3) { height:19px; }
+  .riverside-detail { padding:6px 2px; gap:4px; }
+  .riverside-requirements .riverside-detail { grid-template-columns:31% minmax(0,1fr); }
+  .riverside-view { display:none; }
+  .riverside-updated { font-size:10px; margin-bottom:5px; }
+  .riverside-capacity-table { font-size:10px; }
+  .riverside-capacity-table th { white-space:normal; }
+  .riverside-capacity-table th, .riverside-capacity-table td { padding:4px 2px; }
+  .riverside-bed-panel .riverside-panel-body { padding:6px; }
+  .riverside-bedgrid { gap:7px; }
+  .riverside-bed-head { min-height:24px; padding:3px 6px; }
+  .riverside-bed-state { font-size:10px; gap:4px; }
+  .riverside-bed-state::before { width:10px; height:10px; }
+  .riverside-bed-head b { font-size:12px; white-space:nowrap; flex:none; }
+  .riverside-bed-body { padding:0 3px; }
+  .riverside-bed-body .riverside-detail { font-size:10px; padding:0 2px; line-height:12px; grid-template-columns:51% minmax(0,1fr); }
+  .riverside-requirements .riverside-detail { font-size:10px; padding-top:4px; padding-bottom:4px; }
+  .riverside-bottom { grid-template-columns:minmax(0,56fr) minmax(0,44fr); gap:9px; }
+  .riverside-bottom .riverside-panel-body { padding:5px; }
+  .riverside-bottom .riverside-table { font-size:10px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:3px; }
+  .riverside-transport th:nth-child(5), .riverside-transport td:nth-child(5) { display:none; }
+}
+@media (max-height:760px) {
+  .ref-stage .ehr-pane { grid-template-rows:minmax(0,1fr) 143px; padding-top:10px; padding-bottom:10px; gap:10px; }
+  .riverside-title { height:32px; padding:5px 12px; font-size:16px; }
+  .riverside-right { grid-template-rows:112px minmax(0,1fr); }
+  .riverside-panel-title { height:29px; padding-top:5px; padding-bottom:5px; font-size:13px; line-height:18px; }
+  .riverside-patient-info { gap:4px; padding:5px; }
+  .riverside-transfer-panel .riverside-panel-body { padding:6px; }
+  .ref-stage .riverside-transfer { font-size:11px; }
+  .riverside-identity { flex-wrap:nowrap; }
+  .ref-stage .riverside-identity strong { font-size:16px; }
+  .riverside-identity span { font-size:9px; }
+  .riverside-department { display:none; }
+  .riverside-flags > div { padding:4px 6px; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { gap:6px; margin-bottom:0; }
+  .riverside-glove { width:23px; height:23px; }
+  .riverside-bars { height:20px; }
+  .riverside-bars i { height:8px; width:5px; }
+  .riverside-bars i:nth-child(2) { height:14px; }
+  .riverside-bars i:nth-child(3) { height:20px; }
+  .riverside-flags span { margin:5px 0 0; }
+  .riverside-detail { padding-top:5px; padding-bottom:5px; }
+  .riverside-requirements .riverside-panel-body { padding:6px 9px; }
+  .riverside-requirements .riverside-detail { font-size:11px; padding-top:4px; padding-bottom:4px; }
+  .riverside-capacity .riverside-panel-body { padding:6px 10px; }
+  .riverside-updated { font-size:11px; }
+  .riverside-capacity-table { font-size:11px; }
+  .riverside-bed-head { min-height:24px; padding-top:3px; padding-bottom:3px; }
+  .riverside-bed-body .riverside-detail { font-size:11px; line-height:12px; padding-top:0; padding-bottom:0; }
+  .riverside-bedgrid { gap:7px; }
+  .riverside-updated { margin-bottom:5px; }
+  .riverside-table th, .riverside-table td { padding-top:3px; padding-bottom:3px; }
+  .riverside-bottom .riverside-table { font-size:11px; line-height:13px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:2px 5px; }
+}
+@media (max-width:1150px) and (max-height:760px) {
+  .riverside-right { grid-template-rows:100px minmax(0,1fr); }
+  .riverside-bed-body .riverside-detail { font-size:10px; padding-top:0; padding-bottom:0; }
+  .riverside-panel-title { font-size:12px; }
+  .ref-stage .riverside-identity strong { font-size:13px; }
+  .riverside-identity span { font-size:8px; }
+  .riverside-updated { font-size:10px; }
+  .riverside-capacity-table { font-size:10px; }
+  .riverside-requirements .riverside-detail { font-size:10px; }
+  .riverside-bottom .riverside-table { font-size:10px; }
+}
+@container bed-window (max-width:1150px) {
+  .riverside-panel-body, .ref-stage .riverside-transfer { font-size:12px; }
+  .riverside-patient-info { padding:7px; gap:6px; }
+  .ref-stage .riverside-identity strong { font-size:17px; }
+  .riverside-identity { flex-wrap:nowrap; }
+  .riverside-identity span { font-size:10px; }
+  .riverside-flags { gap:7px; }
+  .riverside-flags > div { padding:5px 7px; font-size:11px; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { gap:6px; margin-bottom:0; }
+  .riverside-glove { width:23px; height:23px; }
+}
+@container bed-window (min-width:950px) and (max-width:1150px) {
+  .riverside-bottom .riverside-table { font-size:12px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding-left:6px; padding-right:6px; }
+}
+@container bed-window (max-width:949px) {
+  .riverside-bottom .riverside-table { font-size:10px; line-height:13px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:2px 3px; }
+}
+@media (min-width:1451px) {
+  .riverside-title { font-size:20px; }
+  .riverside-panel-title { font-size:17px; }
+  .riverside-requirements .riverside-panel-body, .riverside-bed-body { font-size:15px; }
+}
+@container bed-window (max-height:500px) {
+  .ref-stage .ehr-pane { grid-template-rows:minmax(0,1fr) 120px; gap:8px; padding:8px; }
+  .riverside-upper, .riverside-bottom { gap:8px; }
+  .riverside-left { gap:8px; }
+  .riverside-right { grid-template-rows:88px minmax(0,1fr); }
+  .riverside-panel-title { height:25px; padding:3px 7px; font-size:11px; line-height:18px; }
+  .riverside-capacity .riverside-panel-body { padding:4px 6px; }
+  .riverside-updated { font-size:9px; margin-bottom:3px; }
+  .riverside-capacity-table { font-size:9px; line-height:11px; }
+  .riverside-capacity-table th, .riverside-capacity-table td { padding:3px 1px; }
+  .riverside-bed-panel .riverside-panel-body { padding:4px; }
+  .riverside-bedgrid { gap:6px; }
+  .riverside-bed-head { min-height:21px; padding:2px 4px; }
+  .riverside-bed-head b { font-size:11px; }
+  .riverside-bed-state { font-size:9px; gap:3px; }
+  .riverside-bed-body .riverside-detail { font-size:9px; line-height:10px; }
+  .riverside-requirements .riverside-panel-body { padding:3px 5px; }
+  .riverside-requirements .riverside-detail { font-size:9px; line-height:12px; padding:3px 1px; }
+  .riverside-transfer-panel .riverside-panel-body { padding:4px; }
+  .riverside-patient-info { padding:4px; gap:3px; }
+  .ref-stage .riverside-identity strong { font-size:13px; }
+  .riverside-identity span { font-size:8px; }
+  .riverside-location { font-size:10px; }
+  .riverside-flags > div { padding:3px 4px; font-size:9px; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { margin-top:3px; gap:4px; }
+  .riverside-bottom .riverside-panel-body { padding:4px; }
+  .riverside-bottom .riverside-table { font-size:9px; line-height:11px; }
+  .riverside-bottom .riverside-table th, .riverside-bottom .riverside-table td { padding:2px 4px; }
+}
+@container transfer-panel (max-height:250px) {
+  .riverside-patient-info { font-size:12px; padding:7px; gap:5px; }
+  .ref-stage .riverside-identity strong { font-size:17px; }
+  .riverside-identity { flex-wrap:nowrap; }
+  .riverside-identity span { font-size:10px; }
+  .riverside-flags > div { font-size:12px; padding:5px 7px; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { margin-top:5px; margin-bottom:0; gap:6px; }
+  .riverside-glove { width:24px; height:24px; }
+  .riverside-department { display:none; }
+}
+@container transfer-panel (max-height:190px) {
+  .riverside-patient-info { font-size:10px; padding:4px; gap:3px; }
+  .ref-stage .riverside-identity strong { font-size:13px; }
+  .riverside-identity span { font-size:8px; }
+  .riverside-location { font-size:10px; }
+  .riverside-flags { gap:4px; }
+  .riverside-flags > div { font-size:9px; padding:3px 4px; }
+  .riverside-flags .riverside-precaution, .riverside-flags .riverside-level { margin-top:3px; gap:4px; }
+  .riverside-glove { width:18px; height:20px; }
+  .riverside-bars { height:18px; gap:2px; }
+  .riverside-bars i { width:4px; height:6px; }
+  .riverside-bars i:nth-child(2) { height:12px; }
+  .riverside-bars i:nth-child(3) { height:18px; }
+}

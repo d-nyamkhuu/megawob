@@ -1,0 +1,66 @@
+/* Windows XP Luna audio settings reference design. */
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.xp-window{--xp-blue:#075ce1;--xp-dark:#052b9d;--xp-line:#b7c7da;--xp-cream:#f4f2df;color:#101426;background:var(--xp-cream);font:clamp(16px,1.38vw,24px)/1.35 Tahoma,Arial,sans-serif;border:2px solid #075de8;border-radius:10px;box-shadow:inset 0 0 0 2px #62a9ff}
+.xp-titlebar{height:6.45%;min-height:42px;display:flex;align-items:center;gap:16px;padding:0 14px;background:linear-gradient(180deg,#55a5ff 0%,#0877ff 13%,#0565f2 44%,#0048d8 100%);color:white;border-bottom:2px solid #003ba9;text-shadow:0 1px 2px #00358a;position:relative}
+.xp-titlebar h1{font-size:1.12em;font-weight:bold;white-space:nowrap;margin:0}.speaker-icon{font:700 1.45em Arial,sans-serif;line-height:1;color:#e6f3ff;text-shadow:0 1px 2px #00318c}
+.window-controls{margin-left:auto;display:flex;gap:5px;align-items:center}.window-controls span{width:42px;height:40px;display:grid;place-items:center;font:bold 25px Arial,sans-serif;border:2px solid #d4e7ff;border-radius:9px 9px 5px 5px;background:linear-gradient(#74b9ff,#1677eb 55%,#0756c8);box-shadow:inset 0 1px 2px #fff9,0 1px 2px #00378a}.window-controls .close{background:linear-gradient(#ff9b7d,#f84924 55%,#c91d0a);font-size:30px}
+.xp-main{height:93.55%;display:grid;grid-template-columns:71.25% 28.75%;min-height:0;background:var(--xp-cream)}
+.audio-stage{position:relative;min-width:0;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 44%,#fbfaee,#f0efdf);border-right:2px solid #c5c5b8}
+.help-panel{min-width:0;position:relative;padding:2.1% 2.05%;background:linear-gradient(125deg,#eaf3ff,#dceafb 22%,#f8f7ea 22.3%,#fffef5);overflow:hidden}
+.help-heading{height:8.5%;display:flex;align-items:center;gap:18px;margin:-2.1% -2.4% 2.6%;padding:0 5%;background:linear-gradient(#d5e8ff,#c3dcf7);border-bottom:1px solid #a9c4e1}
+.help-mark{position:absolute;top:2.5%;left:5%;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:white;font:bold 45px Arial;background:radial-gradient(circle at 35% 25%,#78b7fa,#0750bd 68%,#052881);border:4px solid #e6f3ff;box-shadow:0 1px 4px #344c68}
+.help-panel h2{position:absolute;top:4.3%;left:24%;margin:0;color:#061e81;font-size:1.3em}.help-copy{margin-top:5%;line-height:1.42}.help-section{border-top:2px solid #c5c7c5;margin-top:7%;padding-top:4.5%}.help-section h3{margin:0 0 2%;color:#092d9a;font-size:1.03em}.help-section p{line-height:1.4}.tips{margin-top:8%}.tip-line{display:flex;align-items:flex-start;gap:14px;margin:3.1% 0;line-height:1.38}.tip-dot{flex:none;width:14px;height:14px;border-radius:50%;background:#1261cc;margin:9px 0 0 4px}
+.xp-footer{position:absolute;z-index:5;right:1%;bottom:1%;height:44px;display:flex;align-items:center;gap:8px}.xp-submit{min-width:102px;padding:7px 16px;border:1px solid #6b89ad;border-radius:7px;background:linear-gradient(#fff,#dbeaff 48%,#b9d5f4);color:#102b6b;box-shadow:inset 0 1px white,0 1px 2px #46648c;font-weight:bold;text-shadow:0 1px white}.footer-submit{height:38px}.footer-submit-link{color:#063fa7;font-size:.9em;font-weight:bold}.end-xtra{position:absolute;right:182px;top:7px;z-index:2;padding:5px 12px!important;font-size:.7em!important;background:linear-gradient(#fff,#c8dfff)!important;border:1px solid #7aa4d3!important;border-radius:6px!important;color:#193b74!important}
+.xp-instruction{position:absolute;left:25%;right:22%;top:8%;padding:8px 14px;border:1px solid #81ade0;border-radius:6px;background:linear-gradient(#fff,#e4f0ff);box-shadow:0 2px 5px #233e5928;font-size:.76em;line-height:1.25;color:#142b5a;z-index:4}.xp-instruction[hidden]{display:none}.panel-instruction{position:static;margin:4% 0 0;font-size:.77em}.toast-instruction{position:absolute;right:30%;top:9%;z-index:8;max-width:38%;padding:12px 18px;border:1px solid #79a4d6;border-radius:7px;background:#fffde9;box-shadow:0 3px 10px #263c5b55;font-size:.8em;line-height:1.3}.instruction-hidden .help-panel{padding-top:2.1%}
+/* Preserve the slider template's anchors and model wiring while changing its visual layout. */
+.slc-card{left:0!important;top:0!important;width:100%!important;height:100%!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible}
+.slc-presets{position:absolute;left:54%;right:3%;top:5.7%;bottom:6%;margin:0!important;border:2px solid #9bbde4!important;border-radius:6px!important;background:#fff!important;box-shadow:0 1px 3px #6b7a8833!important;font-size:clamp(16px,1.35vw,23px)!important;overflow:hidden}
+.slc-presets table{width:100%;height:auto;border-collapse:collapse}.slc-presets caption{text-align:left!important;padding:12px 24px!important;height:58px;background:linear-gradient(#e2efff,#c8def7);border-bottom:1px solid #b5cde9;color:#082880!important;text-transform:none!important;letter-spacing:0!important;font-size:1.15em!important;font-weight:bold!important}
+.slc-presets th,.slc-presets td{padding:8px 14px!important;height:clamp(38px,4.25vw,56px);font-size:1em!important;text-align:left!important;color:#11162a!important;border-bottom:1px solid #d5d7da}.slc-presets th{height:52px!important;text-align:center!important;font-weight:400!important;color:#11162a!important;border:0!important}.slc-presets th:first-child{width:56%;font-size:0!important}.slc-presets td:first-child{font-weight:400!important}
+.slc-card,.slc-card.dense,.slc-card.touch{font-size:clamp(20px,1.4vw,24px)!important}.slc-grid{position:absolute;left:4%;right:51%;top:14%;bottom:10%;display:grid!important;grid-template-columns:minmax(0,1fr) 116px!important;grid-auto-rows:max-content;align-content:start;column-gap:18px!important;row-gap:42px!important;align-items:start!important}
+.slc-grid>.slc-h{display:contents!important}.slc-label{grid-column:1/-1;min-width:0!important;text-align:left!important;white-space:nowrap;color:#082b94;font-weight:bold!important;font-size:1.05em;padding-top:0;margin-bottom:-10px}.slc-body{grid-column:1;min-width:0}.slc-hit{width:100%!important;height:32px!important;margin:0 7px!important;overflow:visible}.slc-rail,.slc-fill{top:50%!important;left:0!important;right:0!important;height:12px!important;transform:translateY(-50%);border-radius:10px!important}.slc-rail{background:linear-gradient(#aaa,#fdfdfd 45%,#b8b8b8)!important;border:1px solid #aaa}.slc-fill{display:none}.slc-thumb{top:50%!important;width:21px!important;height:39px!important;transform:translateY(-50%)!important;border:2px solid #075b15!important;border-radius:5px 5px 7px 7px!important;background:linear-gradient(90deg,#99ff9b,#08bf32 42%,#e6ffe7 68%,#0b9e29)!important;box-shadow:0 1px 2px #1d321c!important}.slc-ticks{top:100%!important;left:0!important;right:0!important;height:34px!important;color:#111!important;font-size:.88em!important}.slc-tick{top:8px!important;transform:translateX(-50%)!important}.slc-tick::before{top:-8px!important;left:50%!important;width:1px!important;height:15px!important;background:#4b4b4b!important}.slc-readout{grid-column:2;width:auto!important;min-width:96px;padding:4px 8px!important;border:2px solid #a7a9aa!important;border-radius:5px!important;background:linear-gradient(#fff,#f0f0f0)!important;color:#111!important;text-align:center!important;font-size:1em!important;height:44px!important;white-space:nowrap}
+@media(max-width:1200px){.xp-titlebar{min-height:38px}.window-controls span{width:32px;height:30px;font-size:20px}.help-mark{width:48px;height:48px;font-size:35px}.xp-main{grid-template-columns:71.25% 28.75%}.help-copy{margin-top:13%;font-size:.91em}.help-section{margin-top:5%;padding-top:3%}.tip-line{gap:8px;margin:2.3% 0;font-size:.88em}.slc-presets{font-size:15px!important}.slc-presets caption{height:44px;padding:8px 14px!important}.slc-presets th,.slc-presets td{height:36px;padding:5px 8px!important}.slc-grid{grid-template-columns:minmax(0,1fr) 78px!important;column-gap:8px!important;row-gap:clamp(64px,11vw,105px)!important}.slc-readout{min-width:72px;height:34px!important;font-size:.83em!important}.slc-label{font-size:.92em}.slc-hit{height:27px!important}.slc-thumb{height:32px!important;width:19px!important}}
+.slc-readout{margin-bottom:clamp(68px,8vw,112px)!important}
+@media(max-width:1200px){.slc-grid{row-gap:34px!important}.slc-readout{margin-bottom:clamp(72px,10vw,104px)!important}}
+/* Match the inset work surface and blue help rail of the Luna control panel. */
+.audio-stage{background:radial-gradient(ellipse at 48% 42%,#f8f6e8 0%,#f3f1df 72%,#efeddc 100%);}
+.audio-stage::after{content:"";position:absolute;inset:2.1% 1.4% 2.1% 2.1%;border:2px solid #dedbc9;border-radius:9px;pointer-events:none;z-index:1}
+.slc-card{z-index:0}
+.help-panel{background:#fffef5;border-left:1px solid #c7c7b9}
+.help-heading{height:12%;margin-top:-2.1%;background:linear-gradient(#d7e8fc,#c4dcf6);border-bottom:1px solid #b4cce6}
+.help-mark{top:2.2%;width:62px;height:62px}
+.help-panel h2{top:4.1%}
+.help-copy{margin-top:5%;}
+.xp-titlebar{background:linear-gradient(180deg,#4e9fff 0%,#0874fa 14%,#0863eb 50%,#0349d2 100%)}
+.window-controls span{border-radius:8px 8px 4px 4px}
+@media(max-width:1200px){.help-heading{height:11%}.help-mark{top:2%;width:48px;height:48px}.help-panel h2{top:4.1%}}
+body.instruction-header .xp-titlebar{height:12%;min-height:68px}
+body.instruction-header .xp-main{height:88%}
+body.instruction-header .xp-instruction{top:50%;transform:translateY(-50%);}
+body.instruction-toast .toast-instruction{left:3%;right:auto;top:auto;bottom:4%;width:min(44%,520px);max-width:44%;}
+@media(max-width:1200px){body.instruction-header .xp-titlebar{height:13%;min-height:72px}body.instruction-header .xp-main{height:87%}.xp-instruction{left:22%;right:22%;font-size:.68em;padding:6px 9px}.toast-instruction{font-size:.72em;padding:8px 12px}}
+.help-panel{padding-left:6%;padding-right:6%;font-size:1.04em}
+.help-heading{margin-left:-7.2%;margin-right:-7.2%;padding-left:7.5%}
+.help-panel h2{left:25.5%}
+@media(max-width:1200px){.help-panel{padding-left:5%;padding-right:5%;font-size:.96em}.help-heading{margin-left:-6.2%;margin-right:-6.2%;padding-left:6.5%}}
+.survey-drawer{z-index:40;top:17%;right:2%;left:auto;width:30%;height:auto;min-height:220px;padding:22px 24px;background:linear-gradient(145deg,#fffef4,#e5efff);border:2px solid #78a9e5;border-radius:8px;color:#101426;box-shadow:0 5px 18px #17396955;font: .82em/1.35 Tahoma,Arial,sans-serif}
+.survey-drawer h2{color:#082b94;font-size:1.18em;padding-right:26px;white-space:normal}
+.survey-drawer hr{border-top:1px solid #a9bfd9}
+.survey-drawer .survey-x{top:10px;right:12px;color:#143f89;font-size:1.45em}
+.survey-drawer .survey-close{position:static;display:block;width:auto;min-width:0;height:auto;margin:20px 0 0 auto;padding:7px 15px;border:1px solid #6b89ad;border-radius:6px;background:linear-gradient(#fff,#dbeaff 48%,#b9d5f4);color:#102b6b;box-shadow:inset 0 1px white;font-weight:bold}
+.survey-drawer .survey-select,.survey-drawer .survey-options{border-color:#91acd0;background:#fff}
+.survey-drawer .survey-options{z-index:2}
+.survey-drawer.overlay-chat{top:auto;bottom:4%;width:29%;min-height:0}
+.survey-drawer.overlay-chat:has(.survey-choices){top:15%;bottom:auto;height:68%;overflow:auto}
+.survey-drawer.overlay-promo{top:18%;right:34%;width:32%;min-height:0}
+.survey-drawer.overlay-toast{top:auto;right:2%;bottom:7%;width:27%;min-height:0;padding:16px 20px}
+.survey-drawer.overlay-banner{top:6.5%;right:1%;left:1%;width:auto;min-height:68px;padding:14px 24px;display:flex;align-items:center;gap:18px}
+.survey-drawer.overlay-banner h2{flex:0 0 24%}
+.survey-drawer.overlay-banner .survey-intro{margin:0;flex:1}
+.survey-drawer.overlay-banner .survey-close{margin:0 34px 0 0}
+@media(max-width:1200px){.survey-drawer{width:38%;right:2%;padding:14px 16px}.survey-drawer.overlay-promo{right:25%;width:50%}.survey-drawer.overlay-banner{left:1%;right:1%;width:auto;min-height:58px}.survey-drawer.overlay-chat:has(.survey-choices){top:12%;height:75%}}
+body.instruction-header .survey-drawer.overlay-banner{top:13.5%}
+/* Three or more sliders fit the panel: the space under each row (room for the ticks) shrinks with the viewport
+   height. */
+.slc-grid{row-gap:clamp(8px,2.2vh,34px)!important}
+.slc-readout{margin-bottom:clamp(40px,7vh,104px)!important}

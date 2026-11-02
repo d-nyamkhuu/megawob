@@ -1,0 +1,26 @@
+// Design of this site on the composition/sections template (templates/complete-goals/sections.js).
+env.widget({
+  task: 'complete-goals',
+  site: 'design-complete-goals-event-03',
+  name: 'design',
+  split: 'train',
+  scenarios: ['event'],
+  template: 'complete-goals/sections',
+  design: {
+    wrapPadding: '0',
+    headingGap: '0',
+    titleSize: '0px',
+    subtitleSize: '0px',
+    styles: ['cards'],
+    subtitles: [''],
+    gapRange: [12, 12],
+    columnRange: [1280, 1280],
+    gridMinWidth: 0,
+    heightRange: [300, 430],
+    heightInset: 120,
+    cardInset: 0,
+    minBoxHeight: 160,
+    contentMargin: 18,
+    growMargin: 16,
+  },
+});

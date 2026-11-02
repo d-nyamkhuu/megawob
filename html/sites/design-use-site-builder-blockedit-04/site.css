@@ -1,0 +1,509 @@
+@import url("../../templates/site/css/design-6854b2.css");
+
+/* browser-style permission / extension bubbles under the address bar */
+.ref-hz-bubble-pop {
+  top: 8px; left: 24px; width: min(360px, calc(100vw - 48px));
+  padding: 14px 16px; border: 1px solid #ced4da; border-radius: 8px;
+  background: #fff; color: #212529; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+.ref-hz-bubble-pop .ref-hz-btn { background: #fff; color: #212529; border-color: #ced4da; }
+.ref-hz-bubble-pop .ref-hz-primary { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.ref-hz-extension { left: auto; right: 24px; }
+.ref-hz-perm-head { display: flex; align-items: center; gap: 8px; }
+/* download bar at the bottom of the window */
+.ref-hz-download {
+  left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; background: #f1f3f5; color: #212529; border-top: 1px solid #ced4da;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.12);
+}
+.ref-hz-download .ref-hz-x { color: #495057; font-size: 14px; }
+.ref-hz-dl-info { flex: 1; min-width: 0; }
+.ref-hz-dl-info .ref-hz-text { margin-top: 0; font-size: 13px; color: #495057; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ref-hz-file {
+  position: relative; flex: none; width: 22px; height: 28px; border: 2px solid #495057; border-radius: 2px 8px 2px 2px;
+  background: #fff;
+}
+.ref-hz-file::after { content: ''; position: absolute; left: 4px; right: 4px; top: 9px; height: 8px;
+  border-top: 2px solid #adb5bd; border-bottom: 2px solid #adb5bd; }
+/* sponsored card with a fake Continue */
+.ref-hz-ad {
+  right: 24px; top: 84px; width: min(300px, calc(100vw - 48px));
+  padding: 10px 12px 14px; border: 1px solid #ffe066; border-radius: 8px;
+  background: #fffbea; color: #3d2f00; box-shadow: 0 8px 24px rgba(0,0,0,.18); text-align: center;
+}
+.ref-hz-ad-top { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #7a6400; }
+.ref-hz-ad-close { font-size: 12px; color: #7a6400; }
+.ref-hz-ad-art { font-size: 34px; margin: 4px 0; }
+.ref-hz-ad-text { font-weight: 700; font-size: 16px; }
+.ref-hz-ad-cta { margin-top: 10px; width: 100%; padding: 10px; font-size: 15px; background: #2b8a3e; border-color: #2b8a3e; }
+
+.ref-notice {
+  position: fixed; z-index: 1060; right: 20px; top: 76px;
+  display: flex; align-items: flex-start; gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.ref-notice-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+}
+.ref-notice-body { flex: 1; min-width: 0; }
+.ref-notice-from { font-size: 12px; color: var(--muted); }
+.ref-notice-text { margin-top: 2px; font-weight: 600; }
+.ref-notice-x { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.ref-hz-lock {
+  position: relative; flex: none; width: 10px; height: 8px; margin: 5px 2px 0; border-radius: 2px; background: #2b8a3e;
+}
+.ref-hz-lock::before { content: ''; position: absolute; left: 1px; top: -6px; width: 4px; height: 6px;
+  border: 2px solid #2b8a3e; border-bottom: 0; border-radius: 5px 5px 0 0; }
+.ref-hz-note-pin { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 8px; background: var(--bg); }
+.ref-hz-perm-icon {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; background: #1a73e8; color: #fff; font-weight: 700; font-size: 14px;
+}
+
+/* 2024 GNOME page editor frame */
+:root {
+  --bg: #f4f5f7; --panel: #fff; --fg: #172033; --muted: #697386;
+  --line: #d9dee7; --accent: #0866e8; background: #f4f5f7;
+}
+html, body { background: #f4f5f7; color: #172033; }
+body { font: 16px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+.gnome-titlebar {
+  order: -5; flex: none; height: 48px; position: relative; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(#f1f2f4,#e8eaee); border-bottom: 1px solid #d8dbe0;
+  color: #202735; font-size: 17px; font-weight: 650;
+}
+.gnome-window-controls { position: absolute; right: 18px; top: 0; height: 100%; display: flex; align-items: center; gap: 26px; }
+.gnome-window-control { width: 18px; text-align: center; color: #303746; font: 20px/1 system-ui; }
+.gnome-menubar {
+  order: -4; height: 40px; flex: none; display: flex; align-items: center; gap: 32px;
+  padding: 0 22px; background: #f8f9fb; border-bottom: 1px solid #d9dde4;
+  color: #222a38; font-size: 16px;
+}
+.gnome-menu-item { cursor: default; }
+.gnome-appbar {
+  order: -3; flex: none; min-height: 66px; padding: 0 18px 0 24px;
+  display: flex; align-items: center; gap: 18px; background: #fff;
+  border-bottom: 1px solid #d9dee7; box-shadow: 0 1px 2px rgba(19,35,60,.04);
+}
+.gnome-action-group { display: flex; align-items: center; height: 38px; flex: 1; }
+.gnome-action {
+  display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 18px;
+  border-right: 1px solid #d8dde5; color: #3c4658; white-space: nowrap; font-size: 16px;
+}
+.gnome-action:first-child { padding-left: 4px; }
+.gnome-action-icon { font: 25px/1 system-ui; color: #576276; }
+.gnome-draft-status { order: 4; display: flex; align-items: center; gap: 9px; white-space: nowrap; color: #727d8f; font-size: 14px; }
+.gnome-status-dot { width: 11px; height: 11px; border-radius: 50%; background: #b7bfcb; }
+.gnome-end-tools { order: 5; gap: 10px; }
+.gnome-end-tools:empty { display: none; }
+.ref-task.gnome-original-chrome { display: none; }
+.gnome-task-note {
+  order: 3; flex: 1; min-width: 140px; padding: 0 10px; color: #515d70;
+  font-size: 13px; line-height: 1.25; font-weight: 500;
+}
+.ref-submit {
+  border: 0; border-radius: 8px; padding: 12px 22px; background: #0866e8;
+  color: white; font: 600 15px system-ui, sans-serif; box-shadow: 0 1px 2px #0002;
+}
+.ref-xtra { border-radius: 7px; background: #f5f6f8; color: #3d4858; border-color: #d8dde5; font: 14px system-ui,sans-serif; }
+.ref-body.gnome-content { order: 0; flex: 1; min-height: 0; padding: 0; gap: 0; background: #f7f8fa; }
+.gnome-summary {
+  flex: none; width: clamp(245px, 15.6vw, 280px); min-height: 0; padding: 16px 12px 18px;
+  display: flex; flex-direction: column; background: #f1f3f6; border-right: 1px solid #d9dee7;
+}
+.gnome-brand { display: flex; align-items: center; gap: 12px; height: 54px; padding: 0 10px 12px; margin-bottom: 10px; white-space: nowrap; font-size: 15px; }
+.gnome-coral { color: #1472df; font-size: 29px; line-height: 1; transform: rotate(90deg); }
+.gnome-side-item { height: 43px; display: flex; align-items: center; gap: 17px; margin: 1px 0; padding: 0 14px; border-radius: 9px; color: #566174; font-size: 15px; }
+.gnome-side-item.is-active { color: #0766e8; background: #d7e7fb; font-weight: 650; }
+.gnome-side-icon { width: 20px; text-align: center; font-size: 21px; color: inherit; }
+.gnome-summary-card {
+  margin: auto 0 20px; padding: 16px 18px 14px; border: 1px solid #dce1e8;
+  border-radius: 12px; background: #f9fafb; color: #667286;
+}
+.gnome-summary-card > strong { display: block; margin-bottom: 12px; color: #202a3b; font-size: 15px; }
+.gnome-stat { height: 36px; display: flex; align-items: center; gap: 13px; font-size: 14px; }
+.gnome-stat span:first-child { width: 20px; color: #43516a; font-size: 19px; }
+.ref-stage { flex: 1; min-width: 0; min-height: 0; align-items: stretch !important; justify-content: stretch !important; padding: 0; background: #fff; }
+.ref-stage, .ref-stage *, .ref-stage button, .ref-stage input, .ref-stage textarea { font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+.ref-stage > * { width: 100% !important; max-width: none !important; height: 100% !important; min-width: 0 !important; }
+.ref-stage button { border-radius: 7px; }
+.ref-stage input, .ref-stage textarea { border: 1px solid #d4dbe5 !important; border-radius: 7px !important; background: #fff !important; color: #192337 !important; }
+.ref-panel { flex: none; width: 255px; margin: 12px; border: 1px solid #d9dee7; border-radius: 10px; background: #fff; }
+.ref-panel-title { color: #263246; font: 650 15px system-ui,sans-serif; text-transform: none; letter-spacing: 0; }
+.ref-panel-text { color: #48556a; font: 14px/1.4 system-ui,sans-serif; }
+.ref-foot { order: 1; min-height: 56px; padding: 6px 20px; color: #657186; background: #f7f8fa; border-top: 1px solid #d9dee7; font: 14px system-ui,sans-serif; }
+.ref-endlink { color: #0866e8; font: 600 15px system-ui,sans-serif; }
+.ref-note { left: auto; right: 24px; bottom: 20px; border: 1px solid #d9dee7; border-left: 4px solid #0866e8; border-radius: 10px; background: #fff; font: 14px system-ui,sans-serif; }
+body.ref-has-note .ref-body { padding-bottom: 0; }
+html.env-scroll .ref-task { display: none; }
+html.env-scroll .ref-body, html.env-scroll .ref-stage { flex: 1; min-height: 0; }
+.ref-ov, .ref-fault, .ref-notice, .ref-hz { font-family: system-ui, sans-serif; }
+
+/* Rivermere Public Library, 1996 catalog desk */
+:root {
+  --bg: #f4eee1; --panel: #fbf7ee; --fg: #261d20; --muted: #65585a;
+  --line: #d6cabb; --accent: #741c2b;
+  background: #f4eee1;
+}
+html, body { background: #f4eee1; color: #261d20; }
+body { font: 16px/1.32 Georgia, "Times New Roman", serif; }
+.ref-task {
+  min-height: 102px; padding: 10px 18px; gap: 18px; position: relative;
+  color: #741c2b; background: #fbf8f0;
+  border-bottom: 1px solid #d2c6b7;
+}
+.ref-task::before {
+  content: "▤"; display: inline-flex; align-items: center; justify-content: center;
+  flex: none; width: 104px; height: 78px; margin-right: 3px;
+  color: #741c2b; font: 64px/1 Georgia, serif;
+  text-shadow: 2px 2px #d6c5a8;
+}
+.ref-brand { color: #741c2b; font: bold 36px/1.08 Georgia, "Times New Roman", serif; }
+.ref-instruction { color: #3b2729; font: 17px/1.25 Georgia, "Times New Roman", serif; }
+.ref-spacer { flex: 1; }
+.ref-tools { gap: 8px; }
+.ref-submit {
+  padding: 12px 18px; border: 1px solid #5c1723; border-radius: 4px;
+  background: #741c2b; color: #fff9ef; font: bold 16px Georgia, serif;
+}
+.ref-xtra { border: 1px solid #cfc2b1; border-radius: 3px; background: #f5efe3; color: #482b30; font: 14px Georgia, serif; }
+.ref-body { min-height: 0; padding: 6px 8px 10px; gap: 7px; background: #f5f0e6; }
+.ref-stage { border: 0; background: transparent; }
+.ref-panel { border: 1px solid #d6cabb; border-radius: 3px; background: #fbf7ee; }
+.ref-panel-title { color: #741c2b; font: bold 17px Georgia, serif; text-transform: none; }
+.ref-panel-text { font: 16px/1.35 Georgia, serif; }
+.ref-foot {
+  min-height: 78px; padding: 8px 20px; color: #fff7ec;
+  background: #641824; border-top: 2px solid #8d3a43;
+  font: 16px Georgia, serif;
+}
+.ref-foot .ref-tools { min-height: 58px; }
+.ref-endlink { color: #741c2b; font: 17px Georgia, serif; }
+.ref-note { border: 1px solid #cdbfae; border-left: 4px solid #741c2b; border-radius: 2px; background: #fff9ed; font: 15px Georgia, serif; }
+.ref-ov, .ref-fault, .ref-notice, .ref-hz { font-family: Georgia, "Times New Roman", serif; }
+
+/* The page builder surface inherits the same printed-paper palette and type. */
+.ref-stage, .ref-stage * { font-family: Georgia, "Times New Roman", serif !important; }
+.ref-stage button, .ref-stage input, .ref-stage textarea { font-family: Georgia, "Times New Roman", serif !important; }
+.ref-stage button { border-radius: 2px; }
+.ref-stage input, .ref-stage textarea { border-color: #c9bdae !important; border-radius: 2px !important; background: #fffdfa !important; color: #302326 !important; }
+.ref-stage { align-items: stretch !important; justify-content: stretch !important; }
+.ref-stage > * { width: 100% !important; max-width: none !important; height: 100% !important; min-width: 0 !important; }
+.ref-side { display: none !important; }
+.ref-panel { width: 230px; flex: 0 0 230px; margin: 8px 0 8px 8px; }
+body:not(.ref-has-note) .ref-body { gap: 0; }
+
+/* Final site-specific tokens and widget surface overrides. */
+:root { --bg:#f4f5f7; --panel:#fff; --fg:#172033; --muted:#697386; --line:#d9dee7; --accent:#0866e8; }
+html, body { background:#f4f5f7; color:#172033; }
+body { font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif; overflow:hidden; }
+.gnome-titlebar { order:-5; height:48px; flex:none; position:relative; z-index:3; display:flex; align-items:center; justify-content:center; background:linear-gradient(#f1f2f4,#e8eaee); border-bottom:1px solid #d8dbe0; color:#202735; font:650 17px/1.2 system-ui,sans-serif; }
+.gnome-window-controls { position:absolute; right:18px; top:0; height:100%; display:flex; align-items:center; gap:26px; }
+.gnome-window-control { width:18px; text-align:center; color:#303746; font:20px/1 system-ui,sans-serif; }
+.gnome-menubar { order:-4; height:40px; flex:none; display:flex; align-items:center; gap:32px; padding:0 22px; background:#f8f9fb; border-bottom:1px solid #d9dde4; color:#222a38; font:16px system-ui,sans-serif; }
+.gnome-appbar { order:-3; flex:none; min-height:66px; padding:0 18px 0 24px; display:flex; align-items:center; gap:18px; background:#fff; border-bottom:1px solid #d9dee7; box-shadow:0 1px 2px #13233c0a; }
+.gnome-action-group { display:flex; align-items:center; height:38px; flex:1; }
+.gnome-action { display:flex; align-items:center; gap:12px; height:38px; padding:0 18px; border-right:1px solid #d8dde5; color:#3c4658; white-space:nowrap; font:16px system-ui,sans-serif; }
+.gnome-action:first-child { padding-left:4px; }
+.gnome-action-icon { font:25px/1 system-ui,sans-serif; color:#576276; }
+.gnome-draft-status { order:4; display:flex; align-items:center; justify-content:flex-end; gap:9px; flex:0 0 142px; white-space:nowrap; color:#727d8f; font:14px system-ui,sans-serif; }
+.gnome-status-dot { width:11px; height:11px; border-radius:50%; background:#b7bfcb; }
+.gnome-end-tools { order:5; gap:10px; }
+.ref-task.gnome-original-chrome { display:none; }
+.gnome-task-note { order:3; flex:1; min-width:140px; padding:0 10px; color:#515d70; font:500 13px/1.25 system-ui,sans-serif; }
+.ref-submit { border:0; border-radius:8px; padding:12px 22px; background:#0866e8; color:#fff; font:600 15px system-ui,sans-serif; box-shadow:0 1px 2px #0002; }
+.ref-xtra { border:1px solid #d8dde5; border-radius:7px; background:#f5f6f8; color:#3d4858; font:14px system-ui,sans-serif; }
+.ref-body.gnome-content { order:0; flex:1; min-height:0; padding:0; gap:0; background:#f7f8fa; }
+.gnome-summary { order:-1; flex:none; width:clamp(245px,15.6vw,280px); min-height:0; padding:16px 12px 18px; display:flex; flex-direction:column; background:#f1f3f6; border-right:1px solid #d9dee7; }
+.gnome-brand { display:flex; align-items:center; gap:12px; height:54px; padding:0 10px 12px; margin-bottom:10px; white-space:nowrap; font:650 15px system-ui,sans-serif; }
+.gnome-coral { color:#1472df; font-size:29px; line-height:1; transform:rotate(90deg); }
+.gnome-side-item { height:43px; display:flex; align-items:center; gap:17px; margin:1px 0; padding:0 14px; border-radius:9px; color:#566174; font:15px system-ui,sans-serif; }
+.gnome-side-item.is-active { color:#0766e8; background:#d7e7fb; font-weight:650; }
+.gnome-side-icon { width:20px; text-align:center; font-size:21px; }
+.gnome-summary-card { margin:auto 0 20px; padding:16px 18px 14px; border:1px solid #dce1e8; border-radius:12px; background:#f9fafb; color:#667286; }
+.gnome-summary-card > strong { display:block; margin-bottom:12px; color:#202a3b; font:650 15px system-ui,sans-serif; }
+.gnome-stat { height:36px; display:flex; align-items:center; gap:13px; font:14px system-ui,sans-serif; }
+.gnome-stat span:first-child { width:20px; color:#43516a; font-size:19px; }
+.ref-stage { order:0; flex:1; min-width:0; min-height:0; padding:0; background:#fff; align-items:stretch !important; justify-content:stretch !important; }
+.ref-stage, .ref-stage *, .ref-stage button, .ref-stage input, .ref-stage textarea { font-family:system-ui,-apple-system,"Segoe UI",sans-serif !important; }
+.ref-stage { color:#172033 !important; background:#fff !important; }
+.ref-stage * { box-shadow:none; }
+.ref-stage button { border-radius:7px !important; }
+.ref-stage input, .ref-stage textarea { border:1px solid #d4dbe5 !important; border-radius:7px !important; background:#fff !important; color:#192337 !important; }
+.ref-panel { width:255px; flex:0 0 255px; margin:12px; border:1px solid #d9dee7; border-radius:10px; background:#fff; }
+.ref-panel-title { color:#263246; font:650 15px system-ui,sans-serif; text-transform:none; letter-spacing:0; }
+.ref-panel-text { color:#48556a; font:14px/1.4 system-ui,sans-serif; }
+.ref-foot { order:1; min-height:56px; padding:6px 20px; color:#657186; background:#f7f8fa; border-top:1px solid #d9dee7; font:14px system-ui,sans-serif; }
+.ref-endlink { color:#0866e8; font:600 15px system-ui,sans-serif; }
+.ref-note { left:auto; right:24px; bottom:20px; border:1px solid #d9dee7; border-left:4px solid #0866e8; border-radius:10px; background:#fff; font:14px system-ui,sans-serif; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+html.env-scroll .ref-task { display:none; }
+html.env-scroll .ref-body, html.env-scroll .ref-stage { flex:1; min-height:0; }
+.ref-ov, .ref-fault, .ref-notice, .ref-hz { font-family:system-ui,sans-serif; }
+@media (max-width: 1240px) {
+  .gnome-appbar { flex-wrap:wrap; row-gap:5px; padding:7px 12px; }
+  .gnome-action-group { order:0; flex:0 0 100%; width:100%; }
+  .gnome-task-note { order:1; flex:1 1 48%; padding:2px 4px; }
+  .gnome-draft-status { order:2; }
+  .gnome-end-tools { order:3; margin-left:auto; }
+  .gnome-summary { width:245px; }
+}
+
+/* Native three-pane block editor. */
+html, body { --bg:#f4f5f7; --panel:#fff; --fg:#172033; --muted:#738096; --line:#e0e5ed; --accent:#0066ed; margin:0; }
+.ref-body.gnome-content { display:flex; flex-direction:row; align-items:stretch; background:#fff; }
+.gnome-summary { order:0!important; width:15.55%; flex:0 0 15.55%; background:#eef1f4; padding:16px 11px 18px; }
+.gnome-content > .ref-stage { order:1!important; flex:1 1 0; min-width:0; background:#fff; }
+.gnome-content > .ref-panel { order:2!important; }
+.gnome-titlebar { height:48px; background:linear-gradient(110deg,#e3e5e9,#e7e9ec); font-size:17px; }
+.gnome-menubar { height:39px; gap:32px; padding-left:21px; }
+.gnome-appbar { min-height:66px; padding:0 18px 0 22px; gap:24px; background:#f8f9fb; flex-wrap:wrap; }
+.gnome-action-group { flex:1; min-width:570px; }
+.gnome-action { padding:0 20px; gap:14px; border:0; position:relative; }
+.gnome-action:nth-child(-n+3)::after { content:''; position:absolute; right:0; height:34px; width:1px; background:#d9dee6; }
+.gnome-action:last-child { padding-right:0; }
+.gnome-publish-slot { order:5; }
+.gnome-publish-slot .ab-btn { white-space:nowrap; border:0; border-radius:7px; padding:12px 22px; background:#0066ed; color:#fff; font:600 15px system-ui,sans-serif; cursor:pointer; }
+.gnome-end-tools { order:6; gap:8px; }
+.gnome-end-tools:empty { display:none; }
+.gnome-end-tools .ref-submit, .gnome-end-tools .ref-xtra { padding:8px 12px; font-size:13px; }
+.gnome-task-note { order:8; flex:1 0 100%; padding:10px 0 12px; font:14px/1.4 system-ui,sans-serif; }
+.gnome-brand { padding:0 8px 12px; margin-bottom:8px; font-size:15px; gap:12px; }
+.gnome-coral { width:34px; height:36px; flex:none; transform:none; }
+.gnome-coral svg { width:100%; height:100%; }
+.gnome-side-item { height:44px; margin:1px 0; font-size:15px; }
+.gnome-summary-card { margin:auto 2px 20px; padding:16px 21px; }
+.gnome-summary .ref-panel { margin:10px 2px; width:auto; flex:0 1 auto; padding:12px; min-height:0; overflow:auto; }
+.gnome-summary .ref-panel-title { font-size:14px; }
+.gnome-summary .ref-panel-text { font-size:13px; }
+.ref-stage > .ab-app { border:0; border-radius:0; box-shadow:none; }
+.ref-stage .ab-app.reef-editor { position:absolute; width:100%!important; height:100%!important; left:0!important; top:0!important; color:#172033; background:#fff; }
+.reef-editor .ab-work { display:grid; grid-template-columns:29.5% 31.1% 39.4%; height:100%; overflow:hidden; }
+.reef-editor .ab-foot[hidden] { display:none; }
+.reef-blocks, .reef-properties, .reef-preview { min-width:0; min-height:0; background:#fff; border-right:1px solid #e2e6ed; }
+.reef-blocks { display:flex; flex-direction:column; }
+.reef-pane-heading { height:60px; margin:0; padding:0 21px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex:none; font-size:18px; font-weight:650; }
+.reef-pane-heading h2 { margin:0; font:inherit; white-space:nowrap; }
+.reef-blocklist { padding:0 16px; flex:1; }
+.reef-editor .reef-block-row { display:flex; align-items:center; gap:14px; width:100%; height:86px; min-height:86px; padding:10px 18px!important; margin:0 0 9px; border:1px solid #e0e5ed; border-radius:9px!important; color:#172033; background:#fff; text-align:left; }
+.reef-editor .reef-block-row.ab-selected { outline:1px solid #0066ff; outline-offset:-1px; border-color:#0066ff; background:#e8f2ff; }
+.reef-block-number { width:20px; flex:none; font-size:15px; }
+.reef-block-row.ab-selected .reef-block-number { color:#0066ed; }
+.reef-block-thumb { display:flex; flex:none; flex-direction:column; justify-content:center; gap:7px; width:34%; height:64px; border:1px solid #e0e5ed; border-radius:6px; padding:12px; overflow:hidden; }
+.reef-block-thumb i { display:block; height:3px; background:#b3bbc6; }
+.reef-block-thumb i:last-child { width:58%; }
+.reef-block-words { min-width:0; }
+.reef-editor .reef-block-row strong { display:block; font-size:15px; font-weight:650; color:#172033; margin:0 0 5px; }
+.reef-block-type { font-size:14px; color:#7d8798; }
+.reef-bound-copy, .reef-bound-meta { display:none!important; }
+.reef-editor .reef-properties { width:auto; border-left:0; padding:0 22px 18px; }
+.reef-properties .reef-pane-heading { padding:0; }
+.reef-property-type { font-size:13px; color:#7b8598; font-weight:400; white-space:nowrap; }
+.reef-properties > .ab-caption, .reef-properties > .ab-setting, .reef-properties > .ab-kv, .reef-properties > .ab-spacingbox { display:none; }
+.reef-image-control { height:158px; display:flex; align-items:center; gap:16px; padding:6px; border-radius:9px; background:#f7f8fa; margin:6px -3px 22px; }
+.reef-inspector-photo { width:59%; height:100%; border-radius:6px; flex:none; }
+.reef-change-image { display:flex; align-items:center; justify-content:center; gap:10px; border:1px solid #d7dde7; border-radius:7px; color:#667086; background:#fff; height:42px; padding:0 12px; white-space:nowrap; font-size:12px!important; }
+.reef-editor .ab-field { margin:0 0 20px; position:relative; }
+.reef-editor .ab-fieldlabel { font-size:15px; font-weight:650; margin-bottom:8px; }
+.reef-editor .ab-input { height:41px; font-size:15px; padding:8px 13px; line-height:1.3; }
+.reef-editor .ab-counter, .reef-editor .ab-checkmeter { display:none; }
+.reef-editor .ab-segment { display:flex; gap:13px; width:81%; margin-bottom:27px; }
+.reef-editor .ab-segment button { padding:0; height:44px; border:1px solid #dce1e9; border-radius:7px!important; color:#53617b; background:white; }
+.reef-editor .ab-segment button.on { color:white; background:#0066ed; border-color:#0066ed; }
+.reef-editor .ab-segment svg { width:23px; height:23px; }
+.reef-field:has([aria-label="Padding"]) { width:57%; }
+.reef-number-arrows { position:absolute; right:0; bottom:0; height:41px; width:39px; border-left:1px solid #e0e5ed; display:flex; align-items:center; justify-content:center; white-space:pre-line; text-align:center; line-height:11px; font-size:12px; color:#44516a; pointer-events:none; }
+.reef-px { position:absolute; bottom:10px; left:calc(100% + 18px); color:#647088; font-size:14px; }
+.reef-preview { display:flex; flex-direction:column; padding:0 17px 17px; border:0; }
+.reef-preview .reef-pane-heading { padding:0 0 0 2px; }
+.reef-devices { display:flex; background:#f2f3f6; border-radius:8px; gap:6px; }
+.reef-devices .ab-iconbtn { width:46px; height:39px; border:0; border-radius:7px; }
+.reef-devices .ab-iconbtn.on { background:#0066ed; color:white; }
+.reef-devices svg { width:23px; height:23px; }
+.reef-webpage { flex:1; min-height:0; overflow:hidden; border:1px solid #e0e5ed; border-radius:7px 7px 0 0; display:flex; flex-direction:column; }
+.reef-webnav { flex:none; height:37px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.reef-webnav strong { font-size:11px; display:flex; align-items:center; gap:7px; white-space:nowrap; }
+.reef-webnav strong svg { width:23px; height:25px; color:#0066ed; }
+.reef-webnav > div { display:flex; gap:24px; font-size:8px; }
+.reef-photo { background-image:url('assets/reef.webp'); background-repeat:no-repeat; background-size:cover; }
+.reef-thumb-image { background-image:url('assets/turtle.webp'); background-position:center; padding:0; }
+.reef-inspector-photo { background-image:url('assets/turtle.webp'); background-position:center; }
+.reef-hero { background-position:0 center; flex:4.05; min-height:160px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:white; padding:20px 40px; }
+.reef-hero h1 { margin:0 0 10px; color:white; font-size:32px; line-height:1.12; letter-spacing:-.5px; }
+.reef-hero p { margin:0 0 17px; font-size:13px; }
+.reef-plan { background:#0075ff; color:#fff; padding:10px 17px; border-radius:5px; font-size:11px; font-weight:650; }
+.reef-turtle { background-image:url('assets/turtle.webp'); background-position:center 43%; flex:2.55; min-height:110px; display:flex; align-items:flex-end; justify-content:center; padding:0 25px 45px; border-top:2px solid white; text-align:center; }
+.reef-turtle h2 { color:white; font-size:27px; line-height:1.15; margin:0; text-shadow:0 2px 6px #1238; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+.reef-intro { flex:1.3; min-height:110px; padding:22px 40px; display:flex; flex-direction:column; justify-content:center; text-align:center; background:#f1f4f7; }
+.reef-intro h3 { font-size:16px; margin:0 0 10px; }
+.reef-intro p { font-size:12px; line-height:1.6; color:#536079; margin:0; }
+.reef-bottom { flex:1.1; min-height:50px; background-position:0 90%; }
+.ref-foot { min-height:44px; }
+.ref-float-dock { height:48px; }
+.ref-float { bottom:6px; padding:8px 16px; }
+.ref-note { position:relative; align-self:flex-end; flex:none; margin:8px 18px; bottom:auto; right:auto; left:auto; max-width:600px; width:auto; padding:10px 42px 10px 16px; order:2; }
+@media (max-width:1400px) {
+  .gnome-summary { flex-basis:15.55%; width:15.55%; padding:12px 9px; }
+  .gnome-brand { font-size:12px; gap:8px; padding:0 3px 10px; }
+  .gnome-coral { width:28px; }
+  .gnome-side-item { font-size:14px; padding:0 10px; gap:13px; }
+  .gnome-summary-card { padding:14px; margin-bottom:12px; }
+  .reef-pane-heading { font-size:16px; padding:0 16px; height:55px; }
+  .reef-blocklist { padding:0 13px; }
+  .reef-editor .reef-block-row { padding:10px 12px!important; gap:10px; }
+  .reef-editor .reef-block-row strong { font-size:13px; }
+  .reef-block-type { font-size:12px; }
+  .reef-editor .reef-properties { padding:0 16px; }
+  .reef-property-type { font-size:11px; }
+  .reef-image-control { height:135px; gap:9px; margin-bottom:20px; }
+  .reef-change-image { font-size:10px!important; padding:0 8px; gap:6px; }
+  .reef-change-image svg { width:14px; }
+  .reef-hero { padding:15px 22px; }
+  .reef-hero h1 { font-size:25px; }
+  .reef-turtle { padding-bottom:32px; }
+  .reef-turtle h2 { font-size:23px; }
+  .reef-webnav { padding:0 12px; }
+  .reef-webnav > div { gap:12px; }
+  .reef-webnav strong { font-size:9px; }
+  .reef-intro { padding:18px; }
+  .reef-intro h3 { font-size:14px; }
+  .reef-intro p { font-size:10px; }
+}
+@media (max-width:1240px) {
+  .gnome-appbar { row-gap:4px; padding:6px 12px; gap:12px; }
+  .gnome-action-group { flex:1; width:auto; min-width:490px; }
+  .gnome-action { font-size:13px; padding:0 12px; gap:8px; }
+  .gnome-draft-status { font-size:12px; }
+  .gnome-end-tools { margin-left:0; }
+  .gnome-side-item { height:36px; font-size:12px; gap:10px; }
+  .gnome-brand { font-size:10px; gap:5px; }
+  .gnome-summary-card { padding:12px 10px; }
+  .gnome-summary-card > strong { font-size:13px; }
+  .gnome-stat { font-size:12px; height:28px; }
+  .reef-pane-heading { font-size:14px; padding:0 12px; height:49px; }
+  .reef-blocklist { padding:0 9px; }
+  .reef-editor .reef-block-row { height:76px; min-height:76px; padding:8px!important; gap:8px; }
+  .reef-block-number { width:14px; font-size:13px; }
+  .reef-block-thumb { height:52px; padding:8px; width:32%; }
+  .reef-editor .reef-block-row strong { font-size:12px; }
+  .reef-editor .reef-properties { padding:0 12px; }
+  .reef-property-type { font-size:9px; }
+  .reef-image-control { height:105px; gap:6px; margin-bottom:17px; }
+  .reef-change-image { font-size:9px!important; padding:0 6px; gap:4px; white-space:normal; }
+  .reef-editor .ab-field { margin-bottom:16px; }
+  .reef-editor .ab-fieldlabel { font-size:13px; }
+  .reef-editor .ab-input { height:36px; font-size:13px; }
+  .reef-editor .ab-segment { margin-bottom:18px; gap:9px; }
+  .reef-editor .ab-segment button { height:38px; }
+  .reef-preview { padding:0 10px 10px; }
+  .reef-devices .ab-iconbtn { width:30px; height:32px; }
+  .reef-devices svg { width:19px; height:19px; }
+  .reef-webnav > div { gap:8px; font-size:6px; }
+  .reef-webnav strong { font-size:8px; gap:4px; }
+  .reef-webnav strong svg { width:17px; }
+  .reef-hero h1 { font-size:22px; }
+  .reef-hero p { font-size:10px; }
+  .reef-turtle h2 { font-size:19px; }
+  .reef-intro { min-height:95px; padding:14px; }
+  .reef-intro h3 { font-size:12px; }
+  .reef-intro p { font-size:9px; }
+}
+
+/* Fine controls and compact desktop arrangements. */
+.gnome-instructionbar { order:-4; display:flex; align-items:center; gap:18px; padding:8px 22px; flex:none; background:#f8f9fb; border-bottom:1px solid #d9dee7; }
+.gnome-instructionbar .gnome-task-note, .gnome-instructionbar .gnome-panel-fallback { order:0; padding:0; flex:1; min-width:0; }
+.gnome-instructionbar .gnome-end-tools { order:1; }
+.gnome-menubar { order:-3; }
+.gnome-appbar { order:-2; }
+.ref-ov-banner { background:#e4efff; color:#183663; border-bottom:1px solid #cddffa; }
+.ref-ov-cookie { border-color:#d9e0ea; box-shadow:0 -4px 18px #152b3a18; }
+.ref-ov-box { border:1px solid #d9e0ea; border-radius:14px; box-shadow:0 14px 35px #17203330; }
+.ref-ov-btn { border-radius:7px; }
+.ref-ov-promo { background:#14243626; }
+.gnome-action-icon { width:26px; height:26px; display:flex; }
+.gnome-action-icon svg, .gnome-side-icon svg, .gnome-stat svg { width:100%; height:100%; }
+.gnome-side-icon { height:23px; display:flex; }
+.gnome-stat span:first-child { height:20px; display:flex; }
+.gnome-summary { overflow:hidden; }
+.gnome-brand { flex-shrink:0; font-size:14px; }
+.gnome-brand strong { min-width:0; white-space:normal; }
+.gnome-side-item { flex-shrink:0; }
+.gnome-summary-card { flex-shrink:0; }
+.gnome-summary:has(.ref-panel) .gnome-side-item { height:29px; margin:0; font-size:14px; }
+.gnome-summary:has(.ref-panel) .gnome-brand { height:40px; margin-bottom:0; }
+.gnome-summary:has(.ref-panel) .ref-panel { flex:0 0 auto; max-height:220px; }
+.gnome-summary:has(.ref-panel) .gnome-summary-card { margin-top:auto; margin-bottom:0; padding:12px 18px; }
+.gnome-summary:has(.ref-panel) .gnome-stat { height:29px; }
+.gnome-panel-fallback { order:6; flex:1 1 65%; width:auto; margin:0; padding:8px 0; border:0; background:transparent; }
+.gnome-panel-fallback .ref-panel-title { display:none; }
+.gnome-panel-fallback .ref-panel-text { font:14px/1.4 system-ui,sans-serif; }
+.gnome-task-note { order:6; flex:1 1 65%; }
+.gnome-end-tools { order:7; }
+.ref-foot .ref-tools { min-height:0; }
+.ref-note-x { position:absolute; right:12px; top:10px; }
+.reef-editor .reef-hero { box-shadow:inset 0 0 0 1000px #00345130; }
+.reef-editor .reef-turtle { box-shadow:inset 0 0 0 1000px #002d4430; }
+.reef-blocks, .reef-properties, .reef-preview { border-radius:10px 10px 0 0; }
+@media (max-width:1400px) {
+  .gnome-brand { font-size:11px; }
+}
+@media (max-width:1240px) {
+  .gnome-action-group { min-width:max-content; }
+  .gnome-action { font-size:12px; padding:0 9px; gap:7px; }
+  .gnome-action-icon { width:23px; height:23px; }
+  .gnome-draft-status { order:4; margin-left:auto; }
+  .gnome-publish-slot { order:5; }
+  .gnome-publish-slot .ab-btn { padding:10px 16px; font-size:13px; }
+  .gnome-task-note { padding:6px 0; font-size:13px; }
+  .gnome-brand { white-space:normal; font-size:10px; line-height:1.3; }
+  .gnome-summary-card { margin-bottom:0; }
+}
+@media (max-height:800px) {
+  .gnome-summary { padding-top:9px; padding-bottom:9px; }
+  .gnome-brand { height:38px; margin-bottom:5px; padding-bottom:6px; }
+  .gnome-side-item { height:30px; margin:0; font-size:12px; }
+  .gnome-summary-card { padding:10px 12px; margin-bottom:0; }
+  .gnome-summary-card > strong { font-size:12px; margin-bottom:6px; }
+  .gnome-stat { height:25px; font-size:12px; }
+  .reef-pane-heading { height:46px; }
+  .reef-image-control { height:86px; margin-top:2px; margin-bottom:14px; }
+  .reef-editor .ab-field { margin-bottom:13px; }
+  .reef-editor .ab-fieldlabel { font-size:13px; margin-bottom:6px; }
+  .reef-editor .ab-input { height:35px; font-size:13px; }
+  .reef-editor .ab-segment { margin-bottom:18px; }
+  .reef-editor .ab-segment button { height:36px; }
+  .reef-number-arrows { height:35px; }
+  .reef-webnav { height:32px; }
+  .reef-hero { min-height:125px; padding:12px 20px; }
+  .reef-hero h1 { font-size:23px; }
+  .reef-hero p { margin-bottom:10px; }
+  .reef-plan { padding:8px 13px; }
+  .reef-turtle { min-height:80px; padding:12px; align-items:center; }
+  .reef-turtle h2 { font-size:20px; }
+  .reef-intro { min-height:85px; padding:12px 18px; }
+  .reef-intro h3 { margin-bottom:7px; }
+  .reef-bottom { min-height:30px; }
+}
+@media (max-height:680px) {
+  .gnome-side-item { height:auto; min-height:20px; flex:1 1 0; font-size:11px; }
+  .gnome-side-icon { width:17px; height:18px; }
+  .gnome-stat { height:20px; font-size:11px; }
+  .gnome-summary-card { padding:8px; }
+  .gnome-summary-card > strong { font-size:11px; }
+  .gnome-brand { height:33px; }
+  .gnome-coral { height:28px; }
+  .reef-image-control { height:68px; margin-bottom:12px; }
+  .reef-editor .ab-field { margin-bottom:10px; }
+  .reef-editor .ab-fieldlabel { margin-bottom:5px; font-size:12px; }
+  .reef-editor .ab-input { height:32px; font-size:12px; }
+  .reef-editor .ab-segment { margin-bottom:12px; }
+  .reef-editor .ab-segment button { height:32px; }
+  .reef-pane-heading { height:42px; }
+  .reef-number-arrows { height:32px; }
+}

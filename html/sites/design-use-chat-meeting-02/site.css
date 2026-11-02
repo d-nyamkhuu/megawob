@@ -1,0 +1,566 @@
+@import url("../../templates/site/css/use-chat-meeting-9a1c49.css");
+
+
+/* 1987 GEM desktop widget: hard monochrome edges, stipple, and beveled gadgets. */
+:root {
+  --bg: #d0d0d0;
+  --panel: #f1f1f1;
+  --fg: #090909;
+  --muted: #333;
+  --line: #111;
+  --accent: #111;
+}
+html, body { background: #c8c8c8; color: #090909; }
+body {
+  font: 16px/1.25 "Courier New", Courier, monospace;
+  padding: 4px;
+  background-color: #bdbdbd;
+  background-image: repeating-linear-gradient(135deg, rgba(0,0,0,.045) 0 1px, transparent 1px 3px);
+}
+.ref-task {
+  position: relative;
+  min-height: 45px;
+  height: 45px;
+  padding: 4px 8px;
+  gap: 12px;
+  color: #fff;
+  background: repeating-linear-gradient(135deg,#171717 0 2px,#292929 2px 4px);
+  border: 2px solid #080808;
+  box-shadow: inset 1px 1px #aaa, inset -1px -1px #555;
+}
+.ref-task::after {
+  content: "File     Edit     View     Meeting     Channel     People     Window     Help";
+  position: absolute;
+  left: 0; right: 0; top: 100%;
+  height: 34px;
+  padding: 5px 14px;
+  color: #090909;
+  background: repeating-linear-gradient(135deg,#eee 0 2px,#e2e2e2 2px 4px);
+  border: 2px solid #111;
+  font-size: 17px;
+  line-height: 22px;
+  white-space: pre;
+  z-index: 5;
+}
+.ref-task::before {
+  content: "▦  TeamTalk";
+  position: absolute;
+  left: 12px; top: 8px; z-index: 6;
+  color: #fff;
+  font: bold 20px/1 "Courier New", monospace;
+}
+.ref-brand { display: none !important; }
+.ref-task[data-display="header"] .ref-tools { margin-left: auto; }
+.ref-instruction {
+  position: absolute;
+  z-index: 7;
+  left: 140px; right: 52%; top: calc(100% + 120px);
+  padding: 4px 0;
+  color: #090909;
+  background: transparent;
+  border: 0;
+  font: 600 14px/1.2 Arial, sans-serif;
+}
+.ref-task[data-display="header"] + .ref-project .ref-project-meta,
+.ref-task[data-display="header"] + .ref-project .ref-project-description { display: none; }
+.ref-spacer { flex: 1; }
+.ref-nav { display: none; }
+.ref-tools { gap: 5px; }
+.ref-submit, .ref-xtra, .ref-ov-btn, .ref-hz-btn {
+  border: 2px solid #111;
+  border-radius: 0;
+  color: #111;
+  background: #e8e8e8;
+  box-shadow: inset 2px 2px #fff, inset -2px -2px #777;
+  font-family: "Courier New", monospace;
+}
+.ref-submit { background: #ddd; color: #111; padding: 5px 13px; font-weight: 700; }
+.ref-xtra { padding: 4px 8px; font-size: 13px; }
+.ref-body { position: relative; margin-top: 0; border: 2px solid #111; background: #eee; }
+.ref-stage { background: #e7e7e7; }
+.ref-project {
+  flex: none;
+  height: 143px;
+  margin-top: 34px;
+  padding: 14px 28px 12px 38px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border: 2px solid #111;
+  background: repeating-linear-gradient(135deg,#f4f4f4 0 2px,#ececec 2px 4px);
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #777;
+}
+.ref-project-identity { flex: 1; min-width: 0; display: flex; align-items: center; gap: 34px; }
+.ref-project-icon { flex: none; width: 64px; height: 70px; display: grid; place-items: center; border: 3px solid #111; box-shadow: 6px 6px #aaa; font: 52px/1 "Courier New", monospace; }
+.ref-project-copy { min-width: 0; }
+.ref-project-title { font: bold 36px/1.1 "Courier New", monospace; letter-spacing: .02em; }
+.ref-project-meta { margin-top: 4px; font-size: 19px; font-weight: 700; }
+.ref-project-description { margin-top: 8px; font-size: 18px; }
+.ref-project-shortcuts { flex: none; display: flex; align-items: stretch; height: 100%; }
+.ref-project-shortcut { width: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-left: 2px solid #111; font-size: 18px; }
+.ref-project-shortcut-icon { font-size: 34px; line-height: 1; }
+.ref-project-shortcut-count { font-weight: 700; }
+.ref-panel, .ref-side, .ref-foot, .ref-note {
+  border: 2px solid #111;
+  border-radius: 0;
+  background: #e9e9e9;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #888;
+}
+.ref-panel-title { color: #111; font-weight: 700; }
+.ref-panel { order: 2; }
+.ref-stage { order: 1; }
+.ref-body.ref-panel-right { flex-direction: row; }
+.ref-endlink { color: #111; text-decoration: underline; }
+.ref-icon { border-radius: 0; }
+.ref-foot { min-height: 52px; padding: 4px 12px; }
+.ref-note { border-left: 2px solid #111; box-shadow: 2px 2px #555; }
+.ref-ov, .ref-hz, .ref-fault { font-family: "Courier New", monospace; }
+.ref-ov-cookie, .ref-ov-toast, .ref-ov-chat, .ref-ov-box, .ref-ov-banner,
+.ref-hz-support, .ref-hz-inject, .ref-hz-ad, .ref-hz-bubble-pop {
+  border: 2px solid #111; border-radius: 0; background: #eee; color: #111; box-shadow: 3px 3px #555;
+}
+.ref-ov-banner { top: 82px; background: #ddd; color: #111; }
+.ref-ov-promo { background: rgba(0,0,0,.38); }
+.ref-ov-primary, .ref-hz-primary { background: #111; border-color: #111; color: #fff; }
+.ref-fault, .ref-busy-box { border: 2px solid #111; border-radius: 0; background: #eee; color: #111; box-shadow: 3px 3px #555; }
+.ref-spinner { animation: none; border-color: #111; }
+
+/* WorkGroup Central: late-90s intranet frame and dense meeting panels. */
+:root { --bg:#e5e7e8; --panel:#f1f2f2; --fg:#17171b; --muted:#58636d; --line:#a1a6a8; --accent:#173c70; }
+html, body { background:#e5e7e8; color:#17171b; }
+body { padding:0; font:16px/1.25 Verdana, Arial, sans-serif; }
+.ref-task {
+  position:relative; z-index:2; height:111px; min-height:111px; padding:0 15px;
+  display:block; color:#fff; background:linear-gradient(110deg,#0b2e5f,#002653 70%,#062b56);
+  border:0; border-bottom:5px solid #b94e16;
+}
+.ref-task::before {
+  content:"♟"; position:absolute; left:20px; top:13px; color:#eef4ff;
+  font:bold 34px/1 Verdana,Arial,sans-serif;
+}
+.ref-task::after {
+  content:"Home       Channels       Meetings       Documents       Projects       People";
+  position:absolute; left:15px; bottom:0; height:35px; padding:6px 26px 0;
+  white-space:pre; color:white; font:16px/27px Verdana,Arial,sans-serif;
+  background:linear-gradient(#df641e,#b8450c) 0 0/112px 100% no-repeat, linear-gradient(#df641e,#b8450c) 120px 0/142px 100% no-repeat, linear-gradient(#f1f1f1,#e5e6e7) 270px 0/150px 100% no-repeat, linear-gradient(#df641e,#b8450c) 428px 0/160px 100% no-repeat, linear-gradient(#df641e,#b8450c) 596px 0/145px 100% no-repeat, linear-gradient(#df641e,#b8450c) 749px 0/138px 100% no-repeat;
+  border:0; border-bottom:0; border-radius:0; text-shadow:0 1px #73300e;
+}
+.ref-brand { position:absolute; left:94px; top:14px; z-index:1; color:#eef4ff; font-size:0; }
+.ref-task .ref-brand { display:block !important; }
+.ref-brand { font:bold 24px/1.2 Verdana,Arial,sans-serif; font-size:24px; }
+.ref-brand::after { content:"│  Team Communication\A    for a Connected Company"; display:inline-block; margin-left:24px; white-space:pre; vertical-align:middle; font:16px/1.2 Verdana,Arial,sans-serif; color:#c4d8f3; }
+.ref-nav { display:none !important; }
+.ref-instruction { position:absolute; z-index:4; left:470px; right:190px; top:52px; color:#dbe7fa; font:14px/1.2 Verdana,Arial,sans-serif; }
+.ref-spacer { display:none; }
+.ref-tools { position:absolute; right:16px; top:12px; z-index:5; gap:8px; }
+.ref-task[data-display="header"] .ref-tools { top:auto; bottom:3px; }
+.ref-submit, .ref-xtra { padding:5px 12px; border:1px solid #a5b4c5; border-radius:3px; background:#e8edf2; color:#17345b; font:14px Verdana,Arial,sans-serif; box-shadow:inset 1px 1px white; }
+.ref-body { min-height:0; padding:12px 15px 0; gap:10px; background:#e5e7e8; }
+.ref-body.ref-panel-right { flex-direction:row; }
+.ref-project { display:none !important; }
+.ref-side { display:none !important; }
+.ref-stage { min-width:0; min-height:0; align-items:stretch !important; justify-content:stretch !important; padding:0; background:#e5e7e8; }
+.ref-stage * { font-family:Verdana,Arial,sans-serif !important; }
+.ref-stage { filter:none; }
+.ref-stage nav, .ref-stage [aria-label="Primary navigation"] { display:none !important; }
+.ref-stage button, .ref-stage [role="button"] { border-radius:3px !important; box-shadow:none !important; border-color:#8c969d !important; }
+.ref-stage input, .ref-stage textarea { border-radius:3px !important; }
+.ref-stage header, .ref-stage footer { background:#174579 !important; color:#fff !important; border-color:#9da6ac !important; }
+.ref-stage [class*="video"], .ref-stage [class*="participant"] { border-radius:2px !important; }
+.ref-stage [class*="sidebar"], .ref-stage [class*="left-rail"], .ref-stage [class*="leftrail"], .ref-stage aside { display:none !important; }
+.ref-stage [role="navigation"], .ref-stage [role="complementary"], .ref-stage [class*="workspace-nav"], .ref-stage [class*="channel-nav"], .ref-stage [class*="channel-sidebar"], .ref-stage [class*="nav-rail"] { display:none !important; }
+.ref-stage [class*="video-grid"], .ref-stage [class*="participant-grid"] { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; grid-template-rows:repeat(2,minmax(0,1fr)) !important; grid-auto-rows:minmax(0,1fr) !important; gap:4px !important; }
+.ref-panel { width:220px; margin:0 0 0 8px; padding:10px; border:1px solid #9ca4a8; border-radius:2px; background:#f4f4f3; }
+.ref-panel-title { color:#173c70; font-weight:bold; }
+.ref-note { border:1px solid #a1823d; border-radius:2px; background:#fff7df; box-shadow:none; font-size:14px; }
+.ref-foot { min-height:74px; margin:10px 15px 14px; padding:8px 15px; border:1px solid #b49e69; border-radius:2px; background:#fff6de; color:#13294c; }
+.ref-endlink { color:#173c70; }
+.ref-float-dock { height:56px; }
+.ref-ov, .ref-hz, .ref-fault { font-family:Verdana,Arial,sans-serif; }
+.ref-ov-cookie, .ref-ov-toast, .ref-ov-chat, .ref-ov-box, .ref-ov-banner { border-radius:2px; }
+.ref-ov-banner { top:111px; }
+.ref-spinner { animation:none; }
+@media (max-width: 900px) {
+  .ref-task { min-height: 42px; height: 42px; }
+  .ref-task::after { font-size: 13px; height: 29px; padding: 4px 8px; }
+  .ref-body { margin-top: 0; }
+  .ref-instruction { font-size: 13px; }
+  .ref-project { height: 116px; padding: 8px 10px; gap: 8px; }
+  .ref-project-identity { gap: 10px; }
+  .ref-project-icon { width: 42px; height: 48px; font-size: 34px; }
+  .ref-project-title { font-size: 22px; }
+  .ref-project-meta, .ref-project-description { font-size: 12px; }
+  .ref-project-shortcut { width: 68px; font-size: 11px; }
+  .ref-project-shortcut-icon { font-size: 22px; }
+}
+
+/* Three-column meeting workspace from the 1999 WorkGroup Central design. */
+.ref-task {
+  height:111px; min-height:111px; padding:0 15px; overflow:visible;
+  background:linear-gradient(110deg,#0b2e5f,#002653 70%,#062b56);
+  border-bottom:5px solid #b94e16;
+}
+.ref-task::before { content:none; }
+.ref-task::after {
+  content:"Home       Channels       Meetings       Documents       Projects       People";
+  left:15px; bottom:0; height:35px; padding:6px 26px 0; white-space:pre; color:#fff;
+  font:16px/27px Verdana,Arial,sans-serif; text-shadow:0 1px #73300e;
+  background:linear-gradient(#df641e,#b8450c) 0 0/112px 100% no-repeat,linear-gradient(#df641e,#b8450c) 120px 0/142px 100% no-repeat,linear-gradient(#f1f1f1,#e5e6e7) 270px 0/150px 100% no-repeat,linear-gradient(#df641e,#b8450c) 428px 0/160px 100% no-repeat,linear-gradient(#df641e,#b8450c) 596px 0/145px 100% no-repeat,linear-gradient(#df641e,#b8450c) 749px 0/138px 100% no-repeat;
+}
+.ref-brand { left:94px; top:14px; color:#eef4ff; font:bold 24px/1.2 Verdana,Arial,sans-serif; }
+.ref-brand::after { content:"│  Team Communication\A    for a Connected Company"; display:inline-block; margin-left:24px; white-space:pre; vertical-align:middle; font:16px/1.2 Verdana,Arial,sans-serif; color:#c4d8f3; }
+.ref-brand::before {
+  content:""; position:absolute; left:-70px; top:0; width:48px; height:38px;
+  background:radial-gradient(circle at 8px 8px,#e6f0ff 0 5px,transparent 6px),radial-gradient(circle at 24px 6px,#e6f0ff 0 5px,transparent 6px),radial-gradient(circle at 40px 8px,#e6f0ff 0 5px,transparent 6px),radial-gradient(ellipse at 8px 26px,#e6f0ff 0 9px,transparent 10px),radial-gradient(ellipse at 24px 24px,#e6f0ff 0 10px,transparent 11px),radial-gradient(ellipse at 40px 26px,#e6f0ff 0 9px,transparent 10px);
+}
+.ref-top-links { position:absolute; right:18px; top:10px; display:flex; align-items:center; gap:18px; }
+.ref-top-links a { padding:0 0 2px; border-bottom:1px solid #b7cee8; color:#eef4ff; font-size:14px; line-height:1.2; text-decoration:none; cursor:pointer; }
+.ref-top-links a + a { border-left:1px solid rgba(220,235,255,.75); padding-left:18px; }
+.ref-date { position:absolute; top:32px; right:22px; color:#d8e6f7; font-size:14px; }
+.ref-nav { display:none!important; }
+.ref-tools { right:15px; top:10px; }
+.ref-task[data-display="header"] .ref-tools { bottom:3px; right:15px; top:auto; }
+.ref-instruction { left:470px; right:200px; top:53px; color:#dbe7fa; font:13px/1.2 Verdana,Arial,sans-serif; }
+.ref-body { flex:1; min-height:0; padding:12px 15px 0; gap:10px; background:#e5e7e8; border:0; }
+.ref-stage { flex: 0 0 45%; min-width:0; padding:0; align-items:stretch!important; justify-content:stretch!important; background:#e5e7e8; }
+.ref-stage { order:0!important; }
+.meeting-gallery-reference {
+  position:absolute; z-index:12; pointer-events:none; left:15px; top:52px; bottom:0; width:calc(45% - 17px);
+  display:flex; flex-direction:column; overflow:hidden; border:1px solid #929ba0;
+  background:linear-gradient(#f3f4f4,#e5e7e8); box-shadow:0 1px 2px #b9bdc0;
+}
+.meeting-gallery-head { flex:none; height:40px; padding:7px 10px; display:flex; align-items:center; justify-content:space-between; color:#fff; font-size:19px; background:linear-gradient(#1a4e84,#103c70); }
+.meeting-gallery-head b { display:flex; align-items:center; gap:10px; }
+.meeting-gallery-head b::before { content:""; width:24px; height:24px; background:radial-gradient(circle at 5px 5px,#edf4ff 0 4px,transparent 5px),radial-gradient(circle at 12px 4px,#edf4ff 0 4px,transparent 5px),radial-gradient(circle at 19px 5px,#edf4ff 0 4px,transparent 5px),radial-gradient(ellipse at 5px 18px,#edf4ff 0 5px,transparent 6px),radial-gradient(ellipse at 12px 17px,#edf4ff 0 6px,transparent 7px),radial-gradient(ellipse at 19px 18px,#edf4ff 0 5px,transparent 6px); }
+.meeting-gallery-content { flex:1; min-height:0; display:flex; gap:18px; padding:10px; }
+.meeting-portrait-grid { flex:1; min-width:0; min-height:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:repeat(2,minmax(0,1fr)); gap:5px; }
+.meeting-portrait-tile { min-width:0; min-height:0; position:relative; background-size:cover; background-position:center 34%; border:2px solid #56636b; box-shadow:inset 0 0 0 1px rgba(255,255,255,.5); }
+.meeting-person-1 { background-image:url("assets/meeting-person-1.jpg"); }
+.meeting-person-2 { background-image:url("assets/meeting-person-2.jpg"); }
+.meeting-person-3 { background-image:url("assets/meeting-person-3.jpg"); }
+.meeting-person-4 { background-image:url("assets/meeting-person-4.jpg"); }
+.meeting-portrait-tile span { position:absolute; left:0; right:0; bottom:0; padding:4px 7px; color:white; background:linear-gradient(transparent,rgba(0,0,0,.78)); font-size:15px; }
+.meeting-control-stack { flex:none; width:84px; display:flex; flex-direction:column; gap:10px; }
+.meeting-control-card { flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:4px; padding:4px; border:1px solid #89949a; border-radius:4px; background:linear-gradient(#fbfbfb,#e8e9e9); color:#173e6c; text-align:center; }
+.meeting-gallery-head,.meeting-portrait-grid,.meeting-portrait-tile { pointer-events:none; }
+.meeting-control-card { pointer-events:auto; cursor:pointer; }
+.meeting-control-card span { font-size:30px; line-height:1; }
+.meeting-control-card small { color:#251a19; font-size:13px; line-height:1.15; }
+.meeting-control-card[data-control="Mic On"] span { position:relative; width:19px; height:26px; margin:2px 0; border-radius:11px; background:#338642; font-size:0; }
+.meeting-control-card[data-control="Mic On"] span::after { content:""; position:absolute; left:-5px; right:-5px; bottom:-5px; height:12px; border:2px solid #338642; border-top:0; border-radius:0 0 14px 14px; }
+.meeting-control-card[data-control="Camera On"] span { position:relative; width:29px; height:18px; margin:6px 0; border:4px solid #174579; border-radius:3px; font-size:0; }
+.meeting-control-card[data-control="Camera On"] span::after { content:""; position:absolute; right:-13px; top:1px; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:9px solid #174579; }
+.meeting-control-card[data-control="Share Screen"] span { position:relative; width:30px; height:20px; margin:5px 0; border:3px solid #174579; border-radius:2px; font-size:0; }
+.meeting-control-card[data-control="Share Screen"] span::after { content:""; position:absolute; left:10px; bottom:-8px; width:8px; height:4px; border-bottom:2px solid #174579; border-top:2px solid #174579; }
+.meeting-control-card[data-control="Raise Hand"] span { position:relative; width:28px; height:32px; font-size:0; background:linear-gradient(#303636,#303636) 3px 8px/4px 13px no-repeat,linear-gradient(#303636,#303636) 8px 1px/4px 20px no-repeat,linear-gradient(#303636,#303636) 13px 0/4px 21px no-repeat,linear-gradient(#303636,#303636) 18px 5px/4px 16px no-repeat,linear-gradient(#303636,#303636) 0 13px/7px 4px no-repeat; }
+.meeting-control-card[data-control="Raise Hand"] span::after { content:""; position:absolute; left:6px; bottom:0; width:17px; height:15px; border-radius:6px 6px 4px 4px; background:#303636; }
+.ref-stage [class*="workspace-header"], .ref-stage [class*="workspace-topbar"],
+.ref-stage [class*="workspace-toolbar"], .ref-stage [class*="team-sync"],
+.ref-stage [class*="meeting-summary"], .ref-stage [class*="meeting-meta"] { display:none!important; }
+.meeting-chat { order:1; }
+.meeting-roster { order:2; }
+.ref-panel { order:3!important; }
+.ref-stage * { font-family:Verdana,Arial,sans-serif!important; }
+.ref-stage nav,.ref-stage [aria-label="Primary navigation"] { display:none!important; }
+.ref-stage [class*="sidebar"],.ref-stage [class*="left-rail"],.ref-stage [class*="leftrail"],.ref-stage aside { display:none!important; }
+.ref-stage [role="navigation"],.ref-stage [role="complementary"],.ref-stage [class*="workspace-nav"],.ref-stage [class*="channel-nav"],.ref-stage [class*="channel-sidebar"],.ref-stage [class*="nav-rail"] { display:none!important; }
+.meeting-panel { min-width:0; overflow:hidden; border:1px solid #939da3; background:linear-gradient(#f9fafa,#e9ebec); box-shadow:0 1px 2px #c5c8ca; }
+.meeting-chat { flex:0 0 29%; min-height:0; display:flex; flex-direction:column; }
+.meeting-roster { flex:1 1 25%; min-width:220px; min-height:0; display:flex; flex-direction:column; gap:10px; }
+.meeting-people,.meeting-rooms { flex:1 1 50%; min-height:0; }
+.meeting-panel-head { height:40px; padding:7px 10px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(#1a4e84,#103c70); color:white; font-weight:bold; font-size:19px; white-space:nowrap; }
+.meeting-panel-action { color:white; font-weight:normal; font-size:14px; }
+.meeting-transcript { flex:1; min-height:0; overflow:hidden; padding:8px 10px; background:linear-gradient(#fff,#f7f8f8); }
+.meeting-message { display:flex; gap:10px; margin:8px 0 16px; color:#17171b; font-size:15px; line-height:1.32; }
+.meeting-avatar { flex:none; width:40px;height:40px;display:grid;place-items:center;background:#d8dcde;color:#68727a;border:1px solid #bec5c9;font-size:20px; }
+.meeting-message-copy { min-width:0; }
+.meeting-byline { display:flex; gap:10px; align-items:baseline; margin-bottom:2px; }
+.meeting-byline b { color:#071b82; }
+.meeting-byline time { color:#64686b; font-size:12px; }
+.meeting-compose-field { flex:1; min-height:50px; resize:none; border:1px solid #92999d; background:white; font:14px Verdana,Arial,sans-serif; }
+.meeting-composer { padding:5px 8px 8px; display:flex; flex-direction:column; gap:5px; border-top:1px solid #aeb3b5; }
+.meeting-format { color:#292d30; font-weight:bold; letter-spacing:5px; }
+.meeting-send-row { display:flex; align-items:center; justify-content:space-between; }
+.meeting-channel-select,.meeting-send { padding:5px 9px; border:1px solid #87939b; background:#eef1f2; color:#17365d; }
+.meeting-send { min-width:92px; font-weight:bold; }
+.meeting-table { padding:8px 6px; }
+.meeting-table-row { display:grid; grid-template-columns:1fr 1fr; min-height:42px; border:1px solid #a9afb2; border-bottom:0; background:rgba(255,255,255,.65); }
+.meeting-table-row:last-child { border-bottom:1px solid #a9afb2; }
+.meeting-cell { padding:9px 9px; border-right:1px solid #a9afb2; white-space:nowrap; font-size:14px; }
+.meeting-cell:last-child { border:0; }
+.meeting-status-cell { display:flex; align-items:center; gap:10px; }
+.meeting-status-dot { flex:none; width:13px; height:13px; border-radius:50%; background:#398d36; }
+.meeting-table-labels { background:linear-gradient(#e5e7e8,#d6d9da); font-weight:bold; }
+.meeting-tips {
+  flex:none; min-height:108px; margin:10px 15px 14px; padding:10px 18px 8px 26px;
+  display:flex; align-items:center; gap:24px; color:#11294d;
+  border:1px solid #b49e69; border-radius:3px;
+  background:linear-gradient(90deg,#fff7e1,#fff4d5);
+}
+.meeting-tips-mark { flex:none; width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#174579;color:#fff;font:bold 32px/1 Arial,sans-serif; }
+.meeting-tips-copy { flex:1; min-width:0; padding-left:24px; border-left:2px solid #174579; font-size:14px; }
+.meeting-tips-copy b { color:#071b82; font-size:16px; }
+.meeting-tips-copy ul { margin:3px 0 0; padding-left:18px; line-height:1.35; }
+.meeting-tips-copy li { padding-left:2px; }
+.ref-foot { margin:10px 15px 14px; min-height:74px; padding:8px 15px; background:#fff6de; border:1px solid #b49e69; color:#13294c; }
+@media (max-width:1100px) {
+  .ref-stage { flex-basis:42%; }
+  .meeting-chat { flex-basis:31%; }
+  .meeting-roster { min-width:190px; }
+  .meeting-panel-head { font-size:15px; }
+  .meeting-cell { padding:7px 5px; font-size:12px; }
+  .meeting-message { font-size:13px; }
+  .meeting-gallery-reference { width:calc(42% - 16px); top:42px; bottom:0; }
+  .meeting-gallery-content { gap:8px; padding:6px; }
+  .meeting-control-stack { width:56px; gap:5px; }
+  .meeting-control-card span { font-size:22px; }
+  .meeting-control-card small { font-size:10px; }
+  .meeting-portrait-tile span { padding:3px; font-size:10px; }
+  .ref-top-links { gap:8px; right:10px; }
+  .ref-top-links a { font-size:11px; }
+  .ref-top-links a + a { padding-left:8px; }
+  .ref-date { top:29px; right:12px; font-size:11px; }
+}
+@media (max-width:900px) {
+  .ref-body { padding:8px; gap:6px; }
+  .ref-stage { flex-basis:40%; }
+  .meeting-chat { flex-basis:32%; }
+  .meeting-roster { min-width:170px; }
+  .meeting-panel-head { height:32px; padding:5px; font-size:12px; }
+  .meeting-table-row { min-height:30px; }
+  .meeting-cell { padding:5px 3px; font-size:10px; }
+  .meeting-message { gap:5px; margin:4px 0 8px; font-size:10px; }
+  .meeting-avatar { width:23px; height:23px; }
+  .meeting-byline { gap:4px; }
+  .meeting-byline time { font-size:9px; }
+  .meeting-composer { padding:3px; }
+  .meeting-compose-field { min-height:32px; }
+  .meeting-tips { min-height:72px; margin:6px 8px; padding:5px 10px; gap:10px; }
+  .meeting-tips-mark { width:34px; height:34px; font-size:23px; }
+  .meeting-tips-copy { padding-left:10px; font-size:10px; }
+  .meeting-tips-copy b { font-size:11px; }
+}
+
+/* Live meeting presentation. The workspace anchor now owns all three panels. */
+body { font-family:Arial, sans-serif; line-height:1.25; }
+.ref-task { height:112px; min-height:112px; background:linear-gradient(105deg,#113c6e,#002758 72%); }
+.ref-task::after { content:none; }
+.ref-brand { top:14px; left:94px; font:bold 36px/1.15 Arial,sans-serif; letter-spacing:0; }
+.ref-brand::before { left:-72px; width:52px; height:40px; }
+.ref-brand::after { margin-left:26px; padding-left:24px; border-left:1px solid #cad9ee; content:'Team Communication\A for a Connected Company'; font:20px/1.15 Arial,sans-serif; }
+.ref-task[data-display=header] .ref-brand::after { visibility:hidden; }
+.ref-top-links { top:15px; right:22px; gap:18px; }
+.ref-top-links a { font:18px/1.15 Arial,sans-serif; }
+.ref-date { top:48px; right:24px; font:16px/1.2 Arial,sans-serif; }
+.wg-tabs { position:absolute; left:15px; bottom:-5px; height:43px; display:flex; align-items:flex-end; gap:6px; }
+.wg-tab { height:39px; min-width:113px; padding:4px 29px; border:1px solid #c35417; border-top:5px solid #ee6d16; border-radius:9px 9px 0 0; background:linear-gradient(#c45316,#ab400b); color:white; font:20px Arial,sans-serif; cursor:pointer; }
+.wg-tab.active { height:43px; color:#080e51; font-weight:bold; background:linear-gradient(#f1f2f3,#e5e8e9); border:1px solid #b69d80; border-bottom:0; }
+.ref-instruction { top:11px; left:475px; right:390px; padding:0; font:17px/1.25 Arial,sans-serif; color:#f3f7ff; }
+.ref-tools { top:75px; right:15px; gap:6px; }
+.ref-task[data-display=header] .ref-tools { bottom:4px; }
+.ref-submit,.ref-xtra { font:16px Arial,sans-serif; }
+.ref-body { padding:13px 15px 0; gap:10px; }
+.ref-stage { flex:1 1 0; min-width:0; }
+.ref-stage * { font-family:Arial,sans-serif!important; }
+.ref-stage .ch-app { inset:0; border:0; border-radius:0; box-shadow:none; background:transparent; }
+.ch-app>.ch-status { display:none; }
+.ch-app .ch-body,.ch-app .ch-main { overflow:hidden; }
+.wg-meeting-layout { flex:1; min-height:0; display:grid; grid-template-columns:minmax(0,44.7fr) minmax(0,28.9fr) minmax(0,25.2fr); gap:10px; }
+.meeting-panel { border:1px solid #8d9499; border-radius:2px; box-shadow:inset 0 0 0 1px #f7f7f7; background:linear-gradient(#f5f6f7,#e5e8e9); }
+.wg-meeting { display:flex; flex-direction:column; min-height:0; }
+.meeting-gallery-head,.meeting-panel-head { flex:none; height:40px; min-height:40px; padding:6px 9px; color:#fff; background:linear-gradient(110deg,#103b71,#305b88); font-size:21px; line-height:1.2; border-bottom:1px solid #a5adb2; }
+.meeting-gallery-head { pointer-events:auto; }
+.meeting-gallery-head b { gap:18px; }
+.meeting-gallery-head b::before { content:none; }
+.wg-timer { font-size:18px; }
+.wg-meeting-content { min-height:0; flex:1; display:flex; gap:18px; padding:10px 12px 40px 9px; }
+.wg-portrait-grid { display:grid; min-width:0; min-height:0; flex:1; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:minmax(0,48fr) minmax(0,52fr); gap:4px; }
+.wg-portrait { min-width:0; min-height:0; position:relative; border:2px solid #384953; border-radius:2px; background-size:100% 100%; background-position:center; }
+.wg-portrait.hand { border-color:#b58717; }
+.wg-caption { position:absolute; left:0; right:0; bottom:0; min-height:30px; padding:4px 10px; display:flex; align-items:center; gap:7px; color:#fff; background:#101010; font-size:19px; white-space:nowrap; overflow:hidden; }
+.wg-caption span { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.wg-controls { flex:none; width:85px; display:flex; flex-direction:column; justify-content:space-between; padding-top:26px; padding-bottom:14px; gap:17px; }
+.ch-app button.wg-control { display:flex; flex:1; min-height:0; max-height:128px; flex-direction:column; justify-content:center; padding:9px 3px; gap:9px; border:1px solid #83898d!important; background:linear-gradient(#f8f8f8,#e9e9e9); box-shadow:inset 1px 1px #fff!important; border-radius:3px!important; color:#2b1717; font-size:18px; line-height:1.15; }
+.wg-control>span { display:flex; flex-direction:column; }
+.wg-control svg { width:48px; height:48px; flex-shrink:0; color:#19477d; }
+.wg-control[data-chat-control=mute] svg { color:#2d842b; }
+.wg-control[data-chat-control=hand] svg { color:#393b3a; }
+.ch-app .wg-control.wg-pressed { background:#dce4ed; border-color:#193e70!important; }
+.meeting-chat { min-width:0; }
+.wg-panel-title { display:flex; align-items:center; gap:12px; min-width:0; overflow:hidden; }
+.wg-panel-title>span { overflow:hidden; text-overflow:ellipsis; }
+.ch-app button.meeting-panel-action { padding:0; border:0!important; background:none; color:#fff; text-decoration:underline; border-radius:0!important; font-size:17px; font-weight:normal; flex:none; }
+.meeting-transcript { margin:3px 4px 6px; border:1px solid #979da1; padding:4px 12px; overflow:auto; scrollbar-color:#bdc0c2 #f2f3f3; scrollbar-width:auto; }
+.meeting-message { gap:17px; margin:11px 0 21px; font-size:18px; line-height:1.25; }
+.meeting-avatar { position:relative; width:40px; height:40px; border:1px solid #c3c7c9; border-radius:3px; background:linear-gradient(135deg,#dce0e1,#b8bdbf); }
+.meeting-avatar::before { content:''; position:absolute; width:16px; height:18px; border-radius:50%; top:5px; left:11px; background:linear-gradient(#858e91,#596166); }
+.meeting-avatar::after { content:''; position:absolute; width:26px; height:14px; border-radius:11px 11px 2px 2px; bottom:3px; left:6px; background:linear-gradient(#737c80,#555e62); }
+.meeting-byline { gap:12px; margin-bottom:2px; flex-wrap:wrap; }
+.meeting-byline b,.wg-chat-author { color:#080e76; font-size:18px; }
+.meeting-byline time { font-size:16px; color:#5e6163; }
+.meeting-composer { flex:none; min-height:171px; padding:4px 9px 12px; gap:7px; background:linear-gradient(#e9ebed,#e2e5e7); border-top:1px solid #b5b9bc; }
+.meeting-format { height:25px; display:flex; align-items:center; gap:23px; padding-left:10px; letter-spacing:0; font-size:24px; }
+.ref-stage .meeting-format * { font-family:Georgia,serif!important; }
+.ch-app textarea.meeting-compose-field { flex:none; width:100%; height:74px; padding:6px; border:1px solid #92999d; border-radius:3px; resize:none; background:#fff; }
+.meeting-send-row { margin-top:2px; min-height:38px; }
+.meeting-channel-select { max-width:69%; overflow:hidden; white-space:nowrap; font-size:16px; padding:5px; border-radius:3px; }
+.ch-app button.meeting-send { min-width:112px; min-height:37px; padding:4px 15px; font-size:18px; border:1px solid #213d6c!important; color:#0a1754; background:linear-gradient(#fafafa,#dbdfe2); }
+.meeting-roster { min-width:0; display:flex; gap:10px; }
+.meeting-people { flex:1.17 1 0; display:flex; flex-direction:column; }
+.meeting-rooms { flex:1 1 0; display:flex; flex-direction:column; }
+.meeting-table { min-height:0; overflow:auto; padding:7px 4px; }
+.meeting-table-row { min-height:42px; grid-template-columns:46% 54%; }
+.meeting-cell { padding:9px 13px; overflow:hidden; text-overflow:ellipsis; font-size:18px; }
+.meeting-people .meeting-cell { font-size:17px; padding:6px 13px; }
+.meeting-people .meeting-table-row { min-height:36px; }
+.meeting-status-cell { gap:12px; }
+.meeting-status-dot { width:14px; height:14px; }
+.meeting-tips { height:122px; min-height:122px; margin:11px 15px 14px; padding:13px 26px; gap:28px; background:#fff7df; }
+.meeting-tips-mark { width:44px; height:44px; font-size:36px; }
+.meeting-tips-copy { border-left:1px solid #1c3047; padding-left:31px; font:16px/1.35 Arial,sans-serif; }
+.meeting-tips-copy b { font-size:19px; }
+.meeting-tips-copy li b { font-size:inherit; color:inherit; }
+.meeting-tips-copy ul { margin-top:3px; line-height:1.5; }
+.ref-foot { min-height:43px; margin:-4px 15px 8px; padding:4px 0; background:transparent; border:0; box-shadow:none; }
+.ref-foot .ref-tools { position:static; }
+.ref-foot-text { font-size:12px; color:#5c6269; }
+.ref-float-dock { height:43px; }
+.ref-float { bottom:9px; }
+.ref-panel { position:absolute; z-index:2; right:15px; top:13px; width:calc((100% - 50px) * .25506); margin:0; padding:14px 16px 14px 54px; background:#fff7df; color:#122b4a; }
+.ref-panel::before { content:'i'; position:absolute; left:15px; top:16px; width:25px; height:25px; display:grid; place-items:center; color:white; background:#164777; border-radius:50%; font:bold 20px Georgia,serif; }
+.ref-panel-title { font:700 17px Arial,sans-serif; }
+.ref-panel-text { font:16px/1.4 Arial,sans-serif; }
+body.ref-has-note .ref-body { padding-bottom:0; }
+.ref-note { position:fixed; left:44%; top:12px; right:auto; bottom:auto; width:44%; max-width:740px; min-height:48px; margin:0; padding:11px 37px 11px 53px; border:1px solid #4c769e; border-radius:7px; background:linear-gradient(#f3faff,#dfedfa); color:#17385d; box-shadow:2px 3px 6px #001b4533; font:600 16px/1.2 Arial,sans-serif; }
+.ref-note::before { content:'i'; position:absolute; left:15px; top:13px; width:25px; height:25px; display:grid; place-items:center; color:#fff; background:#164777; border-radius:50%; font:bold 20px Georgia,serif; }
+body.ref-has-note .ref-brand::after { visibility:hidden; }
+.ref-note-x { position:absolute; top:8px; right:10px; }
+.ref-ov,.ref-ov-btn { font-family:Arial,sans-serif; }
+.ref-ov { font-size:16px; color:#15355c; }
+.ref-ov-btn { border:1px solid #8ba4bd; background:linear-gradient(#fff,#dfe9f3); color:#0a2857; box-shadow:inset 1px 1px #fff; font:16px Arial,sans-serif; border-radius:3px; }
+.ref-ov-primary { background:linear-gradient(#195a96,#06417f); border-color:#174677; color:#fff; }
+.ref-ov-cookie { left:15px; right:auto; bottom:150px; width:min(1120px,calc(100% - 30px)); padding:16px 18px 16px 84px; gap:20px; border:1px solid #2f679e; border-radius:5px; background:#f9fcff; box-shadow:2px 3px 8px #183f7133; }
+.ref-ov-cookie::before { content:'●'; position:absolute; left:22px; top:19px; width:42px; height:42px; display:grid; place-items:center; border-radius:50%; background:#ca7c2a; color:#814615; font-size:27px; }
+.ref-ov-cookie .ref-ov-text::before { content:'We use cookies'; display:block; font-weight:bold; font-size:20px; color:#070b70; }
+.ref-ov-cookie .ref-ov-row { flex:none; }
+.ref-ov-chat { bottom:160px; right:18px; width:380px; max-width:calc(100% - 36px); min-height:260px; display:block; padding:65px 20px 77px; background:#fff; border:1px solid #9aa9b9; border-radius:12px; box-shadow:1px 3px 9px #14376044; }
+.wg-support-title { position:absolute; top:0; left:0; right:0; height:47px; padding:12px 20px; background:linear-gradient(#0c569a,#003b7d); color:#fff; border-radius:10px 10px 0 0; font-size:20px; font-weight:bold; }
+.ref-ov-chat .ref-ov-text { padding:14px; background:#e9edf2; border-radius:9px; line-height:1.4; }
+.ref-ov-chat .ref-ov-row { position:absolute; right:14px; top:9px; }
+.ref-ov-chat .ref-ov-row .ref-ov-btn { color:white; font:26px Arial,sans-serif; box-shadow:none; }
+.wg-support-compose { position:absolute; bottom:18px; left:20px; right:20px; display:flex; height:43px; }
+.wg-support-compose input { min-width:0; flex:1; padding:8px; border:1px solid #b5c0ca; border-radius:4px; font:16px Arial,sans-serif; }
+.wg-support-compose button { border:0; background:#e9edf2; color:#17477b; font-size:28px; }
+.ref-ov-promo { background:#102f542b; }
+.ref-ov-box { width:min(640px,calc(100% - 40px)); padding:38px 44px 30px; gap:20px; border:1px solid #a6b2bf; border-radius:8px; background:#fff; color:#243e68; box-shadow:0 6px 20px #0d244455; font:19px/1.4 Arial,sans-serif; }
+.wg-promo-title { margin:0; color:#080e76; font-size:30px; }
+.wg-promo-email { width:100%; border:1px solid #acbacb; border-radius:4px; padding:13px; font:18px Arial,sans-serif; }
+.ref-ov-box .ref-ov-row { gap:12px; }
+.ref-ov-box .ref-ov-btn { min-height:42px; padding:8px 20px; font-size:18px; }
+.ref-ov-banner { top:112px; min-height:48px; background:#e1f5de; border:1px solid #87af7c; box-shadow:none; color:#153e24; font-weight:bold; }
+@media(min-width:1401px) {
+  .wg-tab:nth-child(1) { width:113px; }
+  .wg-tab:nth-child(2) { width:135px; }
+  .wg-tab:nth-child(3) { width:153px; }
+  .wg-tab:nth-child(4) { width:160px; }
+  .wg-tab:nth-child(5) { width:145px; }
+  .wg-tab:nth-child(6) { width:136px; }
+}
+@media(max-width:1400px) {
+  .ref-brand { font-size:29px; left:77px; top:16px; }
+  .ref-brand::before { left:-59px; transform:scale(.85); transform-origin:left top; }
+  .ref-brand::after { font-size:17px; margin-left:20px; padding-left:20px; }
+  .ref-top-links a { font-size:15px; }
+  .ref-date { font-size:14px; }
+  .wg-tabs { gap:5px; }
+  .wg-tab { padding:4px 24px; min-width:100px; font-size:18px; }
+  .ref-instruction { left:385px; right:370px; font-size:15px; }
+  .meeting-gallery-head,.meeting-panel-head { font-size:18px; height:36px; min-height:36px; }
+  .wg-panel-title { gap:7px; }
+  .wg-panel-title svg { width:24px; }
+  .ch-app button.meeting-panel-action { font-size:14px; }
+  .wg-meeting-content { padding:8px 10px 27px 8px; gap:12px; }
+  .wg-controls { width:72px; padding-top:20px; gap:14px; padding-bottom:8px; }
+  .ch-app button.wg-control { font-size:14px; line-height:1.1; padding:4px 2px; gap:4px; }
+  .wg-control svg { width:34px; height:34px; }
+  .wg-caption { font-size:16px; padding:4px 6px; }
+  .wg-timer { font-size:15px; }
+  .meeting-message { font-size:16px; gap:12px; margin:10px 0 18px; }
+  .meeting-byline b { font-size:16px; }
+  .meeting-byline time { font-size:13px; }
+  .meeting-avatar { width:34px; height:36px; }
+  .meeting-avatar::before { left:8px; }
+  .meeting-avatar::after { left:3px; }
+  .meeting-cell { font-size:15px; padding:8px; }
+  .meeting-people .meeting-cell { font-size:13px; padding:3px 7px; line-height:1.15; }
+  .meeting-people .meeting-table-row { min-height:22px; }
+  .meeting-rooms .meeting-cell { font-size:14px; padding:4px 7px; }
+  .meeting-rooms .meeting-table-row { min-height:27px; }
+  .meeting-table-row { min-height:35px; }
+  .meeting-composer { min-height:149px; padding-bottom:8px; }
+  .ch-app textarea.meeting-compose-field { height:60px; }
+  .meeting-channel-select { font-size:13px; }
+  .ch-app button.meeting-send { min-width:85px; font-size:16px; }
+  .meeting-tips { height:105px; min-height:105px; padding:10px 22px; }
+  .meeting-tips-copy { font-size:14px; }
+  .meeting-tips-copy b { font-size:17px; }
+}
+@media(max-width:1100px) {
+  .ref-task { height:105px; min-height:105px; }
+  .ref-brand { font-size:26px; left:70px; }
+  .ref-brand::after { font-size:14px; margin-left:17px; padding-left:17px; }
+  .ref-top-links { gap:10px; right:15px; }
+  .ref-top-links a { font-size:13px; }
+  .ref-date { top:38px; }
+  .wg-tab { font-size:16px; padding:4px 18px; min-width:85px; }
+  .ref-instruction { left:348px; right:310px; top:8px; font-size:14px; }
+  .ref-tools { top:71px; }
+  .ref-submit,.ref-xtra { font-size:13px; padding:4px 8px; }
+  .ref-body { padding:10px 10px 0; }
+  .wg-meeting-layout { gap:7px; grid-template-columns:minmax(0,44fr) minmax(0,30fr) minmax(0,26fr); }
+  .meeting-gallery-head,.meeting-panel-head { font-size:15px; padding:5px 6px; height:32px; min-height:32px; }
+  .meeting-gallery-head b { gap:7px; }
+  .wg-timer { font-size:12px; }
+  .ch-app button.meeting-panel-action { font-size:11px; }
+  .wg-panel-title { gap:5px; }
+  .wg-panel-title svg { width:20px; height:20px; }
+  .wg-meeting-content { gap:10px; padding:7px 7px 22px; }
+  .wg-controls { width:58px; padding-top:14px; gap:11px; }
+  .ch-app button.wg-control { font-size:12px; padding:2px; gap:2px; }
+  .wg-control svg { width:28px; height:28px; }
+  .wg-caption { font-size:13px; min-height:24px; }
+  .meeting-message { font-size:14px; gap:8px; margin:7px 0 15px; }
+  .meeting-byline { gap:5px; }
+  .meeting-byline b { font-size:14px; }
+  .meeting-byline time { font-size:11px; }
+  .meeting-avatar { width:27px; height:30px; }
+  .meeting-avatar::before { left:7px; top:3px; width:13px; height:15px; }
+  .meeting-avatar::after { left:3px; width:21px; height:12px; }
+  .meeting-transcript { padding:2px 6px; }
+  .meeting-cell { padding:7px 5px; font-size:13px; }
+  .meeting-people .meeting-cell { font-size:12px; padding:2px 5px; line-height:1.1; }
+  .meeting-people .meeting-table-row { min-height:19px; }
+  .meeting-rooms .meeting-cell { padding:3px 5px; }
+  .meeting-rooms .meeting-table-row { min-height:24px; }
+  .meeting-table-row { min-height:30px; }
+  .meeting-status-cell { gap:6px; }
+  .meeting-status-dot { width:10px; height:10px; }
+  .meeting-roster { gap:7px; }
+  .meeting-composer { min-height:128px; padding:3px 5px 7px; gap:5px; }
+  .meeting-format { height:20px; font-size:20px; gap:18px; }
+  .ch-app textarea.meeting-compose-field { height:49px; }
+  .meeting-send-row { min-height:30px; }
+  .meeting-channel-select { font-size:11px; }
+  .ch-app button.meeting-send { min-width:64px; min-height:30px; font-size:14px; }
+  .meeting-tips { height:91px; min-height:91px; margin:8px 10px 10px; gap:19px; padding:8px 16px; }
+  .meeting-tips-copy { font-size:12px; padding-left:19px; }
+  .meeting-tips-copy b { font-size:15px; }
+  .ref-ov-cookie { bottom:145px; padding:12px 14px 12px 62px; font-size:13px; gap:12px; }
+  .ref-ov-cookie::before { width:30px; height:30px; left:17px; top:18px; font-size:20px; }
+  .ref-ov-cookie .ref-ov-text::before { font-size:16px; }
+  .ref-ov-cookie .ref-ov-btn { padding:6px 9px; font-size:13px; }
+  .ref-ov-chat { width:300px; min-height:220px; bottom:145px; font-size:14px; padding:58px 15px 69px; }
+  .wg-support-title { height:40px; padding:9px 15px; font-size:17px; }
+  .wg-support-compose input { font-size:14px; }
+  .ref-ov-banner { top:105px; }
+}

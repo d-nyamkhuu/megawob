@@ -1,0 +1,92 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body.cad{--bg:#072748;--panel:#0b3157;--line:#44566a;--accent:#2f8cf5;--muted:#c3dcee;--fg:#f2f8ff;
+  font-family:"Segoe UI","Liberation Sans",Arial,sans-serif;font-size:clamp(11px,1.8vh,17px);color:#1c242c;background:#092b40}
+button{font:inherit;cursor:pointer}
+.cad-window{display:flex;flex-direction:column;width:100%;height:100%;border:1px solid #1b3a5c;background:#072748}
+.cad-title{flex:none;height:3.2vh;display:flex;align-items:center;gap:.7em;padding:0 .4em;color:#fff;background:linear-gradient(#214660,#183c58);font-size:.94em}
+.cad-logo{width:1.05em;height:1.05em;color:#cfe3f5}.cad-logo svg{width:100%;height:100%}
+.cad-wc{margin-left:auto;width:8.2em;height:1.4em}.cad-wc svg{width:100%;height:100%}
+.cad-menu{flex:none;height:3.4vh;display:flex;align-items:center;gap:1.38em;padding:0 .75em;background:linear-gradient(#accbde,#9bbdd3);color:#14202c;font-size:.94em}
+.cad-menu-action{flex:none;margin-left:auto;padding:.08em .8em;border:1px solid #6f8a9e;border-radius:2px;background:linear-gradient(#d2e0e9,#a8bfce);color:#14202c;font-size:.95em;line-height:1.2}
+.cad-menu-action + .cad-menu-action{margin-left:0}
+.cad-menu-action.cad-end{background:linear-gradient(#2f8cf8,#1773e8);border-color:#c4e0f5;color:#fff;font-weight:700}
+.cad-surface{position:relative;flex:1;min-height:0;background:#072748}
+.cad-stage{position:absolute;inset:0}
+.cad-backdrop{position:absolute;inset:0;background-color:#062741;
+  background-image:linear-gradient(rgba(69,137,170,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(69,137,170,.13) 1px,transparent 1px);background-size:2.22% 5%}
+.cad-drawing{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cad-scale{position:absolute;right:2.3%;bottom:2.5%;color:#dcecf8;font-family:"Courier New",monospace;font-size:1.12em;letter-spacing:.04em;white-space:pre}
+.cad-note{position:absolute;z-index:5;left:6%;right:5.9%;top:3.2%;min-height:11.5%;display:flex;align-items:center;justify-content:center;
+  background:rgba(9,38,61,.78);border:2px solid #ffdf29;border-radius:3px;padding:.5em 1.2em}
+.instruction{color:#fff;font-weight:700;font-size:clamp(15px,2.05vw,36px);line-height:1.25;text-align:center}
+.instruction .hl{color:#ffe24a}
+.instruction-close{position:absolute;right:.5em;top:.3em;padding:.2em .7em;background:#cfd8e0;border:1px solid #6c7a88;border-radius:2px;font-size:.65em}
+.cad-note[hidden]{display:none}
+.instruction-panel .cad-note{left:2%;right:auto;top:18.05%;width:25%;min-height:0;display:block;padding:.8em 1em;border-color:#8aa7b8;background:#0b2b45}
+.instruction-panel .cad-note::before{content:"Task note";display:block;color:#c0eeff;font-weight:600;margin-bottom:.5em;border-bottom:1px solid #5b7b8e;padding-bottom:.4em}
+.instruction-panel .instruction{font-size:clamp(14px,1.45vw,24px);text-align:left;line-height:1.4}
+.instruction-toast .cad-note{left:auto;right:5.9%;width:62%;min-height:0;padding:.7em 3em .7em 1em;border-color:#8aa7b8;box-shadow:0 2px 5px #031c30}
+.instruction-toast .instruction{font-size:clamp(14px,1.4vw,23px);text-align:left;line-height:1.3}
+.cad-dock{flex:none;height:15.6%;min-height:94px;display:flex;gap:.6em;padding:.7em .45em .65em;background:linear-gradient(#b5c6d1,#aabeca);border-top:1px solid #8499ad}
+.cad-group{flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#b9c8d6;border:1px solid #8fa3b6;border-radius:3px;padding:.2em .5em .4em;box-shadow:inset 0 0 0 1px #d7e2ec}
+.cad-group-title{flex:none;font-weight:600;color:#26323d;font-size:1.05em;line-height:1.2}
+.cad-tools{flex:1;min-height:0;display:flex;background:#c9d3dc;border:1px solid #9aabbb}
+.cad-tool{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45em;padding:.2em 0;background:linear-gradient(#c9d7e1,#bacbd7);border:0;border-left:1px solid #e4eaf0;border-right:1px solid #a9b8c6;color:#101e28;font-size:.85em;cursor:default}
+.cad-icon{display:block;width:3.2em;height:3.2em;flex:none}.cad-icon svg{width:100%;height:100%}
+.cad-task{flex:0 0 18.05%}
+.cad-actions{flex:1;display:flex;align-items:center;gap:.6em;min-height:0}
+.cad-btn{height:55%;padding:0 1em;border:1px solid #839aa9;border-radius:5px;background:linear-gradient(#acbecb,#9cb1bf);box-shadow:inset 0 0 0 1px #cbd8e0;color:#1c242c;font-size:1.1em}
+.cad-btn.reset{flex:0 0 38%}
+.cad-task-passive .cad-btn.reset{flex:1}
+.cad-btn.primary{flex:1;background:linear-gradient(#2f8cf8,#1773e8);border:1px solid #b3daff;color:#fff;font-weight:700;font-size:1.35em;height:65%}
+.cad-btn:active{filter:brightness(.92)}
+.cad-status{flex:none;height:4.14vh;display:flex;align-items:center;justify-content:space-between;padding:0 .8em;background:linear-gradient(#b5c6d1,#aebfc9);border-top:1px solid #d8e4eb;color:#1c2630;font-size:.94em}
+.cad-coords{white-space:pre;padding:0 2.3em 0 .9em;height:100%;display:flex;align-items:center;border-left:1px solid #8299a7;box-shadow:-1px 0 #d9e4eb}
+.cad-end-link{order:1;margin-left:auto;margin-right:1.5em;color:#153f68;font-weight:700;text-decoration:underline;white-space:nowrap}
+.cad-status .cad-coords{order:2}
+.cad button:focus-visible,.slc-hit:focus-visible{outline:2px solid #ffe24a;outline-offset:2px}
+
+/* slider widget (widgets/set-slider.js) */
+.slc-card{left:auto!important;right:5.9%;top:18.05%!important;width:16.45%;height:73.6%;padding:0!important;background:rgba(11,43,69,.94)!important;border:1px solid #5b7b8e!important;border-radius:4px!important;box-shadow:inset 0 0 0 1px rgba(149,185,204,.09)!important;color:#f2f8ff}
+.slc-card .slc-row,.slc-card .slc-v{display:block;position:relative;width:100%;height:100%}
+.slc-card.cad-multiple .slc-row{display:flex;gap:0!important}
+.slc-card.cad-multiple .slc-v{flex:1;min-width:0;border-left:1px solid #5b7b8e}
+.slc-card.cad-multiple .slc-v:first-child{border-left:0}
+.slc-card .slc-label{position:absolute;left:9.1%;top:3.2%;text-align:left;font-size:clamp(16px,2.55vh,24px);font-weight:700;color:#fff;min-width:0;line-height:1.25}
+.slc-card .slc-body{position:absolute;left:calc(20.4% - 19px);top:14.3%;margin:0}
+.slc-card .slc-rail{background:#5d6e7b!important;border:1px solid #adc3d0;border-radius:7px!important;box-shadow:inset 0 0 0 1px #7f95a3}
+.slc-card .slc-fill{display:none}
+.slc-card .slc-thumb{border-radius:4px!important;border:1px solid #2184d3!important;background:linear-gradient(#409cfc,#2387ef)!important;box-shadow:0 1px 2px rgba(0,0,0,.5)!important}
+.slc-card .slc-ticks{color:#d0e4f3;font-family:"Courier New",monospace;font-size:1.05em;width:3.4em!important}
+.slc-card .slc-tick::before{background:#9fb8cc!important}
+.slc-card .slc-tick:not(:first-child):not(:last-child){font-size:0}
+.slc-card .slc-tick::before{display:none}
+.cad-minor-ticks{position:absolute;left:calc(50% + 15px);top:4.5%;width:13px;height:90.5%;background:repeating-linear-gradient(to bottom,#9ab6c6 0px,#9ab6c6 1px,transparent 1px,transparent 5.556%);background-size:7px 100%;background-repeat:no-repeat;pointer-events:none}
+.cad-minor-ticks::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,#9ab6c6 0px,#9ab6c6 1px,transparent 1px,transparent 11.111%)}
+.slc-card .slc-tick:first-child,.slc-card .slc-tick:last-child{font-size:1.1em}
+.cad-side{position:absolute;left:41%;top:28.8%;width:53%;display:flex;flex-direction:column;gap:1em}
+.cad-side .slc-readout,.cad-help{width:100%;padding:.32em .2em .35em;border:1px solid #8aa7b8;border-radius:3px;background:rgba(10,42,68,.7);color:#fff;text-align:center;font-size:clamp(16px,2.77vh,26px);white-space:nowrap}
+.cad-side .slc-readout{font-family:"Courier New",monospace;font-weight:700;font-size:clamp(20px,3.4vh,32px);line-height:1.15;padding:.3em .2em;color:#c2ecff}
+.cad-side .slc-readout::before,.cad-help::before{content:"Current Value";display:block;font-size:.62em;line-height:1.5}
+.cad-side .slc-readout::before{font-family:"Segoe UI","Liberation Sans",Arial,sans-serif;font-size:.6em;font-weight:400;color:#fff;margin-bottom:.2em;line-height:1.4}
+.cad-help::before{font-size:.9em;margin-bottom:.3em}
+.cad-help{color:#ffe24a;font-weight:700;font-size:clamp(13px,2.3vh,22px);line-height:1.5}
+.cad-help::before{content:"Control";color:#fff;font-weight:400}
+
+/* overlays */
+.cad-dialog{position:fixed;z-index:40;right:3%;top:30%;width:22em;background:#c9d3dc;border:1px solid #4d6479;box-shadow:0 4px 14px rgba(0,0,0,.45);font-size:1.05em}
+.cad-dialog-bar{display:flex;justify-content:space-between;align-items:center;padding:.3em .6em;background:linear-gradient(#17395c,#102c4b);color:#fff}
+.cad-x{border:0;background:none;color:#fff;font-size:1.3em;padding:0 .3em}
+.cad-dialog-body{padding:.9em 1em 1em;display:flex;flex-direction:column;gap:.8em;align-items:flex-start}
+.cad-dialog-body p{margin:0}
+.cad-dialog.overlay-toast{top:auto;bottom:20%}
+.cad-dialog.overlay-banner{left:0;right:0;top:0;width:auto}
+
+/* Shared frame elements keep the CAD geometry and styling. */
+.cad-menu .ref-tools{display:flex;align-items:center;gap:.5em;margin-left:auto;min-width:0}
+.cad-menu .ref-tools .cad-menu-action{margin-left:0;white-space:nowrap}
+.ref-spacer{display:none}
+.cad-note .ref-panel-title{display:none}
+.cad-actions .ref-float-dock{display:contents}
+.cad-actions .reset{margin:0}
